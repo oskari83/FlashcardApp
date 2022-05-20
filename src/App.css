@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Readex+Pro&display=swap');
 .maincontainer {
   position: relative;
   margin: auto;
@@ -9,52 +8,4 @@
 
 body {
   background-color: rgb(255, 255, 255);
-}
-
-.thecard{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: all 0.3s ease;
-}
-
-.thecardRotated{
-  transform: rotateX(180deg);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: all 0.3s ease;
-}
-
-.fronttext{
-  width: 100%;
-  height: 10%;
-  padding: 26% 0;
-  text-align: center;
-  font-family: "Readex Pro", sans-serif;
-  font-size: 1.9em;
-  font-weight: bold;
-}
-
-.thefront{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  background: #6593f7;
-  border-radius: 14px;
-  color: rgb(241, 241, 241);
-}
-
-.theback{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  background: #e9e9e9;
-  transform: rotateX(180deg);
-  border-radius: 14px;
-  color: #333;
 }
