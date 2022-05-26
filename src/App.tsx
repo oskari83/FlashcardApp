@@ -6,7 +6,7 @@ function App() {
     <div>
       <div className="topBar">
         <div className="topBarContent">
-          hi
+          <p>hi</p>
         </div>
       </div>
 
