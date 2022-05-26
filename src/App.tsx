@@ -3,8 +3,18 @@ import './App.css'
 
 function App() {
   return (
-    <div className="maincontainer">
-      <Card/>
+    <div>
+      <div className="topBar">
+        <div className="topBarContent">
+          hi
+        </div>
+      </div>
+
+      <div className="containerMain">
+        <div className="cardcontainer">
+          <Card/>
+        </div>
+      </div>
     </div>
   );
 }
