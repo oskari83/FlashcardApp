@@ -7,25 +7,31 @@ function App() {
     <div>
       <div className="topBar">
         <div className="topBarContentContainer">
-          <div className="logo">
-            <img src={require('./Assets/logo.png')} alt="logo" />
-          </div>
-          <div className="LogoName">Flashcard App</div>
-          <div className="navBarHome">Home</div>
-          <div className="navBarBrowse">Browse</div>
-          <div className="navBarCreate" onClick={() => null}>Create</div>
+          <div className="LogoName">Flashcard app</div>
+          <div className="navBarHome">home</div>
+          <div className="navBarBrowse">browse</div>
+          <div className="navBarCreate" onClick={() => null}>create</div>
         </div>
       </div>
 
       <div className="containerMain">
-        <div className="setName">Name of Flashcard Set</div>
-        <div className="setInfo">Information about set, Creator: Oskari, Cards: 23</div>
-        <div className="cardcontainer">
-          <Card/>
+        <div className="setInfoContainer">
+          <div className="setName">Name of Flashcard Set</div>
+          <div className="setInfo">Information about set, Creator: Oskari, Cards: 23</div>
         </div>
+        <div className="setAreaContainer">
+          <div className="selectorBar">
+            <div className="selectorBarItem">statistics</div>
+            <div className="selectorBarItem">revise</div>
+            <div className="selectorBarItem">edit</div>
+          </div>
+          <div className="cardcontainer">
+            <Card/>
+          </div>
 
-        <div className="setContents">
+          <div className="setContents">
           
+          </div> 
         </div>
       </div>
     </div>

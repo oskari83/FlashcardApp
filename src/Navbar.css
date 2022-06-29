@@ -1,10 +1,9 @@
 .topBar {
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(41, 116, 255, 0.801);
   position: fixed;
   top: 0;
   width: 100%;
-  height: 60px;
-  border-bottom: 1px solid #d4d4d4;
+  height: 40px;
   padding: 0;
   z-index: 8;
 }
@@ -14,7 +13,7 @@
   margin-left:auto;
   margin-right: auto;
   top: 0;
-  height: 60px;
+  height: 40px;
 }
 
 .logo {
@@ -27,91 +26,107 @@
   z-index:5;
 }
 
+.navbarItemBackground {
+  padding-top: 14px;
+  padding-bottom: 6px;
+  width: 45px;
+  margin-left: 230px;
+  padding-left: 9px;
+  position: fixed;
+  font-family: "ReadexLight";
+  font-size: 13px;
+  color: rgb(255, 255, 255);
+  z-index:5;
+}
+
 .LogoName {
-  margin-top: 20px;
+  margin-top: 12px;
   width: 150px;
-  margin-left: 55px;
+  margin-left: 15px;
   position: fixed;
   font-family: "ReadexBold";
-  font-size: 17px;
-  color: rgba(56, 119, 255, 0.769);
+  font-size: 14px;
+  color: rgb(255, 255, 255);
   z-index:5;
 }
 
 .navBarHome {
-  padding-top: 22px;
-  padding-bottom: 16px;
+  padding-top: 14px;
+  padding-bottom: 6px;
   width: 45px;
   margin-left: 230px;
+  padding-left: 9px;
   position: fixed;
   font-family: "ReadexLight";
-  font-size: 15px;
-  color: rgb(122, 122, 122);
+  font-size: 13px;
+  color: rgb(255, 255, 255);
   z-index:5;
 }
 
 .navBarHome:hover {
-  padding-top: 22px;
-  padding-bottom: 16px;
+  padding-top: 14px;
+  padding-bottom: 6px;
   width: 45px;
   margin-left: 230px;
   position: fixed;
   font-family: "ReadexLight";
-  font-size: 15px;
-  color: rgb(122, 122, 122);
+  font-size: 13px;
+  color: rgb(255, 255, 255);
   z-index:5;
   cursor: pointer;
-  border-bottom: 3px solid rgb(56, 119, 255);
+  border-bottom: 3px solid rgb(255, 255, 255);
 }
 
 .navBarBrowse {
-  padding-top: 22px;
-  padding-bottom: 16px;
+  padding-top: 14px;
+  padding-bottom: 6px;
   width: 55px;
   margin-left: 350px;
+  padding-left: 9px;
   position: fixed;
   font-family: "ReadexLight";
-  font-size: 15px;
-  color: rgb(122, 122, 122);
+  font-size: 13px;
+  color: rgb(255, 255, 255);
   z-index:5;
 }
 
 .navBarBrowse:hover {
-  padding-top: 22px;
-  padding-bottom: 16px;
+  padding-top: 14px;
+  padding-bottom: 6px;
   width: 55px;
   margin-left: 350px;
   position: fixed;
   font-family: "ReadexLight";
-  font-size: 15px;
-  color: rgb(122, 122, 122);
+  font-size: 13px;
+  color: rgb(255, 255, 255);
   z-index:5;
   cursor: pointer;
-  border-bottom: 3px solid rgb(56, 119, 255);
+  border-bottom: 3px solid rgb(255, 255, 255);
 }
 
 .navBarCreate {
-  padding-top: 22px;
-  padding-bottom: 16px;
+  padding-top: 14px;
+  padding-bottom: 6px;
   width: 48px;
   margin-left: 470px;
+  padding-left: 9px;
   position: fixed;
   font-family: "ReadexLight";
-  font-size: 15px;
-  color: rgb(122, 122, 122);
+  font-size: 13px;
+  color: rgb(255, 255, 255);
   z-index:5;
 }
 
 .navBarCreate:hover {
-  padding-top: 22px;
-  padding-bottom: 16px;
+  padding-top: 14px;
+  padding-bottom: 6px;
   width: 48px;
   margin-left: 470px;
   position: fixed;
   font-family: "ReadexLight";
-  font-size: 15px;
-  color: rgb(122, 122, 122);
+  font-size: 13px;
+  color: rgb(255, 255, 255);
   z-index:5;
   cursor: pointer;
-  border-bottom: 3px solid rgb(56, 119, 255);
+  border-bottom: 3px solid rgb(255, 255, 255);
 }
