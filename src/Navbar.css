@@ -32,9 +32,9 @@
   width: 150px;
   margin-left: 55px;
   position: fixed;
-  font-family: "Readex";
+  font-family: "ReadexBold";
   font-size: 17px;
-  color: rgb(56, 119, 255);
+  color: rgba(56, 119, 255, 0.769);
   z-index:5;
 }
 
