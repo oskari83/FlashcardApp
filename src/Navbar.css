@@ -26,17 +26,43 @@
   z-index:5;
 }
 
-.navbarItemBackground {
-  padding-top: 14px;
-  padding-bottom: 6px;
-  width: 45px;
-  margin-left: 230px;
-  padding-left: 9px;
-  position: fixed;
+.navbarContentBar {
+  height: 40px;
+  margin-left: 180px;
+  width: 500px;
+  display: inline-block;
+}
+
+.navbarContentItem {
+  float: left;
+  cursor: pointer;
+  z-index:5;
   font-family: "ReadexLight";
   font-size: 13px;
   color: rgb(255, 255, 255);
+  padding-top: 14px;
+  padding-bottom: 6px;
+  width: 100px;
+  text-align: center;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.navbarContentItem:hover {
+  float: left;
+  cursor: pointer;
   z-index:5;
+  font-family: "ReadexLight";
+  font-size: 13px;
+  color: rgb(255, 255, 255);
+  padding-top: 14px;
+  padding-bottom: 6px;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: 3px solid rgb(255, 255, 255);
 }
 
 .LogoName {
@@ -48,85 +74,4 @@
   font-size: 14px;
   color: rgb(255, 255, 255);
   z-index:5;
-}
-
-.navBarHome {
-  padding-top: 14px;
-  padding-bottom: 6px;
-  width: 45px;
-  margin-left: 230px;
-  padding-left: 9px;
-  position: fixed;
-  font-family: "ReadexLight";
-  font-size: 13px;
-  color: rgb(255, 255, 255);
-  z-index:5;
-}
-
-.navBarHome:hover {
-  padding-top: 14px;
-  padding-bottom: 6px;
-  width: 45px;
-  margin-left: 230px;
-  position: fixed;
-  font-family: "ReadexLight";
-  font-size: 13px;
-  color: rgb(255, 255, 255);
-  z-index:5;
-  cursor: pointer;
-  border-bottom: 3px solid rgb(255, 255, 255);
-}
-
-.navBarBrowse {
-  padding-top: 14px;
-  padding-bottom: 6px;
-  width: 55px;
-  margin-left: 350px;
-  padding-left: 9px;
-  position: fixed;
-  font-family: "ReadexLight";
-  font-size: 13px;
-  color: rgb(255, 255, 255);
-  z-index:5;
-}
-
-.navBarBrowse:hover {
-  padding-top: 14px;
-  padding-bottom: 6px;
-  width: 55px;
-  margin-left: 350px;
-  position: fixed;
-  font-family: "ReadexLight";
-  font-size: 13px;
-  color: rgb(255, 255, 255);
-  z-index:5;
-  cursor: pointer;
-  border-bottom: 3px solid rgb(255, 255, 255);
-}
-
-.navBarCreate {
-  padding-top: 14px;
-  padding-bottom: 6px;
-  width: 48px;
-  margin-left: 470px;
-  padding-left: 9px;
-  position: fixed;
-  font-family: "ReadexLight";
-  font-size: 13px;
-  color: rgb(255, 255, 255);
-  z-index:5;
-}
-
-.navBarCreate:hover {
-  padding-top: 14px;
-  padding-bottom: 6px;
-  width: 48px;
-  margin-left: 470px;
-  position: fixed;
-  font-family: "ReadexLight";
-  font-size: 13px;
-  color: rgb(255, 255, 255);
-  z-index:5;
-  cursor: pointer;
-  border-bottom: 3px solid rgb(255, 255, 255);
 }

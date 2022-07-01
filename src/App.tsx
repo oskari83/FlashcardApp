@@ -1,6 +1,7 @@
 import { Card } from './Components/Card';
 import './App.css';
 import './Navbar.css';
+import './Footer.css';
 
 function App() {
   return (
@@ -8,9 +9,11 @@ function App() {
       <div className="topBar">
         <div className="topBarContentContainer">
           <div className="LogoName">Flashcard app</div>
-          <div className="navBarHome">home</div>
-          <div className="navBarBrowse">browse</div>
-          <div className="navBarCreate" onClick={() => null}>create</div>
+          <div className="navbarContentBar">
+            <div className='navbarContentItem'>home</div>
+            <div className='navbarContentItem'>browse</div>
+            <div className='navbarContentItem'>create</div>
+          </div>
         </div>
       </div>
 
@@ -34,6 +37,7 @@ function App() {
           </div> 
         </div>
       </div>
+      <div className='footer'>shit</div>
     </div>
   );
 }
