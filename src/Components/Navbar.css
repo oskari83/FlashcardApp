@@ -1,0 +1,101 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.navbar-outer{
+    display: flex;
+    background-color: #2f6effe1;
+    box-shadow: rgba(0, 0, 0, 0.36) 0px 1px 4px;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+}
+
+.navbar-tutorial{
+    min-height: 50px;
+    display: flex;
+    width: clamp(200px,800px,800px);
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 0 12px;
+    z-index: 8;
+}
+
+.navbar-tutorial ul{
+    list-style: none;
+}
+
+.nav-menu{
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    font-family: "Readex";
+    font-size: 0.8rem;
+}
+
+.nav-user{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    font-family: "Readex";
+    font-size: 0.8rem;
+}
+
+.nav-item{
+    height: 100%;
+    display: flex;
+    list-style: none;
+}
+
+.nav-icon{
+    height: 14px;
+    width: 14px;
+    cursor: pointer;
+}
+
+.nav-link{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo{
+    display: flex;
+    align-items: center;
+}
+
+.nav-branding{
+    font-size: 1rem;
+    font-family: "ReadexBold";
+}
+
+.hamburger{
+    display: none;
+    cursor: pointer;
+}
+
+.bar{
+    display: block;
+    width: 15px;
+    height: 2px;
+    margin: 2px auto;
+    background-color: white;
+}
+
+@media (max-width: 700px) {
+    .nav-menu{
+        display: none;
+    }
+
+    .hamburger {
+        display: contents;
+    }
+}
