@@ -1,42 +1,34 @@
 import './Navbar.css';
 import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
-import { IoSettingsSharp, IoCloseSharp } from 'react-icons/io5'
+import { IoSettingsSharp, IoCloseSharp, IoLogInSharp } from 'react-icons/io5'
+import { AiFillHome, AiOutlineOrderedList } from 'react-icons/ai'
+import { MdCreateNewFolder } from 'react-icons/md'
 
-const NavMenu = ({version}: {version: string}) => {
+interface FuncProps {
+    CloseFunction: () => void
+}
+
+const NavLink = ({text}: {text: string}) => {
     return(
-        <ul className={`nav-${version}`}>
-            <li className="nav-item">
-                <a href="#" className="nav-link nav-itemHoverable">Home</a>
-            </li>
-            <li className="nav-item">
-                <a href="#" className="nav-link nav-itemHoverable">Browse</a>
-            </li>
-            <li className="nav-item">
-                <a href="#" className="nav-link nav-itemHoverable">Create</a>
-            </li>
-        </ul>
+        <a href="#" className="nav-link nav-itemHoverable">{text}</a>
     )
 }
 
-const NavMenuMobile = () => {
+const NavItemHoverable = ({text}: {text: string}) => {
+    return (
+        <li className="nav-item">
+            <NavLink text={text} />
+        </li>
+    )
+}
+
+const NavMenu = () => {
     return(
-        <ul className='nav-mobile'>
-            <li className="nav-item">
-                <a href="#" className="nav-link nav-itemHoverable">Home</a>
-            </li>
-            <li className="nav-item">
-                <a href="#" className="nav-link nav-itemHoverable">Browse</a>
-            </li>
-            <li className="nav-item">
-                <a href="#" className="nav-link nav-itemHoverable">Create</a>
-            </li>
-            <li className="nav-item">
-                <a href="#" className="nav-link nav-itemHoverable">Sign In</a>
-            </li>
-            <li className="nav-item">
-                <a href="#" className="nav-link nav-itemHoverable">Settings</a>
-            </li>
+        <ul className='nav-menu'>
+            <NavItemHoverable text='Home' />
+            <NavItemHoverable text='Browse' />
+            <NavItemHoverable text='Create' />
         </ul>
     )
 }
@@ -44,9 +36,7 @@ const NavMenuMobile = () => {
 const NavUser = () => {
     return(
         <ul className="nav-user">
-            <li className="nav-item nav-itemHoverable">
-                <a href="#" className="nav-link nav-itemHoverable">Sign In</a>
-            </li>
+            <NavItemHoverable text='Sign In' />
             <li className="nav-item">
                 <a href="#" className="nav-link">|</a>
             </li>
@@ -57,11 +47,44 @@ const NavUser = () => {
     )
 }
 
+const NavMenuMobile = ({CloseFunction}: FuncProps) => {
+    return(
+        <ul className='nav-mobile'>
+            <li className="nav-item">
+                <div className="hover-box" onClick={() => CloseFunction()}></div>
+                <AiFillHome size='20px' color='white' />
+                <NavLink text='Home' />
+            </li>
+            <li className="nav-item">
+                <div className="hover-box" onClick={() => CloseFunction()}></div>
+                <AiOutlineOrderedList size='20px' color='white' />
+                <NavLink text='Browse' />
+            </li>
+            <li className="nav-item">
+                <div className="hover-box" onClick={() => CloseFunction()}></div>
+                <MdCreateNewFolder size='20px' color='white' />
+                <NavLink text='Create' />
+            </li>
+            <li className="nav-item">
+                <div className="hover-box" onClick={() => CloseFunction()}></div>
+                <IoLogInSharp size='20px' color='white' />
+                <NavLink text='Sign in' />
+            </li>
+            <li className="nav-item">
+                <div className="hover-box" onClick={() => CloseFunction()}></div>
+                <IoSettingsSharp size='20px' color='white' />
+                <NavLink text='Settings' />
+            </li>
+        </ul>
+    )
+}
+
 export const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const hamburgerIcon = <FiMenu size='20px' color='white' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}/>
     const closeIcon = <IoCloseSharp size='20px' color='white' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}/>
+    const closeMobileMenu = () => setMobileMenuOpen(false);
 
     return(
       <div className="navbar-outer">
@@ -70,22 +93,15 @@ export const Navbar = () => {
                 <a href='#' className="nav-branding">flashcard app.</a>
             </div>
 
-            <NavMenu version='menu'/>
+            <NavMenu/>
             <NavUser/>
 
             <div className='hamburger'>
                 {mobileMenuOpen ? closeIcon : hamburgerIcon}
             </div>
-            {mobileMenuOpen && <NavMenuMobile/>}
+
+            {mobileMenuOpen && <NavMenuMobile CloseFunction={closeMobileMenu}/>}
         </nav>
       </div>
     )
 }
-
-/*
-<div className="hamburger">
-    <span className="bar"></span>
-    <span className="bar"></span>
-    <span className="bar"></span>
-</div>
-*/
