@@ -37,7 +37,7 @@ const NavUser = () => {
     return(
         <ul className="nav-user">
             <NavItemHoverable text='Sign In' />
-            <li className="nav-item">
+            <li className="nav-itemDivider">
                 <a href="#" className="nav-link">|</a>
             </li>
             <li className="nav-icon">
@@ -94,6 +94,7 @@ export const Navbar = () => {
             </div>
 
             <NavMenu/>
+            
             <NavUser/>
 
             <div className='hamburger'>

@@ -1,5 +1,6 @@
 import { Card } from './Components/Card';
 import { Navbar } from './Components/Navbar';
+import { IoMdStats } from 'react-icons/io'
 import './App.css';
 import './Footer.css';
 
@@ -15,7 +16,10 @@ function App() {
         </div>
         <div className="setAreaContainer">
           <div className="selectorBar">
-            <div className="selectorBarItem">statistics</div>
+            <div className="selectorBarItem">
+              <div className='selectorBarItemIcon'><IoMdStats size='20px' color='rgb(92, 92, 92)' /></div>
+              <div className='selectorBarItemText'>statistics</div>
+            </div>
             <div className="selectorBarItem">revise</div>
             <div className="selectorBarItem">edit</div>
           </div>
