@@ -1,30 +1,41 @@
 import { Card } from './Components/Card';
 import { Navbar } from './Components/Navbar';
-import { IoMdStats } from 'react-icons/io'
+import { IoMdStats, IoMdPlay } from 'react-icons/io'
+import { AiFillEdit } from 'react-icons/ai'
+import { useState } from 'react';
 import './App.css';
 import './Footer.css';
 
 function App() {
+  const [currentSelection, setCurrentSelection] = useState(0);
+
+  const selectionChange = (id: number) => {
+    setCurrentSelection(id)
+  }
+
   return (
     <div>
       <Navbar/>
 
       <div className="containerMain">
         <div className="setInfoContainer">
-          <div className="setName">Name of Flashcard Set</div>
+          <div className="setName">Name of Collection</div>
           <div className="setInfo">Information about set, Creator: Oskari, Cards: 23</div>
         </div>
         <div className="setAreaContainer">
           <div className="selectorBar">
-            <div className="selectorBarItem">
-              <div className='selectorBarItemIcon'><IoMdStats size='20px' color='rgb(92, 92, 92)' /></div>
-              <div className='selectorBarItemText'>statistics</div>
+            <div className={currentSelection===0 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(0)}>
+              <div className='selectorBarItemIcon'><IoMdStats size='20px' color={currentSelection===0 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
+              <div className='selectorBarItemText'>Statistics</div>
             </div>
-            <div className="selectorBarItem">revise</div>
-            <div className="selectorBarItem">edit</div>
-          </div>
-          <div className="cardcontainer">
-            <Card cardFrontText='front' cardBackText='back'/>
+            <div className={currentSelection===1 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(1)}>
+              <div className='selectorBarItemIcon'><IoMdPlay size='20px' color={currentSelection===1 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
+              <div className='selectorBarItemText'>Revise</div>
+            </div>
+            <div className={currentSelection===2 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(2)}>
+              <div className='selectorBarItemIcon'><AiFillEdit size='20px' color={currentSelection===2 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
+              <div className='selectorBarItemText'>Edit</div>
+            </div>
           </div>
 
           <div className="setContents">
@@ -37,3 +48,9 @@ function App() {
 }
 
 export default App;
+
+/*
+<div className="cardcontainer">
+            <Card cardFrontText='front' cardBackText='back'/>
+          </div>
+*/

@@ -90,11 +90,11 @@ export const Navbar = () => {
       <div className="navbar-outer">
         <nav className="navbar-tutorial">
             <div className="nav-logo">
-                <a href='#' className="nav-branding">flashcard app.</a>
+                <a href='#' className="nav-branding">classic flashcards.</a>
             </div>
 
             <NavMenu/>
-            
+
             <NavUser/>
 
             <div className='hamburger'>
