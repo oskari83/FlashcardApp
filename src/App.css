@@ -100,14 +100,14 @@ img {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.setContents {
-  width: 800px;
-  height: 100px;
-  margin: auto;
-  margin-top: 20px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-  border: 0px solid #bbbbbb;
+.setStatisticsTable {
+  width: 100%;
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  font-family: "Readex";
+  font-size: 12px;
+  color: rgb(85, 85, 85);
 }
 
 .selectorBar {

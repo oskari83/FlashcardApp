@@ -1,10 +1,10 @@
 import { Card } from './Components/Card';
 import { Navbar } from './Components/Navbar';
+import { StatisticsTable } from './Components/StatisticsTable';
 import { IoMdStats, IoMdPlay } from 'react-icons/io'
 import { AiFillEdit } from 'react-icons/ai'
 import { useState } from 'react';
 import './App.css';
-import './Footer.css';
 
 function App() {
   const [currentSelection, setCurrentSelection] = useState(0);
@@ -38,9 +38,17 @@ function App() {
             </div>
           </div>
 
-          <div className="setContents">
-          
-          </div> 
+          {currentSelection===0 && 
+            <div className="setStatisticsTable">
+              <StatisticsTable />
+            </div>
+          } 
+
+          {currentSelection===1 && 
+            <div className="cardcontainer">
+              <Card cardFrontText='front' cardBackText='back'/>
+            </div>
+          } 
         </div>
       </div>
     </div>
@@ -48,9 +56,3 @@ function App() {
 }
 
 export default App;
-
-/*
-<div className="cardcontainer">
-            <Card cardFrontText='front' cardBackText='back'/>
-          </div>
-*/

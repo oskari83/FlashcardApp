@@ -1,0 +1,81 @@
+td {
+    height: 30px;
+    text-overflow: ellipsis;
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+th {
+    height: 30px;
+    text-align: left;
+}
+
+.statsTable{
+    margin: 0 0 0 0;
+    width: 90%;
+    border-collapse: collapse;
+}
+
+.itemColumn {
+    width: 70%;
+}
+
+.attemptsColumn {
+    width: 10%;
+}
+
+.masteryColumn {
+    width: 20%;
+}
+
+.boldRow {
+    font-family: "ReadexBold";
+    color: rgb(78, 78, 78);
+    border-bottom: 2px solid rgb(78, 78, 78);
+}
+
+.normalRow {
+    border-bottom: 1px solid rgb(177, 177, 177);
+}
+
+.attemptsTextTable{
+    text-align: center;
+}
+
+.masteryboxes{
+    width: 80%;
+    height: 80%;
+    margin: 0px 0px 0px 25%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.masterybox1{
+    width: 15%;
+    margin: 0px 1px 0px 1px;
+    aspect-ratio: 1/1;
+    background-color: rgb(211, 44, 44);
+}
+
+.masterybox2{
+    width: 15%;
+    aspect-ratio: 1/1;
+    margin: 0px 1px 0px 1px;
+    background: rgb(211, 186, 44);
+}
+
+.masterybox3{
+    width: 15%;
+    aspect-ratio: 1/1;
+    margin: 0px 1px 0px 1px;
+    background: rgb(180, 211, 44);
+}
+
+.masterybox4{
+    width: 15%;
+    aspect-ratio: 1/1;
+    margin: 0px 1px 0px 1px;
+    background: rgb(44, 211, 52);
+}
