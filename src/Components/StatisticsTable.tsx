@@ -2,14 +2,14 @@ import './StatisticsTable.css';
 
 const MasteryBoxElement = ({level}: {level: number}) => {
     return(
-        <td className='attemptsTextTable'>
-        <div className='masteryboxes'>
-            {[...Array(level)].map(
-            (value: undefined, index: number) => (
-                <div className={`masterybox${level}`} key={index}></div>
-            )
-            )}
-        </div>
+        <td className='masteryTextTable'>
+            <div className='masteryboxes'>
+                {[...Array(level)].map(
+                (value: undefined, index: number) => (
+                    <div className={`masterybox${level}`} key={index}></div>
+                )
+                )}
+            </div>
         </td>
     )
 }
@@ -36,7 +36,7 @@ export const StatisticsTable = () => {
         <tr className='boldRow'>
             <td>Item</td>
             <td className='attemptsTextTable'>Attempts</td>
-            <td className='attemptsTextTable'>Mastery</td>
+            <td className='masteryTextTable'>Mastery</td>
         </tr>
         <NormalTableRow text={"non-price determinants of demand"} attempts={5} level={4}/>
         <NormalTableRow text={"the law of supply"} attempts={4} level={2}/>

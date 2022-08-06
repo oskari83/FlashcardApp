@@ -1,0 +1,56 @@
+.footer{
+    position: absolute;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    height:50px;
+    background-color: rgba(211, 211, 211, 0);
+    z-index: 1;
+    font-family: "ReadexLight";
+    font-size: 12px;
+    color: #d2d3da;
+}
+
+.footerInner {
+    width:clamp(200px,96%,800px);
+    border-top: 2px solid rgb(236, 235, 241);
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+
+.footerLogo {
+    width:25px;
+    aspect-ratio: 1/1;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url(../Assets/GitHub-Mark-64px.png);
+    opacity: 0.3;
+    padding-right: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.footerTextClickable{
+    cursor: pointer;
+    height: 100%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.footerTextClickable:hover{
+    font-family: "Readex";
+}
+  
+.footerText{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    padding-right: 10px;
+    padding-left: 10px;
+}

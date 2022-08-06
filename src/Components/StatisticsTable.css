@@ -15,6 +15,7 @@ th {
     margin: 0 0 0 0;
     width: 90%;
     border-collapse: collapse;
+    font-size: clamp(8px, 2.5vw, 12px);
 }
 
 .itemColumn {
@@ -43,6 +44,10 @@ th {
     text-align: center;
 }
 
+.masteryTextTable{
+    text-align: center;
+}
+
 .masteryboxes{
     width: 80%;
     height: 80%;
@@ -53,29 +58,41 @@ th {
 }
 
 .masterybox1{
-    width: 15%;
+    width: clamp(2px,15%,16px);
     margin: 0px 1px 0px 1px;
     aspect-ratio: 1/1;
-    background-color: rgb(211, 44, 44);
+    background-color: rgb(228, 109, 109);
 }
 
 .masterybox2{
-    width: 15%;
+    width: clamp(2px,15%,16px);
     aspect-ratio: 1/1;
     margin: 0px 1px 0px 1px;
-    background: rgb(211, 186, 44);
+    background: rgb(236, 227, 108);
 }
 
 .masterybox3{
-    width: 15%;
+    width: clamp(2px,15%,16px);
     aspect-ratio: 1/1;
     margin: 0px 1px 0px 1px;
-    background: rgb(180, 211, 44);
+    background: rgb(236, 227, 108);
 }
 
 .masterybox4{
-    width: 15%;
+    width: clamp(2px,15%,16px);
     aspect-ratio: 1/1;
     margin: 0px 1px 0px 1px;
-    background: rgb(44, 211, 52);
+    background: rgb(109, 230, 139);
+}
+
+@media (max-width: 700px) {
+    .attemptsTextTable{
+        display: none;
+    }
+    .attemptsColumn{
+        display: none;
+    }
+    .masteryColumn {
+        width: 30%;
+    }
 }

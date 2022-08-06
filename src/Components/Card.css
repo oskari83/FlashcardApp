@@ -51,7 +51,7 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   background: #ffffff;
-  border-radius: 14px;
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   color: rgb(51, 51, 51);
   cursor: pointer;
@@ -67,7 +67,7 @@
   transform: rotateX(180deg);
   -webkit-transform: rotateX(180deg);
   -moz-transform: rotateX(180deg);
-  border-radius: 14px;
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   color: #333;
   cursor: pointer;
