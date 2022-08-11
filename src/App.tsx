@@ -24,6 +24,8 @@ function App() {
           <div className='setProgress'>43</div>
           <div className="setInfo">Information about set, Creator: Oskari, Cards: 23</div>
         </div>
+
+        <div className='setAreaOuter'>
         <div className="setAreaContainer">
           <div className="selectorBar">
             <div className={currentSelection===0 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(0)}>
@@ -51,10 +53,33 @@ function App() {
           } 
 
           {currentSelection===1 && 
+          <div>
+            <div className='aboveCard'>
+              <div className='aboveCardInner'>
+                <div className='cardOutOf'>Card 4/55</div>
+                <div className='randomizeText'>
+                  <label className='randomOrder'>
+                    <input type="checkbox" />
+                    Random order
+                  </label>
+                </div>
+              </div>
+            </div>
+            
             <div className="cardcontainer">
               <Card cardFrontText='front' cardBackText='back'/>
             </div>
+
+            <div className='belowCard'>
+              <div className='belowCardInner'>
+                <div className='feedButtonNeg'>-1</div>
+                <div className='feedButtonNeut'>0</div>
+                <div className='feedButtonPos'>+1</div>
+              </div>
+            </div>
+          </div>
           } 
+        </div>
         </div>
       </div>
         <Footer />

@@ -1,4 +1,5 @@
 import './StatisticsTable.css';
+import { MdKeyboardArrowDown } from 'react-icons/md'
 
 const MasteryBoxElement = ({level}: {level: number}) => {
     return(
@@ -34,9 +35,18 @@ export const StatisticsTable = () => {
         </colgroup>
         <tbody>
         <tr className='boldRow'>
-            <td>Item</td>
-            <td className='attemptsTextTable'>Attempts</td>
-            <td className='masteryTextTable'>Mastery</td>
+            <td className='headerRow'>
+                <div className='tdText'>Item</div>
+                <div className='arrowIcon'><MdKeyboardArrowDown size='20px' color={`rgb(78, 78, 78)`} /></div>
+            </td>
+            <td className='headerRow attemptsTextTable'>
+                <div className='tdTextAttempts'>Attempts</div>
+                <div className='arrowIcon'><MdKeyboardArrowDown size='20px' color={`rgb(78, 78, 78)`} /></div>
+            </td>
+            <td className='headerRow masteryTextTable'>
+                <div className='tdTextMastery'>Mastery</div>
+                <div className='arrowIconMastery'><MdKeyboardArrowDown size='20px' color={`rgb(78, 78, 78)`} /></div>
+            </td>
         </tr>
         <NormalTableRow text={"non-price determinants of demand"} attempts={5} level={4}/>
         <NormalTableRow text={"the law of supply"} attempts={4} level={2}/>

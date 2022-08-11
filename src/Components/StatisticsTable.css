@@ -19,11 +19,11 @@ th {
 }
 
 .itemColumn {
-    width: 70%;
+    width: 65%;
 }
 
 .attemptsColumn {
-    width: 10%;
+    width: 15%;
 }
 
 .masteryColumn {
@@ -32,8 +32,67 @@ th {
 
 .boldRow {
     font-family: "ReadexBold";
+    position: relative;
+    color: rgb(105, 105, 105);
+    border-radius: 2px;
+    border-bottom: 1px solid rgb(105, 105, 105);
+}
+
+.headerRow{
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.headerRow:hover{
+    background-color: rgb(240, 240, 240);
+    cursor: pointer;
+    vertical-align: middle;
     color: rgb(78, 78, 78);
-    border-bottom: 2px solid rgb(78, 78, 78);
+    border-bottom: 1px solid rgb(78, 78, 78);
+}
+
+.arrowIcon{
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding-top: 2px;
+}
+
+.arrowIconMastery{
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding-top: 2px;
+    padding-left: 10%;
+}
+
+.tdText{
+    align-items: center;
+    display: flex;
+    float: left;
+    height: 30px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.tdTextAttempts{
+    align-items: center;
+    display: flex;
+    float: left;
+    height: 30px;
+    padding-left: 12px;
+    padding-right: 4px;
+}
+
+.tdTextMastery{
+    align-items: center;
+    display: flex;
+    float: left;
+    height: 30px;
+    padding-left: 24px;
+    padding-right: 4px;
 }
 
 .normalRow {
@@ -51,7 +110,7 @@ th {
 .masteryboxes{
     width: 80%;
     height: 80%;
-    margin: 0px 0px 0px 25%;
+    margin: 0px 0px 0px 22%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
