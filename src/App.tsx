@@ -59,7 +59,7 @@ function App() {
                 <div className='cardOutOf'>Card 4/55</div>
                 <div className='randomizeText'>
                   <label className='randomOrder'>
-                    <input type="checkbox" />
+                    <input type="checkbox" className='checkBoxStyle'/>
                     Random order
                   </label>
                 </div>
