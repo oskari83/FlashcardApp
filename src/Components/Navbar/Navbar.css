@@ -132,6 +132,10 @@ a{
     font-family: "ReadexBold";
 }
 
+.nav-branding:hover{
+    text-shadow: 1px 1px #00000070;
+}
+
 .nav-icon{
     display: flex;
     align-items: center;

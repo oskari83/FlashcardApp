@@ -1,4 +1,4 @@
-td {
+.setStatisticsTable td {
     height: 30px;
     text-overflow: ellipsis;
     max-width: 0;
@@ -6,9 +6,19 @@ td {
     white-space: nowrap;
 }
 
-th {
+.setStatisticsTable th {
     height: 30px;
     text-align: left;
+}
+
+.setStatisticsTable {
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    font-family: "Readex";
+    font-size: 12px;
+    color: rgb(85, 85, 85);
 }
 
 .statsTable{
@@ -55,12 +65,13 @@ th {
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: right;
     height: 30px;
     padding-top: 2px;
     float: right;
     width: 20%;
     margin-right: 0px;
-    padding-right: 0px;
+    padding-right: 4px;
 }
 
 .arrowIconMastery{

@@ -1,0 +1,256 @@
+.cardcontainer {
+    position: relative;
+    width: clamp(250px,90%,450px);
+    aspect-ratio: 45 / 28;
+    z-index: 1;
+}
+  
+.aboveCard{
+    font-family: "ReadexLight";
+    font-size: 12px;
+    color: rgb(155, 155, 155);
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+  
+.aboveCardInner{
+    width: clamp(250px,90%,450px);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.belowCard{
+    font-family: "ReadexBold";
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+  
+.belowCardInner{
+    width: clamp(250px,90%,450px);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.feedButtonNeg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32%;
+    height: 100%;
+    background-color: rgb(228, 109, 109, 0.5);
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+  
+.feedButtonNeut{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32%;
+    height: 100%;
+    background-color: rgba(241, 241, 241, 0.5);
+    cursor: pointer;
+    color: rgb(58, 58, 58);
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+  
+.feedButtonPos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32%;
+    height: 100%;
+    background-color: rgb(109, 230, 139, 0.5);
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+  
+.feedButtonNeg:hover{
+    background-color: rgb(228, 109, 109, 1.0);
+}
+  
+.feedButtonNeut:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(58, 58, 58);
+}
+  
+.feedButtonPos:hover{
+    background-color: rgb(109, 230, 139, 1.0);
+}
+  
+.randomOuterOuter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 100%
+}
+  
+.randomOuter{
+    box-sizing: border-box;
+    width: 24px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.randomizeText{
+    box-sizing: border-box;
+    width: 14px;
+    height: 14px;
+}
+  
+.randomOrder{
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+  
+.randomOrder .checkmark{
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgb(155, 155, 155);;
+    display: inline-block;
+    border-radius: 7px;
+}
+  
+.randomOrder input {
+    display: none;
+}
+  
+.randomOrder input:checked + .checkmark{
+    background-color: rgba(41, 116, 255, 0.7);
+    border: 0px solid rgb(155, 155, 155);
+}
+  
+.innerCircle{
+    margin-left: 4px;
+    margin-top: 4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: white;
+}
+  
+.cardRowContainer{
+   width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+  
+.leftButton{
+    height: 280px;
+    margin-right: 10px;
+    width: 40px;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.rightButton{
+    height: 280px;
+    margin-left: 10px;
+    width: 40px;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.leftButton:hover{
+    background-color: rgb(250, 250, 250);
+}
+  
+.rightButton:hover{
+    background-color: rgb(250, 250, 250);
+}
+  
+.mobileleftandright{
+    font-family: "ReadexBold";
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    margin: 0 auto;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    margin-top: 5px;
+}
+  
+.mobileInner{
+    width: clamp(250px,90%,450px);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.mobileLeft{
+    height: 100%;
+    width: 49%;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.mobileRight{
+    height: 100%;
+    width: 49%;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.mobileLeft:hover{
+    background-color: rgb(250, 250, 250);
+}
+  
+.mobileRight:hover{
+    background-color: rgb(250, 250, 250);
+}
+
+@media (max-width: 600px) {
+    .leftButton{
+      display: none;
+    }
+    
+    .rightButton{
+      display: none;
+    }
+    .mobileleftandright{
+      display: flex;
+    }
+}

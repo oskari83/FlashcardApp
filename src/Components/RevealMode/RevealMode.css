@@ -1,0 +1,105 @@
+.revealmodeTable{
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    font-family: "Readex";
+    font-size: 12px;
+    color: rgb(85, 85, 85);
+}
+
+.normalRowTd{
+    border-right: 1px solid rgb(240, 240, 240);
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    position: relative;
+}
+
+.normalAnswerTd{
+    border-right: 1px solid rgb(240, 240, 240);
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    position: relative;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.normalAnswerTdIn{
+    border-right: 1px solid rgb(240, 240, 240);
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    position: relative;
+    cursor: pointer;
+    color: white;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.normalAnswerTdIn:hover{
+    background-color: rgb(243, 243, 243);
+    color: rgb(243, 243, 243);
+}
+
+.revealmodeTable th {
+    text-align: left;
+}
+
+.revealTable{
+    margin: 0 0 0 0;
+    width: 90%;
+    border-collapse: collapse;
+    font-size: clamp(8px, 2.5vw, 12px);
+    table-layout: fixed;
+}
+
+.questionColumn {
+    width: 50%;
+}
+
+.answerColumn {
+    width: 50%;
+}
+
+.fboldRow {
+    font-family: "ReadexBold";
+    position: relative;
+    color: rgb(105, 105, 105);
+    border-radius: 2px;
+    border-bottom: 1px solid rgb(105, 105, 105);
+    border-left: 1px solid rgb(105, 105, 105);
+    border-top: 1px solid rgb(105, 105, 105);
+}
+
+.fheaderRow{
+    vertical-align: middle;
+    border-right: 1px solid rgb(105, 105, 105);
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.ftdText{
+    align-items: center;
+    display: flex;
+    height: 30px;
+}
+
+.normalRevealRow {
+    border-bottom: 1px solid rgb(240, 240, 240);
+    border-top: 1px solid rgb(240, 240, 240);
+    border-left: 1px solid rgb(240, 240, 240);
+}
