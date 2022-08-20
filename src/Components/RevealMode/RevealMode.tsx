@@ -2,16 +2,29 @@ import './RevealMode.css'
 import { useState } from 'react';
 
 const NormalTableRow = ({question, answer}: {question: string,answer: string}) => {
-    const [show, setShow] = useState(false);
+
+    const [show, setShow] = useState(0);
+
     const showAnswer = () => {
-        setShow(!show)
+        show<2 && setShow(show + 1);
+    }
+
+    const giveFeedBack = () => {
+        setShow(0);
     }
 
     return(
         <tr className='normalRevealRow'>
             <td className='normalRowTd'>{question}</td>
-            <td className={`normalAnswerTd${show ? '' : 'In'}`} onClick={() => showAnswer()}>
+            <td className={`normalAnswerTd${show}`} onClick={() => showAnswer()}>
                 {answer}
+                {show===2 && 
+                <div className='tdFbOuter'>
+                    <div className='fbneg' onClick={() => giveFeedBack()}>-1</div>
+                    <div className='fbneu' onClick={() => giveFeedBack()}>0</div>
+                    <div className='fbpos' onClick={() => giveFeedBack()}>1</div> 
+                </div>                        
+                }
             </td>
         </tr>
     )

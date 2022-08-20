@@ -1,4 +1,4 @@
-.revealmodeTable{
+.editCollectionTable{
     width: 100%;
     padding-top: 20px;
     display: flex;
@@ -140,12 +140,17 @@
     text-align: left;
 }
 
-.revealTable{
+.editTable{
     margin: 0 0 0 0;
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
     font-size: clamp(8px, 2.5vw, 12px);
     table-layout: fixed;
+}
+
+.editTableForm{
+    margin: 0 0 0 0;
+    width: 90%;
 }
 
 .questionColumn {

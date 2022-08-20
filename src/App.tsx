@@ -3,6 +3,7 @@ import { Footer } from './Components/Footer/Footer';
 import { FlipMode } from './Components/FlipMode/FlipMode';
 import { RevealMode } from './Components/RevealMode/RevealMode';
 import { StatisticsTable } from './Components/StatisticsTable/StatisticsTable';
+import { CollectionEdit } from './Components/CollectionEdit/CollectionEdit';
 import { IoMdStats, IoMdPlay } from 'react-icons/io'
 import { AiFillEdit } from 'react-icons/ai'
 import { useState } from 'react';
@@ -58,6 +59,10 @@ function App() {
 
             {currentSelection===2 && 
               <RevealMode />
+            } 
+
+            {currentSelection===3 && 
+              <CollectionEdit />
             } 
 
           </div>
