@@ -1,13 +1,20 @@
 import './CollectionEdit.css'
+import { RiDeleteBinLine } from 'react-icons/ri'
+import { IoMdClose } from 'react-icons/io'
 
 const NormalTableRow = ({question, answer}: {question: string,answer: string}) => {
     return(
-        <tr className='normalRevealRow'>
-            <td className='normalRowTd'>
-                <input type="text" id="quest" name="quest"></input>    
+        <tr className='enormalRevealRow'>
+            <td className='enormalRowTd'>
+                <span className='inputspan' role="textarea" contentEditable>{question}</span>    
             </td>
-            <td className={`normalAnswerTd1`}>
-                <input type="text" id="def" name="def"></input> 
+            <td className='enormalRowTd'>
+                <span className='inputspan' role="textarea" contentEditable>{answer}</span>  
+            </td>
+            <td className='enormalRowTd'>
+                <div className='delButton'>
+                    <IoMdClose size='20px' color={`rgb(70, 70, 70)`} />
+                </div>
             </td>
         </tr>
     )
@@ -17,18 +24,28 @@ export const CollectionEdit = () => {
     return(
         <div className='editCollectionTable'>
             <form className='editTableForm'>
+                <input type="button"></input>
+                <input type="button"></input>
                 <table className='editTable'>
                 <colgroup>
-                    <col className="questionColumn"></col>
-                    <col className="answerColumn"></col>
+                    <col className="editquestionColumn"></col>
+                    <col className="editanswerColumn"></col>
+                    <col className='editdeleteColumn'></col>
                 </colgroup>
                 <tbody>
-                <tr className='fboldRow'>
-                    <td className='fheaderRow'>
-                        <div className='ftdText'>Object</div>
+                <tr className='eboldRow'>
+                    <td className='eheaderRow'>
+                        <div className='etdText'>Object</div>
                     </td>
-                    <td className='fheaderRow'>
-                        <div className='ftdText'>Definition</div>
+                    <td className='eheaderRow'>
+                        <div className='etdText'>Definition</div>
+                    </td>
+                    <td className='eheaderRow'>
+                        <div className='etdText'>
+                            <div className='editDelIcon'>
+                                <RiDeleteBinLine size='20px' color={`rgb(70, 70, 70)`} />
+                            </div>
+                        </div>
                     </td>
                 </tr>
                     <NormalTableRow question={"non-price determinants of demand"} answer={"1 changes in income 2 habits, fashion, tastes 3 substitutes and complements 4 demographic changes 5 ad and gov"}/>
