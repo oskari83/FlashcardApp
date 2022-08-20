@@ -1,0 +1,150 @@
+.containerMain {
+  width: clamp(200px,96%,800px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0%;
+  padding-right: 0%;
+  padding-top: 50px;
+  padding-bottom: 10px;
+  z-index: 2;
+  background-color: rgb(242, 245, 250);
+}
+  
+.setAreaContainer {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  padding-left: 0%;
+  padding-right: 0%;
+  z-index: 2;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  height: 800px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.setAreaOuter{
+  min-height: calc(85vh - 50px);
+}
+  
+.setName {
+  padding-left: 3%;
+  float:left;
+  padding-right: 5%;
+  font-family: "ReadexBold";
+  font-size: clamp(20px, 5.5vw, 25px);;
+  color: rgb(78, 78, 78);
+}
+
+.setProgress {
+  position: relative;
+  font-family: "Readex";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: rgb(78, 78, 78);
+  float:right;
+  width: 50px;
+  aspect-ratio: 1/1;
+  border-radius: 5px;
+  margin-right: 3%;
+  margin-top: 0px;
+  background-color: rgb(109, 230, 139);
+}
+
+.setInfo {
+  padding-top: 4px;
+  padding-left: 3%;
+  padding-right: 5%;
+  font-family: "Readex";
+  font-size: 12px;
+  color: rgb(104, 104, 104);
+  clear: left;
+}
+
+.setInfoContainer {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0%;
+  padding-right: 0%;
+  margin-top: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  z-index: 2;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.selectorBar {
+  height: 40px;
+  border-bottom: 1px solid #d4d4d4;
+  display: flex;
+  width: clamp(200px,100%,800px);
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 0 0px;
+  z-index: 8;
+}
+
+.selectorBarItem {
+  width: 100%;
+  font-family: "Readex";
+  font-size: clamp(10px, 2.5vw, 13px);
+  color: rgb(92, 92, 92);
+  cursor: pointer;
+  text-align: center;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+}
+
+.selectorBarItemText{
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  padding-left: 8%;
+  padding-right: 8%;
+  align-items: center;
+}
+
+.selectorBarItemIcon{
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+}
+
+.selectorBarItem:hover {
+  box-shadow: inset 0 -3px 0 0 rgba(41, 116, 255, 0.801);
+}
+
+.selectorBarItemSelected {
+  width: 100%;
+  font-family: "Readex";
+  font-size: clamp(10px, 2.5vw, 13px);
+  color: rgba(41, 116, 255, 1.0);
+  box-shadow: inset 0 -3px 0 0 rgba(41, 116, 255, 0.801);
+  cursor: pointer;
+  text-align: center;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 500px) {
+  .selectorBarItemIcon{
+    display: none;
+  }
+
+  .setProgress{
+    display: none;
+  }
+}

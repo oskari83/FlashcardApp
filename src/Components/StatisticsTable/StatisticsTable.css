@@ -65,7 +65,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: flex-end;
     height: 30px;
     padding-top: 2px;
     float: right;

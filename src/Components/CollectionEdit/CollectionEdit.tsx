@@ -24,8 +24,12 @@ export const CollectionEdit = () => {
     return(
         <div className='editCollectionTable'>
             <form className='editTableForm'>
-                <input type="button"></input>
-                <input type="button"></input>
+                
+                <div className='aboveTableContainer'>
+                    <div className='submitButton'>Save</div>
+                    <div className='cancelChanges'>Cancel changes</div>
+                </div>
+
                 <table className='editTable'>
                 <colgroup>
                     <col className="editquestionColumn"></col>
@@ -56,6 +60,15 @@ export const CollectionEdit = () => {
                     <NormalTableRow question={"where allocative efficiency occurs"} answer={"at the market equilibrium as community surplus is maximised"}/>
                 </tbody>
                 </table>
+
+                <div className='addAnotherRowContainer'>
+                    <div className='addRowButton'>+ Add</div>
+                </div>
+
+                <div className='belowTableContainer'>
+                    <div className='submitButton'>Save</div>
+                    <div className='cancelChanges'>Cancel changes</div>
+                </div>
             </form>
         </div>
     )

@@ -8,6 +8,11 @@
     color: rgb(85, 85, 85);
 }
 
+.editTableForm{
+    margin: 0 0 0 0;
+    width: 90%;
+}
+
 .enormalRowTd{
     border-right: 1px solid rgb(240, 240, 240);
     padding-left: 6px;
@@ -77,11 +82,6 @@
     border-collapse: collapse;
     font-size: clamp(8px, 2.5vw, 12px);
     table-layout: fixed;
-}
-
-.editTableForm{
-    margin: 0 0 0 0;
-    width: 90%;
 }
 
 .editquestionColumn {
@@ -155,4 +155,95 @@
     border-bottom: 1px solid rgb(240, 240, 240);
     border-top: 1px solid rgb(240, 240, 240);
     border-left: 1px solid rgb(240, 240, 240);
+}
+
+.aboveTableContainer{
+    height: 30px;
+    width: 100%;
+    margin: 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-bottom: 10px;
+    font-family: "ReadexBold";
+    font-size: 10px;
+    color: rgb(85, 85, 85);
+}
+
+.belowTableContainer{
+    height: 30px;
+    width: 100%;
+    margin: 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+    font-family: "ReadexBold";
+    font-size: 10px;
+    color: rgb(85, 85, 85);
+}
+
+.submitButton{
+    display: flex;
+    height: 100%;
+    width: 100px;
+    background-color: #2f6dff9c;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.cancelChanges{
+    display: flex;
+    height: 100%;
+    width: 100px;
+    margin-left: 4px;
+    background-color: rgba(240, 240, 240, 0.5);
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.submitButton:hover{
+    background-color: #2f6effe1;
+}
+
+.cancelChanges:hover{
+    background-color: rgb(240, 240, 240);
+}
+
+.addAnotherRowContainer{
+    height: 30px;
+    width: 100%;
+    margin: 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    font-family: "ReadexBold";
+    font-size: 10px;
+    color: rgb(85, 85, 85);
+}
+
+.addRowButton{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin-left: 4px;
+    background-color: rgba(240, 240, 240, 0.5);
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.addRowButton:hover{
+    background-color: rgb(240, 240, 240);
 }
