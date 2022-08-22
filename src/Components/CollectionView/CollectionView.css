@@ -33,8 +33,25 @@
   float:left;
   padding-right: 5%;
   font-family: "ReadexBold";
-  font-size: clamp(20px, 5.5vw, 25px);;
+  font-size: clamp(20px, 5.5vw, 25px);
   color: rgb(78, 78, 78);
+}
+
+.setNameText{
+  float:left;
+}
+
+.setNameIcon{
+  display: flex;
+  align-items: center;
+  float:right;
+  margin-left: 18px;
+  margin-top: 8px;
+  font-size: 10px;
+}
+
+.innerSetNameText{
+  margin-left: 4px;
 }
 
 .setProgress {
@@ -146,5 +163,14 @@
 
   .setProgress{
     display: none;
+  }
+}
+
+@media (max-width: 340px) {
+  .innerSetNameText{
+    display: none;
+  }
+  .setNameIcon{
+    margin-top: 6px;
   }
 }

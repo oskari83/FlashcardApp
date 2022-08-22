@@ -3,12 +3,18 @@ import { RevealMode } from '../RevealMode/RevealMode';
 import { StatisticsTable } from '../StatisticsTable/StatisticsTable';
 import { CollectionEdit } from '../CollectionEdit/CollectionEdit';
 import { IoMdStats, IoMdPlay } from 'react-icons/io'
+import { BsBookmark,BsBookmarkCheckFill } from "react-icons/bs"
 import { AiFillEdit } from 'react-icons/ai'
 import { useState } from 'react';
 import './CollectionView.css';
 
 export const CollectionView = () => {
     const [currentSelection, setCurrentSelection] = useState(0);
+    const [bookmarked, setBookmarked] = useState(false);
+
+    const bookmarkThis = () => {
+        setBookmarked(!bookmarked);
+    }
 
     const selectionChange = (id: number) => {
         setCurrentSelection(id)
@@ -18,7 +24,17 @@ export const CollectionView = () => {
         <>
         <div className="containerMain">
             <div className="setInfoContainer">
-            <div className="setName">Name of Collection</div>
+            <div className="setName">
+                <div className='setNameText'>Name of Collection</div>
+                <div className='setNameIcon' onClick={() => bookmarkThis()}>
+                    { bookmarked ? 
+                    <BsBookmarkCheckFill size='16px' color={`rgb(78, 78, 78)`} />
+                    :
+                    <BsBookmark size='16px' color={`rgb(78, 78, 78)`} />
+                    }
+                    <div className='innerSetNameText'>Save</div>
+                </div>
+            </div>
             <div className='setProgress'>43%</div>
             <div className="setInfo">Information about set, Creator: Oskari, Cards: 23</div>
             </div>
