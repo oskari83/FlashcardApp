@@ -1,6 +1,105 @@
-.editCollectionTable{
+.createviewContainerMain {
+    width: clamp(200px,96%,800px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    z-index: 2;
+    background-color: rgb(242, 245, 250);
+}
+
+.creationContainer{
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0%;
+    padding-right: 0%;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-family: "Readex";
+    font-size: 12px;
+    color:rgb(70, 70, 70);
+    min-height: calc(95vh - 20px);
+}
+
+.collectionNameContainer {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0%;
+    padding-right: 0%;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Readex";
+    font-size: 20px;
+    color:rgb(70, 70, 70)
+}
+
+.nameInput{
+    width: 75%;
+    height: 100%;
+    box-sizing: border-box;
+    margin-left: 5%;
+    margin-right:14px;
+    border: none;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    font-family: "Readex";
+    font-size: 15px;
+    color:rgb(70, 70, 70);
+    float:left;
+}
+
+.nameInput:focus{
+    border: none;
+    border-bottom: 1px solid rgba(41, 116, 255, 1.0);;
+    outline: none;
+}
+
+.nameInput::placeholder{
+    font-family: "Readex";
+    font-size: 15px;
+    color:rgb(70, 70, 70)
+}
+
+.submitButtonName{
+    float:right;
+    display: flex;
+    height: 100%;
+    width: 100px;
+    background-color: #2f6dff9c;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 10px;
+    font-family: "ReadexBold";
+    margin-right: 5%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.submitButtonName:hover{
+    background-color: #2f6effe1;
+}
+
+.createCollectionTable{
     width: 100%;
-    padding-top: 20px;
+    padding-top: 15px;
     display: flex;
     justify-content: center;
     font-family: "Readex";
@@ -8,12 +107,12 @@
     color: rgb(85, 85, 85);
 }
 
-.editTableForm{
+.cTableForm{
     margin: 0 0 0 0;
     width: 90%;
 }
 
-.enormalRowTd{
+.cnormalRowTd{
     border-right: 1px solid rgb(240, 240, 240);
     padding-left: 6px;
     padding-right: 6px;
@@ -22,11 +121,7 @@
     position: relative;
 }
 
-.editTable th {
-    text-align: left;
-}
-
-.editTable{
+.createTable{
     margin: 0 0 0 0;
     width: 100%;
     border-collapse: collapse;
@@ -34,19 +129,19 @@
     table-layout: fixed;
 }
 
-.editquestionColumn {
+.cquestionColumn {
     width: 47%;
 }
 
-.editanswerColumn {
+.canswerColumn {
     width: 47%;
 }
 
-.editdeleteColumn {
+.cdeleteColumn {
     width: 6%;
 }
 
-.eboldRow {
+.cboldRow {
     font-family: "ReadexBold";
     position: relative;
     color: rgb(105, 105, 105);
@@ -56,20 +151,20 @@
     border-top: 1px solid rgb(105, 105, 105);
 }
 
-.eheaderRow{
+.cheaderRow{
     vertical-align: middle;
     border-right: 1px solid rgb(105, 105, 105);
     padding-left: 6px;
     padding-right: 6px;
 }
 
-.etdText{
+.ctdText{
     align-items: center;
     display: flex;
     height: 30px;
 }
 
-.editDelIcon{
+.cDelIcon{
     width: 100%;
     height: 100%;
     display: flex;
@@ -77,7 +172,7 @@
     justify-content: center;
 }
 
-.delButton{
+.cdelButton{
     width: 100%;
     height: 100%;
     display: flex;
@@ -87,11 +182,11 @@
     border-radius: 2px;
 }
 
-.delButton:hover{
+.cdelButton:hover{
     background-color: rgb(240, 240, 240);
 }
 
-.inputspan{
+.cinputspan{
     display: block;
     padding: 4px 4px;
     width: 100%;
@@ -101,13 +196,13 @@
     border: 1px solid rgb(240, 240, 240);
 }
 
-.enormalRevealRow {
+.cnormalRevealRow {
     border-bottom: 1px solid rgb(240, 240, 240);
     border-top: 1px solid rgb(240, 240, 240);
     border-left: 1px solid rgb(240, 240, 240);
 }
 
-.aboveTableContainer{
+.cAboveTableContainer{
     height: 30px;
     width: 100%;
     margin: 0 0;
@@ -120,7 +215,7 @@
     color: rgb(85, 85, 85);
 }
 
-.belowTableContainer{
+.cbelowTableContainer{
     height: 30px;
     width: 100%;
     margin: 0 0;
@@ -147,28 +242,11 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.cancelChanges{
-    display: flex;
-    height: 100%;
-    width: 100px;
-    margin-left: 4px;
-    background-color: rgba(240, 240, 240, 0.5);
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-}
-
 .submitButton:hover{
     background-color: #2f6effe1;
 }
 
-.cancelChanges:hover{
-    background-color: rgb(240, 240, 240);
-}
-
-.addAnotherRowContainer{
+.caddAnotherRowContainer{
     height: 30px;
     width: 100%;
     margin: 0 0;
@@ -196,4 +274,14 @@
 
 .addRowButton:hover{
     background-color: rgb(240, 240, 240);
+}
+
+@media (max-width: 400px) {
+    .submitButtonName{
+        display: none;
+    }
+
+    .nameInput{
+        width: 100%;
+    }
 }
