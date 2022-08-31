@@ -276,6 +276,15 @@
     background-color: rgb(240, 240, 240);
 }
 
+.createViewName{
+    font-family: "ReadexBold";
+    font-size: 24px;
+    color:rgb(80, 80, 80);
+    padding-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
 @media (max-width: 400px) {
     .submitButtonName{
         display: none;

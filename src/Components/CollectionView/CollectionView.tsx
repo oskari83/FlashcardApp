@@ -28,11 +28,13 @@ export const CollectionView = () => {
                 <div className='setNameText'>Name of Collection</div>
                 <div className='setNameIcon' onClick={() => bookmarkThis()}>
                     { bookmarked ? 
-                    <BsBookmarkCheckFill size='16px' color={`rgb(78, 78, 78)`} />
+                    <BsBookmarkCheckFill size='16px' color={`rgb(248, 222, 106)`} />
                     :
                     <BsBookmark size='16px' color={`rgb(78, 78, 78)`} />
                     }
-                    <div className='innerSetNameText'>Save</div>
+                    <div className='innerSetNameText'>
+                        { bookmarked ? "Saved" : "Save"}
+                    </div>
                 </div>
             </div>
             <div className='setProgress'>43%</div>

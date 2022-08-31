@@ -39,6 +39,7 @@ export const BrowseView = () => {
     return(
         <>
         <div className="containerMain">
+            <div className="browseViewName">Browse Collections</div>
             <div className="searchBarContainer">
                 <input type="text" className='searchInput'  placeholder="Search..."></input>
                 <div className='searchIcon'>

@@ -1,0 +1,211 @@
+.containerMainAuth {
+    width: clamp(200px,96%,500px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.authContainer{
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0%;
+    padding-right: 0%;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    height: 350px;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-family: "Readex";
+    font-size: 12px;
+    color:rgb(70, 70, 70);
+}
+
+.emptyCont{
+    height: calc(100vh - 600px);
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.authViewName{
+    font-family: "ReadexBold";
+    font-size: 24px;
+    color:rgb(80, 80, 80);
+    padding-left: 10px;
+    margin-top: 105px;
+    margin-bottom: 10px;
+}
+
+.authFlexCont{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.emailContainer{
+    height: 40px;
+    width: 70%;
+    margin-top: 10px;
+}
+
+.passwordContainer{
+    height: 40px;
+    width: 70%;
+    margin-top: 10px;
+}
+
+.choiceContainer{
+    width: 70%;
+    height: 40px;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: "ReadexBold";
+    font-size: 16px;
+    color:rgb(166, 166, 166);
+}
+
+.signInChoice{
+    width: 70px;
+    height: 100%;
+    margin-right: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 4px solid white;
+}
+
+.signInChoiceA{
+    width: 70px;
+    height: 100%;
+    margin-right: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color:rgb(100, 100, 100);
+    border-bottom: 4px solid rgb(100, 100, 100);
+}
+
+.registerChoice{
+    width: 70px;
+    height: 100%;
+    margin-right: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 4px solid white;
+}
+
+.registerChoiceA{
+    width: 70px;
+    height: 100%;
+    margin-right: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color:rgb(100, 100, 100);
+    border-bottom: 4px solid rgb(100, 100, 100);
+}
+
+.signInChoice:hover{
+    color:rgb(100, 100, 100);
+    border-bottom: 4px solid rgb(100, 100, 100);
+}
+
+.registerChoice:hover{
+    color:rgb(100, 100, 100);
+    border-bottom: 4px solid rgb(100, 100, 100);
+}
+
+.emailInput{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-family: "Readex";
+    font-size: 12px;
+    color:rgb(70, 70, 70);
+}
+
+.emailInput:focus{
+    border: none;
+    border: 2px solid rgba(41, 116, 255, 1.0);;
+    outline: none;
+}
+
+.emailInput::placeholder{
+    font-family: "Readex";
+    font-size: 12px;
+    color:rgb(164, 164, 164)
+}
+
+.passwordInput{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding-left: 16px;
+    padding-right: 16px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: none;
+    border: 2px solid rgb(255, 255, 255);
+    font-family: "Readex";
+    font-size: 12px;
+    border-radius: 4px;
+    color:rgb(70, 70, 70);
+}
+
+.passwordInput:focus{
+    border: none;
+    border: 2px solid rgba(41, 116, 255, 1.0);;
+    outline: none;
+}
+
+.passwordInput::placeholder{
+    font-family: "Readex";
+    font-size: 12px;
+    color:rgb(164, 164, 164)
+}
+
+.emailTextContainer{
+    width: 70%;
+    margin-top: 16px;
+}
+
+.passwordTextContainer{
+    width: 70%;
+    margin-top: 16px;
+}
+
+.signinButton{
+    display: flex;
+    height: 40px;
+    width: 70%;
+    margin-top: 24px;
+    background-color: #2f6dff9c;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.signinButton:hover{
+    background-color: #2f6effe1;
+}

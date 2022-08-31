@@ -90,7 +90,7 @@
     width: 90%;
     height: 100px;
     background-color: rgb(255, 255, 255);
-    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 4px;
     color:rgb(119, 119, 119);
     cursor: pointer;
@@ -98,6 +98,7 @@
 
 .collectionItem:hover{
     color:rgba(41, 116, 255, 0.801);
+    box-shadow: rgba(50, 50, 105, 0.3) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 1px 1px 0px;
 }
 
 .aboveResultsContainer{
@@ -172,4 +173,13 @@
     font-size: clamp(10px, 3.5vw, 12px);
     color:rgb(119, 119, 119);
     clear: both;
+}
+
+.browseViewName{
+    font-family: "ReadexBold";
+    font-size: 24px;
+    color:rgb(80, 80, 80);
+    padding-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
 }

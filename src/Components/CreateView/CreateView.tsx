@@ -25,6 +25,8 @@ export const CreateView = () => {
         <>
         <div className="createviewContainerMain">
 
+            <div className='createViewName'>Create Collection</div>
+
             <div className="collectionNameContainer">
                 <input type="text" className='nameInput'  placeholder="Name..."></input>
                 <div className='submitButtonName'>Create</div>

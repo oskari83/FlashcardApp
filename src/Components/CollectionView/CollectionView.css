@@ -45,6 +45,7 @@
   display: flex;
   align-items: center;
   float:right;
+  cursor: pointer;
   margin-left: 18px;
   margin-top: 8px;
   font-size: 10px;
