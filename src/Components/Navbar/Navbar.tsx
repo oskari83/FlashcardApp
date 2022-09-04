@@ -9,16 +9,16 @@ interface FuncProps {
     CloseFunction: () => void
 }
 
-const NavLink = ({text}: {text: string}) => {
+const NavLink = ({text,addr}: {text: string, addr:string}) => {
     return(
-        <a href="#" className="nav-link nav-itemHoverable">{text}</a>
+        <a href={addr} className="nav-link nav-itemHoverable">{text}</a>
     )
 }
 
-const NavItemHoverable = ({text}: {text: string}) => {
+const NavItemHoverable = ({text,addr}: {text: string, addr:string}) => {
     return (
         <li className="nav-item">
-            <NavLink text={text} />
+            <NavLink text={text} addr={addr}/>
         </li>
     )
 }
@@ -26,9 +26,9 @@ const NavItemHoverable = ({text}: {text: string}) => {
 const NavMenu = () => {
     return(
         <ul className='nav-menu'>
-            <NavItemHoverable text='Home' />
-            <NavItemHoverable text='Browse' />
-            <NavItemHoverable text='Create' />
+            <NavItemHoverable text='Home' addr=''/>
+            <NavItemHoverable text='Browse' addr='/browse'/>
+            <NavItemHoverable text='Create' addr='/create'/>
         </ul>
     )
 }
@@ -36,9 +36,9 @@ const NavMenu = () => {
 const NavUser = () => {
     return(
         <ul className="nav-user">
-            <NavItemHoverable text='Sign In' />
+            <NavItemHoverable text='Sign In' addr='/auth'/>
             <li className="nav-itemDivider">
-                <a href="#" className="nav-link">|</a>
+                <a href="/auth" className="nav-link">|</a>
             </li>
             <li className="nav-icon">
                 <IoSettingsSharp size='20px' color='white'/>
@@ -53,27 +53,27 @@ const NavMenuMobile = ({CloseFunction}: FuncProps) => {
             <li className="nav-item">
                 <div className="hover-box" onClick={() => CloseFunction()}></div>
                 <AiFillHome size='20px' color='white' />
-                <NavLink text='Home' />
+                <NavLink text='Home' addr=''/>
             </li>
             <li className="nav-item">
                 <div className="hover-box" onClick={() => CloseFunction()}></div>
                 <AiOutlineOrderedList size='20px' color='white' />
-                <NavLink text='Browse' />
+                <NavLink text='Browse' addr='/browse'/>
             </li>
             <li className="nav-item">
                 <div className="hover-box" onClick={() => CloseFunction()}></div>
                 <MdCreateNewFolder size='20px' color='white' />
-                <NavLink text='Create' />
+                <NavLink text='Create' addr='/create'/>
             </li>
             <li className="nav-item">
                 <div className="hover-box" onClick={() => CloseFunction()}></div>
                 <IoLogInSharp size='20px' color='white' />
-                <NavLink text='Sign in' />
+                <NavLink text='Sign in' addr='/auth'/>
             </li>
             <li className="nav-item">
                 <div className="hover-box" onClick={() => CloseFunction()}></div>
                 <IoSettingsSharp size='20px' color='white' />
-                <NavLink text='Settings' />
+                <NavLink text='Settings' addr=''/>
             </li>
         </ul>
     )
