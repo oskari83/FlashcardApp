@@ -26,7 +26,7 @@ const NavItemHoverable = ({text,addr}: {text: string, addr:string}) => {
 const NavMenu = () => {
     return(
         <ul className='nav-menu'>
-            <NavItemHoverable text='Home' addr=''/>
+            <NavItemHoverable text='Home' addr='/'/>
             <NavItemHoverable text='Browse' addr='/browse'/>
             <NavItemHoverable text='Create' addr='/create'/>
         </ul>
@@ -53,7 +53,7 @@ const NavMenuMobile = ({CloseFunction}: FuncProps) => {
             <li className="nav-item">
                 <div className="hover-box" onClick={() => CloseFunction()}></div>
                 <AiFillHome size='20px' color='white' />
-                <NavLink text='Home' addr=''/>
+                <NavLink text='Home' addr='/'/>
             </li>
             <li className="nav-item">
                 <div className="hover-box" onClick={() => CloseFunction()}></div>
@@ -84,13 +84,16 @@ export const Navbar = () => {
 
     const hamburgerIcon = <FiMenu size='20px' color='white' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}/>
     const closeIcon = <IoCloseSharp size='20px' color='white' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}/>
-    const closeMobileMenu = () => setMobileMenuOpen(false);
+    const closeMobileMenu = () => {
+        setMobileMenuOpen(false);
+        window.location.href="/";
+    }
 
     return(
       <div className="navbar-outer">
         <nav className="navbar-tutorial">
             <div className="nav-logo">
-                <a href='#' className="nav-branding">classic flashcards.</a>
+                <a href='/' className="nav-branding">classic flashcards.</a>
             </div>
 
             <NavMenu/>

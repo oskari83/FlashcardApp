@@ -3,6 +3,7 @@ import { Footer } from './Components/Footer/Footer';
 import { CollectionView } from './Components/CollectionView/CollectionView';
 import { BrowseView } from './Components/BrowseView/BrowseView';
 import { CreateView } from './Components/CreateView/CreateView';
+import { HomeView } from './Components/HomeView/HomeView';
 import { AuthenticationView } from './Components/AuthenticationView/AuthenticationView';
 import { useState } from 'react';
 import {
@@ -27,13 +28,8 @@ function App() {
         <Route path="/create" element={<CreateView />} />
         <Route path="/browse" element={<BrowseView />} />
         <Route path="/auth" element={<AuthenticationView />} />
-        <Route path="/" element={<CollectionView />} />
+        <Route path="/" element={<HomeView />} />
       </Routes>
-
-      {curView===1 && <BrowseView />}
-      {curView===2 && <CollectionView />}
-      {curView===3 && <CreateView />}
-      {curView===4 && <AuthenticationView />}
 
       <Footer />
 
