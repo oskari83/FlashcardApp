@@ -150,13 +150,145 @@
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    height: 400px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     font-family: "Readex";
     font-size: 14px;
     color:rgb(70, 70, 70);
+}
+
+.homeViewUpperText{
+    font-family: "ReadexBold";
+    font-size: 24px;
+    color:rgb(80, 80, 80);
+    padding-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.aboveCollectionsContainer{
+    margin-top: 10px;
+    height: 50px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    font-family: "ReadexBold";
+    font-size: clamp(12px, 3.5vw, 20px);
+    color:rgb(80, 80, 80);
+}
+
+.filterContainer{
+    height: 30px;
+    width: clamp(150px,220px,220px);
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+    justify-content: center;
+    font-family: "Readex";
+    font-size: clamp(9px, 3.5vw, 11px);
+    color: white;
+}
+
+.filterAll{
+    width: 32%;
+    height: 100%;
+    background-color: #2f6dff61;
+    border-radius: 2px;
+    border: 1px solid #2f6dff66;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 2px;
+}
+
+.filterAll:hover{
+    background-color: #2f6dffb6;
+    border: none;
+}
+
+.filterCreated{
+    width: 32%;
+    height: 100%;
+    background-color: #2f6dff61;
+    border-radius: 2px;
+    border: 1px solid #2f6dff66;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 2px;
+}
+
+.filterCreated:hover{
+    background-color: #2f6dffb6;
+    border: none;
+}
+
+.filterSaved{
+    width: 32%;
+    height: 100%;
+    background-color: #2f6dff61;
+    border-radius: 2px;
+    border: 1px solid #2f6dff66;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 2px;
+}
+
+.filterSaved:hover{
+    background-color: #2f6dffb6;
+    border: none;
+}
+
+.filterAllS{
+    width: 32%;
+    height: 100%;
+    background-color: #2f6dffb6;
+    border: none;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 2px;
+}
+
+.filterSavedS{
+    width: 32%;
+    height: 100%;
+    background-color: #2f6dffb6;
+    border: none;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 2px;
+}
+
+.filterCreatedS{
+    width: 32%;
+    height: 100%;
+    background-color: #2f6dffb6;
+    border: none;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 2px;
+}
+
+.homeCollectionsFlexContainer{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
 
 @media (max-width: 400px) {

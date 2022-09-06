@@ -1,8 +1,9 @@
 import './Navbar.css';
 import { useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
-import { IoSettingsSharp, IoCloseSharp, IoLogInSharp } from 'react-icons/io5'
+import { IoCloseSharp } from 'react-icons/io5'
 import { AiFillHome, AiOutlineOrderedList } from 'react-icons/ai'
+import { FaUserGraduate } from "react-icons/fa";
 import { MdCreateNewFolder } from 'react-icons/md'
 
 interface FuncProps {
@@ -36,12 +37,13 @@ const NavMenu = () => {
 const NavUser = () => {
     return(
         <ul className="nav-user">
-            <NavItemHoverable text='Sign In' addr='/auth'/>
-            <li className="nav-itemDivider">
-                <a href="/auth" className="nav-link">|</a>
-            </li>
-            <li className="nav-icon">
-                <IoSettingsSharp size='20px' color='white'/>
+            <li className="nav-itemUser">
+                <a href={'/user'} className="nav-linkUser nav-itemHoverable">
+                    {'oskari83'}
+                    <li className="nav-icon">
+                        <FaUserGraduate size='16px' color='white'/>
+                    </li>
+                </a>
             </li>
         </ul>
     )
@@ -67,13 +69,8 @@ const NavMenuMobile = ({CloseFunction}: FuncProps) => {
             </li>
             <li className="nav-item">
                 <div className="hover-box" onClick={() => CloseFunction()}></div>
-                <IoLogInSharp size='20px' color='white' />
-                <NavLink text='Sign in' addr='/auth'/>
-            </li>
-            <li className="nav-item">
-                <div className="hover-box" onClick={() => CloseFunction()}></div>
-                <IoSettingsSharp size='20px' color='white' />
-                <NavLink text='Settings' addr=''/>
+                <FaUserGraduate size='20px' color='white' />
+                <NavLink text='Profile' addr='/auth'/>
             </li>
         </ul>
     )

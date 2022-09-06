@@ -49,7 +49,7 @@ a{
 .nav-user{
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 1px;
     align-items: center;
     font-family: "Readex";
     font-size: 0.8rem;
@@ -60,7 +60,7 @@ a{
     flex-direction: column;
     justify-content: flex-start;
     flex-wrap: wrap;
-    height: 128px;
+    height: 88px;
     align-items: center;
     font-family: "Readex";
     font-size: 0.8rem;
@@ -80,6 +80,13 @@ a{
     list-style: none;
 }
 
+.nav-itemUser{
+    height: 100%;
+    width: 110px;
+    display: flex;
+    list-style: none;
+}
+
 .nav-itemDivider{
     height: 100%;
     display: flex;
@@ -91,6 +98,15 @@ a{
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.nav-linkUser{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
     align-items: center;
 }
 
@@ -140,15 +156,6 @@ a{
     display: flex;
     align-items: center;
     cursor: pointer;
-    -webkit-transition: 0.2s ease-out;
-    -moz-transition:  0.2s ease-out;
-    transition:  0.2s ease-out;
-}
-
-.nav-icon:hover{
-    -webkit-transform: rotateZ(90deg);
-    -moz-transform: rotateZ(90deg);
-    transform: rotateZ(90deg);
 }
 
 .hamburger{

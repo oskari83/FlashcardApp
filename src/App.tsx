@@ -4,11 +4,10 @@ import { CollectionView } from './Components/CollectionView/CollectionView';
 import { BrowseView } from './Components/BrowseView/BrowseView';
 import { CreateView } from './Components/CreateView/CreateView';
 import { HomeView } from './Components/HomeView/HomeView';
+import { ProfileView } from './Components/ProfileView/ProfileView';
 import { AuthenticationView } from './Components/AuthenticationView/AuthenticationView';
 import { useState } from 'react';
-import {
-  Routes, Route, Link
-} from "react-router-dom"
+import { Routes, Route, Link } from "react-router-dom"
 import './App.css';
 
 
@@ -28,6 +27,7 @@ function App() {
         <Route path="/create" element={<CreateView />} />
         <Route path="/browse" element={<BrowseView />} />
         <Route path="/auth" element={<AuthenticationView />} />
+        <Route path="/user" element={<ProfileView />} />
         <Route path="/" element={<HomeView />} />
       </Routes>
 

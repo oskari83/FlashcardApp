@@ -1,0 +1,191 @@
+.containerMainProf {
+    width: clamp(200px,96%,400px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.profViewName{
+    font-family: "ReadexBold";
+    font-size: 24px;
+    color:rgb(80, 80, 80);
+    padding-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.profileContainer{
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0%;
+    padding-right: 0%;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-family: "Readex";
+    font-size: 14px;
+    color:rgb(70, 70, 70);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.accountDetailsText{
+    margin-top: 14px;
+    margin-bottom: 4px;
+    margin-left: 40px;
+    font-family: "ReadexBold";
+}
+
+.statsDetailsText{
+    margin-top: 14px;
+    margin-bottom: 4px;
+    margin-left: 40px;
+    font-family: "ReadexBold";
+}
+
+.usernameText{
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 40px;
+    font-family: "Readex";
+    color:rgb(101, 101, 101);
+}
+
+.emailText{
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-family: "Readex";
+    color:rgb(101, 101, 101);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.emailChangeButton{
+    color: #2f6dffc0;
+    cursor: pointer;
+}
+
+.emailChangeButton:hover{
+    color: #2f6dff;
+}
+
+.emailChangeCancelButton{
+    color: #ff2f2fc0;
+    cursor: pointer;
+}
+
+.emailChangeCancelButton:hover{
+    color: #ff2f2f
+}
+
+.pwChangeButton{
+    color: #2f6dffc0;
+    cursor: pointer;
+}
+
+.pwChangeButton:hover{
+    color: #2f6dff;
+}
+
+.passwordText{
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-family: "Readex";
+    color:rgb(101, 101, 101);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.statText{
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 40px;
+    font-family: "Readex";
+    color:rgb(101, 101, 101);
+}
+
+.statTextBottom{
+    margin-top: 4px;
+    margin-bottom: 24px;
+    margin-left: 40px;
+    font-family: "Readex";
+    color:rgb(101, 101, 101);
+}
+
+.emptyContainer{
+    height: calc(100vh - 460px);
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.emailChangeInput{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgb(247, 247, 247);
+    border-radius: 2px;
+    margin-left: 6px;
+    margin-right: 6px;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-family: "Readex";
+    font-size: 12px;
+    color:rgb(70, 70, 70);
+}
+
+.emailChangeInput:focus{
+    border: 1px solid rgb(247, 247, 247);
+    outline: none;
+}
+
+.emailChangeInput::placeholder{
+    font-family: "Readex";
+    font-size: 12px;
+    color:rgb(164, 164, 164)
+}
+
+.pwChangeInput{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgb(247, 247, 247);
+    border-radius: 2px;
+    margin-left: 6px;
+    margin-right: 6px;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-family: "Readex";
+    font-size: 12px;
+    color:rgb(70, 70, 70);
+}
+
+.pwChangeInput:focus{
+    border: 1px solid rgb(247, 247, 247);
+    outline: none;
+}
+
+.pwChangeInput::placeholder{
+    font-family: "Readex";
+    font-size: 12px;
+    color:rgb(164, 164, 164)
+}
