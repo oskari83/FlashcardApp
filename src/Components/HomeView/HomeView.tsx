@@ -1,6 +1,7 @@
 import './HomeView.css';
 import { FaUserGraduate } from "react-icons/fa";
 import { HiOutlineExternalLink } from "react-icons/hi";
+import { CollectionItem, CollectionData } from '../../Types';
 import { useState } from 'react';
 
 const NotYetAuthComponent = () => {
@@ -29,7 +30,7 @@ const LearningStreak = () => {
     )
 }
 
-const CollectionItem = ( { name, creator, count }: { name: string, creator: string, count: number}) => {    
+const CollectionItemComponent = ( { name, creator, count }: { name: string, creator: string, count: number}) => {    
     return (
         <div className='collectionItem'>
             <div className='itemName'>
@@ -44,7 +45,7 @@ const CollectionItem = ( { name, creator, count }: { name: string, creator: stri
     )
 }
 
-export const HomeView = () => {
+export const HomeView = ({collectionData}: {collectionData: Array<CollectionData>}) => {
     const [curFilter, setCurFilter] = useState(0);
     const filterChange = (id: number) => {
         setCurFilter(id)
@@ -76,12 +77,9 @@ export const HomeView = () => {
                     </div>
                 </div>
                 <div className='homeCollectionsFlexContainer'>
-                    <CollectionItem name={"Economics Chapter 1"} creator={"Oskari Peltonen"} count={45} />
-                    <CollectionItem name={"Economics Chapter 2"} creator={"Oskari Peltonen"} count={32} />
-                    <CollectionItem name={"Economics Chapter 3"} creator={"Oskari Peltonen"} count={41} />
-                    <CollectionItem name={"Economics Chapter 4"} creator={"Oskari Peltonen"} count={44} />
-                    <CollectionItem name={"Economics Chapter 5"} creator={"Oskari Peltonen"} count={58} />
-                    <CollectionItem name={"Economics Chapter 6"} creator={"Oskari Peltonen"} count={12} />
+                    {collectionData.map( (col) => 
+                        <CollectionItemComponent key={col.id} name={col.name} creator={col.creator} count={col.itemCount} />
+                    )}
                 </div>
             </div>
         </div>

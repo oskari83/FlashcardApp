@@ -91,6 +91,7 @@
     font-family: "ReadexBold";
     margin-right: 5%;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: none;
 }
 
 .submitButtonName:hover{
@@ -240,6 +241,9 @@
     border-radius: 4px;
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-size: 10px;
+    font-family: "ReadexBold";
+    border: none;
 }
 
 .submitButton:hover{
