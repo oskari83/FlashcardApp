@@ -76,9 +76,37 @@
     justify-content: space-between;
 }
 
+.emailChangeContainer{
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-family: "Readex";
+    color:rgb(101, 101, 101);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pwChangeContainer{
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-family: "Readex";
+    color:rgb(101, 101, 101);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .emailChangeButton{
     color: #2f6dffc0;
     cursor: pointer;
+    font-size: 12px;
+    margin-right: 2px;
 }
 
 .emailChangeButton:hover{
@@ -88,6 +116,8 @@
 .emailChangeCancelButton{
     color: #ff2f2fc0;
     cursor: pointer;
+    font-size: 12px;
+    margin-left: 2px;
 }
 
 .emailChangeCancelButton:hover{
@@ -97,10 +127,23 @@
 .pwChangeButton{
     color: #2f6dffc0;
     cursor: pointer;
+    font-size: 12px;
+    margin-right: 2px;
 }
 
 .pwChangeButton:hover{
     color: #2f6dff;
+}
+
+.pwChangeCancelButton{
+    color: #ff2f2fc0;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 2px;
+}
+
+.pwChangeCancelButton:hover{
+    color: #ff2f2f
 }
 
 .passwordText{

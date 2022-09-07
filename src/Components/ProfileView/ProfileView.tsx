@@ -18,9 +18,17 @@ export const ProfileView = () => {
         console.log('email changed');
     }
 
+    const emailChangeCancel = () => {
+        emailChangeStatus(0);
+    }
+
     const pwChangeSubmit = () => {
         setPwChange(0);
         console.log('password changed');
+    }
+
+    const pwChangeCancel = () => {
+        setPwChange(0);
     }
 
     return(
@@ -39,9 +47,7 @@ export const ProfileView = () => {
                     </>
                     :
                     <>
-                        <div className='emailAddress'>Email:</div>
-                        <input type="text" className='emailChangeInput'  placeholder="email here..."></input>
-                        <div className='emailChangeButton' onClick={() => emailChangeSubmit()}>Submit</div>
+                        <div className='emailAddress'>Email: oskpelto@gmail.com</div>
                     </>
                     }
                 </div>
@@ -52,10 +58,10 @@ export const ProfileView = () => {
                 :
                 <>
                     <div className='emailChangeContainer'>
-                        <div className='emailAddress'>New email:</div>
+                        <div className='emailAddress'>New:</div>
                         <input type="text" className='emailChangeInput'  placeholder="email here..."></input>
                         <div className='emailChangeButton' onClick={() => emailChangeSubmit()}>Submit</div>
-                        <div className='emailChangeCancelButton' onClick={() => emailChangeSubmit()}>Cancel</div>
+                        <div className='emailChangeCancelButton' onClick={() => emailChangeCancel()}>Cancel</div>
                     </div>
                 </>
                 }
@@ -68,12 +74,25 @@ export const ProfileView = () => {
                     </>
                     :
                     <>
-                        <div className='apw'>Password:</div>
-                        <input type="text" className='pwChangeInput'  placeholder="new password..."></input>
-                        <div className='pwChangeButton' onClick={() => pwChangeSubmit()}>Submit</div>
+                        <div className='apw'>Password: *******</div>
                     </>
                     }
                 </div>
+
+                { pwChange === 0 ? 
+                <>
+                </>
+                :
+                <>
+                    <div className='pwChangeContainer'>
+                    <div className='apw'>New:</div>
+                        <input type="text" className='pwChangeInput'  placeholder="password here..."></input>
+                        <div className='pwChangeButton' onClick={() => pwChangeSubmit()}>Submit</div>
+                        <div className='pwChangeCancelButton' onClick={() => pwChangeCancel()}>Cancel</div>
+                    </div>
+                </>
+                }
+
                 <div className='statsDetailsText'>Statistics</div>
                 <div className='statText'>Collections created: 8</div>
                 <div className='statText'>Collections saved: 2</div>
