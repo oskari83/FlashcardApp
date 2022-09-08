@@ -9,7 +9,7 @@ import { AuthenticationView } from './Components/AuthenticationView/Authenticati
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { CollectionItem, CollectionData } from './Types';
-import axios from 'axios';
+import collectionService from './services/collections';
 import './App.css';
 
 const App = () => {
@@ -17,10 +17,10 @@ const App = () => {
   const [user, setUser] = useState('oskari83')
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3011/collections')
-      .then(response => {
-        setCollections(response.data)
+    collectionService
+      .getAll()
+      .then(initialCollections => {
+        setCollections(initialCollections)
       })
   }, [])
 

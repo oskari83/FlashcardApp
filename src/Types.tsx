@@ -10,5 +10,6 @@ export interface CollectionData {
     name: string,
     creator: string,
     itemCount: number,
+    saved?: boolean,
     items: Array<CollectionItem>
 }

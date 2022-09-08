@@ -2,13 +2,38 @@ import './BrowseView.css';
 import { FiSearch } from "react-icons/fi"
 import { HiOutlineExternalLink } from "react-icons/hi"
 import { BsBookmark,BsBookmarkCheckFill } from "react-icons/bs"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import collectionService from '../../services/collections';
+import browseresultsService from '../../services/browseresults';
+import { CollectionData } from '../../Types';
 
-const CollectionItem = ( { name, creator, count }: { name: string, creator: string, count: number}) => {
-    const [bookmarked, setBookmarked] = useState(false);
+const CollectionItem = ( { collectionWhole, name, creator, count, updateFunc }: { collectionWhole:CollectionData, name: string, creator: string, count: number, updateFunc:any}) => {
+    const [bookmarked, setBookmarked] = useState(collectionWhole.saved);
+    const [thisCollection, setThisCollection] = useState(collectionWhole);
+
+    const addToOwnCollections = (col: CollectionData) => {
+        collectionService
+            .create(col)
+            .then(returnedCollection => {
+                console.log(returnedCollection);
+            }
+        );
+    }
 
     const bookmarkThis = () => {
-        setBookmarked(!bookmarked);
+        console.log(thisCollection);
+        if(bookmarked===false){
+            const changedCollection = {...thisCollection, saved: true}
+            const id = collectionWhole.id;
+
+            updateFunc(id,changedCollection);
+            addToOwnCollections(changedCollection);
+
+            setBookmarked(!bookmarked);
+        }else{
+            const colObject = {...thisCollection, saved: false}
+            setBookmarked(!bookmarked);
+        }
     }
     
     return (
@@ -36,6 +61,29 @@ const CollectionItem = ( { name, creator, count }: { name: string, creator: stri
 }
 
 export const BrowseView = () => {
+    const [resultCollections, setResultCollections] = useState<CollectionData[]>([]);
+
+    const updateResultsCollection = (id:number, colObject: CollectionData) => {
+        browseresultsService
+            .update(id, colObject).then(returnedCollection => {
+            setResultCollections(resultCollections.map((n) => {
+                if(n.id!==id){
+                    return n;
+                }else{
+                    return returnedCollection;
+                }
+            }))
+        })
+    }
+
+    useEffect(() => {
+        browseresultsService
+            .getAll()
+            .then(initialResults => {
+                setResultCollections(initialResults)
+            })
+    }, [])
+
     return(
         <>
         <div className="containerMain">
@@ -52,12 +100,9 @@ export const BrowseView = () => {
                     Recently Added Collections
                 </div>
                 <div className='collectionsFlexContainer'>
-                    <CollectionItem name={"Economics Chapter 1"} creator={"Oskari Peltonen"} count={45} />
-                    <CollectionItem name={"Economics Chapter 2"} creator={"Oskari Peltonen"} count={32} />
-                    <CollectionItem name={"Economics Chapter 3"} creator={"Oskari Peltonen"} count={41} />
-                    <CollectionItem name={"Economics Chapter 4"} creator={"Oskari Peltonen"} count={44} />
-                    <CollectionItem name={"Economics Chapter 5"} creator={"Oskari Peltonen"} count={58} />
-                    <CollectionItem name={"Economics Chapter 6"} creator={"Oskari Peltonen"} count={12} />
+                    {resultCollections.map( (col: CollectionData) => 
+                        <CollectionItem key={col.id} collectionWhole={col} name={col.name} creator={col.creator} count={col.itemCount} updateFunc={updateResultsCollection} />
+                    )}
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@ import { ChangeEvent, SyntheticEvent } from 'react';
 import { CollectionItem, CollectionData } from '../../Types';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'
+import collectionService from '../../services/collections';
 
 const objectMap = (obj: object, fn: any) =>
   Object.fromEntries(
@@ -76,11 +76,11 @@ interface SingleItem {
 
 export const CreateView = ({collectionData, createFunc}: {collectionData: Array<CollectionData>, createFunc: any}) => {
     const initVals = {
-        "0": { aside: '', qside: '', key: 0},
-        "1": { aside: '', qside: '', key: 1},
-        "2": { aside: '', qside: '', key: 2},
-        "3": { aside: '', qside: '', key: 3},
-        "4": { aside: '', qside: '', key: 4},
+        "0": { aside: '', qside: '', key: 0, correct: 0},
+        "1": { aside: '', qside: '', key: 1, correct: 0},
+        "2": { aside: '', qside: '', key: 2, correct: 0},
+        "3": { aside: '', qside: '', key: 3, correct: 0},
+        "4": { aside: '', qside: '', key: 4, correct: 0},
     }
     const initID = 5;
     const [values, setValues] = useState(initVals)
@@ -138,10 +138,10 @@ export const CreateView = ({collectionData, createFunc}: {collectionData: Array<
             items: itemsAsArray,
         }
         console.log(collectionObject);
-        axios
-            .post('http://localhost:3011/collections', collectionObject)
-            .then(response => {
-                console.log(response);
+        collectionService
+            .create(collectionObject)
+            .then(returnedCollection => {
+                console.log(returnedCollection);
                 navigate('/');
             });
         //createFunc(collectionObject);
@@ -154,6 +154,7 @@ export const CreateView = ({collectionData, createFunc}: {collectionData: Array<
             aside: '', 
             qside: '', 
             key: id,
+            correct: 0
         }});
         console.log("added row");
     }
