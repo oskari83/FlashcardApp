@@ -1,21 +1,20 @@
 import './CreateView.css';
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { IoMdClose } from 'react-icons/io'
-import { SyntheticEvent } from 'react';
+import { ChangeEvent, SyntheticEvent } from 'react';
 import { CollectionItem, CollectionData } from '../../Types';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 
-const getRandomID = (): number => {
-    return Math.floor(Math.random() * 10000000);
-}
-
-const NormalCreateTableRow = ({question, answer, keyx, removeFunc}: {question: string ,answer: string, keyx: number, removeFunc: any}) => {
-    const [newItem, setNewItem] = useState(
-        {
-            qside: '',
-            aside: ''
-        }
+const objectMap = (obj: object, fn: any) =>
+  Object.fromEntries(
+    Object.entries(obj).map(
+      ([k, v], i) => [k, fn(v, k, i)]
     )
+)
+
+const NormalCreateTableRow = ({qtext, atext, keyx, removeFunc, asideChangeFunc, qsideChangeFunc}: {qtext: string, atext: string, keyx: number, removeFunc: any, asideChangeFunc: any, qsideChangeFunc: any}) => {
 
     const handleItemQuestionChange = (event: SyntheticEvent) => {
         let val = event.currentTarget.textContent;
@@ -23,12 +22,7 @@ const NormalCreateTableRow = ({question, answer, keyx, removeFunc}: {question: s
             val='';
         }
         console.log(val);
-        setNewItem(
-            {
-                ...newItem, 
-                qside: val,
-            }
-        );
+        qsideChangeFunc(keyx,val);
     }
 
     const handleItemAnswerChange = (event: SyntheticEvent) => {
@@ -37,12 +31,7 @@ const NormalCreateTableRow = ({question, answer, keyx, removeFunc}: {question: s
             val='';
         }
         console.log(val);
-        setNewItem(
-            {
-                ...newItem, 
-                aside: val,
-            }
-        );
+        asideChangeFunc(keyx,val);
     }
 
     const clickDeleteButton = () => {
@@ -58,7 +47,8 @@ const NormalCreateTableRow = ({question, answer, keyx, removeFunc}: {question: s
                     role="textarea" 
                     contentEditable 
                     suppressContentEditableWarning={true}
-                >{question}</span>    
+                    
+                ></span>    
             </td>
             <td className='cnormalRowTd'>
                 <span 
@@ -67,7 +57,7 @@ const NormalCreateTableRow = ({question, answer, keyx, removeFunc}: {question: s
                     role="textarea" 
                     contentEditable 
                     suppressContentEditableWarning={true}
-                >{answer}</span>  
+                ></span>  
             </td>
             <td className='cnormalRowTd'>
                 <div className='cdelButton' onClick={clickDeleteButton}>
@@ -78,55 +68,96 @@ const NormalCreateTableRow = ({question, answer, keyx, removeFunc}: {question: s
     )
 }
 
-export const CreateView = ({collectionData}: {collectionData: Array<CollectionData>}) => {
+interface SingleItem {
+    aside: string,
+    qside: string, 
+    key: number,
+}
+
+export const CreateView = ({collectionData, createFunc}: {collectionData: Array<CollectionData>, createFunc: any}) => {
+    const initVals = {
+        "0": { aside: '', qside: '', key: 0},
+        "1": { aside: '', qside: '', key: 1},
+        "2": { aside: '', qside: '', key: 2},
+        "3": { aside: '', qside: '', key: 3},
+        "4": { aside: '', qside: '', key: 4},
+    }
+    const initID = 5;
+    const [values, setValues] = useState(initVals)
+    const [collName, setCollName] = useState('');
+    const [newID, setNewID] = useState(initID);
+    const navigate = useNavigate();
+
     const removeItemFromTable = (ind:number) => {
-        setRows((rows) => rows.filter((itm) => {
-            return itm.props.keyx !== ind;
-        }
-        ))
-        console.log(rows.length);
+        const newValuesDictionary = Object.assign({}, values);
+        delete newValuesDictionary[ind as keyof object];
+        setValues(newValuesDictionary);
+        console.log(newValuesDictionary);
     }
     
-    const [values, setValues] = useState({
-        [0]: { aside: '', qside: '', key: 0, removeFunction: removeItemFromTable},
-        [1]: { aside: '', qside: ''},
-        [2]: { aside: '', qside: ''},
-        [3]: { aside: '', qside: ''},
-        [4]: { aside: '', qside: ''},
-    })
+    const handleQsideChange = (fieldId: number, value: string) => {
+        const indx = fieldId.toString();
+        const oldItem:object = values[indx as keyof object];
+        setValues({...values, [fieldId]: {...oldItem, qside: value}});
+    };
 
-    const initialArr = [
-        <NormalCreateTableRow key={0} question={""} answer={""} keyx={0} removeFunc={removeItemFromTable}/>,
-        <NormalCreateTableRow key={1} question={""} answer={""} keyx={1} removeFunc={removeItemFromTable}/>,
-        <NormalCreateTableRow key={2} question={""} answer={""} keyx={2} removeFunc={removeItemFromTable}/>,
-        <NormalCreateTableRow key={3} question={""} answer={""} keyx={3} removeFunc={removeItemFromTable}/>,
-        <NormalCreateTableRow key={4} question={""} answer={""} keyx={4} removeFunc={removeItemFromTable}/>
-    ]
+    const handleAsideChange = (fieldId: number, value: string) => {
+        const indx = fieldId.toString();
+        const oldItem:object = values[indx as keyof object];
+        setValues({...values, [fieldId]: {...oldItem, aside: value}});
+    };
 
-    const [newItemCount, setNewItemCount] = useState(5);
-    const [rows, setRows] = useState(initialArr);
+    const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const val = event.target.value;
+        console.log(val);
+        setCollName(val);
+    };
+
+    const tableRowComponents = objectMap(values, (item: SingleItem) => {
+        return <NormalCreateTableRow 
+            qtext={item.qside}
+            atext={item.aside}
+            key={item.key} 
+            keyx={item.key} 
+            removeFunc={removeItemFromTable} 
+            asideChangeFunc={handleAsideChange}
+            qsideChangeFunc={handleQsideChange}
+        />
+    });
+
+    const tableRowArray = Object.values(tableRowComponents);
 
     const addCollection = (event: SyntheticEvent) => {
         event.preventDefault()
-        console.log('created collection', event.target)
+        const itemsAsArray = Object.values(values);
         const collectionObject = {
-            id: collectionData.length + 1,
-            name: 'nullUsername',
+            id: collectionData.length + 2,
+            name: collName,
             creator: 'nullUsername',
-            itemCount: rows.length,
-            items: [
-
-            ]
+            itemCount: tableRowArray.length,
+            items: itemsAsArray,
         }
+        console.log(collectionObject);
+        axios
+            .post('http://localhost:3011/collections', collectionObject)
+            .then(response => {
+                console.log(response);
+                navigate('/');
+            });
+        //createFunc(collectionObject);
     }
 
     const addRowToTable = () => {
-        const id = getRandomID();
-        setRows(rows.concat(<NormalCreateTableRow key={id} question={""} answer={""} keyx={id} removeFunc={removeItemFromTable}/>));
-        console.log(rows.length);
+        const id = newID;
+        setNewID(newID + 1);
+        setValues({...values, [id]: {
+            aside: '', 
+            qside: '', 
+            key: id,
+        }});
+        console.log("added row");
     }
     
-
     return(
         <>
         <div className="createviewContainerMain">
@@ -134,7 +165,7 @@ export const CreateView = ({collectionData}: {collectionData: Array<CollectionDa
             <div className='createViewName'>Create Collection</div>
 
             <div className="collectionNameContainer">
-                <input type="text" className='nameInput'  placeholder="Name..."></input>
+                <input type="text" className='nameInput' value={collName} onChange={handleNameChange} placeholder="Name..."></input>
                 <button className='submitButtonName' form='my-form' type='submit'>Create</button>
             </div>
 
@@ -164,7 +195,7 @@ export const CreateView = ({collectionData}: {collectionData: Array<CollectionDa
                                 </div>
                             </td>
                         </tr>
-                            {rows}
+                            {tableRowArray}
                         </tbody>
                         </table>
 

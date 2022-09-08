@@ -45,10 +45,24 @@ const CollectionItemComponent = ( { name, creator, count }: { name: string, crea
     )
 }
 
-export const HomeView = ({collectionData}: {collectionData: Array<CollectionData>}) => {
+export const HomeView = ({collectionData, username}: {collectionData: Array<CollectionData>, username:string}) => {
+    // 0=all, 1=created, 2=saved
     const [curFilter, setCurFilter] = useState(0);
     const filterChange = (id: number) => {
         setCurFilter(id)
+    }
+
+    //filter to show all, only collections created by user, only created by other users
+    let collectionsToShow;
+    switch(curFilter){
+        case 1:
+            collectionsToShow = collectionData.filter((col) => col.creator===username);
+            break;
+        case 2:
+            collectionsToShow = collectionData.filter((col) => col.creator!==username);
+            break;
+        default:
+            collectionsToShow = collectionData; 
     }
 
     return(
@@ -60,7 +74,7 @@ export const HomeView = ({collectionData}: {collectionData: Array<CollectionData
                     <div className='profileIcon'>
                         <FaUserGraduate size='20px' color={`rgba(47, 110, 255, 0.8)`} />
                     </div>
-                    <div className='profileUsernameText'>oskari83</div>
+                    <div className='profileUsernameText'>{username}</div>
                 </div>
                 <div className='rightSideCont'>
                     <LearningStreak />
@@ -77,7 +91,7 @@ export const HomeView = ({collectionData}: {collectionData: Array<CollectionData
                     </div>
                 </div>
                 <div className='homeCollectionsFlexContainer'>
-                    {collectionData.map( (col) => 
+                    {collectionsToShow.map( (col) => 
                         <CollectionItemComponent key={col.id} name={col.name} creator={col.creator} count={col.itemCount} />
                     )}
                 </div>

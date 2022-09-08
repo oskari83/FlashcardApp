@@ -40,9 +40,9 @@ const NavUser = () => {
             <li className="nav-itemUser">
                 <a href={'/user'} className="nav-linkUser nav-itemHoverable">
                     {'oskari83'}
-                    <li className="nav-icon">
+                    <div className="nav-icon">
                         <FaUserGraduate size='16px' color='white'/>
-                    </li>
+                    </div>
                 </a>
             </li>
         </ul>
