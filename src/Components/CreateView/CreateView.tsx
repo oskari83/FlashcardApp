@@ -47,7 +47,6 @@ const NormalCreateTableRow = ({question, answer, keyx, removeFunc}: {question: s
 
     const clickDeleteButton = () => {
         removeFunc(keyx);
-        console.log(keyx);
     }
 
     return(
@@ -80,39 +79,21 @@ const NormalCreateTableRow = ({question, answer, keyx, removeFunc}: {question: s
 }
 
 export const CreateView = ({collectionData}: {collectionData: Array<CollectionData>}) => {
-    const [newCollection, setNewCollection] = useState(
-        [
-            {
-                qside: '',
-                aside: '',
-            },
-            {
-                qside: '',
-                aside: '',
-            },
-            {
-                qside: '',
-                aside: '',
-            },
-            {
-                qside: '',
-                aside: '',
-            },
-            {
-                qside: '',
-                aside: '',
-            }
-        ]
-    )
-    
     const removeItemFromTable = (ind:number) => {
-        setRows(rows.filter(itm => {
-            console.log(itm);
-            return itm.key !== ind;
+        setRows((rows) => rows.filter((itm) => {
+            return itm.props.keyx !== ind;
         }
         ))
-        console.log(rows);
+        console.log(rows.length);
     }
+    
+    const [values, setValues] = useState({
+        [0]: { aside: '', qside: '', key: 0, removeFunction: removeItemFromTable},
+        [1]: { aside: '', qside: ''},
+        [2]: { aside: '', qside: ''},
+        [3]: { aside: '', qside: ''},
+        [4]: { aside: '', qside: ''},
+    })
 
     const initialArr = [
         <NormalCreateTableRow key={0} question={""} answer={""} keyx={0} removeFunc={removeItemFromTable}/>,
@@ -132,14 +113,17 @@ export const CreateView = ({collectionData}: {collectionData: Array<CollectionDa
             id: collectionData.length + 1,
             name: 'nullUsername',
             creator: 'nullUsername',
-            itemCount: 2,
+            itemCount: rows.length,
+            items: [
+
+            ]
         }
     }
 
     const addRowToTable = () => {
         const id = getRandomID();
         setRows(rows.concat(<NormalCreateTableRow key={id} question={""} answer={""} keyx={id} removeFunc={removeItemFromTable}/>));
-        console.log(rows);
+        console.log(rows.length);
     }
     
 
