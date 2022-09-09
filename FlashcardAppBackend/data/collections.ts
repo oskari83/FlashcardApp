@@ -1,0 +1,228 @@
+import { CollectionEntry } from "../src/types";
+
+const collectionEntries: Array<CollectionEntry> = [
+    {
+        "id": 1,
+        "name": "Economics Chapter 1",
+        "creator": "oskari83",
+        "itemCount": 3,
+        "items": [
+          {
+            "qside": "what is demand",
+            "aside": "Quantity of goods consumers are willing and able to purchase at any given price over a period of time",
+            "correct": 3,
+            "key": 0
+          },
+          {
+            "qside": "normal good",
+            "aside": "when income rises demand for a good rises",
+            "correct": 1,
+            "key": 1
+          },
+          {
+            "qside": "competetive supply",
+            "aside": "output of a product takes place as an alternative to other products, apples and oranges",
+            "correct": 0,
+            "key": 2
+          }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Economics Chapter 2",
+        "creator": "oskari83",
+        "itemCount": 2,
+        "items": [
+          {
+            "qside": "consumer surplus",
+            "aside": "refers to the benefits to buyers who are able to purchase a product for less than they are willing to do so",
+            "correct": 2,
+            "key": 0
+          },
+          {
+            "qside": "producer surplus",
+            "aside": "the difference between the price that firms receive and the price they are willing to supply at",
+            "correct": 4,
+            "key": 1
+          }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Fokus Chapter 4",
+        "creator": "eemeli21",
+        "itemCount": 1,
+        "items": [
+          {
+            "qside": "hypätä",
+            "aside": "hoppa ar ade at",
+            "correct": 4,
+            "key": 0
+          }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Math Chapter 2",
+        "creator": "nullUsername",
+        "itemCount": 5,
+        "items": [
+          {
+            "aside": "4",
+            "qside": "2+2",
+            "correct": 0,
+            "key": 0
+          },
+          {
+            "aside": "4",
+            "qside": "1+3",
+            "correct": 0,
+            "key": 1
+          },
+          {
+            "aside": "2",
+            "qside": "1+1",
+            "correct": 0,
+            "key": 2
+          },
+          {
+            "aside": "14",
+            "qside": "5+9",
+            "correct": 0,
+            "key": 3
+          },
+          {
+            "aside": "12",
+            "qside": "10+2",
+            "correct": 0,
+            "key": 4
+          }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Physics Ch 12",
+        "creator": "nullUsername",
+        "itemCount": 1,
+        "items": [
+          {
+            "aside": "abc",
+            "qside": "abc ",
+            "correct": 0,
+            "key": 0
+          }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Physics Ch 12",
+        "creator": "nullUsername",
+        "itemCount": 1,
+        "items": [
+          {
+            "aside": "abc",
+            "qside": "abc",
+            "correct": 0,
+            "key": 0
+          }
+        ]
+    },
+    {
+        "id": 25254355,
+        "name": "New Set 3",
+        "creator": "stranger12",
+        "itemCount": 3,
+        "saved": true,
+        "items": [
+          {
+            "qside": "ostaa",
+            "aside": "to buy",
+            "correct": 3,
+            "key": 0
+          },
+          {
+            "qside": "koodata",
+            "aside": "to code",
+            "correct": 1,
+            "key": 1
+          },
+          {
+            "qside": "palkata",
+            "aside": "to hire",
+            "correct": 0,
+            "key": 2
+          }
+        ]
+    },
+    {
+        "id": 2141341,
+        "name": "New Set 4",
+        "creator": "stranger22",
+        "itemCount": 2,
+        "saved": true,
+        "items": [
+          {
+            "qside": "life",
+            "aside": "is good",
+            "correct": 2,
+            "key": 0
+          },
+          {
+            "qside": "time",
+            "aside": "is money",
+            "correct": 4,
+            "key": 1
+          }
+        ]
+    },
+    {
+        "id": 25254355,
+        "name": "New Set 3",
+        "creator": "stranger12",
+        "itemCount": 3,
+        "saved": true,
+        "items": [
+          {
+            "qside": "ostaa",
+            "aside": "to buy",
+            "correct": 3,
+            "key": 0
+          },
+          {
+            "qside": "koodata",
+            "aside": "to code",
+            "correct": 1,
+            "key": 2
+          },
+          {
+            "qside": "palkata",
+            "aside": "to hire",
+            "correct": 0,
+            "key": 3
+          }
+        ]
+    },
+    {
+        "id": 2141341,
+        "name": "New Set 4",
+        "creator": "stranger22",
+        "itemCount": 2,
+        "saved": false,
+        "items": [
+          {
+            "qside": "life",
+            "aside": "is good",
+            "correct": 2,
+            "key": 0
+          },
+          {
+            "qside": "time",
+            "aside": "is money",
+            "correct": 4,
+            "key": 1
+          }
+        ]
+      }
+]; 
+
+export default collectionEntries;
