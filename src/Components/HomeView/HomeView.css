@@ -155,6 +155,24 @@
     color:rgb(70, 70, 70);
 }
 
+.mainHomeContainerE{
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0%;
+    padding-right: 0%;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-family: "Readex";
+    font-size: 14px;
+    min-height: calc(100vh - 220px);;
+    color:rgb(70, 70, 70);
+}
+
 .homeViewUpperText{
     font-family: "ReadexBold";
     font-size: 24px;
@@ -289,6 +307,50 @@
     align-items: center;
     flex-direction: column;
     margin-bottom: 10px;
+}
+
+.collectionEmptyItem{
+    margin-top: 4px;
+    margin-bottom: 4px;
+    width: 90%;
+    height: 100px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 4px;
+    color:rgb(119, 119, 119);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.collectionEmptyItem:hover{
+    color:rgba(41, 116, 255, 0.801);
+    box-shadow: rgba(50, 50, 105, 0.3) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 1px 1px 0px;
+}
+
+.emptyIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    margin-left: 10%;
+}
+
+.nonetworkIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    margin-top: 12vh;
+}
+
+.emptyText{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    margin-right: 10%;
 }
 
 @media (max-width: 400px) {

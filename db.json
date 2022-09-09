@@ -187,7 +187,7 @@
       "name": "New Set 4",
       "creator": "stranger22",
       "itemCount": 2,
-      "saved": true,
+      "saved": false,
       "items": [
         {
           "qside": "life",

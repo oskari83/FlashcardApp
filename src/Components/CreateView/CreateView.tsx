@@ -1,11 +1,12 @@
 import './CreateView.css';
-import { RiDeleteBinLine } from 'react-icons/ri'
-import { IoMdClose } from 'react-icons/io'
+import { RiDeleteBinLine } from 'react-icons/ri';
+import { IoMdClose } from 'react-icons/io';
 import { ChangeEvent, SyntheticEvent } from 'react';
 import { CollectionItem, CollectionData } from '../../Types';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import collectionService from '../../services/collections';
+import { Notification } from '../Notification/Notification';
 
 const objectMap = (obj: object, fn: any) =>
   Object.fromEntries(
@@ -86,6 +87,7 @@ export const CreateView = ({collectionData, createFunc}: {collectionData: Array<
     const [values, setValues] = useState(initVals)
     const [collName, setCollName] = useState('');
     const [newID, setNewID] = useState(initID);
+    const [notificationMessage, setNotificationMessage] = useState('');
     const navigate = useNavigate();
 
     const removeItemFromTable = (ind:number) => {
@@ -143,6 +145,15 @@ export const CreateView = ({collectionData, createFunc}: {collectionData: Array<
             .then(returnedCollection => {
                 console.log(returnedCollection);
                 navigate('/');
+            })
+            .catch(error => {
+                if(error.code==="ERR_NETWORK"){
+                    setNotificationMessage('Network error - please check your internet connection!');
+                }else{
+                    setNotificationMessage(error.message);
+                }
+                console.log(error);
+                setTimeout(() => setNotificationMessage(''), 5000);
             });
         //createFunc(collectionObject);
     }
@@ -162,6 +173,8 @@ export const CreateView = ({collectionData, createFunc}: {collectionData: Array<
     return(
         <>
         <div className="createviewContainerMain">
+
+            <Notification text={notificationMessage}/>
 
             <div className='createViewName'>Create Collection</div>
 

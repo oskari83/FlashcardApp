@@ -32,6 +32,8 @@ const CollectionItem = ( { collectionWhole, name, creator, count, updateFunc }: 
             setBookmarked(!bookmarked);
         }else{
             const colObject = {...thisCollection, saved: false}
+            const id = collectionWhole.id;
+            updateFunc(id,colObject);
             setBookmarked(!bookmarked);
         }
     }

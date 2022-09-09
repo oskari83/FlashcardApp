@@ -1,8 +1,11 @@
 import './HomeView.css';
 import { FaUserGraduate } from "react-icons/fa";
 import { HiOutlineExternalLink } from "react-icons/hi";
+import { MdSignalWifiConnectedNoInternet4 } from "react-icons/md";
+import { VscEmptyWindow } from "react-icons/vsc";
 import { CollectionItem, CollectionData } from '../../Types';
 import { useState } from 'react';
+import { Notification } from '../Notification/Notification';
 
 const NotYetAuthComponent = () => {
     return(
@@ -45,7 +48,20 @@ const CollectionItemComponent = ( { name, creator, count }: { name: string, crea
     )
 }
 
-export const HomeView = ({collectionData, username}: {collectionData: Array<CollectionData>, username:string}) => {
+const EmptyCollectionsComponent = () => {
+    return (
+        <div className='collectionEmptyItem'>
+            <div className='emptyIcon'>
+                <VscEmptyWindow size='20px' color={`rgb(78, 78, 78)`} />
+            </div>
+            <div className='emptyText'>
+                {"Looks empty, browse others or create your own collection to start studying!"}
+            </div>
+        </div>
+    )
+}
+
+export const HomeView = ({collectionData, username, notifText}: {collectionData: Array<CollectionData>, username:string, notifText:string}) => {
     // 0=all, 1=created, 2=saved
     const [curFilter, setCurFilter] = useState(0);
     const filterChange = (id: number) => {
@@ -68,6 +84,7 @@ export const HomeView = ({collectionData, username}: {collectionData: Array<Coll
     return(
         <>
         <div className="homeContainerMain">
+            <Notification text={notifText} />
             <div className="homeViewUpperText">Home</div>
             <div className='profileCont'>
                 <div className='leftSideCont'>
@@ -81,7 +98,7 @@ export const HomeView = ({collectionData, username}: {collectionData: Array<Coll
                 </div>
             </div>
 
-            <div className='mainHomeContainer'>
+            <div className={`mainHomeContainer${collectionData.length >= 3 ? '' : 'E'}`}>
                 <div className='aboveCollectionsContainer'>
                     <div className='collectionsText'>Collections</div>
                     <div className='filterContainer'>
@@ -91,6 +108,14 @@ export const HomeView = ({collectionData, username}: {collectionData: Array<Coll
                     </div>
                 </div>
                 <div className='homeCollectionsFlexContainer'>
+                    {collectionData.length === 0 && notifText==='' && 
+                        <EmptyCollectionsComponent />
+                    }
+                    {notifText==='Network error - please check your internet connection!' && 
+                        <div className='nonetworkIcon'>
+                            <MdSignalWifiConnectedNoInternet4 size='40px' color={`rgb(190, 190, 190)`} />
+                        </div>
+                    }
                     {collectionsToShow.map( (col) => 
                         <CollectionItemComponent key={col.id} name={col.name} creator={col.creator} count={col.itemCount} />
                     )}

@@ -13,8 +13,9 @@ import collectionService from './services/collections';
 import './App.css';
 
 const App = () => {
-  const [collections, setCollections] = useState([])
-  const [user, setUser] = useState('oskari83')
+  const [collections, setCollections] = useState([]);
+  const [user, setUser] = useState('oskari83');
+  const [notificationMessage, setNotificationMessage] = useState('');
 
   useEffect(() => {
     collectionService
@@ -22,6 +23,14 @@ const App = () => {
       .then(initialCollections => {
         setCollections(initialCollections)
       })
+      .catch(error => {
+        if(error.code==="ERR_NETWORK"){
+            setNotificationMessage('Network error - please check your internet connection!');
+        }else{
+            setNotificationMessage(error.message);
+        }
+        console.log(error);
+    });
   }, [])
 
   const AppendToCollections = (collectionItem:any) => {
@@ -40,7 +49,7 @@ const App = () => {
           <Route path="/browse" element={<BrowseView />} />
           <Route path="/auth" element={<AuthenticationView />} />
           <Route path="/user" element={<ProfileView />} />
-          <Route path="/" element={<HomeView collectionData={collections} username={user}/>} />
+          <Route path="/" element={<HomeView collectionData={collections} username={user} notifText={notificationMessage}/>} />
         </Routes>
       </Router>
       <Footer />
