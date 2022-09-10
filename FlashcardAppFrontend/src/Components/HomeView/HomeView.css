@@ -337,14 +337,6 @@
     margin-left: 10%;
 }
 
-.nonetworkIcon{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    margin-top: 12vh;
-}
-
 .emptyText{
     display: flex;
     align-items: center;

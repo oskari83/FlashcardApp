@@ -1,11 +1,11 @@
 import './HomeView.css';
 import { FaUserGraduate } from "react-icons/fa";
 import { HiOutlineExternalLink } from "react-icons/hi";
-import { MdSignalWifiConnectedNoInternet4 } from "react-icons/md";
 import { VscEmptyWindow } from "react-icons/vsc";
-import { CollectionItem, CollectionData } from '../../Types';
+import { CollectionItem, CollectionData } from '../../types';
 import { useState } from 'react';
 import { Notification } from '../Notification/Notification';
+import { Loading } from '../Loading/Loading';
 
 const NotYetAuthComponent = () => {
     return(
@@ -61,7 +61,7 @@ const EmptyCollectionsComponent = () => {
     )
 }
 
-export const HomeView = ({collectionData, username, notifText}: {collectionData: Array<CollectionData>, username:string, notifText:string}) => {
+export const HomeView = ({collectionData, username, notifText, loadingStatus}: {collectionData: Array<CollectionData>, username:string, notifText:string, loadingStatus:number}) => {
     // 0=all, 1=created, 2=saved
     const [curFilter, setCurFilter] = useState(0);
     const filterChange = (id: number) => {
@@ -111,10 +111,8 @@ export const HomeView = ({collectionData, username, notifText}: {collectionData:
                     {collectionData.length === 0 && notifText==='' && 
                         <EmptyCollectionsComponent />
                     }
-                    {notifText==='Network error - please check your internet connection!' && 
-                        <div className='nonetworkIcon'>
-                            <MdSignalWifiConnectedNoInternet4 size='40px' color={`rgb(190, 190, 190)`} />
-                        </div>
+                    {loadingStatus===1 && 
+                        <Loading />
                     }
                     {collectionsToShow.map( (col) => 
                         <CollectionItemComponent key={col.id} name={col.name} creator={col.creator} count={col.itemCount} />

@@ -35,20 +35,35 @@
   font-family: "ReadexBold";
   font-size: clamp(20px, 5.5vw, 25px);
   color: rgb(78, 78, 78);
-}
-
-.setNameText{
-  float:left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .setNameIcon{
   display: flex;
   align-items: center;
-  float:right;
   cursor: pointer;
   margin-left: 18px;
-  margin-top: 8px;
   font-size: 10px;
+  color: rgb(116, 116, 116);
+}
+
+.setDelIcon{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 18px;
+  font-size: 10px;
+  color: rgb(116, 116, 116);
+}
+
+.setDelIcon:hover{
+  color: rgb(78, 78, 78);
+}
+
+.setNameIcon:hover{
+  color: rgb(78, 78, 78);
 }
 
 .innerSetNameText{

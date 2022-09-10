@@ -201,28 +201,7 @@ const collectionEntries: Array<CollectionEntry> = [
             "key": 3
           }
         ]
-    },
-    {
-        "id": 2141341,
-        "name": "New Set 4",
-        "creator": "stranger22",
-        "itemCount": 2,
-        "saved": false,
-        "items": [
-          {
-            "qside": "life",
-            "aside": "is good",
-            "correct": 2,
-            "key": 0
-          },
-          {
-            "qside": "time",
-            "aside": "is money",
-            "correct": 4,
-            "key": 1
-          }
-        ]
-      }
+    }
 ]; 
 
 export default collectionEntries;

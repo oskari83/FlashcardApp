@@ -8,12 +8,15 @@ import { ProfileView } from './Components/ProfileView/ProfileView';
 import { AuthenticationView } from './Components/AuthenticationView/AuthenticationView';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import { CollectionItem, CollectionData } from './Types';
+import { CollectionItem, CollectionData } from './types';
 import collectionService from './services/collections';
 import './App.css';
+import { CollectionEdit } from './Components/CollectionEdit/CollectionEdit';
+import { CollectionView } from './Components/CollectionView/CollectionView';
 
 const App = () => {
   const [collections, setCollections] = useState([]);
+  const [loadingStatus, setLoadingStatus] = useState(1);
   const [user, setUser] = useState('oskari83');
   const [notificationMessage, setNotificationMessage] = useState('');
 
@@ -21,7 +24,8 @@ const App = () => {
     collectionService
       .getAll()
       .then(initialCollections => {
-        setCollections(initialCollections)
+        setCollections(initialCollections);
+        setLoadingStatus(0);
       })
       .catch(error => {
         if(error.code==="ERR_NETWORK"){
@@ -49,7 +53,8 @@ const App = () => {
           <Route path="/browse" element={<BrowseView />} />
           <Route path="/auth" element={<AuthenticationView />} />
           <Route path="/user" element={<ProfileView />} />
-          <Route path="/" element={<HomeView collectionData={collections} username={user} notifText={notificationMessage}/>} />
+          <Route path="/collection" element={<CollectionView />} />
+          <Route path="/" element={<HomeView collectionData={collections} username={user} notifText={notificationMessage} loadingStatus={loadingStatus}/>} />
         </Routes>
       </Router>
       <Footer />

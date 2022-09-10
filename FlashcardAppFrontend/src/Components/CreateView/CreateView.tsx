@@ -2,7 +2,7 @@ import './CreateView.css';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { IoMdClose } from 'react-icons/io';
 import { ChangeEvent, SyntheticEvent } from 'react';
-import { CollectionItem, CollectionData } from '../../Types';
+import { CollectionItem, CollectionData } from '../../types';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import collectionService from '../../services/collections';
@@ -77,11 +77,11 @@ interface SingleItem {
 
 export const CreateView = ({collectionData, createFunc}: {collectionData: Array<CollectionData>, createFunc: any}) => {
     const initVals = {
-        "0": { aside: '', qside: '', key: 0, correct: 0},
-        "1": { aside: '', qside: '', key: 1, correct: 0},
-        "2": { aside: '', qside: '', key: 2, correct: 0},
-        "3": { aside: '', qside: '', key: 3, correct: 0},
-        "4": { aside: '', qside: '', key: 4, correct: 0},
+        "0": { qside: '', aside: '', key: 0, correct: 0},
+        "1": { qside: '', aside: '', key: 1, correct: 0},
+        "2": { qside: '', aside: '', key: 2, correct: 0},
+        "3": { qside: '', aside: '', key: 3, correct: 0},
+        "4": { qside: '', aside: '', key: 4, correct: 0},
     }
     const initID = 5;
     const [values, setValues] = useState(initVals)
@@ -133,7 +133,6 @@ export const CreateView = ({collectionData, createFunc}: {collectionData: Array<
         event.preventDefault()
         const itemsAsArray = Object.values(values);
         const collectionObject = {
-            id: collectionData.length + 2,
             name: collName,
             creator: 'nullUsername',
             itemCount: tableRowArray.length,
@@ -144,6 +143,7 @@ export const CreateView = ({collectionData, createFunc}: {collectionData: Array<
             .create(collectionObject)
             .then(returnedCollection => {
                 console.log(returnedCollection);
+                //createFunc(collectionObject);
                 navigate('/');
             })
             .catch(error => {
@@ -155,15 +155,14 @@ export const CreateView = ({collectionData, createFunc}: {collectionData: Array<
                 console.log(error);
                 setTimeout(() => setNotificationMessage(''), 5000);
             });
-        //createFunc(collectionObject);
     }
 
     const addRowToTable = () => {
         const id = newID;
         setNewID(newID + 1);
         setValues({...values, [id]: {
-            aside: '', 
             qside: '', 
+            aside: '', 
             key: id,
             correct: 0
         }});

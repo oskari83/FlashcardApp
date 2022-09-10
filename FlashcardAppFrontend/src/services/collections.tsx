@@ -1,14 +1,14 @@
 import axios from 'axios';
-import { CollectionData } from '../Types';
+import { NewCollectionData } from '../types';
 
-const baseUrl = 'http://localhost:3011/collections';
+const baseUrl = 'api/collections';
 
 const getAll = () => {
     const request = axios.get(baseUrl);
     return request.then(response => response.data);
 }
 
-const create = (newObject: CollectionData) => {
+const create = (newObject: NewCollectionData) => {
     const request = axios.post(baseUrl, newObject);
     return request.then(response => response.data);
 }

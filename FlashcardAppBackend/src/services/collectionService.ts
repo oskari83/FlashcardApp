@@ -21,8 +21,21 @@ const findById = (id: number): CollectionEntry | undefined => {
     return entry;
 };
 
+const deleteById = (id: number): CollectionEntry | undefined => {
+  let deletedCollection;
+  for(let i=0;i<collectionEntries.length;i++){
+    if(collectionEntries[i].id===id){
+      deletedCollection = collectionEntries[i];
+      collectionEntries.splice(i,1);
+      break;
+    }
+  }
+  return deletedCollection;
+};
+
 export default {
   getEntries,
   addCollection,
-  findById
+  findById,
+  deleteById
 };

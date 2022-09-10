@@ -5,7 +5,7 @@ import { BsBookmark,BsBookmarkCheckFill } from "react-icons/bs"
 import { useState, useEffect } from 'react';
 import collectionService from '../../services/collections';
 import browseresultsService from '../../services/browseresults';
-import { CollectionData } from '../../Types';
+import { CollectionData } from '../../types';
 
 const CollectionItem = ( { collectionWhole, name, creator, count, updateFunc }: { collectionWhole:CollectionData, name: string, creator: string, count: number, updateFunc:any}) => {
     const [bookmarked, setBookmarked] = useState(collectionWhole.saved);

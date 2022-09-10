@@ -32,4 +32,10 @@ router.post('/', (req, res) => {
     }
 });
 
+router.delete('/:id', (req, res) => {
+    const deleted = collectionService.deleteById(Number(req.params.id));
+    console.log(deleted);
+    res.status(204).end();
+});
+
 export default router;

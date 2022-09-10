@@ -3,6 +3,7 @@ import { RevealMode } from '../RevealMode/RevealMode';
 import { StatisticsTable } from '../StatisticsTable/StatisticsTable';
 import { CollectionEdit } from '../CollectionEdit/CollectionEdit';
 import { IoMdStats, IoMdPlay } from 'react-icons/io'
+import { RiDeleteBin2Line } from 'react-icons/ri';
 import { BsBookmark,BsBookmarkCheckFill } from "react-icons/bs"
 import { AiFillEdit } from 'react-icons/ai'
 import { useState } from 'react';
@@ -35,6 +36,10 @@ export const CollectionView = () => {
                     <div className='innerSetNameText'>
                         { bookmarked ? "Saved" : "Save"}
                     </div>
+                </div>
+                <div className='setDelIcon'>
+                    <RiDeleteBin2Line size='20px' color={`rgb(116, 116, 116)`} />
+                    <div className='innerSetNameText'>Delete</div>
                 </div>
             </div>
             <div className='setProgress'>43%</div>

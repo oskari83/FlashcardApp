@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CollectionData } from '../Types';
+import { CollectionData } from '../types';
 
 const baseUrl = 'http://localhost:3011/browseresults';
 
