@@ -1,10 +1,11 @@
+require('dotenv').config();
 import express from 'express';
 import collectionRouter from './routes/collections';
 const app = express();
 app.use(express.json());
-const cors = require('cors')
-app.use(express.static('build'))
-app.use(cors())
+const cors = require('cors');
+app.use(express.static('build'));
+app.use(cors());
 
 const PORT = process.env.PORT || 3004;
 

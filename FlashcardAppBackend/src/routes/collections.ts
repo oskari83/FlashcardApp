@@ -1,11 +1,20 @@
 import express from 'express';
 import collectionService from '../services/collectionService';
 import toNewCollectionEntry from '../utils';
+import { MongooseCollectionEntry } from '../types';
+const CollectionM = require('../models/collection');
 
 const router = express.Router();
 
 router.get('/', (_req, res) => {
-  res.send(collectionService.getEntries());
+  CollectionM.find({})
+    .then((cols: any) => {
+      res.json(cols);
+    });
+  /*
+  const entrs = collectionService.getEntries();
+  res.json(entrs);
+  */
 });
 
 router.get('/:id', (req, res) => {
@@ -21,8 +30,17 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     try {
         const newColEntry = toNewCollectionEntry(req.body);
+        const newCollectionEntry = new CollectionM({
+            ...newColEntry
+        });
+        newCollectionEntry.save()
+        .then((savedCol:MongooseCollectionEntry) => {
+          res.json(savedCol);
+        })
+        /*
         const addedEntry = collectionService.addCollection(newColEntry);
         res.json(addedEntry);
+        */
     } catch (error: unknown) {
         let errorMessage = 'Something went wrong.';
         if (error instanceof Error) {

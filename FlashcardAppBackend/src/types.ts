@@ -15,3 +15,14 @@ export interface CollectionEntry {
 }
 
 export type NewCollectionEntry = Omit<CollectionEntry, 'id'>;
+
+export interface MongooseCollectionEntry {
+    _id?: object | undefined,
+    id: string;
+    name: string;
+    creator: string;
+    itemCount: number;
+    saved?: boolean;
+    items: ItemEntry[];
+    __v?: object;
+}

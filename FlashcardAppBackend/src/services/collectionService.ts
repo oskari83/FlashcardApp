@@ -1,19 +1,31 @@
 import collectionEntries from '../../data/collections';
-//import collectionold from '../../data/collectionsold.json';
+const CollectionM = require('../models/collection');
 
-import { NewCollectionEntry, CollectionEntry } from '../types';
+import { NewCollectionEntry, CollectionEntry, MongooseCollectionEntry } from '../types';
 
-const getEntries = (): Array<CollectionEntry> => {
-  return collectionEntries;
+const getEntries = (): any | void => {
+  CollectionM.find({})
+    .then((cols: any) => {
+      console.log(cols);
+      return cols;
+    })
+    .catch((error:ErrorCallback) => {
+      console.log(error);
+    });
 };
 
-const addCollection = ( entry: NewCollectionEntry): CollectionEntry => {
-    const newCollectionEntry = {
-        id: Math.max(...collectionEntries.map(d => d.id)) + 1,
-        ...entry
-    }
-    collectionEntries.push(newCollectionEntry);
-    return newCollectionEntry;
+const addCollection = ( entry: NewCollectionEntry): CollectionEntry | void => {
+  const newCollectionEntry = new CollectionM({
+      ...entry
+  });
+  newCollectionEntry.save()
+    .then((savedCol:MongooseCollectionEntry) => {
+      return savedCol;
+    })
+    .catch((error:ErrorCallback) => {
+      console.log(error);
+      throw new Error('Could not save collection to mongodb');
+    });
 };
 
 const findById = (id: number): CollectionEntry | undefined => {

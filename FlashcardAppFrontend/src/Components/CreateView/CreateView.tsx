@@ -145,6 +145,7 @@ export const CreateView = ({collectionData, createFunc}: {collectionData: Array<
                 console.log(returnedCollection);
                 //createFunc(collectionObject);
                 navigate('/');
+                navigate(0);
             })
             .catch(error => {
                 if(error.code==="ERR_NETWORK"){

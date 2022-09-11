@@ -5,6 +5,7 @@ import { BsBookmark,BsBookmarkCheckFill } from "react-icons/bs"
 import { useState, useEffect } from 'react';
 import collectionService from '../../services/collections';
 import browseresultsService from '../../services/browseresults';
+import { Loading } from '../Loading/Loading';
 import { CollectionData } from '../../types';
 
 const CollectionItem = ( { collectionWhole, name, creator, count, updateFunc }: { collectionWhole:CollectionData, name: string, creator: string, count: number, updateFunc:any}) => {
@@ -64,6 +65,7 @@ const CollectionItem = ( { collectionWhole, name, creator, count, updateFunc }: 
 
 export const BrowseView = () => {
     const [resultCollections, setResultCollections] = useState<CollectionData[]>([]);
+    const [loadingStatusBrowse, setLoadingStatusBrowse] = useState(1);
 
     const updateResultsCollection = (id:number, colObject: CollectionData) => {
         browseresultsService
@@ -82,7 +84,8 @@ export const BrowseView = () => {
         browseresultsService
             .getAll()
             .then(initialResults => {
-                setResultCollections(initialResults)
+                setResultCollections(initialResults);
+                setLoadingStatusBrowse(0);
             })
     }, [])
 
@@ -102,6 +105,10 @@ export const BrowseView = () => {
                     Recently Added Collections
                 </div>
                 <div className='collectionsFlexContainer'>
+                    {loadingStatusBrowse===1 && 
+                        <Loading />
+                    }
+
                     {resultCollections.map( (col: CollectionData) => 
                         <CollectionItem key={col.id} collectionWhole={col} name={col.name} creator={col.creator} count={col.itemCount} updateFunc={updateResultsCollection} />
                     )}
