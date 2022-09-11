@@ -35,7 +35,7 @@ const App = () => {
         }
         console.log(error);
     });
-  }, [])
+  }, []);
 
   const AppendToCollections = (collectionItem:any) => {
     console.log(collectionItem);

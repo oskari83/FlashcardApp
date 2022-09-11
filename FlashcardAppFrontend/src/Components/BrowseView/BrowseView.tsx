@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import collectionService from '../../services/collections';
 import browseresultsService from '../../services/browseresults';
 import { Loading } from '../Loading/Loading';
+import { Notification } from '../Notification/Notification';
 import { CollectionData } from '../../types';
 
 const CollectionItem = ( { collectionWhole, name, creator, count, updateFunc }: { collectionWhole:CollectionData, name: string, creator: string, count: number, updateFunc:any}) => {
@@ -66,6 +67,7 @@ const CollectionItem = ( { collectionWhole, name, creator, count, updateFunc }: 
 export const BrowseView = () => {
     const [resultCollections, setResultCollections] = useState<CollectionData[]>([]);
     const [loadingStatusBrowse, setLoadingStatusBrowse] = useState(1);
+    const [notificationMessage, setNotificationMessage] = useState('');
 
     const updateResultsCollection = (id:number, colObject: CollectionData) => {
         browseresultsService
@@ -81,6 +83,24 @@ export const BrowseView = () => {
     }
 
     useEffect(() => {
+        collectionService
+          .getAll()
+          .then(initialCollections => {
+            setResultCollections(initialCollections);
+            setLoadingStatusBrowse(0);
+          })
+          .catch(error => {
+            if(error.code==="ERR_NETWORK"){
+                setNotificationMessage('Network error - please check your internet connection!');
+            }else{
+                setNotificationMessage(error.message);
+            }
+            console.log(error);
+        });
+    }, []);
+
+    /*
+    useEffect(() => {
         browseresultsService
             .getAll()
             .then(initialResults => {
@@ -88,10 +108,13 @@ export const BrowseView = () => {
                 setLoadingStatusBrowse(0);
             })
     }, [])
+    */
 
     return(
         <>
         <div className="containerMain">
+            <Notification text={notificationMessage} />
+
             <div className="browseViewName">Browse Collections</div>
             <div className="searchBarContainer">
                 <input type="text" className='searchInput'  placeholder="Search..."></input>

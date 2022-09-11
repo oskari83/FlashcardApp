@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NewCollectionData } from '../types';
+import { CollectionData, NewCollectionData } from '../types';
 
 const baseUrl = 'api/collections';
 
@@ -13,7 +13,13 @@ const create = (newObject: NewCollectionData) => {
     return request.then(response => response.data);
 }
 
+const update = (id:number, newObject:CollectionData) => {
+  const request = axios.put(`${baseUrl}/${id}`, newObject);
+  return request.then(response => response.data);
+}
+
 export default { 
   getAll,
   create,
+  update
 }
