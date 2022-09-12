@@ -1,38 +1,56 @@
 import express from 'express';
-import toNewCollectionEntry from '../utils';
-import { MongooseCollectionEntry } from '../types';
-import { nextTick } from 'process';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+const helper = require('../utils/helper');
 const CollectionM = require('../models/collection');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 
 const router = express.Router();
 
-router.get('/', (_req, res) => {
-	CollectionM.find({})
-		.then((cols: any) => {
-			res.json(cols);
-		});
+const getTokenFrom = (request:express.Request) => {
+	const authorization = request.get('authorization');
+	if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+		return authorization.substring(7);
+	}
+	return null;
+};
+
+router.get('/', async (_req:express.Request, res:express.Response) => {
+	const cols = await CollectionM
+		.find({})
+		.populate('user', { username: 1 });
+	res.json(cols);
 });
 
-router.get('/:id', (req, res) => {
-	CollectionM.findById(req.params.id)
-		.then((col:MongooseCollectionEntry) => {
-			res.json(col);
-		})
-		.catch((error: ErrorCallback) => nextTick(error));
+router.get('/:id', async (req:express.Request, res:express.Response) => {
+	const fcol = await CollectionM.findById(req.params.id);
+	if (fcol) {
+		res.json(fcol);
+	} else {
+		res.status(404).end();
+	}
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', async (req:express.Request, res:express.Response) => {
 	try {
-		const newColEntry = toNewCollectionEntry(req.body);
+		const newColEntry = helper.toNewCollectionEntry(req.body);
+
+		const token = getTokenFrom(req);
+		const decodedToken = jwt.verify(token, process.env.SECRET);
+		if(!decodedToken.id){
+			return res.status(401).json({ error: 'token missing or invalid' });
+		}
+
+		const user = await User.findById(decodedToken.id);
+
 		const newCollectionEntry = new CollectionM({
-			...newColEntry
+			...newColEntry,
+			user: user._id
 		});
-		newCollectionEntry.save()
-			.then((savedCol:MongooseCollectionEntry) => {
-				res.json(savedCol);
-			})
-			.catch((error:unknown) => next(error));
+
+		const savedCol = await newCollectionEntry.save();
+		user.createdCollections = user.createdCollections.concat(savedCol._id);
+		await user.save();
+		res.status(201).json(savedCol);
 	} catch (error: unknown) {
 		let errorMessage = 'Something went wrong.';
 		if (error instanceof Error) {
@@ -42,27 +60,21 @@ router.post('/', (req, res, next) => {
 	}
 });
 
-router.delete('/:id', (req, res, next) => {
-	CollectionM.findByIdAndRemove(req.params.id)
-		.then((_result:any) => {
-			res.status(204).end();
-		})
-		.catch((error: unknown) => next(error));
+router.delete('/:id', async (req:express.Request, res:express.Response) => {
+	await CollectionM.findByIdAndRemove(req.params.id);
+	res.status(204).end();
 });
 
-router.put('/:id', (req, res, next) => {
-	const body = req.body;
+router.put('/:id', async (req:express.Request, res:express.Response) => {
+	const body = helper.toUpdatedCollectionEntry(req.body);
 
 	const col = {
 		itemCount: body.itemCount,
 		items: body.items,
 	};
 
-	CollectionM.findByIdAndUpdate(req.params.id, col, { new: true })
-		.then((updatedCol:MongooseCollectionEntry) => {
-			res.json(updatedCol);
-		})
-		.catch((error:unknown) => next(error));
+	const updatedCol = await CollectionM.findByIdAndUpdate(req.params.id, col, { new: true });
+	res.json(updatedCol);
 });
 
-export default router;
+module.exports = router;

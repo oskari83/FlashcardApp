@@ -1,4 +1,4 @@
-import { NewCollectionEntry, ItemEntry } from './types';
+import { NewCollectionEntry, ItemEntry, UpdatedCollectionEntry } from '../types';
 
 const isString = (text: unknown): text is string => {
 	return typeof text === 'string' || text instanceof String;
@@ -36,7 +36,7 @@ const parseItemsField = (items: unknown): ItemEntry[] => {
 	return items;
 };
 
-type Fields = { name: unknown, creator: unknown, itemCount: unknown, items: unknown };
+type Fields = { name?: unknown, creator?: unknown, itemCount: unknown, items: unknown };
 
 const toNewCollectionEntry = ({ name, creator, itemCount, items }: Fields): NewCollectionEntry => {
 	const newEntry: NewCollectionEntry = {
@@ -49,4 +49,16 @@ const toNewCollectionEntry = ({ name, creator, itemCount, items }: Fields): NewC
 	return newEntry;
 };
 
-export default toNewCollectionEntry;
+const toUpdatedCollectionEntry = ({ itemCount, items }: Fields): UpdatedCollectionEntry => {
+	const newEntry: UpdatedCollectionEntry = {
+		itemCount: parseNumberField(itemCount),
+		items: parseItemsField(items)
+	};
+
+	return newEntry;
+};
+
+module.exports = {
+	toNewCollectionEntry,
+	toUpdatedCollectionEntry,
+};

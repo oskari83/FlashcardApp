@@ -175,6 +175,6 @@ const collectionEntries: Array<CollectionEntry> = [
 			}
 		]
 	},
-]; 
+];
 
 export default collectionEntries;

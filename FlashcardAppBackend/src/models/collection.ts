@@ -1,22 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import mongoose from 'mongoose';
-
-const url = process.env.MONGODB_URI || 'null';
-
-mongoose.connect(url)
-	.then((_result: unknown) => {
-		console.log('connected to MongoDB');
-	})
-	.catch((error: Error) => {
-		console.log('error connecting to MongoDB:', error.message);
-	});
 
 const collectionSchema = new mongoose.Schema({
 	name: String,
 	creator: String,
 	itemCount: Number,
 	items: Array,
+	user: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+	}
 });
-
 
 collectionSchema.set('toJSON', {
 	transform: (_document:any, returnedObject:any) => {

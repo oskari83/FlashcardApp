@@ -16,6 +16,11 @@ export interface CollectionEntry {
 
 export type NewCollectionEntry = Omit<CollectionEntry, 'id'>;
 
+export interface UpdatedCollectionEntry {
+    itemCount: number;
+    items: ItemEntry[];
+}
+
 export interface MongooseCollectionEntry {
     _id?: object | undefined,
     id: string;
