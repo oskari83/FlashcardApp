@@ -15,52 +15,77 @@ import { CollectionEdit } from './Components/CollectionEdit/CollectionEdit';
 import { CollectionView } from './Components/CollectionView/CollectionView';
 
 const App = () => {
-  const [collections, setCollections] = useState([]);
-  const [loadingStatus, setLoadingStatus] = useState(1);
-  const [user, setUser] = useState('oskari83');
-  const [notificationMessage, setNotificationMessage] = useState('');
+	const [collections, setCollections] = useState([]);
+	const [loadingStatus, setLoadingStatus] = useState(1);
+	const [userN, setUserN] = useState('oskari83');
+	const [notificationMessage, setNotificationMessage] = useState('');
+	const [user, setUser] = useState<any>(null);
 
-  useEffect(() => {
-    collectionService
-      .getAll()
-      .then(initialCollections => {
-        setCollections(initialCollections);
-        setLoadingStatus(0);
-      })
-      .catch(error => {
-        if(error.code==="ERR_NETWORK"){
-            setNotificationMessage('Network error - please check your internet connection!');
-        }else{
-            setNotificationMessage(error.message);
-        }
-        console.log(error);
-    });
-  }, []);
+	const SetUserData = (s:any) => {
+		setUser(s);
+	}
 
-  const AppendToCollections = (collectionItem:any) => {
-    console.log(collectionItem);
-    setCollections(collections.concat(collectionItem));
-    console.log(collections);
-  }
+	useEffect(() => {
+		collectionService
+		.getAll()
+		.then(initialCollections => {
+			setCollections(initialCollections);
+			setLoadingStatus(0);
+		})
+		.catch(error => {
+			if(error.code==="ERR_NETWORK"){
+				setNotificationMessage('Network error - please check your internet connection!');
+			}else{
+				setNotificationMessage(error.message);
+			}
+			console.log(error);
+		});
+	}, []);
 
-  return (
-    <div>
+	useEffect(() => {
+		const loggedUserJSON = window.localStorage.getItem('loggedFlashcardAppUser');
+		if (loggedUserJSON) {
+			const user = JSON.parse(loggedUserJSON);
+			setUser(user);
+			collectionService.setToken(user.token);
+		}
+	}, []);
 
-      <Navbar/>
-      <Router>
-        <Routes>
-          <Route path="/create" element={<CreateView collectionData={collections} createFunc={AppendToCollections}/>} />
-          <Route path="/browse" element={<BrowseView />} />
-          <Route path="/auth" element={<AuthenticationView />} />
-          <Route path="/user" element={<ProfileView />} />
-          <Route path="/collection" element={<CollectionView />} />
-          <Route path="/" element={<HomeView collectionData={collections} username={user} notifText={notificationMessage} loadingStatus={loadingStatus}/>} />
-        </Routes>
-      </Router>
-      <Footer />
+	const AppendToCollections = (collectionItem:any) => {
+		console.log(collectionItem);
+		setCollections(collections.concat(collectionItem));
+		console.log(collections);
+	}
 
-    </div>
-  );
+	if(user===null){
+		return(
+			<div>
+				<Navbar/>
+				<AuthenticationView setUserFunc={SetUserData}/>
+				<Footer />
+			</div>
+		)
+	}
+
+	return (
+		<div>
+
+		<Navbar/>
+
+		<Router>
+			<Routes>
+			<Route path="/create" element={<CreateView collectionData={collections} createFunc={AppendToCollections} username={user.username}/>} />
+			<Route path="/browse" element={<BrowseView />} />
+			<Route path="/auth" element={<AuthenticationView setUserFunc={SetUserData}/>} />
+			<Route path="/user" element={<ProfileView />} />
+			<Route path="/collection" element={<CollectionView />} />
+			<Route path="/" element={<HomeView collectionData={collections} username={user.username} notifText={notificationMessage} loadingStatus={loadingStatus}/>} />
+			</Routes>
+		</Router>
+		<Footer />
+
+		</div>
+	);
 }
 
 export default App;

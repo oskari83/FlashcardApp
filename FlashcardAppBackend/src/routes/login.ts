@@ -19,6 +19,7 @@ loginRouter.post('/', async (request:express.Request, response:express.Response)
 	}
 
 	console.log(user);
+	console.log('loggin in');
 
 	const userForToken = {
 		email: user.email,

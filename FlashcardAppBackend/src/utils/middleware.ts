@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const logger2 = require('./logger');
 import express from 'express';
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
 
 const requestLogger = (request:express.Request, _response:express.Response, next:express.NextFunction) => {
 	logger2.info('Method:', request.method);
@@ -33,8 +36,21 @@ const errorHandler = (error: { name: string, message: string}, _request:express.
 	next(error);
 };
 
+const userExtractor = async (request:any, _response:express.Response, next:express.NextFunction) => {
+	const authorization = await request.get('authorization');
+	if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+		const decodedToken = jwt.verify(authorization.substring(7), process.env.SECRET);
+		if(decodedToken){
+			request.user = await User.findById(decodedToken.id);
+		}
+	}
+
+	next();
+};
+
 module.exports = {
 	requestLogger,
 	unknownEndpoint,
-	errorHandler
+	errorHandler,
+	userExtractor
 };

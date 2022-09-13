@@ -1,4 +1,4 @@
-import { NewCollectionEntry, ItemEntry, UpdatedCollectionEntry } from '../types';
+import { NewCollectionEntry2, ItemEntry, UpdatedCollectionEntry2 } from '../types';
 
 const isString = (text: unknown): text is string => {
 	return typeof text === 'string' || text instanceof String;
@@ -10,18 +10,6 @@ const parseTextField = (txt: unknown): string => {
 	}
 
 	return txt;
-};
-
-const isNumber = (num: unknown): num is number => {
-	return typeof num === 'number' || num instanceof Number;
-};
-
-const parseNumberField = (num: unknown): number => {
-	if (!num || !isNumber(num)) {
-		throw new Error('Incorrect or missing number field');
-	}
-
-	return num;
 };
 
 const isItemEntry = (itm: unknown): itm is ItemEntry[] => {
@@ -38,27 +26,38 @@ const parseItemsField = (items: unknown): ItemEntry[] => {
 
 type Fields = { name?: unknown, creator?: unknown, itemCount: unknown, items: unknown };
 
-const toNewCollectionEntry = ({ name, creator, itemCount, items }: Fields): NewCollectionEntry => {
-	const newEntry: NewCollectionEntry = {
+const toNewCollectionEntry = ({ name, creator, items }: Fields): NewCollectionEntry2 => {
+	const newEntry: NewCollectionEntry2 = {
 		name: parseTextField(name),
 		creator: parseTextField(creator),
-		itemCount: parseNumberField(itemCount),
 		items: parseItemsField(items)
 	};
 
 	return newEntry;
 };
 
-const toUpdatedCollectionEntry = ({ itemCount, items }: Fields): UpdatedCollectionEntry => {
-	const newEntry: UpdatedCollectionEntry = {
-		itemCount: parseNumberField(itemCount),
-		items: parseItemsField(items)
-	};
+const toUpdatedCollectionEntry = ({ name, items }: Fields): UpdatedCollectionEntry2 => {
+	let newEntry:UpdatedCollectionEntry2;
+	if(name){
+		newEntry = {
+			name: parseTextField(name),
+			items: parseItemsField(items)
+		};
+	}else{
+		newEntry = {
+			items: parseItemsField(items)
+		};
+	}
 
 	return newEntry;
+};
+
+const generateID = () => {
+	return Math.floor(Math.random() * 10000001);
 };
 
 module.exports = {
 	toNewCollectionEntry,
 	toUpdatedCollectionEntry,
+	generateID
 };

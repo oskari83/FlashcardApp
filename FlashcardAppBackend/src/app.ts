@@ -10,28 +10,28 @@ const collectionRouter = require('./routes/collections');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 
-const middleware = require('./utils/middleware');
+const { unknownEndpoint, errorHandler, userExtractor } = require('./utils/middleware');
 const logger = require('./utils/logger');
 
 logger.info('connecting to', config.MONGODB_URI);
+
 mongoose.connect(config.MONGODB_URI)
-	.then((_res: unknown) => {
-		console.log('connected to MongoDB');
+	.then(() => {
+		logger.info('connected to MongoDB');
 	})
 	.catch((error: Error) => {
-		console.log('error connecting to MongoDB:', error.message);
+		logger.info('error connecting to MongoDB:', error.message);
 	});
 
 app.use(cors());
 app.use(express.static('build'));
 app.use(express.json());
-app.use(middleware.requestLogger);
 
-app.use('/api/collections', collectionRouter);
-app.use('/api/users', usersRouter);
+app.use('/api/collections', userExtractor, collectionRouter);
+app.use('/api/users', userExtractor, usersRouter);
 app.use('/api/login', loginRouter);
 
-app.use(middleware.unknownEndpoint);
-app.use(middleware.errorHandler);
+app.use(unknownEndpoint);
+app.use(errorHandler);
 
 module.exports = app;

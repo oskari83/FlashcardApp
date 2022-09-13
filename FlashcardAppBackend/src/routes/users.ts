@@ -2,8 +2,9 @@ const bcrypt = require('bcrypt');
 import express from 'express';
 const usersRouter = express.Router();
 const User = require('../models/user');
+//const helper = require('../utils/helper');
 
-usersRouter.post('/', async (req:express.Request, res:express.Response) => {
+usersRouter.post('/signup', async (req:express.Request, res:express.Response) => {
 	const { username, email, password } = req.body;
 
 	const existingUser = await User.findOne({ username });
@@ -37,7 +38,7 @@ usersRouter.post('/', async (req:express.Request, res:express.Response) => {
 usersRouter.post('/savecollection', async (req: express.Request, res: express.Response) => {
 	const body = req.body;
 	const user = await User.findById(body.userId);
-	user.savedCollections = user.savedCollections.concat(body.collectionId);
+	user.savedCollectionsApp = user.savedCollectionsApp.concat(body.collectionId);
 	await user.save();
 	res.status(204).end();
 });
@@ -45,10 +46,125 @@ usersRouter.post('/savecollection', async (req: express.Request, res: express.Re
 usersRouter.get('/', async (_req:express.Request,res:express.Response) => {
 	const users = await User
 		.find({})
-		.populate('createdCollections', { name:1,creator:1,itemCount:1,items:1,id:1 })
-		.populate('savedCollections', { name:1,creator:1,itemCount:1,items:1,id:1 });
+		.populate('createdCollections', { name:1,creator:1,itemCount:1,items:1,id:1 });
 
 	res.json(users);
+});
+
+usersRouter.put('/:id/updateown', async (req:any, res:express.Response) => {
+	if(!req.user){
+		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in to save collections)' });
+	}
+
+	const userToUpdate = await User.findById(req.params.id);
+	if(!userToUpdate) {
+		return res.status(404).json({
+			error: 'could not find user to update'
+		});
+	}
+
+	if(userToUpdate._id.toString() !== req.user.id) {
+		return res.status(401).json({
+			error: 'incorrect credentials'
+		});
+	}
+	const colId = req.body.colId;
+	const createdApp = userToUpdate.createdCollectionsApp;
+	let colToChange;
+
+	for(let i=0;i<createdApp.length;i++){
+		if(createdApp[i].id.toString()===colId){
+			colToChange = createdApp[i];
+		}
+	}
+
+	const items = colToChange.items;
+
+	const key = req.body.key;
+	const value = req.body.value;
+
+	for(let i=0;i<items.length;i++){
+		if(items[i].key===key){
+			items[i].correct = value;
+		}
+	}
+
+	const newCol = {
+		...colToChange,
+		items: items,
+	};
+
+	for(let i=0;i<createdApp.length;i++){
+		if(createdApp[i].id.toString()===colId){
+			createdApp[i] = newCol;
+		}
+	}
+
+	const newUser = {
+		...userToUpdate,
+		createdCollectionsApp: createdApp
+	};
+
+	const savedUser = await User.findByIdAndUpdate(req.params.id, newUser, { new: true });
+	res.json(savedUser);
+});
+
+usersRouter.put('/:id/updatesaved', async (req:any, res:express.Response) => {
+	if(!req.user){
+		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in to save collections)' });
+	}
+
+	const userToUpdate = await User.findById(req.params.id);
+	if(!userToUpdate) {
+		return res.status(404).json({
+			error: 'could not find user to update'
+		});
+	}
+
+	if(userToUpdate._id.toString() !== req.user.id) {
+		return res.status(401).json({
+			error: 'incorrect credentials'
+		});
+	}
+	const colId = req.body.colId;
+	const savedApp = userToUpdate.savedCollectionsApp;
+	let colToChange;
+
+	for(let i=0;i<savedApp.length;i++){
+		if(savedApp[i].id.toString()===colId){
+			colToChange = savedApp[i];
+		}
+	}
+
+	const items = colToChange.items;
+
+	const key = req.body.key;
+	const value = req.body.value;
+
+	for(let i=0;i<items.length;i++){
+		if(items[i].key===key){
+			items[i].correct = value;
+		}
+	}
+
+	const newCol = {
+		...colToChange,
+		items: items,
+	};
+
+	for(let i=0;i<savedApp.length;i++){
+		if(savedApp[i].id.toString()===colId){
+			savedApp[i] = newCol;
+		}
+	}
+
+	const newUser = {
+		...userToUpdate,
+		savedCollectionsApp: savedApp
+	};
+
+	const savedUser = await User.findByIdAndUpdate(req.params.id, newUser, { new: true });
+	res.json(savedUser);
 });
 
 usersRouter.post('/checkusername', async (req:express.Request, res:express.Response) => {

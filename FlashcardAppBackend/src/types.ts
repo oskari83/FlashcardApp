@@ -1,23 +1,22 @@
 export interface ItemEntry {
     qside: string,
     aside: string,
-    correct: number,
-    key: number
+    correct?: number,
+    key?: number
 }
 
 export interface CollectionEntry {
     id: number;
     name: string;
     creator: string;
-    itemCount: number;
-    saved?: boolean;
+    itemCount?: number;
     items: ItemEntry[];
 }
 
-export type NewCollectionEntry = Omit<CollectionEntry, 'id'>;
+export type NewCollectionEntry2 = Omit<CollectionEntry, 'id'>;
 
-export interface UpdatedCollectionEntry {
-    itemCount: number;
+export interface UpdatedCollectionEntry2 {
+    name?: string;
     items: ItemEntry[];
 }
 

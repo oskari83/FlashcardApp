@@ -10,12 +10,8 @@ const userSchema = new mongoose.Schema({
 			ref: 'CollectionM'
 		}
 	],
-	savedCollections: [
-		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'CollectionM'
-		}
-	],
+	savedCollectionsApp: [mongoose.Schema.Types.Mixed],
+	createdCollectionsApp: [mongoose.Schema.Types.Mixed],
 });
 
 userSchema.set('toJSON', {
@@ -25,6 +21,8 @@ userSchema.set('toJSON', {
 		delete returnedObject.__v;
 		delete returnedObject.passwordHash;
 		delete returnedObject.email;
+		delete returnedObject.savedCollectionsApp;
+		delete returnedObject.createdCollectionsApp;
 	}
 });
 

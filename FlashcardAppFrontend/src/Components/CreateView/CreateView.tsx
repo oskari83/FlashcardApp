@@ -75,7 +75,7 @@ interface SingleItem {
     key: number,
 }
 
-export const CreateView = ({collectionData, createFunc}: {collectionData: Array<CollectionData>, createFunc: any}) => {
+export const CreateView = ({collectionData, createFunc, username}: {collectionData: Array<CollectionData>, createFunc: any, username:string}) => {
     const initVals = {
         "0": { qside: '', aside: '', key: 0, correct: 0},
         "1": { qside: '', aside: '', key: 1, correct: 0},
@@ -134,7 +134,7 @@ export const CreateView = ({collectionData, createFunc}: {collectionData: Array<
         const itemsAsArray = Object.values(values);
         const collectionObject = {
             name: collName,
-            creator: 'nullUsername',
+            creator: username,
             itemCount: tableRowArray.length,
             items: itemsAsArray,
         }
