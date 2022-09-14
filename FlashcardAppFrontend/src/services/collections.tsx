@@ -22,14 +22,28 @@ const create = async (newObject: NewCollectionData) => {
     return response.data;
 }
 
-const update = (id:number, newObject:CollectionData) => {
-  const request = axios.put(`${baseUrl}/${id}`, newObject);
-  return request.then(response => response.data);
+const saveCollection = async (id:string) => {
+	const config = {
+		headers: { Authorization: token }
+	}
+	const emp = {};
+	const response = await axios.put(`${baseUrl}/${id}/save`, emp, config);
+	return response.data;
+}
+
+const unSaveCollection = async (id:string) => {
+	const config = {
+		headers: { Authorization: token }
+	}
+	const emp = {};
+	const response = await axios.put(`${baseUrl}/${id}/unsave`, emp, config);
+	return response.data;
 }
 
 export default { 
   getAll,
   create,
-  update,
+  saveCollection,
+  unSaveCollection,
   setToken
 }

@@ -30,3 +30,11 @@ export interface MongooseCollectionEntry {
     items: ItemEntry[];
     __v?: object;
 }
+
+export interface UserRaw {
+    id: string;
+    username: string;
+    createdCollections: MongooseCollectionEntry[];
+    createdCollectionsApp: MongooseCollectionEntry[];
+	savedCollectionsApp: MongooseCollectionEntry[];
+}

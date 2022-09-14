@@ -8,10 +8,23 @@ import { BsBookmark,BsBookmarkCheckFill } from "react-icons/bs"
 import { AiFillEdit } from 'react-icons/ai'
 import { useState } from 'react';
 import './CollectionView.css';
+import { CollectionData } from '../../types';
+import { useParams } from "react-router-dom";
 
-export const CollectionView = () => {
+export const CollectionView = ({collections}: {collections: CollectionData[]}) => {
     const [currentSelection, setCurrentSelection] = useState(0);
     const [bookmarked, setBookmarked] = useState(false);
+	const [collection, setCollection] = useState<null | CollectionData>(null);
+	const [check,setCheck] = useState(0);
+
+	const id = useParams().id;
+	const collection2 = collections.find(col => col.id ===id);
+	console.log(collection2);
+
+	if(collection2!==undefined && check===0){
+		setCollection(collection2);
+		setCheck(1);
+	}
 
     const bookmarkThis = () => {
         setBookmarked(!bookmarked);
@@ -26,7 +39,7 @@ export const CollectionView = () => {
         <div className="containerMain">
             <div className="setInfoContainer">
             <div className="setName">
-                <div className='setNameText'>Name of Collection</div>
+                <div className='setNameText'>{collection!==null ? collection?.name : 'Loading...'}</div>
                 <div className='setNameIcon' onClick={() => bookmarkThis()}>
                     { bookmarked ? 
                     <BsBookmarkCheckFill size='16px' color={`rgb(248, 222, 106)`} />
@@ -43,7 +56,7 @@ export const CollectionView = () => {
                 </div>
             </div>
             <div className='setProgress'>43%</div>
-            <div className="setInfo">Information about set, Creator: Oskari, Cards: 23</div>
+            <div className="setInfo">{`Creator: ${collection!==null ? collection?.creator : 'Loading...'}, Objects: ${collection!==null ? collection?.items.length : 'Loading...'}`}</div>
             </div>
 
             <div className='setAreaOuter'>
@@ -68,7 +81,7 @@ export const CollectionView = () => {
                 </div>
 
                 {currentSelection===0 && 
-                <StatisticsTable />
+                <StatisticsTable items={collection?.items} />
                 } 
 
                 {currentSelection===1 && 

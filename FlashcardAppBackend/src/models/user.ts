@@ -21,8 +21,6 @@ userSchema.set('toJSON', {
 		delete returnedObject.__v;
 		delete returnedObject.passwordHash;
 		delete returnedObject.email;
-		delete returnedObject.savedCollectionsApp;
-		delete returnedObject.createdCollectionsApp;
 	}
 });
 

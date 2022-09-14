@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 import express from 'express';
 const usersRouter = express.Router();
 const User = require('../models/user');
+import { UserRaw } from '../types';
 //const helper = require('../utils/helper');
 
 usersRouter.post('/signup', async (req:express.Request, res:express.Response) => {
@@ -47,8 +48,34 @@ usersRouter.get('/', async (_req:express.Request,res:express.Response) => {
 	const users = await User
 		.find({})
 		.populate('createdCollections', { name:1,creator:1,itemCount:1,items:1,id:1 });
+	const hideStuffUsers = users.map((us:UserRaw) => {
+		const newUS = {
+			username: us.username,
+			createdCollections: us.createdCollections,
+			id: us.id
+		};
+		return newUS;
+	});
+	res.json(hideStuffUsers);
+});
 
-	res.json(users);
+usersRouter.get('/:id', async (req:any,res:express.Response) => {
+	if(!req.user){
+		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in)' });
+	}
+
+	const userToGet = await User.findById(req.params.id);
+	if(!userToGet) {
+		return res.status(404).json({
+			error: 'could not find user'
+		});
+	}
+	if(userToGet._id.toString() !== req.user.id) {
+		return res.status(401).json({
+			error: 'incorrect credentials'
+		});
+	}
+	res.json(userToGet);
 });
 
 usersRouter.put('/:id/updateown', async (req:any, res:express.Response) => {

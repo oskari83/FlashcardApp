@@ -34,12 +34,12 @@ const NavMenu = () => {
     )
 }
 
-const NavUser = () => {
+const NavUser = ({username}: {username:string}) => {
     return(
         <ul className="nav-user">
             <li className="nav-itemUser">
                 <a href={'/user'} className="nav-linkUser nav-itemHoverable">
-                    {'oskari83'}
+                    {username}
                     <div className="nav-icon">
                         <FaUserGraduate size='16px' color='white'/>
                     </div>
@@ -76,7 +76,7 @@ const NavMenuMobile = ({CloseFunction}: FuncProps) => {
     )
 }
 
-export const Navbar = () => {
+export const Navbar = ({username}:{username:string}) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const hamburgerIcon = <FiMenu size='20px' color='white' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}/>
@@ -95,7 +95,7 @@ export const Navbar = () => {
 
             <NavMenu/>
 
-            <NavUser/>
+            <NavUser username={username}/>
 
             <div className='hamburger'>
                 {mobileMenuOpen ? closeIcon : hamburgerIcon}

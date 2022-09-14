@@ -6,11 +6,11 @@ export interface CollectionItem {
 }
 
 export interface CollectionData {
-    id: number,
+    id: string,
     name: string,
     creator: string,
+	saved?: boolean,
     itemCount: number,
-    saved?: boolean,
     items: Array<CollectionItem>
 }
 
@@ -18,6 +18,5 @@ export interface NewCollectionData {
     name: string,
     creator: string,
     itemCount: number,
-    saved?: boolean,
     items: Array<CollectionItem>
 }

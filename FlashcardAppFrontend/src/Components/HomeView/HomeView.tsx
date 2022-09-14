@@ -6,6 +6,7 @@ import { CollectionItem, CollectionData } from '../../types';
 import { useState } from 'react';
 import { Notification } from '../Notification/Notification';
 import { Loading } from '../Loading/Loading';
+import { useNavigate } from "react-router-dom";
 
 const NotYetAuthComponent = () => {
     return(
@@ -33,17 +34,23 @@ const LearningStreak = () => {
     )
 }
 
-const CollectionItemComponent = ( { name, creator, count }: { name: string, creator: string, count: number}) => {    
+const CollectionItemComponent = ( { col }: { col: CollectionData}) => { 
+	const navigate = useNavigate();
+
+	const ClickedCollection = () => {
+		navigate(`/${col.id}`);
+	}
+	
     return (
-        <div className='collectionItem'>
+        <div className='collectionItem' onClick={ClickedCollection}>
             <div className='itemName'>
-                <div className='itemNameText'>{name}</div>
+                <div className='itemNameText'>{col.name}</div>
             </div>
             <div className='linkIcon'>
                 <HiOutlineExternalLink size='20px' color={`rgb(78, 78, 78)`} />
             </div>
-            <div className='itemCreator'>Creator: {creator}</div>
-            <div className='itemObjects'>Objects: {count}</div>
+            <div className='itemCreator'>Creator: {col.creator}</div>
+            <div className='itemObjects'>Objects: {col.itemCount}</div>
         </div>
     )
 }
@@ -108,14 +115,14 @@ export const HomeView = ({collectionData, username, notifText, loadingStatus}: {
                     </div>
                 </div>
                 <div className='homeCollectionsFlexContainer'>
-                    {collectionData.length === 0 && notifText==='' && 
+                    {collectionData.length === 0 && notifText==='' && loadingStatus!==1 &&
                         <EmptyCollectionsComponent />
                     }
                     {loadingStatus===1 && 
                         <Loading />
                     }
                     {collectionsToShow.map( (col) => 
-                        <CollectionItemComponent key={col.id} name={col.name} creator={col.creator} count={col.itemCount} />
+                        <CollectionItemComponent key={col.id} col={col} />
                     )}
                 </div>
             </div>

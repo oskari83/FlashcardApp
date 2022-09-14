@@ -2,6 +2,7 @@ import './AuthenticationView.css';
 import { useState, SyntheticEvent } from 'react';
 import authService from '../../services/auth';
 import collectionService from '../../services/collections';
+import userService from '../../services/user';
 import { BsQuestion, BsCheck, BsX } from 'react-icons/bs';
 import { CheckEmail, CheckUsername, CheckPassword } from './Validation';
 
@@ -39,6 +40,7 @@ const SignInView = ({setUserFunc, setError, errorText}: {setUserFunc:any, setErr
 				'loggedFlashcardAppUser', JSON.stringify(user)
 			); 
 			collectionService.setToken(user.token);
+			userService.setToken(user.token);
 			setUserFunc(user);
 			setEmail('');
 			setPassword('');

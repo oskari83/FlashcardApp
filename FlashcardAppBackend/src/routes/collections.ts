@@ -1,5 +1,5 @@
 import express from 'express';
-import { ItemEntry } from '../types';
+import { CollectionEntry, ItemEntry } from '../types';
 const helper = require('../utils/helper');
 const CollectionM = require('../models/collection');
 
@@ -174,6 +174,37 @@ router.put('/:id/save', async (req:any, res:express.Response) => {
 	await user.save();
 
 	res.json(collectionToSave);
+});
+
+router.put('/:id/unsave', async (req:any, res:express.Response) => {
+	if(!req.user){
+		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in to save collections)' });
+	}
+
+	const collectionToUnSave = await CollectionM.findById(req.params.id);
+
+	if(!collectionToUnSave) {
+		return res.status(404).json({
+			error: 'could not find collection to unsave'
+		});
+	}
+
+	if(collectionToUnSave.user && collectionToUnSave.user.toString() === req.user.id) {
+		return res.status(401).json({
+			error: 'the creator cant unsave his own collection'
+		});
+	}
+
+	const user = req.user;
+	const savedCols = user.savedCollectionsApp;
+	const newSavedCols = savedCols.filter((col:CollectionEntry) => {
+		return col.id!==req.params.id;
+	});
+
+	user.savedCollectionsApp = newSavedCols;
+	await user.save();
+
+	res.status(204).end();
 });
 
 module.exports = router;

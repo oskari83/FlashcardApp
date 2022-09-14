@@ -3,40 +3,53 @@ import { FiSearch } from "react-icons/fi"
 import { HiOutlineExternalLink } from "react-icons/hi"
 import { BsBookmark,BsBookmarkCheckFill } from "react-icons/bs"
 import { useState, useEffect } from 'react';
-import collectionService from '../../services/collections';
-import browseresultsService from '../../services/browseresults';
 import { Loading } from '../Loading/Loading';
 import { Notification } from '../Notification/Notification';
 import { CollectionData } from '../../types';
+import collectionService from '../../services/collections';
 
-const CollectionItem = ( { collectionWhole, name, creator, count, updateFunc }: { collectionWhole:CollectionData, name: string, creator: string, count: number, updateFunc:any}) => {
-    const [bookmarked, setBookmarked] = useState(collectionWhole.saved);
-    const [thisCollection, setThisCollection] = useState(collectionWhole);
+const CollectionItem = ( { collectionWhole, name, creator, count, setError }: { collectionWhole:CollectionData, name: string, creator: string, count: number,setError:any}) => {
+    const [bookmarked, setBookmarked] = useState(false);
+	const [bookmarkStatus, setBookmarkStatus] = useState(0);
 
-    const addToOwnCollections = (col: CollectionData) => {
-        collectionService
-            .create(col)
-            .then(returnedCollection => {
-                console.log(returnedCollection);
-            }
-        );
-    }
+	if(collectionWhole.saved && bookmarked===false){
+		setBookmarked(true);
+		setBookmarkStatus(2);
+	}
 
     const bookmarkThis = () => {
-        console.log(thisCollection);
         if(bookmarked===false){
-            const changedCollection = {...thisCollection, saved: true}
             const id = collectionWhole.id;
+			setBookmarkStatus(1);
 
-            updateFunc(id,changedCollection);
-            addToOwnCollections(changedCollection);
-
-            setBookmarked(!bookmarked);
+			collectionService
+				.saveCollection(id)
+				.then((data) => {
+					console.log(data);
+					setBookmarked(true);
+					setBookmarkStatus(2);
+				})
+				.catch(error => {
+					console.log(error);
+					setError(error.message,5000);
+					setBookmarkStatus(0);
+				});
         }else{
-            const colObject = {...thisCollection, saved: false}
-            const id = collectionWhole.id;
-            updateFunc(id,colObject);
-            setBookmarked(!bookmarked);
+			const id = collectionWhole.id;
+			setBookmarkStatus(3);
+			
+            collectionService
+				.unSaveCollection(id)
+				.then((data) => {
+					console.log(data);
+					setBookmarked(false);
+					setBookmarkStatus(0);
+				})
+				.catch(error => {
+					console.log(error);
+					setError(error.message,5000);
+					setBookmarkStatus(2);
+				});
         }
     }
     
@@ -51,7 +64,10 @@ const CollectionItem = ( { collectionWhole, name, creator, count, updateFunc }: 
                     <BsBookmark size='16px' color={`rgb(119, 119, 119)`} />
                     }
                     <div className='innerItemNameText'>
-                        { bookmarked ? "Saved" : "Save"}
+                        {bookmarkStatus===0 && 'Save'}
+						{bookmarkStatus===1 && 'Saving...'}
+						{bookmarkStatus===2 && 'Saved'}
+						{bookmarkStatus===3 && 'Unsaving...'}
                     </div>
                 </div>
             </div>
@@ -64,51 +80,60 @@ const CollectionItem = ( { collectionWhole, name, creator, count, updateFunc }: 
     )
 }
 
-export const BrowseView = () => {
+export const BrowseView = ({username, savedCols}:{username:string,savedCols:CollectionData[]}) => {
     const [resultCollections, setResultCollections] = useState<CollectionData[]>([]);
     const [loadingStatusBrowse, setLoadingStatusBrowse] = useState(1);
     const [notificationMessage, setNotificationMessage] = useState('');
+	const [check,setCheck] = useState(0);
+	const [notificationTimeout, setNotificationTimeout] = useState<null | NodeJS.Timeout>(null);
 
-    const updateResultsCollection = (id:number, colObject: CollectionData) => {
-        browseresultsService
-            .update(id, colObject).then(returnedCollection => {
-            setResultCollections(resultCollections.map((n) => {
-                if(n.id!==id){
-                    return n;
-                }else{
-                    return returnedCollection;
-                }
-            }))
-        })
-    }
+	if (savedCols.length!==0 && check===0 && resultCollections.length!==0) {
+		console.log(savedCols);
+		const collectionsNew = resultCollections.map((col:CollectionData) => {
+			for(let i=0;i<savedCols.length;i++){
+				if(col.id===savedCols[i].id){
+					col.saved = true;
+				}
+			}
+			return col;
+		});
+		setCheck(1);
+		setResultCollections(collectionsNew);
+	}
+
+	const ClearNotificationMessage = (time:number) => {
+		if(notificationTimeout){
+			clearTimeout(notificationTimeout);
+		}
+		const timeoutN = setTimeout(() => {
+			setNotificationMessage('');
+		},time);
+		setNotificationTimeout(timeoutN);
+	}
+
+	const AddNotification = (mes: string, time:number) => {
+		setNotificationMessage(mes);
+		ClearNotificationMessage(time);
+	}
 
     useEffect(() => {
         collectionService
           .getAll()
           .then(initialCollections => {
-            setResultCollections(initialCollections);
+			const collectionsToShow = initialCollections.filter((col:any) => col.creator!==username);
+			console.log(savedCols);
+            setResultCollections(collectionsToShow);
             setLoadingStatusBrowse(0);
           })
           .catch(error => {
             if(error.code==="ERR_NETWORK"){
-                setNotificationMessage('Network error - please check your internet connection!');
+				AddNotification('Network error - please check your internet connection!',5000);
             }else{
-                setNotificationMessage(error.message);
+				AddNotification(error.message,5000);
             }
             console.log(error);
         });
     }, []);
-
-    /*
-    useEffect(() => {
-        browseresultsService
-            .getAll()
-            .then(initialResults => {
-                setResultCollections(initialResults);
-                setLoadingStatusBrowse(0);
-            })
-    }, [])
-    */
 
     return(
         <>
@@ -133,7 +158,7 @@ export const BrowseView = () => {
                     }
 
                     {resultCollections.map( (col: CollectionData) => 
-                        <CollectionItem key={col.id} collectionWhole={col} name={col.name} creator={col.creator} count={col.itemCount} updateFunc={updateResultsCollection} />
+                        <CollectionItem key={col.id} collectionWhole={col} name={col.name} creator={col.creator} count={col.itemCount} setError={AddNotification}/>
                     )}
                 </div>
             </div>

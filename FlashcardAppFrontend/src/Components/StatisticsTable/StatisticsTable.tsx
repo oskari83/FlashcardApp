@@ -1,7 +1,9 @@
 import './StatisticsTable.css';
 import { MdKeyboardArrowDown } from 'react-icons/md'
+import { CollectionData, CollectionItem } from '../../types';
+import { useState } from 'react';
 
-const MasteryBoxElement = ({level}: {level: number}) => {
+const MasteryBoxElement = ({level}: {level: number | undefined}) => {
     return(
         <td className='masteryTextTable'>
             <div className='masteryboxes'>
@@ -15,17 +17,27 @@ const MasteryBoxElement = ({level}: {level: number}) => {
     )
 }
 
-const NormalTableRow = ({text, attempts, level}: {text: string,attempts: number,level: number}) => {
+const NormalTableRow = ({item}: {item:CollectionItem}) => {
     return(
         <tr className='normalRow'>
-        <td>{text}</td>
-        <td className='attemptsTextTable'>{attempts}</td>
-        <MasteryBoxElement level={level}/>
+			<td>{item.qside}</td>
+			<td className='attemptsTextTable'>{item.correct}</td>
+			<MasteryBoxElement level={item.correct}/>
         </tr>
     )
 }
 
-export const StatisticsTable = () => {
+export const StatisticsTable = ({items}: {items: CollectionItem[] | undefined}) => {
+	const [itemss, setItemss] = useState<null | CollectionItem[]>(null);
+	const [check,setCheck] = useState(0);
+
+	if(items!==undefined && check===0){
+		setItemss(items);
+		setCheck(1);
+		console.log(items);
+	}
+
+
     return(
         <div className="setStatisticsTable">
             <table className='statsTable'>
@@ -34,28 +46,27 @@ export const StatisticsTable = () => {
                 <col className="attemptsColumn"></col>
                 <col className="masteryColumn"></col>
             </colgroup>
-            <tbody>
-            <tr className='boldRow'>
-                <td className='headerRow'>
-                    <div className='tdText'>Object</div>
-                    <div className='arrowIcon'><MdKeyboardArrowDown size='20px' color={`rgb(78, 78, 78)`} /></div>
-                </td>
-                <td className='headerRow attemptsTextTable'>
-                    <div className='tdTextAttempts'>Attempts</div>
-                    <div className='arrowIcon'><MdKeyboardArrowDown size='20px' color={`rgb(78, 78, 78)`} /></div>
-                </td>
-                <td className='headerRow masteryTextTable'>
-                    <div className='tdTextMastery'>Mastery</div>
-                    <div className='arrowIconMastery'><MdKeyboardArrowDown size='20px' color={`rgb(78, 78, 78)`} /></div>
-                </td>
-            </tr>
-            <NormalTableRow text={"non-price determinants of demand"} attempts={5} level={4}/>
-            <NormalTableRow text={"the law of supply"} attempts={4} level={2}/>
-            <NormalTableRow text={"competetive supply"} attempts={5} level={3}/>
-            <NormalTableRow text={"Market equilibrium"} attempts={4} level={1}/>
-            <NormalTableRow text={"allocative efficiency"} attempts={4} level={4}/>
-            <NormalTableRow text={"where allocative efficiency occurs"} attempts={5} level={4}/>
-            </tbody>
+			<tbody>
+			<tr className='boldRow'>
+				<td className='headerRow'>
+					<div className='tdText'>Object</div>
+					<div className='arrowIcon'><MdKeyboardArrowDown size='20px' color={`rgb(78, 78, 78)`} /></div>
+				</td>
+				<td className='headerRow attemptsTextTable'>
+					<div className='tdTextAttempts'>Attempts</div>
+					<div className='arrowIcon'><MdKeyboardArrowDown size='20px' color={`rgb(78, 78, 78)`} /></div>
+				</td>
+				<td className='headerRow masteryTextTable'>
+					<div className='tdTextMastery'>Mastery</div>
+					<div className='arrowIconMastery'><MdKeyboardArrowDown size='20px' color={`rgb(78, 78, 78)`} /></div>
+				</td>
+			</tr>
+			<>
+			{itemss?.map((item:CollectionItem) => {
+				<NormalTableRow item={item}/>
+			})}
+			</>
+			</tbody>
             </table>
         </div>
     )
