@@ -14,6 +14,7 @@
 .setStatisticsTable {
     width: 100%;
     padding-top: 20px;
+	padding-bottom: 40px;
     display: flex;
     justify-content: center;
     font-family: "Readex";

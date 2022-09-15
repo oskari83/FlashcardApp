@@ -1,10 +1,46 @@
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
-import { Card } from '../Card/Card';
+import { CollectionItem } from '../../types';
+import Card from '../Card/Card';
+import { useState, useEffect, useRef } from 'react';
 import './FlipMode.css';
 
-export const FlipMode = () => {
+export const FlipMode = ({items}:{items:CollectionItem[] | undefined}) => {
+	const [order,setOrder] = useState(0);
+	let itemsToShow = order===0 ? items : items?.sort((a,b) => 0.5 - Math.random());
+	const [itemIndex,setItemIndex] = useState(0);
+
+	const cardRef = useRef<any>()
+	const cur: {onRotateBack:any} | undefined = cardRef.current;
+
+	if(itemsToShow===undefined){
+		itemsToShow=[];
+	}
+
+	const cardData = {
+		front: itemsToShow[itemIndex].qside,
+		back: itemsToShow[itemIndex].aside
+	}
+
+	const IncrementIndex = () => {
+		if(cur){
+			cur.onRotateBack();
+		}
+		setTimeout(() => {
+			setItemIndex(itemIndex+1);
+		},200);
+	}
+
+	const DecrementIndex = () => {
+		if(cur){
+			cur.onRotateBack();
+		}
+		setTimeout(() => {
+			setItemIndex(itemIndex-1);
+		},200);
+	}
+
     return(
-        <div>
+        <div className='flipModeOuter'>
             <div className='aboveCard'>
                 <div className='aboveCardInner'>
                     <div className='cardOutOf'>Card 4/55</div>
@@ -25,13 +61,13 @@ export const FlipMode = () => {
             </div>
 
             <div className='cardRowContainer'>
-                <div className='leftButton'>
+                <div className='leftButton' onClick={() => DecrementIndex()}>
                     <MdKeyboardArrowLeft size='20px' color="gray" />
                 </div>
                 <div className="cardcontainer">
-                    <Card cardFrontText='front' cardBackText='back'/>
+                    <Card ref={cardRef} cardFrontText={cardData.front} cardBackText={cardData.back}/>
                 </div>
-                <div className='rightButton'>
+                <div className='rightButton' onClick={() => IncrementIndex()}>
                     <MdKeyboardArrowRight size='20px' color="gray" />
                 </div>
             </div>

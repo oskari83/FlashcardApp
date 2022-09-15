@@ -28,15 +28,6 @@ const NormalTableRow = ({item}: {item:CollectionItem}) => {
 }
 
 export const StatisticsTable = ({items}: {items: CollectionItem[] | undefined}) => {
-	const [itemss, setItemss] = useState<null | CollectionItem[]>(null);
-	const [check,setCheck] = useState(0);
-
-	if(items!==undefined && check===0){
-		setItemss(items);
-		setCheck(1);
-		console.log(items);
-	}
-
 
     return(
         <div className="setStatisticsTable">
@@ -62,8 +53,8 @@ export const StatisticsTable = ({items}: {items: CollectionItem[] | undefined}) 
 				</td>
 			</tr>
 			<>
-			{itemss?.map((item:CollectionItem) => {
-				<NormalTableRow item={item}/>
+			{items?.map((item:CollectionItem) => {
+				return (<NormalTableRow key={item.key} item={item}/>);
 			})}
 			</>
 			</tbody>

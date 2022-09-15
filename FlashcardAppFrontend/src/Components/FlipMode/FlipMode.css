@@ -4,6 +4,10 @@
     aspect-ratio: 45 / 28;
     z-index: 1;
 }
+
+.flipModeOuter{
+	padding-bottom:40px;
+}
   
 .aboveCard{
     font-family: "Readex";

@@ -14,17 +14,9 @@ import { useParams } from "react-router-dom";
 export const CollectionView = ({collections}: {collections: CollectionData[]}) => {
     const [currentSelection, setCurrentSelection] = useState(0);
     const [bookmarked, setBookmarked] = useState(false);
-	const [collection, setCollection] = useState<null | CollectionData>(null);
-	const [check,setCheck] = useState(0);
 
 	const id = useParams().id;
-	const collection2 = collections.find(col => col.id ===id);
-	console.log(collection2);
-
-	if(collection2!==undefined && check===0){
-		setCollection(collection2);
-		setCheck(1);
-	}
+	const collection: undefined | CollectionData = collections.find(col => col.id ===id);
 
     const bookmarkThis = () => {
         setBookmarked(!bookmarked);
@@ -39,7 +31,7 @@ export const CollectionView = ({collections}: {collections: CollectionData[]}) =
         <div className="containerMain">
             <div className="setInfoContainer">
             <div className="setName">
-                <div className='setNameText'>{collection!==null ? collection?.name : 'Loading...'}</div>
+                <div className='setNameText'>{collection!==undefined ? collection?.name : 'Loading...'}</div>
                 <div className='setNameIcon' onClick={() => bookmarkThis()}>
                     { bookmarked ? 
                     <BsBookmarkCheckFill size='16px' color={`rgb(248, 222, 106)`} />
@@ -56,7 +48,7 @@ export const CollectionView = ({collections}: {collections: CollectionData[]}) =
                 </div>
             </div>
             <div className='setProgress'>43%</div>
-            <div className="setInfo">{`Creator: ${collection!==null ? collection?.creator : 'Loading...'}, Objects: ${collection!==null ? collection?.items.length : 'Loading...'}`}</div>
+            <div className="setInfo">{`Creator: ${collection!==undefined ? collection?.creator : 'Loading...'}, Objects: ${collection!==undefined ? collection?.items.length : 'Loading...'}`}</div>
             </div>
 
             <div className='setAreaOuter'>
@@ -85,7 +77,7 @@ export const CollectionView = ({collections}: {collections: CollectionData[]}) =
                 } 
 
                 {currentSelection===1 && 
-                <FlipMode />
+                <FlipMode items={collection?.items} />
                 } 
 
                 {currentSelection===2 && 
@@ -99,6 +91,7 @@ export const CollectionView = ({collections}: {collections: CollectionData[]}) =
             </div>
             </div>
         </div>
+		<div className='emptyCont'></div>
         </>
     )
 }
