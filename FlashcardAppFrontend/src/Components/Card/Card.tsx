@@ -1,25 +1,9 @@
-/* eslint-disable react/display-name */
-import { useState, forwardRef, useImperativeHandle } from 'react'
 import './Card.css';
 
-const Card = forwardRef(({cardFrontText, cardBackText}: {cardFrontText: string, cardBackText: string},refs:any) => {
-    const [isRotated, setRotate] = useState(false);
-    const onRotate = () => setRotate((rotated) => !rotated);
-
-	const onRotateBack = () => {
-		if(isRotated===true){
-			setRotate((rotated) => !rotated);
-		}
-	}
-
-	useImperativeHandle(refs, () => {
-		return {
-			onRotateBack
-		};
-	});
+const Card = ({cardFrontText, cardBackText, cardClass, rotateFunc}: {cardFrontText: string, cardBackText: string, cardClass:string, rotateFunc: any}) => {
   
     return(
-      <div className={`thecard${isRotated ? 'Rotated' : ''}`} onClick={onRotate}>
+      <div className={cardClass} onClick={rotateFunc}>
           <div className="thefront">
             <div className="fronttext">{cardFrontText}</div>
           </div>
@@ -28,6 +12,6 @@ const Card = forwardRef(({cardFrontText, cardBackText}: {cardFrontText: string, 
           </div>
       </div>
     );
-});
+};
 
 export default Card;
