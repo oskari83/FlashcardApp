@@ -1,6 +1,6 @@
 .editCollectionTable{
     width: 100%;
-    padding-top: 20px;
+    padding-top: 30px;
 	padding-bottom: 40px;
     display: flex;
     justify-content: center;
@@ -114,7 +114,7 @@
     margin: 0 0;
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: space-between;
     margin-bottom: 10px;
     font-family: "ReadexBold";
     font-size: 10px;
@@ -199,4 +199,29 @@
 
 .addRowButtonE:hover{
     background-color: var(--white-gray250);
+}
+
+.nameInputE{
+    width: 70%;
+    height: 100%;
+    box-sizing: border-box;
+    margin-right:14px;
+    border: none;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    font-family: "Readex";
+    font-size: 15px;
+    color:rgb(70, 70, 70);
+    float:left;
+}
+
+.nameInputE:focus{
+    border: none;
+    border-bottom: 1px solid rgba(41, 116, 255, 1.0);;
+    outline: none;
+}
+
+.nameInputE::placeholder{
+    font-family: "Readex";
+    font-size: 15px;
+    color:rgb(164, 164, 164)
 }

@@ -2,6 +2,7 @@ import express from 'express';
 import { CollectionEntry, ItemEntry } from '../types';
 const helper = require('../utils/helper');
 const CollectionM = require('../models/collection');
+const User = require('../models/user');
 
 const router = express.Router();
 
@@ -104,40 +105,52 @@ router.put('/:id', async (req:any, res:express.Response) => {
 		items: body.items,
 	};
 
-	const updatedCol = await CollectionM.findByIdAndUpdate(req.params.id, col, { new: true });
-	res.json(updatedCol);
-});
+	if(!req.user){
+		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in to save collections)' });
+	}
 
-router.put('/:id/update', async (req:any, res:express.Response) => {
-	const collectionToUpdate = await CollectionM.findById(req.params.id);
-	if(!collectionToUpdate) {
+	const user = await User.findById(req.user);
+
+	if(!user) {
 		return res.status(404).json({
-			error: 'could not find collection to update'
+			error: 'could not find author'
 		});
 	}
 
-	if(collectionToUpdate.user && collectionToUpdate.user.toString() !== req.user.id) {
+	if(user._id.toString() !== req.user.id) {
 		return res.status(401).json({
-			error: 'only the creator can update a collection'
+			error: 'incorrect credentials, only the creator can update a collection'
 		});
 	}
 
-	const body = helper.toUpdatedCollectionEntry(req.body);
-	const items = body.items;
-	const key = req.key;
-	const value = req.value;
-	for(let i=0;i<items.length;i++){
-		if(items[i].key===key){
-			items[i].correct = value;
+	const colId = req.params.id;
+	const createdApp = user.createdCollectionsApp;
+	let colToChange;
+
+	for(let i=0;i<createdApp.length;i++){
+		if(createdApp[i].id.toString()===colId){
+			colToChange = createdApp[i];
 		}
 	}
 
-	const col = {
-		name: body.name,
-		itemCount: body.items.length,
-		items: items,
+	const newItems = body.items;
+	const newName = body.name;
+
+	const newCol = {
+		...colToChange,
+		items: newItems,
+		name: newName,
+		itemCount: newItems.length
 	};
 
+	for(let i=0;i<createdApp.length;i++){
+		if(createdApp[i].id.toString()===colId){
+			createdApp[i] = newCol;
+		}
+	}
+
+	user.createdCollectionsApp = createdApp;
+	await user.save();
 	const updatedCol = await CollectionM.findByIdAndUpdate(req.params.id, col, { new: true });
 	res.json(updatedCol);
 });

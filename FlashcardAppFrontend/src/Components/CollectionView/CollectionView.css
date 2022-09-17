@@ -95,7 +95,7 @@
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  color: var(--main-gray80);
+  color: white;
   float:right;
   width: 50px;
   aspect-ratio: 1/1;
@@ -159,7 +159,7 @@
   display: flex;
   justify-content: center;
   height: 100%;
-  padding-left: 8%;
+  padding-left: 5%;
   padding-right: 8%;
   align-items: center;
 }

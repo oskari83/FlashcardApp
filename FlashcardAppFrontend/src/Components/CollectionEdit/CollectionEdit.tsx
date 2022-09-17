@@ -1,29 +1,79 @@
 import { RiDeleteBinLine } from 'react-icons/ri'
 import { IoMdClose } from 'react-icons/io'
-import { useState, SyntheticEvent } from 'react';
+import { useState, SyntheticEvent, useRef, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { SingleItem } from '../../types';
+import { SingleItem, CollectionItem } from '../../types';
+import collectionService from '../../services/collections';
 import objectMap from '../../Utils/objectMap';
-import generateID from '../../Utils/idGenerator';
 import './CollectionEdit.css'
 
-const NormalTableRow = ({qtext, atext, keyx, removeFunc, asideChangeFunc, qsideChangeFunc}: {qtext: string, atext: string, keyx: number, removeFunc: any, asideChangeFunc: any, qsideChangeFunc: any}) => {
-    const handleItemQuestionChange = (event: SyntheticEvent) => {
-        let val = event.currentTarget.textContent;
+const ContentEditableWithRef = (props:any) => {
+	const defaultValue = useRef(props.value);
+	const [init, setInit] = useState(props.value);
+
+	useEffect(() => {
+		defaultValue.current = props.value;
+		setInit(props.value);
+	}, [props.resets]);
+
+	useEffect(() => {
+		defaultValue.current = props.value;
+		setInit(props.value);
+	}, [init]);
+  
+	const handleInput = (event:any) => {
+		if (props.onChange) {
+			props.onChange(event.target.innerHTML);
+		}
+	};
+  
+	return (
+		<span
+			contentEditable
+			onInput={handleInput}
+			className="inputspan"
+			role="textarea" 
+			dangerouslySetInnerHTML={{ __html: init }}
+			suppressContentEditableWarning={true}
+			onPaste={(e:any) => {
+				e.preventDefault();
+				const text = (e.originalEvent || e).clipboardData.getData('text/plain');
+				window.document.execCommand('insertText', false, text);
+			}}
+		/>
+	);
+  };
+
+const NormalTableRow = ({qtext, atext, keyx, removeFunc, asideChangeFunc, qsideChangeFunc, resets}: {qtext: string, atext: string, keyx: number, removeFunc: any, asideChangeFunc: any, qsideChangeFunc: any, resets:number}) => {
+    const [qside,setQside] = useState(qtext);
+	const [aside,setAside] = useState(atext);
+
+	useEffect(() => {
+		setQside(qtext);
+	}, [qtext]);
+
+	useEffect(() => {
+		setAside(atext);
+	}, [atext]);
+	
+	const handleItemQuestionChange = (v: string) => {
+		let val = v;
         if(val==null){
             val='';
         }
 		const cleanedVal = val.replace(/(<([^>]+)>)/ig,"");
         qsideChangeFunc(keyx,cleanedVal);
+		setQside(cleanedVal);
     }
 
-    const handleItemAnswerChange = (event: SyntheticEvent) => {
-        let val = event.currentTarget.textContent;
+    const handleItemAnswerChange = (v: string) => {
+        let val = v;
         if(val==null){
             val='';
         }
 		const cleanedVal = val.replace(/(<([^>]+)>)/ig,"");
         asideChangeFunc(keyx,cleanedVal);
+		setAside(cleanedVal);
     }
 
     const clickDeleteButton = () => {
@@ -33,32 +83,10 @@ const NormalTableRow = ({qtext, atext, keyx, removeFunc, asideChangeFunc, qsideC
 	return(
         <tr className='enormalRevealRow'>
             <td className='enormalRowTd'> 
-				<span 
-                    className='inputspan' 
-                    onInput={handleItemQuestionChange} 
-                    role="textarea" 
-                    contentEditable 
-                    suppressContentEditableWarning={true}
-					onPaste={(e:any) => {
-						e.preventDefault();
-						const text = (e.originalEvent || e).clipboardData.getData('text/plain');
-						window.document.execCommand('insertText', false, text);
-					}}
-                >{qtext}</span>  
+				<ContentEditableWithRef value={qside} onChange={(v:string) => handleItemQuestionChange(v)} resets={resets} />  
             </td>
             <td className='enormalRowTd'>
-				<span 
-                    className='inputspan' 
-                    onInput={handleItemAnswerChange} 
-                    role="textarea" 
-                    contentEditable 
-                    suppressContentEditableWarning={true}
-					onPaste={(e:any) => {
-						e.preventDefault();
-						const text = (e.originalEvent || e).clipboardData.getData('text/plain');
-						window.document.execCommand('insertText', false, text);
-					}}
-                >{atext}</span>
+				<ContentEditableWithRef value={aside} onChange={(v:string) => handleItemAnswerChange(v)} resets={resets}/>
             </td>
             <td className='enormalRowTd'>
                 <div className='delButton' onClick={clickDeleteButton}>
@@ -71,30 +99,29 @@ const NormalTableRow = ({qtext, atext, keyx, removeFunc, asideChangeFunc, qsideC
 
 const arrayToObject = (arr: any, key: string) => {
 	return arr.reduce((obje:any, item:any) => {
-		console.log(item);
 		obje = {...obje, [item[key]]: item}
 		return obje;
 	}, {});
 };
 
-export const CollectionEdit = ({items}: {items: any }) => {
-	let initialValues: object;
-	if(items===undefined){
-		initialValues = {};
-		setTimeout(() => {
-			() => {
-				if(items!==undefined){
-					initialValues = arrayToObject(items,'key');
-				}
-			}
-		},200);
-	}else{
-		initialValues=arrayToObject(items,'key');
+export const CollectionEdit = ({items,name, id}: {items: any,name:string | undefined, id:string | undefined}) => {
+	const getHighestID = () => {
+		if(items!==undefined){
+			return Math.max(...items.map((o:CollectionItem) => o.key));
+		}
+		return 10000002;
 	}
 
-    const [values, setValues] = useState(initialValues);
-    const [collName, setCollName] = useState('');
+    const [values, setValues] = useState( items!==undefined ? arrayToObject(items,'key') : {});
+    const [collName, setCollName] = useState(name);
+	const [highestID, setHighestID] = useState(getHighestID());
+	const [resets, setResets] = useState(0);
     const navigate = useNavigate();
+
+	useEffect(() => {
+		setValues(arrayToObject(items,'key'));
+		setHighestID(getHighestID());
+	}, [items]);
 
 	const removeItemFromTable = (ind:number) => {
         const newValuesDictionary = Object.assign({}, values);
@@ -130,6 +157,7 @@ export const CollectionEdit = ({items}: {items: any }) => {
             removeFunc={removeItemFromTable} 
             asideChangeFunc={handleAsideChange}
             qsideChangeFunc={handleQsideChange}
+			resets={resets}
         />);
     });
 
@@ -137,16 +165,43 @@ export const CollectionEdit = ({items}: {items: any }) => {
 
 	const saveEditedCollection = (event: SyntheticEvent) => {
         event.preventDefault()
-        const itemsAsArray = Object.values(values);
+        const itemsAsArray: CollectionItem[] = Object.values(values);
         const collectionObject = {
             name: collName,
             items: itemsAsArray,
         }
         console.log(collectionObject);
+
+		if(id){
+			collectionService
+            .update(id,collectionObject)
+            .then(data => {
+                console.log(data);
+                navigate(0);
+            })
+            .catch(error => {
+                if(error.code==="ERR_NETWORK"){
+                    //setNotificationMessage('Network error - please check your internet connection!');
+                }else{
+                    //setNotificationMessage(error.message);
+                }
+                console.log(error);
+                //setTimeout(() => setNotificationMessage(''), 5000);
+            });
+		}
     }
 
+	const CancelAllChanges = () => {
+		setValues(arrayToObject(items,'key'));
+		setCollName(name);
+		setResets((r:number) => r+1);
+		//navigate(0);
+		//goToEditFunc();
+	}
+
 	const addRowToTable = () => {
-        const id = generateID();
+        const id = highestID+1;
+		setHighestID((id) => id+1);
         setValues({...values, [id]: {
             qside: '', 
             aside: '', 
@@ -161,8 +216,9 @@ export const CollectionEdit = ({items}: {items: any }) => {
             <form className='editTableForm' onSubmit={saveEditedCollection} id='my-form'>
                 
                 <div className='aboveTableContainer'>
+					<input type="text" className='nameInputE' value={collName} onChange={handleNameChange} placeholder="Name..."></input>
 					<button className='submitButtonE' type="submit">Save</button>
-                    <div className='cancelChanges'>Cancel changes</div>
+                    <div className='cancelChanges' onClick={CancelAllChanges}>Cancel changes</div>
                 </div>
 
                 <table className='editTable'>
@@ -197,7 +253,7 @@ export const CollectionEdit = ({items}: {items: any }) => {
 
                 <div className='belowTableContainer'>
 					<button className='submitButtonE' type="submit">Save</button>
-                    <div className='cancelChanges'>Cancel changes</div>
+                    <div className='cancelChanges' onClick={CancelAllChanges}>Cancel changes</div>
                 </div>
             </form>
         </div>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CollectionData, NewCollectionData } from '../types';
+import { CollectionData, NewCollectionData, UpdateCollectionData } from '../types';
 
 const baseUrl = 'api/collections';
 
@@ -19,6 +19,15 @@ const create = async (newObject: NewCollectionData) => {
 		headers: { Authorization: token }
 	}
     const response = await axios.post(baseUrl, newObject, config);
+    return response.data;
+}
+
+
+const update = async (id:string, newObject: UpdateCollectionData) => {
+	const config = {
+		headers: { Authorization: token }
+	}
+    const response = await axios.put(`${baseUrl}/${id}`, newObject, config);
     return response.data;
 }
 
@@ -43,6 +52,7 @@ const unSaveCollection = async (id:string) => {
 export default { 
   getAll,
   create,
+  update,
   saveCollection,
   unSaveCollection,
   setToken

@@ -21,6 +21,11 @@ export interface NewCollectionData {
     items: Array<CollectionItem>
 }
 
+export interface UpdateCollectionData {
+    name?: string,
+    items?: Array<CollectionItem>
+}
+
 export interface SingleItem {
     aside: string,
     qside: string, 

@@ -24,6 +24,10 @@ export const CollectionView = ({collections}: {collections: CollectionData[]}) =
         setCurrentSelection(id)
     }
 
+	const GoToEditCollection = () => {
+		setCurrentSelection(3);
+	}
+
     return(
         <>
         <div className="containerMain">
@@ -42,19 +46,19 @@ export const CollectionView = ({collections}: {collections: CollectionData[]}) =
             <div className="setAreaContainer">
                 <div className="selectorBar">
                 <div className={currentSelection===0 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(0)}>
-                    <div className='selectorBarItemIcon'><IoMdStats size='20px' color={currentSelection===0 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
+                    <div className='selectorBarItemIcon'><IoMdStats size='16px' color={currentSelection===0 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
                     <div className='selectorBarItemText'>Overview</div>
                 </div>
                 <div className={currentSelection===1 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(1)}>
-                    <div className='selectorBarItemIcon'><IoMdPlay size='20px' color={currentSelection===1 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
+                    <div className='selectorBarItemIcon'><IoMdPlay size='16px' color={currentSelection===1 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
                     <div className='selectorBarItemText'>Flip</div>
                 </div>
                 <div className={currentSelection===2 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(2)}>
-                    <div className='selectorBarItemIcon'><IoMdPlay size='20px' color={currentSelection===2 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
+                    <div className='selectorBarItemIcon'><IoMdPlay size='16px' color={currentSelection===2 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
                     <div className='selectorBarItemText'>Reveal</div>
                 </div>
                 <div className={currentSelection===3 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(3)}>
-                    <div className='selectorBarItemIcon'><AiFillEdit size='20px' color={currentSelection===3 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
+                    <div className='selectorBarItemIcon'><AiFillEdit size='16px' color={currentSelection===3 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
                     <div className='selectorBarItemText'>Edit</div>
                 </div>
                 </div>
@@ -72,7 +76,7 @@ export const CollectionView = ({collections}: {collections: CollectionData[]}) =
                 } 
 
                 {currentSelection===3 && 
-                <CollectionEdit items={collection?.items}/>
+                <CollectionEdit items={collection?.items} name={collection?.name} id={collection?.id}/>
                 } 
 
             </div>
