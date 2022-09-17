@@ -4,12 +4,24 @@ import Card from '../Card/Card';
 import { useState, useEffect } from 'react';
 import './FlipMode.css';
 
+const FinishedComponent = ({restartFunc}:{restartFunc:any}) => {
+    return(
+      <div className={'thecardFinished'}>
+          <div className="thefrontFinished noselect">
+            <div className="fronttextFinished noselect">Hooray🥳🎉, finished revising collection</div>
+			<div className='fronttextFinishedClickToRestart' onClick={restartFunc}>Click to restart</div>
+          </div>
+      </div>
+    );
+};
+
 export const FlipMode = ({items}:{items:CollectionItem[] | undefined}) => {
 	const [order,setOrder] = useState(true);
 	const [itemIndex,setItemIndex] = useState(0);
 	const [isRotated, setRotate] = useState(false);
 	const [cardClass, setCardClass] = useState('thecard');
 	const [itemsToShow, SetItems] = useState(items);
+	const [finishedPanel, setFinishedPanel] = useState(false);
 
 	const CreateRandomOrder = () => {
 		if(items!==undefined){
@@ -34,12 +46,22 @@ export const FlipMode = ({items}:{items:CollectionItem[] | undefined}) => {
 	} : {front: '', back: ''}
 
 	const IncrementIndex = () => {
-		setItemIndex(itemIndex+1);
+		if(itemsToShow!==undefined && itemIndex!==(itemsToShow.length)-1){
+			setItemIndex((ind) => ind+1);
+		}else if (itemsToShow!== undefined && itemIndex===itemsToShow.length-1){
+			setFinishedPanel(true);
+		}
 		AutoRotateOnSwitch();
 	}
 
 	const DecrementIndex = () => {
-		setItemIndex(itemIndex-1);
+		if(itemIndex!==0){
+			if(finishedPanel){
+				setFinishedPanel(false);
+			}else{
+				setItemIndex((ind) => ind-1);
+			}
+		}
 		AutoRotateOnSwitch();
 	}
 
@@ -59,7 +81,6 @@ export const FlipMode = ({items}:{items:CollectionItem[] | undefined}) => {
 
 	const SwitchStatus = () => {
 		setRotate((rotated) => {
-			//console.log("setting to", !rotated);
 			return !rotated;
 		});
 	}
@@ -73,11 +94,23 @@ export const FlipMode = ({items}:{items:CollectionItem[] | undefined}) => {
 		setOrder((order) => !order);
 	}
 
+	const RestartFlipping = () => {
+		setFinishedPanel(false);
+		setItemIndex(0);
+		setCardClass('thecard');
+		setRotate(false);
+	}
+
     return(
         <div className='flipModeOuter'>
             <div className='aboveCard'>
                 <div className='aboveCardInner'>
-                    <div className='cardOutOf'>Card 4/55</div>
+                    <div className='cardOutOf'>
+					{finishedPanel && 'Finished collection!'}
+					{!finishedPanel &&
+						`Card: ${itemIndex+1}/${itemsToShow?.length}`
+					}
+					</div>
                     <div className='randomOuterOuter'>
                         <div className='randomOuter'>
                             <div className='randomizeText'>
@@ -95,23 +128,26 @@ export const FlipMode = ({items}:{items:CollectionItem[] | undefined}) => {
             </div>
 
             <div className='cardRowContainer'>
-                <div className='leftButton' onClick={() => DecrementIndex()}>
+                <div className='leftButton noselect' onClick={() => DecrementIndex()}>
                     <MdKeyboardArrowLeft size='20px' color="gray" />
                 </div>
                 <div className="cardcontainer">
-                    <Card cardFrontText={cardData.front} cardBackText={cardData.back} cardClass={cardClass} rotateFunc={RotateCard}/>
+					{finishedPanel && <FinishedComponent restartFunc={RestartFlipping}/>}
+					{!finishedPanel &&
+						<Card cardFrontText={cardData.front} cardBackText={cardData.back} cardClass={cardClass} rotateFunc={RotateCard}/>
+					}
                 </div>
-                <div className='rightButton' onClick={() => IncrementIndex()}>
+                <div className='rightButton noselect' onClick={() => IncrementIndex()}>
                     <MdKeyboardArrowRight size='20px' color="gray" />
                 </div>
             </div>
 
             <div className='mobileleftandright'>
                 <div className='mobileInner'>
-                    <div className='mobileLeft'>
+                    <div className='mobileLeft noselect' onClick={() => DecrementIndex()}>
                     <MdKeyboardArrowLeft size='20px' color="gray" />
                     </div>
-                    <div className='mobileRight'>
+                    <div className='mobileRight noselect' onClick={() => IncrementIndex()}>
                     <MdKeyboardArrowRight size='20px' color="gray" />
                     </div>
                 </div>
@@ -119,9 +155,9 @@ export const FlipMode = ({items}:{items:CollectionItem[] | undefined}) => {
 
             <div className='belowCard'>
                 <div className='belowCardInner'>
-                    <div className='feedButtonNeg'>-1</div>
-                    <div className='feedButtonNeut'>0</div>
-                    <div className='feedButtonPos'>+1</div>
+                    <div className='feedButtonNeg noselect'>-1</div>
+                    <div className='feedButtonNeut noselect'>0</div>
+                    <div className='feedButtonPos noselect'>+1</div>
                 </div>
             </div>
         </div>

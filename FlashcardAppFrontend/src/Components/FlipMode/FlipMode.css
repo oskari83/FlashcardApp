@@ -10,9 +10,9 @@
 }
   
 .aboveCard{
-    font-family: "Readex";
+    font-family: "ReadexLight";
     font-size: 12px;
-    color: rgb(155, 155, 155);
+    color: var(--main-gray155);
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -33,7 +33,7 @@
 .belowCard{
     font-family: "ReadexBold";
     font-size: 12px;
-    color: rgb(255, 255, 255);
+    color: white;
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -57,10 +57,9 @@
     justify-content: center;
     width: 32%;
     height: 100%;
-    background-color: rgb(228, 109, 109, 0.5);
+    background-color: var(--main-gray180-a75);
     cursor: pointer;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 8px;
 }
   
 .feedButtonNeut{
@@ -69,11 +68,10 @@
     justify-content: center;
     width: 32%;
     height: 100%;
-    background-color: rgba(241, 241, 241, 0.5);
+    background-color: var(--white-gray240-a75);
     cursor: pointer;
-    color: rgb(58, 58, 58);
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    color: var(--main-gray60);
+    border-radius: 8px;
 }
   
 .feedButtonPos{
@@ -82,23 +80,23 @@
     justify-content: center;
     width: 32%;
     height: 100%;
-    background-color: rgb(109, 230, 139, 0.5);
+    background-color: var(--main-blue75);
     cursor: pointer;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 8px;
 }
   
 .feedButtonNeg:hover{
-    background-color: rgb(228, 109, 109, 1.0);
+    background-color: var(--main-gray180);
 }
   
 .feedButtonNeut:hover{
-    background-color: rgb(255, 255, 255);
-    color: rgb(58, 58, 58);
+    background-color: white;
+	border: 2px solid var(--white-gray240);
+    color: var(--main-gray60);
 }
   
 .feedButtonPos:hover{
-    background-color: rgb(109, 230, 139, 1.0);
+    background-color: var(--main-blue);
 }
   
 .randomOuterOuter{
@@ -133,7 +131,7 @@
 .randomOrder .checkmark{
     width: 100%;
     height: 100%;
-    border: 1px solid rgb(155, 155, 155);;
+    border: 1px solid var(--main-gray155);
     display: inline-block;
     border-radius: 7px;
 }
@@ -143,8 +141,8 @@
 }
   
 .randomOrder input:checked + .checkmark{
-    background-color: rgba(41, 116, 255, 0.7);
-    border: 0px solid rgb(155, 155, 155);
+    background-color: var(--main-blue75);
+    border: 0px solid var(--main-gray155);
 }
   
 .innerCircle{
@@ -168,7 +166,7 @@
     height: 280px;
     margin-right: 10px;
     width: 40px;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     cursor: pointer;
     border-radius: 5px;
     display: flex;
@@ -180,7 +178,7 @@
     height: 280px;
     margin-left: 10px;
     width: 40px;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     cursor: pointer;
     border-radius: 5px;
     display: flex;
@@ -189,17 +187,17 @@
 }
   
 .leftButton:hover{
-    background-color: rgb(250, 250, 250);
+    background-color: var(--white-gray250);
 }
   
 .rightButton:hover{
-    background-color: rgb(250, 250, 250);
+    background-color: var(--white-gray250);
 }
   
 .mobileleftandright{
     font-family: "ReadexBold";
     font-size: 12px;
-    color: rgb(255, 255, 255);
+    color: white;
     margin: 0 auto;
     display: none;
     justify-content: center;
@@ -219,7 +217,7 @@
 .mobileLeft{
     height: 100%;
     width: 49%;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     cursor: pointer;
     border-radius: 5px;
     display: flex;
@@ -230,7 +228,7 @@
 .mobileRight{
     height: 100%;
     width: 49%;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     cursor: pointer;
     border-radius: 5px;
     display: flex;
@@ -239,13 +237,67 @@
 }
   
 .mobileLeft:hover{
-    background-color: rgb(250, 250, 250);
+    background-color: var(--white-gray250);
 }
   
 .mobileRight:hover{
-    background-color: rgb(250, 250, 250);
+    background-color: var(--white-gray250);
 }
 
+.thecardFinished{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.fronttextFinished{
+	width: 100%;
+	text-align: center;
+	font-family: "Readex";
+	font-size: clamp(0.6rem, 5.5vw, 1.2rem);
+}
+
+.fronttextFinishedClickToRestart{
+	width: 100%;
+	padding-bottom: 14px;
+	text-align: center;
+	font-family: "Readex";
+	font-size: clamp(0.425rem, 5.5vw, 0.85rem);
+	color: var(--main-blue75);
+	cursor: pointer;
+}
+
+.fronttextFinishedClickToRestart:hover{
+	color: var(--main-blue);
+}
+  
+.thefrontFinished{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	background: white;
+	border-radius: 10px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	color: var(--main-gray60);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	  -webkit-user-select: none; /* Safari */
+	   -khtml-user-select: none; /* Konqueror HTML */
+		 -moz-user-select: none; /* Old versions of Firefox */
+		  -ms-user-select: none; /* Internet Explorer/Edge */
+			  user-select: none; /* Non-prefixed version, currently
+									supported by Chrome, Edge, Opera and Firefox */
+}
+  
 @media (max-width: 600px) {
     .leftButton{
       display: none;

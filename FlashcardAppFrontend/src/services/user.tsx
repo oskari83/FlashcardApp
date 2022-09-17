@@ -12,7 +12,7 @@ const get = async (id:string) => {
 	const config = {
 		headers: { Authorization: token2 }
 	}
-	const response = await axios.get(`${baseUrl}/${id}`, config);
+	const response = await axios.get(`${baseUrl}/${id}/data`, config);
     return response.data;
 }
 

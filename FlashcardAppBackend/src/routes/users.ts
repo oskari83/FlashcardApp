@@ -59,7 +59,7 @@ usersRouter.get('/', async (_req:express.Request,res:express.Response) => {
 	res.json(hideStuffUsers);
 });
 
-usersRouter.get('/:id', async (req:any,res:express.Response) => {
+usersRouter.get('/:id/data', async (req:any,res:express.Response) => {
 	if(!req.user){
 		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in)' });
 	}

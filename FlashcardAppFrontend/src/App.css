@@ -13,6 +13,30 @@ src: local('ReadexPro-Light'), url(./Fonts/ReadexPro-Light.woff) format('woff');
   src: local('ReadexPro-Bold'), url(./Fonts/ReadexPro-Bold.woff) format('woff');
 }
 
+:root {
+    --main-blue: rgb(47, 110, 255);
+	--light-blue: rgb(113, 158, 255);
+	--gray-blue: rgb(171, 200, 224);
+	--main-gray180: rgb(180, 180, 180);
+	--main-gray155: rgb(155, 155, 155);
+	--main-gray110: rgb(110, 110, 110);
+	--main-gray80: rgb(80, 80, 80);
+	--main-gray60: rgb(60, 60, 60);
+	--white-gray250: rgb(250,250,250);
+	--white-gray240: rgb(240,240,240);
+
+	--main-blue75: rgba(47, 110, 255,0.75);
+	--light-blue75: rgba(113, 158, 255,0.75);
+	--gray-blue75: rgba(171, 200, 224,0.75);
+	--main-gray180-a75: rgba(180, 180, 180,0.75);
+	--main-gray155-a75: rgba(155, 155, 155,0.75);
+	--main-gray110-a75: rgba(110, 110, 110,0.75);
+	--main-gray80-a75: rgba(80, 80, 80,0.75);
+	--main-gray60-a75: rgba(60, 60, 60,0.75);
+	--white-gray250-a75: rgba(250,250,250,0.75);
+	--white-gray240-a75: rgba(240,240,240,0.75);
+}
+
 p {
   padding: 0;
   margin: 0;

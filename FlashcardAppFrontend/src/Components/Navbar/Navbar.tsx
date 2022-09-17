@@ -90,7 +90,7 @@ export const Navbar = ({username}:{username:string}) => {
       <div className="navbar-outer">
         <nav className="navbar-tutorial">
             <div className="nav-logo">
-                <a href='/' className="nav-branding">classic flashcards.</a>
+                <a href='/' className="nav-branding">MemNotes.io</a>
             </div>
 
             <NavMenu/>

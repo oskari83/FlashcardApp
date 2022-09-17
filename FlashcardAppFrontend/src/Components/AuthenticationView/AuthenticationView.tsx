@@ -4,7 +4,7 @@ import authService from '../../services/auth';
 import collectionService from '../../services/collections';
 import userService from '../../services/user';
 import { BsQuestion, BsCheck, BsX } from 'react-icons/bs';
-import { CheckEmail, CheckUsername, CheckPassword } from './Validation';
+import { CheckEmail, CheckUsername, CheckPassword } from '../../Utils/validation';
 
 const SignInView = ({setUserFunc, setError, errorText}: {setUserFunc:any, setError:any, errorText:string}) => {
 	const [email, setEmail] = useState(''); 

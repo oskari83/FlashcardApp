@@ -6,24 +6,24 @@
     justify-content: center;
     font-family: "Readex";
     font-size: 12px;
-    color: rgb(85, 85, 85);
+    color: var(--main-gray80);
 }
 
 .normalRowTd{
-    border-right: 1px solid rgb(240, 240, 240);
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    border-right: 1px solid var(--white-gray240);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     position: relative;
 }
 
 .normalAnswerTd1{
-    border-right: 1px solid rgb(240, 240, 240);
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    border-right: 1px solid var(--white-gray240);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     position: relative;
     cursor: pointer;
     -webkit-touch-callout: none;
@@ -35,11 +35,11 @@
 }
 
 .normalAnswerTd0{
-    border-right: 1px solid rgb(240, 240, 240);
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    border-right: 1px solid var(--white-gray240);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     position: relative;
     cursor: pointer;
     color: white;
@@ -52,12 +52,12 @@
 }
 
 .normalAnswerTd2{
-    border-right: 1px solid rgb(240, 240, 240);
+    border-right: 1px solid var(--white-gray240);
     position: relative;
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-top: 6px;
-    padding-bottom: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     color: white;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -68,8 +68,8 @@
 }
 
 .normalAnswerTd0:hover{
-    background-color: rgb(243, 243, 243);
-    color: rgb(243, 243, 243);
+    background-color: var(--white-gray240-a75);
+    color: var(--white-gray240-a75);
 }
 
 .tdFbOuter{
@@ -94,7 +94,7 @@
     width: 30%;
     height: 30px;
     z-index: 8;
-    background-color: rgb(228, 109, 109, 0.5);;
+    background-color: var(--main-gray180-a75);
     cursor: pointer;
     border-radius: 4px;
 }
@@ -106,7 +106,7 @@
     width: 30%;
     height: 30px;
     z-index: 8;
-    background-color: rgba(241, 241, 241, 0.5);
+    background-color: var(--white-gray240-a75);
     color: rgb(58, 58, 58);
     cursor: pointer;
     border-radius: 4px;
@@ -119,22 +119,23 @@
     width: 30%;
     height: 30px;
     z-index: 8;
-    background-color: rgb(109, 230, 139, 0.5);
+    background-color: var(--main-blue75);
     cursor: pointer;
     border-radius: 4px;
 }
 
 .fbneg:hover{
-    background-color: rgb(228, 109, 109, 1.0);;
+    background-color: var(--main-gray180);
 }
 
 .fbneu:hover{
-    background-color: rgb(255, 255, 255);
-    color: rgb(58, 58, 58);
+    background-color: white;
+	border: 2px solid var(--white-gray240);
+    color: var(--main-gray60);
 }
 
 .fbpos:hover{
-    background-color: rgb(109, 230, 139, 1.0);
+    background-color: var(--main-blue);
 }
 
 .revealmodeTable th {
@@ -160,16 +161,16 @@
 .fboldRow {
     font-family: "ReadexBold";
     position: relative;
-    color: rgb(105, 105, 105);
+    color: var(--main-gray110);
     border-radius: 2px;
-    border-bottom: 1px solid rgb(105, 105, 105);
-    border-left: 1px solid rgb(105, 105, 105);
-    border-top: 1px solid rgb(105, 105, 105);
+    border-bottom: 1px solid var(--main-gray110);
+    border-left: 1px solid var(--main-gray110);
+    border-top: 1px solid var(--main-gray110);
 }
 
 .fheaderRow{
     vertical-align: middle;
-    border-right: 1px solid rgb(105, 105, 105);
+    border-right: 1px solid var(--main-gray110);
     padding-left: 6px;
     padding-right: 6px;
 }
@@ -181,7 +182,7 @@
 }
 
 .normalRevealRow {
-    border-bottom: 1px solid rgb(240, 240, 240);
-    border-top: 1px solid rgb(240, 240, 240);
-    border-left: 1px solid rgb(240, 240, 240);
+    border-bottom: 1px solid var(--white-gray240);
+    border-top: 1px solid var(--white-gray240);
+    border-left: 1px solid var(--white-gray240);
 }

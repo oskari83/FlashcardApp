@@ -20,3 +20,9 @@ export interface NewCollectionData {
     itemCount: number,
     items: Array<CollectionItem>
 }
+
+export interface SingleItem {
+    aside: string,
+    qside: string, 
+    key: number,
+}

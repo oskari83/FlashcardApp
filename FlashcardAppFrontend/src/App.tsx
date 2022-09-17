@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Navbar } from './Components/Navbar/Navbar';
 import { Footer } from './Components/Footer/Footer';
 import { BrowseView } from './Components/BrowseView/BrowseView';
@@ -5,12 +6,12 @@ import { CreateView } from './Components/CreateView/CreateView';
 import { HomeView } from './Components/HomeView/HomeView';
 import { ProfileView } from './Components/ProfileView/ProfileView';
 import { AuthenticationView } from './Components/AuthenticationView/AuthenticationView';
-import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { CollectionView } from './Components/CollectionView/CollectionView';
+import { useState, useEffect } from 'react';
 import collectionService from './services/collections';
 import userService from './services/user';
 import './App.css';
-import { CollectionView } from './Components/CollectionView/CollectionView';
 
 const App = () => {
 	const [collections, setCollections] = useState([]);
@@ -75,10 +76,6 @@ const App = () => {
 		}
 	}, [user]);
 
-	const AppendToCollections = (collectionItem:any) => {
-		setCollections(collections.concat(collectionItem));
-	}
-
 	if(user===null){
 		return(
 			<div>
@@ -95,7 +92,7 @@ const App = () => {
 		<Router>
 			<Routes>
 			<Route path="/:id" element={<CollectionView collections={collections}/>} />
-			<Route path="/create" element={<CreateView collectionData={collections} createFunc={AppendToCollections} username={user.username}/>} />
+			<Route path="/create" element={<CreateView username={user.username}/>} />
 			<Route path="/browse" element={<BrowseView username={user.username} savedCols={savedCollections} />} />
 			<Route path="/auth" element={<AuthenticationView setUserFunc={SetUserData}/>} />
 			<Route path="/user" element={<ProfileView />} />

@@ -6,7 +6,7 @@
     justify-content: center;
     font-family: "Readex";
     font-size: 12px;
-    color: rgb(85, 85, 85);
+    color: var(--main-gray80);
 }
 
 .editTableForm{
@@ -118,7 +118,7 @@
     margin-bottom: 10px;
     font-family: "ReadexBold";
     font-size: 10px;
-    color: rgb(85, 85, 85);
+    color: var(--main-gray80);
 }
 
 .belowTableContainer{
@@ -131,21 +131,23 @@
     margin-top: 10px;
     font-family: "ReadexBold";
     font-size: 10px;
-    color: rgb(85, 85, 85);
+    color: var(--main-gray80);
 }
 
-.submitButton{
+.submitButtonE{
     display: flex;
     height: 100%;
     width: 100px;
-    background-color: #2f6dff9c;
+    background-color: var(--main-blue75);
     align-items: center;
     justify-content: center;
     margin-right: 4px;
     color: white;
-    border-radius: 4px;
+    border-radius: 15px;
     cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+	border:none;
+	font-size: 10px;
+    font-family: "ReadexBold";
 }
 
 .cancelChanges{
@@ -153,20 +155,20 @@
     height: 100%;
     width: 100px;
     margin-left: 4px;
-    background-color: rgba(240, 240, 240, 0.5);
+    background-color: white;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: 15px;
     cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+	border: 2px solid var(--white-gray240);
 }
 
-.submitButton:hover{
-    background-color: #2f6effe1;
+.submitButtonE:hover{
+    background-color: var(--main-blue);
 }
 
 .cancelChanges:hover{
-    background-color: rgb(240, 240, 240);
+    background-color: var(--white-gray250);
 }
 
 .addAnotherRowContainer{
@@ -179,22 +181,22 @@
     margin-top: 10px;
     font-family: "ReadexBold";
     font-size: 10px;
-    color: rgb(85, 85, 85);
+    color: var(--main-gray80);
 }
 
-.addRowButton{
+.addRowButtonE{
     display: flex;
     height: 100%;
     width: 100%;
     margin-left: 4px;
-    background-color: rgba(240, 240, 240, 0.5);
+    background-color: white;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: 15px;
     cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: 2px solid var(--white-gray240);
 }
 
-.addRowButton:hover{
-    background-color: rgb(240, 240, 240);
+.addRowButtonE:hover{
+    background-color: var(--white-gray250);
 }

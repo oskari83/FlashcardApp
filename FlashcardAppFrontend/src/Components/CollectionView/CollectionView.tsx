@@ -2,10 +2,8 @@ import { FlipMode } from '../FlipMode/FlipMode';
 import { RevealMode } from '../RevealMode/RevealMode';
 import { StatisticsTable } from '../StatisticsTable/StatisticsTable';
 import { CollectionEdit } from '../CollectionEdit/CollectionEdit';
-import { IoMdStats, IoMdPlay } from 'react-icons/io'
-import { RiDeleteBin2Line } from 'react-icons/ri';
-import { BsBookmark,BsBookmarkCheckFill } from "react-icons/bs"
-import { AiFillEdit } from 'react-icons/ai'
+import { IoMdStats, IoMdPlay } from 'react-icons/io';
+import { AiFillEdit } from 'react-icons/ai';
 import { useState } from 'react';
 import './CollectionView.css';
 import { CollectionData } from '../../types';
@@ -32,19 +30,8 @@ export const CollectionView = ({collections}: {collections: CollectionData[]}) =
             <div className="setInfoContainer">
             <div className="setName">
                 <div className='setNameText'>{collection!==undefined ? collection?.name : 'Loading...'}</div>
-                <div className='setNameIcon' onClick={() => bookmarkThis()}>
-                    { bookmarked ? 
-                    <BsBookmarkCheckFill size='16px' color={`rgb(248, 222, 106)`} />
-                    :
-                    <BsBookmark size='16px' color={`rgb(78, 78, 78)`} />
-                    }
-                    <div className='innerSetNameText'>
-                        { bookmarked ? "Saved" : "Save"}
-                    </div>
-                </div>
-                <div className='setDelIcon'>
-                    <RiDeleteBin2Line size='20px' color={`rgb(116, 116, 116)`} />
-                    <div className='innerSetNameText'>Delete</div>
+                <div className={`setNameIconButton${bookmarked ? 'Saved' : ''} noselect`} onClick={() => bookmarkThis()}>
+                    { bookmarked ? "Saved" : "Save"}
                 </div>
             </div>
             <div className='setProgress'>43%</div>
@@ -81,11 +68,11 @@ export const CollectionView = ({collections}: {collections: CollectionData[]}) =
                 } 
 
                 {currentSelection===2 && 
-                <RevealMode />
+                <RevealMode items={collection?.items}/>
                 } 
 
                 {currentSelection===3 && 
-                <CollectionEdit />
+                <CollectionEdit items={collection?.items}/>
                 } 
 
             </div>

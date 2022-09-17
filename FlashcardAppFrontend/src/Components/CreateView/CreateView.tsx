@@ -1,19 +1,12 @@
-import './CreateView.css';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { IoMdClose } from 'react-icons/io';
-import { ChangeEvent, SyntheticEvent } from 'react';
-import { CollectionItem, CollectionData } from '../../types';
-import { useState } from 'react';
+import { SingleItem } from '../../types';
+import { useState, SyntheticEvent } from 'react';
 import { useNavigate } from "react-router-dom";
 import collectionService from '../../services/collections';
 import { Notification } from '../Notification/Notification';
-
-const objectMap = (obj: object, fn: any) =>
-  Object.fromEntries(
-    Object.entries(obj).map(
-      ([k, v], i) => [k, fn(v, k, i)]
-    )
-)
+import objectMap from '../../Utils/objectMap';
+import './CreateView.css';
 
 const NormalCreateTableRow = ({qtext, atext, keyx, removeFunc, asideChangeFunc, qsideChangeFunc}: {qtext: string, atext: string, keyx: number, removeFunc: any, asideChangeFunc: any, qsideChangeFunc: any}) => {
 
@@ -22,8 +15,8 @@ const NormalCreateTableRow = ({qtext, atext, keyx, removeFunc, asideChangeFunc, 
         if(val==null){
             val='';
         }
-        console.log(val);
-        qsideChangeFunc(keyx,val);
+		const cleanedVal = val.replace(/(<([^>]+)>)/ig,"");
+        qsideChangeFunc(keyx,cleanedVal);
     }
 
     const handleItemAnswerChange = (event: SyntheticEvent) => {
@@ -31,8 +24,8 @@ const NormalCreateTableRow = ({qtext, atext, keyx, removeFunc, asideChangeFunc, 
         if(val==null){
             val='';
         }
-        console.log(val);
-        asideChangeFunc(keyx,val);
+		const cleanedVal = val.replace(/(<([^>]+)>)/ig,"");
+        asideChangeFunc(keyx,cleanedVal);
     }
 
     const clickDeleteButton = () => {
@@ -48,17 +41,26 @@ const NormalCreateTableRow = ({qtext, atext, keyx, removeFunc, asideChangeFunc, 
                     role="textarea" 
                     contentEditable 
                     suppressContentEditableWarning={true}
-                    
+					onPaste={(e:any) => {
+						e.preventDefault();
+						const text = (e.originalEvent || e).clipboardData.getData('text/plain');
+						window.document.execCommand('insertText', false, text);
+					}}
                 ></span>    
             </td>
             <td className='cnormalRowTd'>
-                <span 
-                    className='cinputspan'
+				<span 
+                    className='cinputspan' 
                     onInput={handleItemAnswerChange} 
                     role="textarea" 
                     contentEditable 
                     suppressContentEditableWarning={true}
-                ></span>  
+					onPaste={(e:any) => {
+						e.preventDefault();
+						const text = (e.originalEvent || e).clipboardData.getData('text/plain');
+						window.document.execCommand('insertText', false, text);
+					}}
+                ></span> 
             </td>
             <td className='cnormalRowTd'>
                 <div className='cdelButton' onClick={clickDeleteButton}>
@@ -69,13 +71,7 @@ const NormalCreateTableRow = ({qtext, atext, keyx, removeFunc, asideChangeFunc, 
     )
 }
 
-interface SingleItem {
-    aside: string,
-    qside: string, 
-    key: number,
-}
-
-export const CreateView = ({collectionData, createFunc, username}: {collectionData: Array<CollectionData>, createFunc: any, username:string}) => {
+export const CreateView = ({username}: {username:string}) => {
     const initVals = {
         "0": { qside: '', aside: '', key: 0, correct: 0},
         "1": { qside: '', aside: '', key: 1, correct: 0},
@@ -116,7 +112,7 @@ export const CreateView = ({collectionData, createFunc, username}: {collectionDa
     };
 
     const tableRowComponents = objectMap(values, (item: SingleItem) => {
-        return <NormalCreateTableRow 
+        return (<NormalCreateTableRow 
             qtext={item.qside}
             atext={item.aside}
             key={item.key} 
@@ -124,7 +120,7 @@ export const CreateView = ({collectionData, createFunc, username}: {collectionDa
             removeFunc={removeItemFromTable} 
             asideChangeFunc={handleAsideChange}
             qsideChangeFunc={handleQsideChange}
-        />
+        />);
     });
 
     const tableRowArray = Object.values(tableRowComponents);
@@ -143,7 +139,6 @@ export const CreateView = ({collectionData, createFunc, username}: {collectionDa
             .create(collectionObject)
             .then(returnedCollection => {
                 console.log(returnedCollection);
-                //createFunc(collectionObject);
                 navigate('/');
                 navigate(0);
             })
