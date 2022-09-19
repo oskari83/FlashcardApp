@@ -1,8 +1,9 @@
 export interface CollectionItem {
     qside: string,
     aside: string,
-    key?: number,
-    correct?: number,
+    key: number,
+    correct: number,
+	attempts: number
 }
 
 export interface CollectionData {

@@ -32,9 +32,10 @@ router.post('/', async (req:any, res:express.Response) => {
 		const user = req.user;
 
 		const oldItems = newColEntry.items;
-		const newItems = oldItems.map((itemEnt:ItemEntry) => {
+		const newItems = oldItems.map((itemEnt:ItemEntry, index:number) => {
 			itemEnt.correct = 0;
-			itemEnt.key = helper.generateID();
+			itemEnt.key = index+1;
+			itemEnt.attempts = 0;
 			return itemEnt;
 		});
 

@@ -62,8 +62,9 @@ const NormalTableRow = ({qtext, atext, keyx, removeFunc, asideChangeFunc, qsideC
             val='';
         }
 		const cleanedVal = val.replace(/(<([^>]+)>)/ig,"");
-        qsideChangeFunc(keyx,cleanedVal);
-		setQside(cleanedVal);
+		const cleanedVal2 = cleanedVal.replace(/((&nbsp;))*/gmi,'');
+        qsideChangeFunc(keyx,cleanedVal2);
+		setQside(cleanedVal2);
     }
 
     const handleItemAnswerChange = (v: string) => {
@@ -72,8 +73,9 @@ const NormalTableRow = ({qtext, atext, keyx, removeFunc, asideChangeFunc, qsideC
             val='';
         }
 		const cleanedVal = val.replace(/(<([^>]+)>)/ig,"");
-        asideChangeFunc(keyx,cleanedVal);
-		setAside(cleanedVal);
+		const cleanedVal2 = cleanedVal.replace(/((&nbsp;))*/gmi,'');
+        asideChangeFunc(keyx,cleanedVal2);
+		setAside(cleanedVal2);
     }
 
     const clickDeleteButton = () => {
@@ -114,13 +116,11 @@ export const CollectionEdit = ({items,name, id}: {items: any,name:string | undef
 
     const [values, setValues] = useState( items!==undefined ? arrayToObject(items,'key') : {});
     const [collName, setCollName] = useState(name);
-	const [highestID, setHighestID] = useState(getHighestID());
 	const [resets, setResets] = useState(0);
     const navigate = useNavigate();
 
 	useEffect(() => {
 		setValues(arrayToObject(items,'key'));
-		setHighestID(getHighestID());
 	}, [items]);
 
 	const removeItemFromTable = (ind:number) => {
@@ -200,13 +200,13 @@ export const CollectionEdit = ({items,name, id}: {items: any,name:string | undef
 	}
 
 	const addRowToTable = () => {
-        const id = highestID+1;
-		setHighestID((id) => id+1);
+        const id = getHighestID() + 1;
         setValues({...values, [id]: {
             qside: '', 
             aside: '', 
             key: id,
-            correct: 0
+            correct: 0,
+			attempts: 0,
         }});
         console.log("added row");
     }

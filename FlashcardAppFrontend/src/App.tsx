@@ -86,7 +86,6 @@ const App = () => {
 
 	return (
 		<div>
-
 		<Navbar username={user.username}/>
 
 		<Router>
@@ -99,6 +98,7 @@ const App = () => {
 			<Route path="/" element={<HomeView collectionData={collections} username={user.username} notifText={notificationMessage} loadingStatus={loadingStatus}/>} />
 			</Routes>
 		</Router>
+		
 		<Footer />
 
 		</div>

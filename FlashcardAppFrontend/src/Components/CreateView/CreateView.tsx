@@ -73,18 +73,29 @@ const NormalCreateTableRow = ({qtext, atext, keyx, removeFunc, asideChangeFunc, 
 
 export const CreateView = ({username}: {username:string}) => {
     const initVals = {
-        "0": { qside: '', aside: '', key: 0, correct: 0},
-        "1": { qside: '', aside: '', key: 1, correct: 0},
-        "2": { qside: '', aside: '', key: 2, correct: 0},
-        "3": { qside: '', aside: '', key: 3, correct: 0},
-        "4": { qside: '', aside: '', key: 4, correct: 0},
+        "0": { qside: '', aside: '', key: 0, correct: 0, attempts: 0},
+        "1": { qside: '', aside: '', key: 1, correct: 0, attempts: 0},
+        "2": { qside: '', aside: '', key: 2, correct: 0, attempts: 0},
+        "3": { qside: '', aside: '', key: 3, correct: 0, attempts: 0},
+        "4": { qside: '', aside: '', key: 4, correct: 0, attempts: 0},
     }
     const initID = 5;
     const [values, setValues] = useState(initVals)
     const [collName, setCollName] = useState('');
     const [newID, setNewID] = useState(initID);
     const [notificationMessage, setNotificationMessage] = useState('');
+	const [notificationTimeout, setNotificationTimeout] = useState<null | NodeJS.Timeout>(null);
     const navigate = useNavigate();
+
+	const ClearNotificationError = (time:number) => {
+		if(notificationTimeout){
+			clearTimeout(notificationTimeout);
+		}
+		const timeoutN = setTimeout(() => {
+			setNotificationMessage('');
+		},time);
+		setNotificationTimeout(timeoutN);
+	}
 
     const removeItemFromTable = (ind:number) => {
         const newValuesDictionary = Object.assign({}, values);
@@ -126,8 +137,37 @@ export const CreateView = ({username}: {username:string}) => {
     const tableRowArray = Object.values(tableRowComponents);
 
     const addCollection = (event: SyntheticEvent) => {
-        event.preventDefault()
+        event.preventDefault();
+
+		if(collName===''){
+			setNotificationMessage('Name field is empty, add a name to create set');
+			ClearNotificationError(5000);
+			return;
+		}
+		let empties = false;
+		for (const key in values) {
+			console.log(`${key}`);
+			const obj = values[key as keyof typeof values];
+			if(obj['aside']==='' || obj['qside']===''){
+				setNotificationMessage('Some fields are empty, remove or fill to create set');
+				ClearNotificationError(5000);
+				empties = true;
+				return;
+			}
+		}
+
+		if(empties){
+			return;
+		}
+
         const itemsAsArray = Object.values(values);
+
+		if(itemsAsArray.length===0){
+			setNotificationMessage('A collection needs to have at least 1 note');
+			ClearNotificationError(5000);
+			return;
+		}
+
         const collectionObject = {
             name: collName,
             creator: username,
@@ -149,7 +189,7 @@ export const CreateView = ({username}: {username:string}) => {
                     setNotificationMessage(error.message);
                 }
                 console.log(error);
-                setTimeout(() => setNotificationMessage(''), 5000);
+                ClearNotificationError(5000);
             });
     }
 
@@ -160,7 +200,8 @@ export const CreateView = ({username}: {username:string}) => {
             qside: '', 
             aside: '', 
             key: id,
-            correct: 0
+            correct: 0,
+			attempts: 0
         }});
         console.log("added row");
     }
@@ -191,7 +232,7 @@ export const CreateView = ({username}: {username:string}) => {
                         <tbody>
                         <tr className='cboldRow'>
                             <td className='cheaderRow'>
-                                <div className='ctdText'>Object</div>
+                                <div className='ctdText'>Note</div>
                             </td>
                             <td className='cheaderRow'>
                                 <div className='ctdText'>Definition</div>

@@ -18,8 +18,7 @@ loginRouter.post('/', async (request:express.Request, response:express.Response)
 		});
 	}
 
-	console.log(user);
-	console.log('loggin in');
+	console.log('loggin in: ', user.username);
 
 	const userForToken = {
 		email: user.email,

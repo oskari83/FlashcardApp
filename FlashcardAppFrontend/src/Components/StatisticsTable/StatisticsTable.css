@@ -140,28 +140,36 @@
     width: clamp(2px,15%,16px);
     margin: 0px 1px 0px 1px;
     aspect-ratio: 1/1;
-    background-color: var(--main-gray180);
+    background-color: var(--main-gray180-a75);
+	border: 1px solid var(--main-gray180);
+	border-radius: 2px;
 }
 
 .masterybox2{
     width: clamp(2px,15%,16px);
     aspect-ratio: 1/1;
     margin: 0px 1px 0px 1px;
-    background: var(--gray-blue);
+    background: var(--gray-blue75);
+	border: 1px solid var(--gray-blue);
+	border-radius: 2px;
 }
 
 .masterybox3{
     width: clamp(2px,15%,16px);
     aspect-ratio: 1/1;
     margin: 0px 1px 0px 1px;
-    background: var(--light-blue);
+    background: var(--light-blue75);
+	border: 1px solid var(--light-blue);
+	border-radius: 2px;
 }
 
 .masterybox4{
     width: clamp(2px,15%,16px);
     aspect-ratio: 1/1;
     margin: 0px 1px 0px 1px;
-    background: var(--main-blue);
+    background: var(--main-blue75);
+	border: 1px solid var(--main-blue);
+	border-radius: 2px;
 }
 
 @media (max-width: 700px) {

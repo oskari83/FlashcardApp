@@ -2,7 +2,8 @@ export interface ItemEntry {
     qside: string,
     aside: string,
     correct?: number,
-    key?: number
+    key?: number,
+	attempts?: number,
 }
 
 export interface CollectionEntry {
