@@ -10,7 +10,7 @@ const MasteryBoxElement = ({level}: {level: number | undefined}) => {
 
 	useEffect(() => {
 		if(level!==undefined){
-			if(level>=3){
+			if(level>=4){
 				setNewLevel(4);
 				setMastered(true);
 			}else{
@@ -37,47 +37,49 @@ const NormalTableRow = ({item}: {item:CollectionItem}) => {
     return(
         <tr className='normalRow'>
 			<td>{item.qside}</td>
-			<td className='attemptsTextTable'>{item.correct}</td>
+			<td className='attemptsTextTable'>{item.attempts}</td>
 			<MasteryBoxElement level={item.correct}/>
         </tr>
     )
 }
 
-export const StatisticsTable = ({items}: {items: CollectionItem[] | undefined}) => {
+export const StatisticsTable = ({items, itemdata}: {items: CollectionItem[] | undefined, itemdata: any}) => {
 	const [sortState, setSortState] = useState<number>(0);
 	const [itemsShowing,setItemsShowing] = useState<CollectionItem[]>([]);
 	//states 0-2 are for name, 3-4 for attempts, 5-6 for level
 	useEffect(() => {
-		if(items!==undefined){
+		if(items!==undefined && Object.keys(itemdata).length !== 0){
+			const datadata = itemdata.data;
+			const combinedItems = items.map(t1 => ({...t1, ...datadata.find((t2:any) => t2.uniqueId === t1.uniqueId)}))
 			if(sortState===0){
-				setItemsShowing(items);
+				setItemsShowing(combinedItems);
 			}else if(sortState===1){
-				setItemsShowing([...items].sort(function(a:CollectionItem, b:CollectionItem) {
+				setItemsShowing([...combinedItems].sort(function(a:CollectionItem, b:CollectionItem) {
 					return a.qside.localeCompare(b.qside);
 				}));
 			}else if(sortState===2){
-				setItemsShowing([...items].sort(function(a:CollectionItem, b:CollectionItem) {
+				setItemsShowing([...combinedItems].sort(function(a:CollectionItem, b:CollectionItem) {
 					return b.qside.localeCompare(a.qside);
 				}));
 			}else if(sortState===3){
-				setItemsShowing([...items].sort(function(a:CollectionItem, b:CollectionItem) {
+				setItemsShowing([...combinedItems].sort(function(a:CollectionItem, b:CollectionItem) {
 					return a.attempts-b.attempts;
 				}));
 			}else if(sortState===4){
-				setItemsShowing([...items].sort(function(a:CollectionItem, b:CollectionItem) {
+				setItemsShowing([...combinedItems].sort(function(a:CollectionItem, b:CollectionItem) {
 					return b.attempts-a.attempts;
 				}));
 			}else if(sortState===5){
-				setItemsShowing([...items].sort(function(a:CollectionItem, b:CollectionItem) {
+				setItemsShowing([...combinedItems].sort(function(a:CollectionItem, b:CollectionItem) {
 					return a.correct-b.correct;
 				}));
 			}else if(sortState===6){
-				setItemsShowing([...items].sort(function(a:CollectionItem, b:CollectionItem) {
+				setItemsShowing([...combinedItems].sort(function(a:CollectionItem, b:CollectionItem) {
 					return b.correct-a.correct;
 				}));
 			}	
 		}	
-	}, [items,sortState]);
+	}, [items,sortState,itemdata]);
 
 	const SortByNameClick = () => {
 		if(sortState===2){
@@ -138,7 +140,7 @@ export const StatisticsTable = ({items}: {items: CollectionItem[] | undefined}) 
 				</tr>
 				<>
 				{itemsShowing.map((item:CollectionItem) => {
-					return (<NormalTableRow key={item.key} item={item}/>);
+					return (<NormalTableRow key={item.key} item={item} />);
 				})}
 				</>
 			</tbody>

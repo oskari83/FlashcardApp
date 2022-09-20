@@ -106,7 +106,7 @@ const arrayToObject = (arr: any, key: string) => {
 	}, {});
 };
 
-export const CollectionEdit = ({items,name, id}: {items: any,name:string | undefined, id:string | undefined}) => {
+export const CollectionEdit = ({items,name, id, notFunction}: {items: any,name:string | undefined, id:string | undefined, notFunction:any}) => {
 	const getHighestID = () => {
 		if(items!==undefined){
 			return Math.max(...items.map((o:CollectionItem) => o.key));
@@ -165,7 +165,32 @@ export const CollectionEdit = ({items,name, id}: {items: any,name:string | undef
 
 	const saveEditedCollection = (event: SyntheticEvent) => {
         event.preventDefault()
+
+		if(collName===''){
+			notFunction('Name field is empty, add a name to save set',5000);
+			return;
+		}
+		let empties = false;
+		for (const key in values) {
+			const obj = values[key as keyof typeof values];
+			if(obj['aside']==='' || obj['qside']===''){
+				notFunction('Some fields are empty, remove or fill to save set',5000);
+				empties = true;
+				return;
+			}
+		}
+
+		if(empties){
+			return;
+		}
+
         const itemsAsArray: CollectionItem[] = Object.values(values);
+
+		if(itemsAsArray.length===0){
+			notFunction('A collection needs to have at least 1 note',5000);
+			return;
+		}
+
         const collectionObject = {
             name: collName,
             items: itemsAsArray,
@@ -181,12 +206,12 @@ export const CollectionEdit = ({items,name, id}: {items: any,name:string | undef
             })
             .catch(error => {
                 if(error.code==="ERR_NETWORK"){
+					notFunction('Network error - please check your internet connection!',5000);
                     //setNotificationMessage('Network error - please check your internet connection!');
                 }else{
-                    //setNotificationMessage(error.message);
+					notFunction(error.message,5000);
                 }
                 console.log(error);
-                //setTimeout(() => setNotificationMessage(''), 5000);
             });
 		}
     }
@@ -195,8 +220,6 @@ export const CollectionEdit = ({items,name, id}: {items: any,name:string | undef
 		setValues(arrayToObject(items,'key'));
 		setCollName(name);
 		setResets((r:number) => r+1);
-		//navigate(0);
-		//goToEditFunc();
 	}
 
 	const addRowToTable = () => {

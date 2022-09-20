@@ -4,17 +4,77 @@ import { StatisticsTable } from '../StatisticsTable/StatisticsTable';
 import { CollectionEdit } from '../CollectionEdit/CollectionEdit';
 import { IoMdStats, IoMdPlay } from 'react-icons/io';
 import { AiFillEdit } from 'react-icons/ai';
-import { useState } from 'react';
-import './CollectionView.css';
-import { CollectionData } from '../../types';
+import { useState, useEffect } from 'react';
+import { PossiblyEmptyCollectionData, PossiblyEmptyData } from '../../types';
+import { Loading } from '../Loading/Loading';
 import { useParams } from "react-router-dom";
+import { Notification } from '../Notification/Notification';
+import collectionService from '../../services/collections';
+import userService from '../../services/user';
+import './CollectionView.css';
 
-export const CollectionView = ({collections}: {collections: CollectionData[]}) => {
+export const CollectionView = ({userId}: {userId:string}) => {
     const [currentSelection, setCurrentSelection] = useState(0);
     const [bookmarked, setBookmarked] = useState(false);
+	const [notificationMessage, setNotificationMessage] = useState('');
+	const [notificationTimeout, setNotificationTimeout] = useState<null | NodeJS.Timeout>(null);
+	const [id, setID] = useState(useParams().id);
+	const [collection, setCollection] = useState<PossiblyEmptyCollectionData>({});
+	const [colData, setColData] = useState<PossiblyEmptyData>({});
+	const [loadingStatus, setLoadingStatus] = useState(2);
 
-	const id = useParams().id;
-	const collection: undefined | CollectionData = collections.find(col => col.id ===id);
+	const ClearNotificationError = (time:number) => {
+		if(notificationTimeout){
+			clearTimeout(notificationTimeout);
+		}
+		const timeoutN = setTimeout(() => {
+			setNotificationMessage('');
+		},time);
+		setNotificationTimeout(timeoutN);
+	}
+
+	const SetNotificaiton = (text:string,time:number) => {
+		setNotificationMessage(text);
+		ClearNotificationError(time);
+	}
+
+	useEffect(() => {
+		console.log('i fire once',id);
+		if(id!==undefined){
+			collectionService
+				.getSingle(id)
+				.then(initialCollection => {
+					console.log(initialCollection);
+					setCollection(initialCollection);
+					setLoadingStatus((n:number) => n-1);
+				})
+				.catch(error => {
+					if(error.code==="ERR_NETWORK"){
+						SetNotificaiton('Network error - please check your internet connection!',5000);
+					}else{
+						SetNotificaiton(error.message,5000);
+					}
+					console.log(error);
+				});
+
+			userService
+				.getData(userId,id)
+				.then((data:PossiblyEmptyData) => {
+					console.log(data)
+					setColData(data);
+					setLoadingStatus((n:number) => n-1);
+				})
+				.catch((error:any) => {
+					if(error.code==="ERR_NETWORK"){
+						SetNotificaiton('Network error - please check your internet connection!',5000);
+					}else{
+						SetNotificaiton(error.message,5000);
+					}
+					console.log(error);
+				});
+		}
+    }, [id]);
+
 
     const bookmarkThis = () => {
         setBookmarked(!bookmarked);
@@ -24,13 +84,10 @@ export const CollectionView = ({collections}: {collections: CollectionData[]}) =
         setCurrentSelection(id)
     }
 
-	const GoToEditCollection = () => {
-		setCurrentSelection(3);
-	}
-
     return(
         <>
         <div className="containerMain">
+			<Notification text={notificationMessage}/>
             <div className="setInfoContainer">
             <div className="setName">
                 <div className='setNameText'>{collection!==undefined ? collection?.name : 'Loading...'}</div>
@@ -39,7 +96,7 @@ export const CollectionView = ({collections}: {collections: CollectionData[]}) =
                 </div>
             </div>
             <div className='setProgress'>43%</div>
-            <div className="setInfo">{`Creator: ${collection!==undefined ? collection?.creator : 'Loading...'}, Objects: ${collection!==undefined ? collection?.items.length : 'Loading...'}`}</div>
+            <div className="setInfo">{`Creator: ${collection!==undefined ? collection?.creator : 'Loading...'}, Objects: ${collection!==undefined ? collection?.itemCount : 'Loading...'}`}</div>
             </div>
 
             <div className='setAreaOuter'>
@@ -62,9 +119,13 @@ export const CollectionView = ({collections}: {collections: CollectionData[]}) =
                     <div className='selectorBarItemText'>Edit</div>
                 </div>
                 </div>
-
+				<div className='setAreaLoadingOuter'>
+					{loadingStatus!==0 && 
+							<Loading />
+					}
+				</div>
                 {currentSelection===0 && 
-                <StatisticsTable items={collection?.items} />
+                <StatisticsTable items={collection?.items} itemdata={colData}/>
                 } 
 
                 {currentSelection===1 && 
@@ -76,7 +137,7 @@ export const CollectionView = ({collections}: {collections: CollectionData[]}) =
                 } 
 
                 {currentSelection===3 && 
-                <CollectionEdit items={collection?.items} name={collection?.name} id={collection?.id}/>
+                <CollectionEdit items={collection?.items} name={collection?.name} id={collection?.id} notFunction={SetNotificaiton}/>
                 } 
 
             </div>

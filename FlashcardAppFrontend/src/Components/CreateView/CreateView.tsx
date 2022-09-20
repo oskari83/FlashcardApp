@@ -146,7 +146,6 @@ export const CreateView = ({username}: {username:string}) => {
 		}
 		let empties = false;
 		for (const key in values) {
-			console.log(`${key}`);
 			const obj = values[key as keyof typeof values];
 			if(obj['aside']==='' || obj['qside']===''){
 				setNotificationMessage('Some fields are empty, remove or fill to create set');

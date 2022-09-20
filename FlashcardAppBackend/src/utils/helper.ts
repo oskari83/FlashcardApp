@@ -53,7 +53,10 @@ const toUpdatedCollectionEntry = ({ name, items }: Fields): UpdatedCollectionEnt
 };
 
 const generateID = () => {
-	return Math.floor(Math.random() * 10000001);
+	let result = '';
+	const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	for (let i = 12; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+	return result;
 };
 
 module.exports = {

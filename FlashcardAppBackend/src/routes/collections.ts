@@ -31,16 +31,17 @@ router.post('/', async (req:any, res:express.Response) => {
 		const newColEntry = helper.toNewCollectionEntry(req.body);
 		const user = req.user;
 
-		const oldItems = newColEntry.items;
-		const newItems = oldItems.map((itemEnt:ItemEntry, index:number) => {
+		const newItems = newColEntry.items.map((itemEnt:ItemEntry, index:number) => {
 			itemEnt.correct = 0;
-			itemEnt.key = index+1;
+			itemEnt.key = index;
 			itemEnt.attempts = 0;
+			itemEnt.uniqueId = helper.generateID();
 			return itemEnt;
 		});
 
 		const newCollectionEntry = new CollectionM({
-			...newColEntry,
+			name: newColEntry.name,
+			creator: newColEntry.creator,
 			items: newItems,
 			itemCount: newItems.length,
 			user: user.id
@@ -50,12 +51,21 @@ router.post('/', async (req:any, res:express.Response) => {
 
 		user.createdCollections = user.createdCollections.concat(savedCol._id);
 
+		const newItemsData = newItems.map((itemEnt:ItemEntry, index:number) => {
+			const newEntItemData = {
+				key: index,
+				uniqueId: itemEnt.uniqueId,
+				correct: 0,
+				attempts: 0,
+			};
+			return newEntItemData;
+		});
 		const addCreatedCol = {
-			...newColEntry,
+			data: newItemsData,
 			id: savedCol._id
 		};
 
-		user.createdCollectionsApp = user.createdCollectionsApp.concat(addCreatedCol);
+		user.createdData = user.createdData.concat(addCreatedCol);
 		await user.save();
 
 		res.status(201).json(savedCol);
@@ -80,7 +90,16 @@ router.delete('/:id', async (req:any, res:express.Response) => {
 		});
 	}
 
+	const user = req.user;
+	const createdData = user.createdData;
+	const newCreatedData = createdData.filter((col:CollectionEntry) => {
+		return col.id!==req.params.id;
+	});
+
+	user.createdData = newCreatedData;
+	await user.save();
 	await CollectionM.findByIdAndRemove(req.params.id);
+
 	res.status(204).end();
 });
 
@@ -92,6 +111,10 @@ router.put('/:id', async (req:any, res:express.Response) => {
 		});
 	}
 
+	if(!req.user){
+		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in to save collections)' });
+	}
+
 	if(collectionToUpdate.user && collectionToUpdate.user.toString() !== req.user.id) {
 		return res.status(401).json({
 			error: 'only the creator can update a collection'
@@ -100,15 +123,25 @@ router.put('/:id', async (req:any, res:express.Response) => {
 
 	const body = helper.toUpdatedCollectionEntry(req.body);
 
+	const newUpdatedItems = body.items.map((itemEnt:ItemEntry, index:number) => {
+		if(!itemEnt.correct){
+			itemEnt.correct = 0;
+		}
+		if(!itemEnt.attempts){
+			itemEnt.attempts = 0;
+		}
+		if(!itemEnt.uniqueId){
+			itemEnt.uniqueId = helper.generateID();
+		}
+		itemEnt.key = index;
+		return itemEnt;
+	});
+
 	const col = {
 		name: body.name,
 		itemCount: body.items.length,
-		items: body.items,
+		items: newUpdatedItems,
 	};
-
-	if(!req.user){
-		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in to save collections)' });
-	}
 
 	const user = await User.findById(req.user);
 
@@ -125,32 +158,37 @@ router.put('/:id', async (req:any, res:express.Response) => {
 	}
 
 	const colId = req.params.id;
-	const createdApp = user.createdCollectionsApp;
+	const createdData = user.createdData;
 	let colToChange;
 
-	for(let i=0;i<createdApp.length;i++){
-		if(createdApp[i].id.toString()===colId){
-			colToChange = createdApp[i];
+	for(let i=0;i<createdData.length;i++){
+		if(createdData[i].id.toString()===colId){
+			colToChange = createdData[i];
 		}
 	}
 
-	const newItems = body.items;
-	const newName = body.name;
+	const newItemsData = newUpdatedItems.map((itemEnt:ItemEntry, index:number) => {
+		const newEntItemData = {
+			key: index,
+			uniqueId: itemEnt.uniqueId,
+			correct: itemEnt.correct,
+			attempts: itemEnt.attempts,
+		};
+		return newEntItemData;
+	});
 
-	const newCol = {
-		...colToChange,
-		items: newItems,
-		name: newName,
-		itemCount: newItems.length
+	const newDataCol = {
+		data: newItemsData,
+		id: colToChange.id,
 	};
 
-	for(let i=0;i<createdApp.length;i++){
-		if(createdApp[i].id.toString()===colId){
-			createdApp[i] = newCol;
+	for(let i=0;i<createdData.length;i++){
+		if(createdData[i].id.toString()===colId){
+			createdData[i] = newDataCol;
 		}
 	}
 
-	user.createdCollectionsApp = createdApp;
+	user.createdData = createdData;
 	await user.save();
 	const updatedCol = await CollectionM.findByIdAndUpdate(req.params.id, col, { new: true });
 	res.json(updatedCol);
@@ -175,16 +213,24 @@ router.put('/:id/save', async (req:any, res:express.Response) => {
 		});
 	}
 
-	const addSavedCol = {
-		creator: collectionToSave.creator,
-		name: collectionToSave.name,
-		itemCount: collectionToSave.itemCount,
-		items: collectionToSave.items,
+	const newSavedItems = collectionToSave.items.map((itemEnt:ItemEntry, index:number) => {
+		const newEntItemData = {
+			key: index,
+			uniqueId: itemEnt.uniqueId,
+			correct: itemEnt.correct,
+			attempts: itemEnt.attempts,
+		};
+		return newEntItemData;
+	});
+
+	const addSavedData = {
+		data: newSavedItems,
 		id: req.params.id
 	};
 
 	const user = req.user;
-	user.savedCollectionsApp = user.savedCollectionsApp.concat(addSavedCol);
+	user.savedCollections = user.savedCollections.concat(req.params.id);
+	user.savedData = user.savedData.concat(addSavedData);
 	await user.save();
 
 	res.json(collectionToSave);
@@ -210,12 +256,17 @@ router.put('/:id/unsave', async (req:any, res:express.Response) => {
 	}
 
 	const user = req.user;
-	const savedCols = user.savedCollectionsApp;
+	const savedCols = user.savedCollections;
+	const savedData = user.savedData;
 	const newSavedCols = savedCols.filter((col:CollectionEntry) => {
+		return col!==req.params.id;
+	});
+	const newSavedColsData = savedData.filter((col:CollectionEntry) => {
 		return col.id!==req.params.id;
 	});
 
-	user.savedCollectionsApp = newSavedCols;
+	user.savedCollections = newSavedCols;
+	user.savedData = newSavedColsData;
 	await user.save();
 
 	res.status(204).end();

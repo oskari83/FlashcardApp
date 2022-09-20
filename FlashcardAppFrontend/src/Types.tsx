@@ -3,7 +3,15 @@ export interface CollectionItem {
     aside: string,
     key: number,
     correct: number,
-	attempts: number
+	attempts: number,
+	uniqueId?: string
+}
+
+export interface DataEntry {
+	key: number,
+    correct: number,
+	attempts: number,
+	uniqueId?: string
 }
 
 export interface CollectionData {
@@ -13,6 +21,20 @@ export interface CollectionData {
 	saved?: boolean,
     itemCount: number,
     items: Array<CollectionItem>
+}
+
+export interface PossiblyEmptyCollectionData {
+    id?: string,
+    name?: string,
+    creator?: string,
+	saved?: boolean,
+    itemCount?: number,
+    items?: Array<CollectionItem>
+}
+
+export interface PossiblyEmptyData {
+    id?: string,
+    data?: DataEntry[]
 }
 
 export interface NewCollectionData {

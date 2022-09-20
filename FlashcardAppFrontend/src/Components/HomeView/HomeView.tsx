@@ -50,7 +50,7 @@ const CollectionItemComponent = ( { col }: { col: CollectionData}) => {
                 <HiOutlineExternalLink size='20px' color={`rgb(78, 78, 78)`} />
             </div>
             <div className='itemCreator'>Creator: {col.creator}</div>
-            <div className='itemObjects'>Objects: {col.items.length}</div>
+            <div className='itemObjects'>Objects: {col.itemCount}</div>
         </div>
     )
 }

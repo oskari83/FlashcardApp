@@ -23,6 +23,13 @@
   height: 100%;
 }
 
+.setAreaLoadingOuter{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
 .setAreaOuter{
   overflow: hidden;
 }

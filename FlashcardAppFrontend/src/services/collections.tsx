@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CollectionData, NewCollectionData, UpdateCollectionData } from '../types';
+import { NewCollectionData, UpdateCollectionData } from '../types';
 
 const baseUrl = 'api/collections';
 
@@ -11,6 +11,11 @@ const setToken = (newToken: string) => {
 
 const getAll = () => {
     const request = axios.get(baseUrl);
+    return request.then(response => response.data);
+}
+
+const getSingle = (id:string) => {
+    const request = axios.get(`${baseUrl}/${id}`);
     return request.then(response => response.data);
 }
 
@@ -51,6 +56,7 @@ const unSaveCollection = async (id:string) => {
 
 export default { 
   getAll,
+  getSingle,
   create,
   update,
   saveCollection,

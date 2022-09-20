@@ -53,11 +53,11 @@ const App = () => {
 	useEffect(() => {
 		if(user){
 			userService
-			.get(user.id)
+			.getCollections(user.id)
 			.then(data => {
-				const cols = data.createdCollectionsApp.concat(data.savedCollectionsApp);
+				const cols = data.createdCollections.concat(data.savedCollections);
 				setCollections(cols);
-				setSavedCollections(data.savedCollectionsApp);
+				setSavedCollections(data.savedCollections);
 				setLoadingStatus(0);
 			})
 			.catch(error => {
@@ -90,7 +90,7 @@ const App = () => {
 
 		<Router>
 			<Routes>
-			<Route path="/:id" element={<CollectionView collections={collections}/>} />
+			<Route path="/:id" element={<CollectionView userId={user.id}/>} />
 			<Route path="/create" element={<CreateView username={user.username}/>} />
 			<Route path="/browse" element={<BrowseView username={user.username} savedCols={savedCollections} />} />
 			<Route path="/auth" element={<AuthenticationView setUserFunc={SetUserData}/>} />
@@ -98,7 +98,7 @@ const App = () => {
 			<Route path="/" element={<HomeView collectionData={collections} username={user.username} notifText={notificationMessage} loadingStatus={loadingStatus}/>} />
 			</Routes>
 		</Router>
-		
+
 		<Footer />
 
 		</div>

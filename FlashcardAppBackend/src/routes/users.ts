@@ -59,7 +59,34 @@ usersRouter.get('/', async (_req:express.Request,res:express.Response) => {
 	res.json(hideStuffUsers);
 });
 
-usersRouter.get('/:id/data', async (req:any,res:express.Response) => {
+usersRouter.get('/:id/collections', async (req:any,res:express.Response) => {
+	if(!req.user){
+		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in)' });
+	}
+
+	const userToGet = await User
+		.findById(req.params.id)
+		.populate('createdCollections', { name:1,creator:1,itemCount:1,id:1 })
+		.populate('savedCollections', { name:1,creator:1,itemCount:1,id:1 });
+	if(!userToGet) {
+		return res.status(404).json({
+			error: 'could not find user'
+		});
+	}
+	if(userToGet._id.toString() !== req.user.id) {
+		return res.status(401).json({
+			error: 'incorrect credentials'
+		});
+	}
+	const onlyReturnDataObject = {
+		createdCollections: userToGet.createdCollections,
+		savedCollections: userToGet.savedCollections
+	};
+
+	res.json(onlyReturnDataObject);
+});
+
+usersRouter.put('/:id/data', async (req:any,res:express.Response) => {
 	if(!req.user){
 		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in)' });
 	}
@@ -75,7 +102,23 @@ usersRouter.get('/:id/data', async (req:any,res:express.Response) => {
 			error: 'incorrect credentials'
 		});
 	}
-	res.json(userToGet);
+	const colId = req.body.colId;
+	const savedColD = userToGet.savedData;
+	const createdColD = userToGet.createdData;
+	const allCols = savedColD.concat(createdColD);
+	let wantedCol;
+	for(let i=0;i<allCols.length;i++){
+		if(allCols[i].id.toString()===colId){
+			wantedCol = allCols[i];
+		}
+	}
+
+	const onlyReturnDataObject = {
+		data: wantedCol.data
+	};
+
+	console.log(onlyReturnDataObject);
+	res.json(onlyReturnDataObject);
 });
 
 usersRouter.put('/:id/updateown', async (req:any, res:express.Response) => {

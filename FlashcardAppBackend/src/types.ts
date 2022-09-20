@@ -4,6 +4,14 @@ export interface ItemEntry {
     correct?: number,
     key?: number,
 	attempts?: number,
+	uniqueId?: string,
+}
+
+export interface ItemEntryData {
+    correct?: number,
+    key?: number,
+	attempts?: number,
+	uniqueId?: string,
 }
 
 export interface CollectionEntry {
@@ -12,6 +20,11 @@ export interface CollectionEntry {
     creator: string;
     itemCount?: number;
     items: ItemEntry[];
+}
+
+export interface DataEntry {
+	data: ItemEntryData[],
+	id: string
 }
 
 export type NewCollectionEntry2 = Omit<CollectionEntry, 'id'>;
@@ -36,6 +49,7 @@ export interface UserRaw {
     id: string;
     username: string;
     createdCollections: MongooseCollectionEntry[];
-    createdCollectionsApp: MongooseCollectionEntry[];
-	savedCollectionsApp: MongooseCollectionEntry[];
+	savedCollections: MongooseCollectionEntry[];
+    createdData: MongooseCollectionEntry[];
+	savedData: MongooseCollectionEntry[];
 }

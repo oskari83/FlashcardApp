@@ -10,8 +10,14 @@ const userSchema = new mongoose.Schema({
 			ref: 'CollectionM'
 		}
 	],
-	savedCollectionsApp: [mongoose.Schema.Types.Mixed],
-	createdCollectionsApp: [mongoose.Schema.Types.Mixed],
+	savedCollections: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'CollectionM'
+		}
+	],
+	savedData: [mongoose.Schema.Types.Mixed],
+	createdData: [mongoose.Schema.Types.Mixed],
 });
 
 userSchema.set('toJSON', {
