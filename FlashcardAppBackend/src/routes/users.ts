@@ -2,7 +2,8 @@ const bcrypt = require('bcrypt');
 import express from 'express';
 const usersRouter = express.Router();
 const User = require('../models/user');
-import { UserRaw } from '../types';
+const CollectionM = require('../models/collection');
+import { UserRaw, ItemEntry, DataEntry } from '../types';
 //const helper = require('../utils/helper');
 
 usersRouter.post('/signup', async (req:express.Request, res:express.Response) => {
@@ -34,14 +35,6 @@ usersRouter.post('/signup', async (req:express.Request, res:express.Response) =>
 	const savedUser = await user.save();
 
 	res.status(201).json(savedUser);
-});
-
-usersRouter.post('/savecollection', async (req: express.Request, res: express.Response) => {
-	const body = req.body;
-	const user = await User.findById(body.userId);
-	user.savedCollectionsApp = user.savedCollectionsApp.concat(body.collectionId);
-	await user.save();
-	res.status(204).end();
 });
 
 usersRouter.get('/', async (_req:express.Request,res:express.Response) => {
@@ -104,17 +97,82 @@ usersRouter.put('/:id/data', async (req:any,res:express.Response) => {
 	}
 	const colId = req.body.colId;
 	const savedColD = userToGet.savedData;
+	const realSavedColD = savedColD.map((itm:DataEntry) => {
+		const nnn = {
+			...itm,
+			created: false
+		};
+		return nnn;
+	});
 	const createdColD = userToGet.createdData;
-	const allCols = savedColD.concat(createdColD);
-	let wantedCol;
+	const realCreatedColD = createdColD.map((itm:DataEntry) => {
+		const nnn = {
+			...itm,
+			created: true
+		};
+		return nnn;
+	});
+	const allCols = realSavedColD.concat(realCreatedColD);
+	let wantedCol: DataEntry | null = null;
 	for(let i=0;i<allCols.length;i++){
 		if(allCols[i].id.toString()===colId){
 			wantedCol = allCols[i];
 		}
 	}
 
+	if(!wantedCol){
+		return res.status(401).json({
+			error: 'collection data not found in user data'
+		});
+	}
+
+	//check if the collection found has actually been updated and update data i.e. add keys and unique ids
+	//will have to check if this actually works later so for now just a test
+	const wantedColFromDatabase = await CollectionM.findById(colId);
+	const wantedColItems = wantedColFromDatabase.items;
+	const mergedUpdatedCol = wantedColItems.map((t1:ItemEntry) => {
+		const foundData = wantedCol?.data.find((t2) => t2.uniqueId === t1.uniqueId);
+		if(foundData!==undefined){
+			return { ...t1, ...foundData };
+		}
+		return { ...t1 };
+	});
+
+	const realMergedUpdatedCol = mergedUpdatedCol.map((itm: ItemEntry) => {
+		const removeFields = {
+			key: itm.key,
+			uniqueId: itm.uniqueId,
+			correct: itm.correct,
+			attempts: itm.attempts
+		};
+		return removeFields;
+	});
+
+	const dataIWantToSave = {
+		data: realMergedUpdatedCol,
+		id: wantedCol.id
+	};
+
+	if(wantedCol.created){
+		for(let i=0;i<createdColD.length;i++){
+			if(createdColD[i].id.toString()===colId){
+				createdColD[i] = dataIWantToSave;
+			}
+		}
+		userToGet.createdData = createdColD;
+	}else{
+		for(let i=0;i<savedColD.length;i++){
+			if(savedColD[i].id.toString()===colId){
+				savedColD[i] = savedColD;
+			}
+		}
+		userToGet.savedData = savedColD;
+	}
+
+	await userToGet.save();
+
 	const onlyReturnDataObject = {
-		data: wantedCol.data
+		data: realMergedUpdatedCol
 	};
 
 	console.log(onlyReturnDataObject);
@@ -139,7 +197,7 @@ usersRouter.put('/:id/updateown', async (req:any, res:express.Response) => {
 		});
 	}
 	const colId = req.body.colId;
-	const createdApp = userToUpdate.createdCollectionsApp;
+	const createdApp = userToUpdate.createdData;
 	let colToChange;
 
 	for(let i=0;i<createdApp.length;i++){
@@ -148,20 +206,27 @@ usersRouter.put('/:id/updateown', async (req:any, res:express.Response) => {
 		}
 	}
 
-	const items = colToChange.items;
+	const items = colToChange.data;
 
-	const key = req.body.key;
-	const value = req.body.value;
+	const uniqId = req.body.uniqueId;
+	const operation = Number(req.body.operation);
 
 	for(let i=0;i<items.length;i++){
-		if(items[i].key===key){
-			items[i].correct = value;
+		if(items[i].uniqueId.toString()===uniqId){
+			if(operation===0){
+				if(items[i].correct!==0){
+					items[i].correct = items[i].correct-1;
+				}
+			}else if(operation===2){
+				items[i].correct = items[i].correct+1;
+			}
+			items[i].attempts = items[i].attempts+1;
 		}
 	}
 
 	const newCol = {
-		...colToChange,
-		items: items,
+		id: colToChange.id,
+		data: items,
 	};
 
 	for(let i=0;i<createdApp.length;i++){
@@ -172,7 +237,7 @@ usersRouter.put('/:id/updateown', async (req:any, res:express.Response) => {
 
 	const newUser = {
 		...userToUpdate,
-		createdCollectionsApp: createdApp
+		createdData: createdApp
 	};
 
 	const savedUser = await User.findByIdAndUpdate(req.params.id, newUser, { new: true });
@@ -197,7 +262,7 @@ usersRouter.put('/:id/updatesaved', async (req:any, res:express.Response) => {
 		});
 	}
 	const colId = req.body.colId;
-	const savedApp = userToUpdate.savedCollectionsApp;
+	const savedApp = userToUpdate.savedData;
 	let colToChange;
 
 	for(let i=0;i<savedApp.length;i++){
@@ -206,20 +271,27 @@ usersRouter.put('/:id/updatesaved', async (req:any, res:express.Response) => {
 		}
 	}
 
-	const items = colToChange.items;
+	const items = colToChange.data;
 
-	const key = req.body.key;
-	const value = req.body.value;
+	const uniqId = req.body.uniqueId;
+	const operation = Number(req.body.operation);
 
 	for(let i=0;i<items.length;i++){
-		if(items[i].key===key){
-			items[i].correct = value;
+		if(items[i].uniqueId.toString()===uniqId){
+			if(operation===0){
+				if(items[i].correct!==0){
+					items[i].correct = items[i].correct-1;
+				}
+			}else if(operation===2){
+				items[i].correct = items[i].correct+1;
+			}
+			items[i].attempts = items[i].attempts+1;
 		}
 	}
 
 	const newCol = {
-		...colToChange,
-		items: items,
+		id: colToChange.id,
+		data: items,
 	};
 
 	for(let i=0;i<savedApp.length;i++){
@@ -230,7 +302,7 @@ usersRouter.put('/:id/updatesaved', async (req:any, res:express.Response) => {
 
 	const newUser = {
 		...userToUpdate,
-		savedCollectionsApp: savedApp
+		savedData: savedApp
 	};
 
 	const savedUser = await User.findByIdAndUpdate(req.params.id, newUser, { new: true });

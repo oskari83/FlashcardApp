@@ -2,12 +2,13 @@ import './HomeView.css';
 import { FaUserGraduate } from "react-icons/fa";
 import { HiOutlineExternalLink } from "react-icons/hi";
 import { VscEmptyWindow } from "react-icons/vsc";
-import { CollectionItem, CollectionData } from '../../types';
+import { CollectionData } from '../../types';
 import { useState } from 'react';
 import { Notification } from '../Notification/Notification';
 import { Loading } from '../Loading/Loading';
 import { useNavigate } from "react-router-dom";
 
+/*
 const NotYetAuthComponent = () => {
     return(
         <div className='authPossiblyContainer'>
@@ -16,6 +17,7 @@ const NotYetAuthComponent = () => {
         </div>
     )
 }
+*/
 
 const LearningStreak = () => {
     return(

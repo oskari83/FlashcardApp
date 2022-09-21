@@ -21,7 +21,10 @@ export const CollectionView = ({userId}: {userId:string}) => {
 	const [id, setID] = useState(useParams().id);
 	const [collection, setCollection] = useState<PossiblyEmptyCollectionData>({});
 	const [colData, setColData] = useState<PossiblyEmptyData>({});
-	const [loadingStatus, setLoadingStatus] = useState(2);
+	const [loadingStatus, setLoadingStatus] = useState(0);
+	const [created, setCreated] = useState(false);
+	const [requireRefresh, setRequireRefresh] = useState(false);
+	const [executeRefresh,setExecuteRefresh] = useState(0);
 
 	const ClearNotificationError = (time:number) => {
 		if(notificationTimeout){
@@ -38,13 +41,21 @@ export const CollectionView = ({userId}: {userId:string}) => {
 		ClearNotificationError(time);
 	}
 
+	const SetRefreshAsRequired = () => {
+		setRequireRefresh(true);
+	}
+
 	useEffect(() => {
 		console.log('i fire once',id);
+		setLoadingStatus(2);
 		if(id!==undefined){
 			collectionService
 				.getSingle(id)
 				.then(initialCollection => {
 					console.log(initialCollection);
+					if(initialCollection.user.toString()===userId){
+						setCreated(true);
+					}
 					setCollection(initialCollection);
 					setLoadingStatus((n:number) => n-1);
 				})
@@ -73,7 +84,7 @@ export const CollectionView = ({userId}: {userId:string}) => {
 					console.log(error);
 				});
 		}
-    }, [id]);
+    }, [id,executeRefresh]);
 
 
     const bookmarkThis = () => {
@@ -81,7 +92,11 @@ export const CollectionView = ({userId}: {userId:string}) => {
     }
 
     const selectionChange = (id: number) => {
-        setCurrentSelection(id)
+        setCurrentSelection(id);
+		if(requireRefresh){
+			setExecuteRefresh((v:number) => v+1);
+			setRequireRefresh(false);
+		}
     }
 
     return(
@@ -119,24 +134,25 @@ export const CollectionView = ({userId}: {userId:string}) => {
                     <div className='selectorBarItemText'>Edit</div>
                 </div>
                 </div>
-				<div className='setAreaLoadingOuter'>
-					{loadingStatus!==0 && 
-							<Loading />
-					}
-				</div>
-                {currentSelection===0 && 
+		
+				{loadingStatus!==0 && 
+					(<div className='setAreaLoadingOuter'>
+						<Loading />
+					</div>)
+				}
+                {currentSelection===0 && loadingStatus===0 &&
                 <StatisticsTable items={collection?.items} itemdata={colData}/>
                 } 
 
-                {currentSelection===1 && 
+                {currentSelection===1 && loadingStatus===0 &&
                 <FlipMode items={collection?.items} />
                 } 
 
-                {currentSelection===2 && 
-                <RevealMode items={collection?.items}/>
+                {currentSelection===2 && loadingStatus===0 &&
+                <RevealMode items={collection?.items} created={created} id={collection?.id} itemdata={colData} userId={userId} notFunction={SetNotificaiton} setRefresh={SetRefreshAsRequired}/>
                 } 
 
-                {currentSelection===3 && 
+                {currentSelection===3 && loadingStatus===0 &&
                 <CollectionEdit items={collection?.items} name={collection?.name} id={collection?.id} notFunction={SetNotificaiton}/>
                 } 
 

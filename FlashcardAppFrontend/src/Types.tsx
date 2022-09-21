@@ -54,3 +54,9 @@ export interface SingleItem {
     qside: string, 
     key: number,
 }
+
+export interface UpdateData {
+    colId: string,
+	uniqueId?: string,
+	operation: number
+}

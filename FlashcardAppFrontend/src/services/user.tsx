@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { UpdateData } from '../types';
 
 const baseUrl = 'api/users';
 
@@ -27,8 +28,28 @@ const getData = async (id:string, colId: string) => {
     return response.data;
 }
 
+const updateOwnData = async (id:string, newData: UpdateData) => {
+	const config = {
+		headers: { Authorization: token2 }
+	}
+
+	const response = await axios.put(`${baseUrl}/${id}/updateown`, newData, config);
+    return response.data;
+}
+
+const updateSavedData = async (id:string, newData: UpdateData) => {
+	const config = {
+		headers: { Authorization: token2 }
+	}
+
+	const response = await axios.put(`${baseUrl}/${id}/updatesaved`, newData, config);
+    return response.data;
+}
+
 export default { 
   getCollections,
   getData,
+  updateOwnData,
+  updateSavedData,
   setToken
 }

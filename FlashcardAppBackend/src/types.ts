@@ -24,7 +24,8 @@ export interface CollectionEntry {
 
 export interface DataEntry {
 	data: ItemEntryData[],
-	id: string
+	id: string,
+	created?: boolean
 }
 
 export type NewCollectionEntry2 = Omit<CollectionEntry, 'id'>;

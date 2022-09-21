@@ -159,7 +159,7 @@ router.put('/:id', async (req:any, res:express.Response) => {
 
 	const colId = req.params.id;
 	const createdData = user.createdData;
-	let colToChange;
+	let colToChange: any;
 
 	for(let i=0;i<createdData.length;i++){
 		if(createdData[i].id.toString()===colId){
@@ -167,7 +167,21 @@ router.put('/:id', async (req:any, res:express.Response) => {
 		}
 	}
 
-	const newItemsData = newUpdatedItems.map((itemEnt:ItemEntry, index:number) => {
+	if(!colToChange){
+		return res.status(401).json({
+			error: 'collection data not found in user data'
+		});
+	}
+
+	const mergedUpdatedCol = newUpdatedItems.map((t1:ItemEntry) => {
+		const foundData = colToChange?.data.find((t2:any) => t2.uniqueId === t1.uniqueId);
+		if(foundData!==undefined){
+			return { ...t1, ...foundData };
+		}
+		return { ...t1 };
+	});
+
+	const newItemsData = mergedUpdatedCol.map((itemEnt:ItemEntry, index:number) => {
 		const newEntItemData = {
 			key: index,
 			uniqueId: itemEnt.uniqueId,
@@ -217,8 +231,8 @@ router.put('/:id/save', async (req:any, res:express.Response) => {
 		const newEntItemData = {
 			key: index,
 			uniqueId: itemEnt.uniqueId,
-			correct: itemEnt.correct,
-			attempts: itemEnt.attempts,
+			correct: 0,
+			attempts: 0,
 		};
 		return newEntItemData;
 	});
