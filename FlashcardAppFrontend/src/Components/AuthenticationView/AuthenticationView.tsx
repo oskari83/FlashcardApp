@@ -39,6 +39,7 @@ const SignInView = ({setUserFunc, setError, errorText}: {setUserFunc:any, setErr
 			window.localStorage.setItem(
 				'loggedFlashcardAppUser', JSON.stringify(user)
 			); 
+			console.log(user);
 			collectionService.setToken(user.token);
 			userService.setToken(user.token);
 			setUserFunc(user);

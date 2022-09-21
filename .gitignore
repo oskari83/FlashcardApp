@@ -1,1 +1,3 @@
 /FlashcardAppBackend/.env
+/FlashcardAppBackend/node_modules
+/FlashcardAppBackend/prod

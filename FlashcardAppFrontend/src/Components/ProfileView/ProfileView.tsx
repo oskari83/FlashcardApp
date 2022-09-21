@@ -1,9 +1,16 @@
-import './ProfileView.css';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import './ProfileView.css';
 
-export const ProfileView = () => {
+export const ProfileView = ({logoutFunc, user, createdA, savedA}:{logoutFunc:any, user:any, savedA:number, createdA:number}) => {
     const [emailChange, setEmailChange] = useState(0);
     const [pwChange, setPwChange] = useState(0);
+	const navigate = useNavigate();
+
+	const LogoutOfAccount = () => {
+		logoutFunc();
+		navigate('/');
+	}
 
     const emailChangeStatus = (id: number) => {
         setEmailChange(id);
@@ -38,16 +45,16 @@ export const ProfileView = () => {
 
             <div className='profileContainer'>
                 <div className='accountDetailsText'>Account Details</div>
-                <div className='usernameText'>Username: oskari83</div>
+                <div className='usernameText'>Username: {user.username}</div>
                 <div className='emailText'>
                     { emailChange === 0 ? 
                     <>
-                        <div className='emailAddress'>Email: oskpelto@gmail.com</div>
+                        <div className='emailAddress'>Email: {user.email}</div>
                         <div className='emailChangeButton' onClick={() => emailChangeStatus(1)}>Change</div>
                     </>
                     :
                     <>
-                        <div className='emailAddress'>Email: oskpelto@gmail.com</div>
+                        <div className='emailAddress'>Email: {user.email}</div>
                     </>
                     }
                 </div>
@@ -94,10 +101,12 @@ export const ProfileView = () => {
                 }
 
                 <div className='statsDetailsText'>Statistics</div>
-                <div className='statText'>Collections created: 8</div>
-                <div className='statText'>Collections saved: 2</div>
-                <div className='statText'>Collections progress: 12%</div>
-                <div className='statTextBottom'>Account created: 12.02.2021</div>
+                <div className='statText'>Collections created: {createdA}</div>
+                <div className='statText'>Collections saved: {savedA}</div>
+                <div className='statText'>Collections progress: {'null'}%</div>
+                <div className='statTextBottom'>Account created: {'null'}</div>
+
+				<div className='logoutButton' onClick={() => LogoutOfAccount()}>Sign Out</div>
             </div>
 
             <div className='emptyContainer'></div>

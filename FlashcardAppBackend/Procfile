@@ -1,0 +1,1 @@
+worker: sh -c 'cp -r build ./prod && npm start'

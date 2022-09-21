@@ -1,7 +1,8 @@
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
 import { CollectionItem } from '../../types';
-import Card from '../Card/Card';
 import { useState, useEffect } from 'react';
+import userService from '../../services/user';
+import Card from '../Card/Card';
 import './FlipMode.css';
 
 const FinishedComponent = ({restartFunc}:{restartFunc:any}) => {
@@ -15,35 +16,90 @@ const FinishedComponent = ({restartFunc}:{restartFunc:any}) => {
     );
 };
 
-export const FlipMode = ({items}:{items:CollectionItem[] | undefined}) => {
+export const FlipMode = ({items, itemdata, created, userId, notFunction, id, setRefresh}:{items:CollectionItem[] | undefined, itemdata:any, created:boolean, userId:string, notFunction:any, id:any, setRefresh:any}) => {
 	const [order,setOrder] = useState(true);
 	const [itemIndex,setItemIndex] = useState(0);
 	const [isRotated, setRotate] = useState(false);
 	const [cardClass, setCardClass] = useState('thecard');
-	const [itemsToShow, SetItems] = useState(items);
+	const [itemsToShow, SetItems] = useState<any[]>([]);
 	const [finishedPanel, setFinishedPanel] = useState(false);
+	const [combinedItems, setCombinedItems] = useState<any[]>([]);
+	
+	useEffect(() => {
+		if(items!==undefined && Object.keys(itemdata).length !== 0){
+			const datadata = itemdata.data;
+			const combinedStuff = items.map(t1 => ({...t1, ...datadata.find((t2:any) => t2.uniqueId === t1.uniqueId)}));
+			SetItems(combinedStuff);	
+			setCombinedItems(combinedStuff);
+		}	
+	}, [items,itemdata]);
 
 	const CreateRandomOrder = () => {
-		if(items!==undefined){
-			const sortedItems = [...items].sort((a,b) => 0.5 - Math.random());
-			SetItems(sortedItems);
-		}else{
-			SetItems([]);
-		}
+		const sortedItems = [...combinedItems].sort((a,b) => 0.5 - Math.random());
+		SetItems(sortedItems);
 	}
 
 	const SetNormalOrder = () => {
-		SetItems(items);
+		SetItems(combinedItems);
 	}
 
-	if(itemsToShow===undefined){
-		SetItems(items);
-	}
-
-	const cardData = itemsToShow!==undefined ? {
+	const cardData = itemsToShow.length>0 ? {
 		front: itemsToShow[itemIndex].qside,
 		back: itemsToShow[itemIndex].aside
 	} : {front: '', back: ''}
+
+	const giveFeedBack = (op:number) => {
+		if(created){
+			const updateDataObject = {
+				colId: id,
+				uniqueId: itemsToShow[itemIndex].uniqueId,
+				operation: op,
+			}
+			userService
+				.updateOwnData(userId,updateDataObject)
+				.then(resp => {
+					console.log(resp);
+					setRefresh();
+				})
+				.catch(error => {
+					if(error.code==="ERR_NETWORK"){
+						notFunction('Network error - please check your internet connection!',5000);
+					}else{
+						notFunction(error.message,5000);
+					}
+					if(error.response.data.error==='token expired'){
+						window.localStorage.clear();
+						window.location.reload();
+					}
+					console.log(error);
+				});
+		}else{
+			const updateDataObject = {
+				colId: id,
+				uniqueId: itemsToShow[itemIndex].uniqueId,
+				operation: op,
+			}
+			userService
+				.updateSavedData(userId,updateDataObject)
+				.then(resp => {
+					console.log(resp);
+					setRefresh();
+				})
+				.catch(error => {
+					if(error.code==="ERR_NETWORK"){
+						notFunction('Network error - please check your internet connection!',5000);
+					}else{
+						notFunction(error.message,5000);
+					}
+					if(error.response.data.error==='token expired'){
+						window.localStorage.clear();
+						window.location.reload();
+					}
+					console.log(error);
+				});
+		}
+        IncrementIndex();
+    }
 
 	const IncrementIndex = () => {
 		if(itemsToShow!==undefined && itemIndex!==(itemsToShow.length)-1){
@@ -155,9 +211,9 @@ export const FlipMode = ({items}:{items:CollectionItem[] | undefined}) => {
 
             <div className='belowCard'>
                 <div className='belowCardInner'>
-                    <div className='feedButtonNeg noselect'>-1</div>
-                    <div className='feedButtonNeut noselect'>0</div>
-                    <div className='feedButtonPos noselect'>+1</div>
+                    <div className='feedButtonNeg noselect' onClick={() => giveFeedBack(0)}>-1</div>
+                    <div className='feedButtonNeut noselect' onClick={() => giveFeedBack(1)}>0</div>
+                    <div className='feedButtonPos noselect' onClick={() => giveFeedBack(2)}>+1</div>
                 </div>
             </div>
         </div>

@@ -1,75 +1,24 @@
-import './BrowseView.css';
 import { FiSearch } from "react-icons/fi"
 import { HiOutlineExternalLink } from "react-icons/hi"
-import { BsBookmark,BsBookmarkCheckFill } from "react-icons/bs"
 import { useState, useEffect } from 'react';
 import { Loading } from '../Loading/Loading';
 import { Notification } from '../Notification/Notification';
 import { CollectionData } from '../../types';
+import { useNavigate } from 'react-router-dom';
 import collectionService from '../../services/collections';
+import './BrowseView.css';
 
-const CollectionItem = ( { collectionWhole, name, creator, count, setError }: { collectionWhole:CollectionData, name: string, creator: string, count: number,setError:any}) => {
-    const [bookmarked, setBookmarked] = useState(false);
-	const [bookmarkStatus, setBookmarkStatus] = useState(0);
+const CollectionItem = ( { name, creator, count, id }: { name: string, creator: string, count: number, id:string}) => {
+	const navigate = useNavigate();
 
-	if(collectionWhole.saved && bookmarked===false){
-		setBookmarked(true);
-		setBookmarkStatus(2);
+	const ClickedCollection = () => {
+		navigate(`/${id}`);
 	}
-
-    const bookmarkThis = () => {
-        if(bookmarked===false){
-            const id = collectionWhole.id;
-			setBookmarkStatus(1);
-
-			collectionService
-				.saveCollection(id)
-				.then((data) => {
-					console.log(data);
-					setBookmarked(true);
-					setBookmarkStatus(2);
-				})
-				.catch(error => {
-					console.log(error);
-					setError(error.message,5000);
-					setBookmarkStatus(0);
-				});
-        }else{
-			const id = collectionWhole.id;
-			setBookmarkStatus(3);
-			
-            collectionService
-				.unSaveCollection(id)
-				.then((data) => {
-					console.log(data);
-					setBookmarked(false);
-					setBookmarkStatus(0);
-				})
-				.catch(error => {
-					console.log(error);
-					setError(error.message,5000);
-					setBookmarkStatus(2);
-				});
-        }
-    }
     
     return (
-        <div className='collectionItem'>
+        <div className='collectionItem' onClick={ClickedCollection}>
             <div className='itemName'>
                 <div className='itemNameText'>{name}</div>
-                <div className='itemNameIcon' onClick={() => bookmarkThis()}>
-                    { bookmarked ? 
-                    <BsBookmarkCheckFill size='16px' color={`rgb(248, 222, 106)`} />
-                    :
-                    <BsBookmark size='16px' color={`rgb(119, 119, 119)`} />
-                    }
-                    <div className='innerItemNameText'>
-                        {bookmarkStatus===0 && 'Save'}
-						{bookmarkStatus===1 && 'Saving...'}
-						{bookmarkStatus===2 && 'Saved'}
-						{bookmarkStatus===3 && 'Unsaving...'}
-                    </div>
-                </div>
             </div>
             <div className='linkIcon'>
                 <HiOutlineExternalLink size='20px' color={`rgb(78, 78, 78)`} />
@@ -158,7 +107,7 @@ export const BrowseView = ({username, savedCols}:{username:string,savedCols:Coll
                     }
 
                     {resultCollections.map( (col: CollectionData) => 
-                        <CollectionItem key={col.id} collectionWhole={col} name={col.name} creator={col.creator} count={col.itemCount} setError={AddNotification}/>
+                        <CollectionItem key={col.id}  name={col.name} creator={col.creator} count={col.itemCount} id={col.id}/>
                     )}
                 </div>
             </div>

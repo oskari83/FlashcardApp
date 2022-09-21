@@ -27,13 +27,20 @@ const create = async (newObject: NewCollectionData) => {
     return response.data;
 }
 
-
 const update = async (id:string, newObject: UpdateCollectionData) => {
 	const config = {
 		headers: { Authorization: token }
 	}
     const response = await axios.put(`${baseUrl}/${id}`, newObject, config);
     return response.data;
+}
+
+const deleteCollection = (id:string) => {
+	const config = {
+		headers: { Authorization: token }
+	}
+    const request = axios.delete(`${baseUrl}/${id}`,config);
+    return request.then(response => response.data);
 }
 
 const saveCollection = async (id:string) => {
@@ -59,6 +66,7 @@ export default {
   getSingle,
   create,
   update,
+  deleteCollection,
   saveCollection,
   unSaveCollection,
   setToken

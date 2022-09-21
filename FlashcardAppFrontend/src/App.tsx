@@ -6,7 +6,7 @@ import { CreateView } from './Components/CreateView/CreateView';
 import { HomeView } from './Components/HomeView/HomeView';
 import { ProfileView } from './Components/ProfileView/ProfileView';
 import { AuthenticationView } from './Components/AuthenticationView/AuthenticationView';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { Routes, Route, HashRouter as Router } from "react-router-dom"
 import { CollectionView } from './Components/CollectionView/CollectionView';
 import { useState, useEffect } from 'react';
 import collectionService from './services/collections';
@@ -23,6 +23,11 @@ const App = () => {
 
 	const SetUserData = (s:any) => {
 		setUser(s);
+	}
+
+	const DeleteUserData = () => {
+		window.localStorage.clear();
+		setUser(null);
 	}
 
 	const ClearNotificationMessage = (time:number) => {
@@ -55,6 +60,7 @@ const App = () => {
 			userService
 			.getCollections(user.id)
 			.then(data => {
+				console.log(data);
 				const cols = data.createdCollections.concat(data.savedCollections);
 				setCollections(cols);
 				setSavedCollections(data.savedCollections);
@@ -66,11 +72,11 @@ const App = () => {
 				}else{
 					AddNotification(error.message,5000);
 				}
-				if(error.response.data.error==='token expired'){
-					window.localStorage.clear();
-					setUser(null);
-					window.location.reload();
+				
+				if(error.response.data!==undefined && error.response.data.error!==undefined && error.response.data.error==='token expired'){
+					DeleteUserData();
 				}
+				
 				console.log(error);
 			});
 		}
@@ -90,11 +96,11 @@ const App = () => {
 
 		<Router>
 			<Routes>
-			<Route path="/:id" element={<CollectionView userId={user.id}/>} />
+			<Route path="/:id" element={<CollectionView userId={user.id} savedCols={savedCollections} />} />
 			<Route path="/create" element={<CreateView username={user.username}/>} />
 			<Route path="/browse" element={<BrowseView username={user.username} savedCols={savedCollections} />} />
 			<Route path="/auth" element={<AuthenticationView setUserFunc={SetUserData}/>} />
-			<Route path="/user" element={<ProfileView />} />
+			<Route path="/user" element={<ProfileView logoutFunc={DeleteUserData} user={user} createdA={collections.length-savedCollections.length} savedA={savedCollections.length}/>} />
 			<Route path="/" element={<HomeView collectionData={collections} username={user.username} notifText={notificationMessage} loadingStatus={loadingStatus}/>} />
 			</Routes>
 		</Router>

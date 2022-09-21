@@ -5,15 +5,15 @@ import { CollectionEdit } from '../CollectionEdit/CollectionEdit';
 import { IoMdStats, IoMdPlay } from 'react-icons/io';
 import { AiFillEdit } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
-import { PossiblyEmptyCollectionData, PossiblyEmptyData } from '../../types';
+import { CollectionData, PossiblyEmptyCollectionData, PossiblyEmptyData } from '../../types';
 import { Loading } from '../Loading/Loading';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Notification } from '../Notification/Notification';
 import collectionService from '../../services/collections';
 import userService from '../../services/user';
 import './CollectionView.css';
 
-export const CollectionView = ({userId}: {userId:string}) => {
+export const CollectionView = ({userId, savedCols}: {userId:string,savedCols:CollectionData[] | undefined}) => {
     const [currentSelection, setCurrentSelection] = useState(0);
     const [bookmarked, setBookmarked] = useState(false);
 	const [notificationMessage, setNotificationMessage] = useState('');
@@ -25,6 +25,7 @@ export const CollectionView = ({userId}: {userId:string}) => {
 	const [created, setCreated] = useState(false);
 	const [requireRefresh, setRequireRefresh] = useState(false);
 	const [executeRefresh,setExecuteRefresh] = useState(0);
+	const navigate = useNavigate();
 
 	const ClearNotificationError = (time:number) => {
 		if(notificationTimeout){
@@ -86,9 +87,42 @@ export const CollectionView = ({userId}: {userId:string}) => {
 		}
     }, [id,executeRefresh]);
 
-
-    const bookmarkThis = () => {
-        setBookmarked(!bookmarked);
+	const clickDelButton = () => {
+		if(created){
+			if (window.confirm("Do you really want to delete collection forever?") && id!==undefined) {
+				setBookmarked(true);
+				console.log('confirmed');
+				collectionService
+					.deleteCollection(id)
+					.then((data) => {
+						console.log(data);
+						navigate('/');
+						navigate(0);
+					})
+					.catch(error => {
+						console.log(error);
+						SetNotificaiton(error.message,5000);
+						setBookmarked(false);
+					});
+			}
+		}else{
+			if (window.confirm("Do you really want to remove this collection from your saved collections?") && id!==undefined) {
+				console.log('confirmed');
+				setBookmarked(true);
+				collectionService
+					.unSaveCollection(id)
+					.then((data) => {
+						console.log(data);
+						navigate('/');
+						navigate(0);
+					})
+					.catch(error => {
+						console.log(error);
+						SetNotificaiton(error.message,5000);
+						setBookmarked(false);
+					});
+			}
+		}
     }
 
     const selectionChange = (id: number) => {
@@ -106,9 +140,11 @@ export const CollectionView = ({userId}: {userId:string}) => {
             <div className="setInfoContainer">
             <div className="setName">
                 <div className='setNameText'>{collection!==undefined ? collection?.name : 'Loading...'}</div>
-                <div className={`setNameIconButton${bookmarked ? 'Saved' : ''} noselect`} onClick={() => bookmarkThis()}>
-                    { bookmarked ? "Saved" : "Save"}
-                </div>
+                
+				<div className={`setNameIconButton noselect`} onClick={() => clickDelButton()}>
+					{ bookmarked ? "Deleting..." : "Delete"}
+				</div>
+				
             </div>
             <div className='setProgress'>43%</div>
             <div className="setInfo">{`Creator: ${collection!==undefined ? collection?.creator : 'Loading...'}, Objects: ${collection!==undefined ? collection?.itemCount : 'Loading...'}`}</div>
@@ -118,21 +154,23 @@ export const CollectionView = ({userId}: {userId:string}) => {
             <div className="setAreaContainer">
                 <div className="selectorBar">
                 <div className={currentSelection===0 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(0)}>
-                    <div className='selectorBarItemIcon'><IoMdStats size='16px' color={currentSelection===0 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
-                    <div className='selectorBarItemText'>Overview</div>
+                    <div className='selectorBarItemIcon'><IoMdStats size='16px' color={currentSelection===0 ? `rgb(47, 110, 255)` : `rgb(92, 92, 92)`} /></div>
+                    <div className='selectorBarItemText'>OVERVIEW</div>
                 </div>
                 <div className={currentSelection===1 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(1)}>
-                    <div className='selectorBarItemIcon'><IoMdPlay size='16px' color={currentSelection===1 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
-                    <div className='selectorBarItemText'>Flip</div>
+                    <div className='selectorBarItemIcon'><IoMdPlay size='16px' color={currentSelection===1 ? `rgb(47, 110, 255)` : `rgb(92, 92, 92)`} /></div>
+                    <div className='selectorBarItemText'>FLIP</div>
                 </div>
                 <div className={currentSelection===2 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(2)}>
-                    <div className='selectorBarItemIcon'><IoMdPlay size='16px' color={currentSelection===2 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
-                    <div className='selectorBarItemText'>Reveal</div>
+                    <div className='selectorBarItemIcon'><IoMdPlay size='16px' color={currentSelection===2 ? `rgb(47, 110, 255)` : `rgb(92, 92, 92)`} /></div>
+                    <div className='selectorBarItemText'>REVEAL</div>
                 </div>
-                <div className={currentSelection===3 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(3)}>
-                    <div className='selectorBarItemIcon'><AiFillEdit size='16px' color={currentSelection===3 ? `rgb(41, 116, 255)` : `rgb(92, 92, 92)`} /></div>
-                    <div className='selectorBarItemText'>Edit</div>
-                </div>
+				{ created &&
+                (<div className={currentSelection===3 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(3)}>
+                    <div className='selectorBarItemIcon'><AiFillEdit size='16px' color={currentSelection===3 ? `rgb(47, 110, 255)` : `rgb(92, 92, 92)`} /></div>
+                    <div className='selectorBarItemText'>EDIT</div>
+                </div>)
+				}					
                 </div>
 		
 				{loadingStatus!==0 && 
@@ -145,7 +183,7 @@ export const CollectionView = ({userId}: {userId:string}) => {
                 } 
 
                 {currentSelection===1 && loadingStatus===0 &&
-                <FlipMode items={collection?.items} />
+                <FlipMode items={collection?.items} created={created} id={collection?.id} itemdata={colData} userId={userId} notFunction={SetNotificaiton} setRefresh={SetRefreshAsRequired}/>
                 } 
 
                 {currentSelection===2 && loadingStatus===0 &&

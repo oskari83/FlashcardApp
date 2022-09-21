@@ -2,7 +2,7 @@
 import collectionEntries from '../../data/collections';
 const CollectionM = require('../models/collection');
 
-import { NewCollectionEntry, CollectionEntry, MongooseCollectionEntry } from '../types';
+import { CollectionEntry, MongooseCollectionEntry } from '../types';
 
 const getEntries = (): any | void => {
 	CollectionM.find({})
@@ -15,7 +15,7 @@ const getEntries = (): any | void => {
 		});
 };
 
-const addCollection = ( entry: NewCollectionEntry): CollectionEntry | void => {
+const addCollection = ( entry: any): CollectionEntry | void => {
 	const newCollectionEntry = new CollectionM({
 		...entry
 	});

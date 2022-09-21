@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 import express from 'express';
 const usersRouter = express.Router();
 const User = require('../models/user');
@@ -98,20 +98,13 @@ usersRouter.put('/:id/data', async (req:any,res:express.Response) => {
 	const colId = req.body.colId;
 	const savedColD = userToGet.savedData;
 	const realSavedColD = savedColD.map((itm:DataEntry) => {
-		const nnn = {
-			...itm,
-			created: false
-		};
-		return nnn;
+		return { ...itm, created: false };
 	});
 	const createdColD = userToGet.createdData;
 	const realCreatedColD = createdColD.map((itm:DataEntry) => {
-		const nnn = {
-			...itm,
-			created: true
-		};
-		return nnn;
+		return { ...itm, created: true };
 	});
+
 	const allCols = realSavedColD.concat(realCreatedColD);
 	let wantedCol: DataEntry | null = null;
 	for(let i=0;i<allCols.length;i++){
@@ -120,62 +113,66 @@ usersRouter.put('/:id/data', async (req:any,res:express.Response) => {
 		}
 	}
 
-	if(!wantedCol){
-		return res.status(401).json({
-			error: 'collection data not found in user data'
-		});
-	}
-
 	//check if the collection found has actually been updated and update data i.e. add keys and unique ids
 	//will have to check if this actually works later so for now just a test
 	const wantedColFromDatabase = await CollectionM.findById(colId);
 	const wantedColItems = wantedColFromDatabase.items;
-	const mergedUpdatedCol = wantedColItems.map((t1:ItemEntry) => {
-		const foundData = wantedCol?.data.find((t2) => t2.uniqueId === t1.uniqueId);
-		if(foundData!==undefined){
-			return { ...t1, ...foundData };
-		}
-		return { ...t1 };
-	});
+	let mergedUpdatedCol;
 
-	const realMergedUpdatedCol = mergedUpdatedCol.map((itm: ItemEntry) => {
-		const removeFields = {
-			key: itm.key,
-			uniqueId: itm.uniqueId,
-			correct: itm.correct,
-			attempts: itm.attempts
-		};
-		return removeFields;
-	});
+	if(wantedCol){
+		mergedUpdatedCol = wantedColItems.map((t1:ItemEntry) => {
+			const newO = {
+				uniqueId: t1.uniqueId,
+				correct: t1.correct,
+				attempts: t1.attempts,
+				...wantedCol?.data.find((t2) => t2.uniqueId === t1.uniqueId) };
+			const modO = { ...newO, key: t1.key };
+			return modO;
+		});
+	}else{
+		mergedUpdatedCol = wantedColItems.map((t1:ItemEntry) => {
+			const nwD = {
+				uniqueId: t1.uniqueId,
+				correct: t1.correct,
+				attempts: t1.attempts,
+				key: t1.key
+			};
+			return nwD;
+		});
+	}
 
 	const dataIWantToSave = {
-		data: realMergedUpdatedCol,
-		id: wantedCol.id
+		data: mergedUpdatedCol,
+		id: colId
 	};
 
-	if(wantedCol.created){
-		for(let i=0;i<createdColD.length;i++){
-			if(createdColD[i].id.toString()===colId){
-				createdColD[i] = dataIWantToSave;
+	if(wantedCol){
+		if(wantedCol.created){
+			for(let i=0;i<createdColD.length;i++){
+				if(createdColD[i].id.toString()===colId){
+					createdColD[i] = dataIWantToSave;
+				}
+			}
+		}else{
+			for(let i=0;i<savedColD.length;i++){
+				if(savedColD[i].id.toString()===colId){
+					savedColD[i] = dataIWantToSave;
+				}
 			}
 		}
+
 		userToGet.createdData = createdColD;
-	}else{
-		for(let i=0;i<savedColD.length;i++){
-			if(savedColD[i].id.toString()===colId){
-				savedColD[i] = savedColD;
-			}
-		}
 		userToGet.savedData = savedColD;
+	}else{
+		userToGet.savedCollections = userToGet.savedCollections.concat(colId);
+		userToGet.savedData = userToGet.savedData.concat(dataIWantToSave);
 	}
 
 	await userToGet.save();
-
 	const onlyReturnDataObject = {
-		data: realMergedUpdatedCol
+		data: mergedUpdatedCol
 	};
 
-	console.log(onlyReturnDataObject);
 	res.json(onlyReturnDataObject);
 });
 

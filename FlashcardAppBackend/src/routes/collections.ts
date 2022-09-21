@@ -84,6 +84,10 @@ router.delete('/:id', async (req:any, res:express.Response) => {
 		return res.status(204).end();
 	}
 
+	if(!req.user){
+		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in to delete collections)' });
+	}
+
 	if(collectionToDelete.user && collectionToDelete.user.toString() !== req.user.id) {
 		return res.status(401).json({
 			error: 'only the creator can delete a collection'
@@ -252,7 +256,7 @@ router.put('/:id/save', async (req:any, res:express.Response) => {
 
 router.put('/:id/unsave', async (req:any, res:express.Response) => {
 	if(!req.user){
-		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in to save collections)' });
+		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in to unsave collections)' });
 	}
 
 	const collectionToUnSave = await CollectionM.findById(req.params.id);
@@ -273,7 +277,7 @@ router.put('/:id/unsave', async (req:any, res:express.Response) => {
 	const savedCols = user.savedCollections;
 	const savedData = user.savedData;
 	const newSavedCols = savedCols.filter((col:CollectionEntry) => {
-		return col!==req.params.id;
+		return col.toString()!==req.params.id;
 	});
 	const newSavedColsData = savedData.filter((col:CollectionEntry) => {
 		return col.id!==req.params.id;

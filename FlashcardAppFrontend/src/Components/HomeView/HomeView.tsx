@@ -1,4 +1,3 @@
-import './HomeView.css';
 import { FaUserGraduate } from "react-icons/fa";
 import { HiOutlineExternalLink } from "react-icons/hi";
 import { VscEmptyWindow } from "react-icons/vsc";
@@ -7,17 +6,7 @@ import { useState } from 'react';
 import { Notification } from '../Notification/Notification';
 import { Loading } from '../Loading/Loading';
 import { useNavigate } from "react-router-dom";
-
-/*
-const NotYetAuthComponent = () => {
-    return(
-        <div className='authPossiblyContainer'>
-            <div className='authPossiblyText'>Register now to create your own collections and start studying!</div>
-            <div className='takeToAuthButton'>Register</div>
-        </div>
-    )
-}
-*/
+import './HomeView.css';
 
 const LearningStreak = () => {
     return(
@@ -102,9 +91,6 @@ export const HomeView = ({collectionData, username, notifText, loadingStatus}: {
                     </div>
                     <div className='profileUsernameText'>{username}</div>
                 </div>
-                <div className='rightSideCont'>
-                    <LearningStreak />
-                </div>
             </div>
 
             <div className={`mainHomeContainer${collectionData.length >= 3 ? '' : 'E'}`}>
@@ -132,3 +118,9 @@ export const HomeView = ({collectionData, username, notifText, loadingStatus}: {
         </>
     )
 }
+
+/*
+<div className='rightSideCont'>
+	<LearningStreak />
+</div>
+*/

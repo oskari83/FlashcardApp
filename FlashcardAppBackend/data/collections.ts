@@ -132,7 +132,6 @@ const collectionEntries: Array<CollectionEntry> = [
 		'name': 'New Set 3',
 		'creator': 'stranger12',
 		'itemCount': 3,
-		'saved': true,
 		'items': [
 			{
 				'qside': 'ostaa',
@@ -159,7 +158,6 @@ const collectionEntries: Array<CollectionEntry> = [
 		'name': 'New Set 4',
 		'creator': 'stranger22',
 		'itemCount': 2,
-		'saved': true,
 		'items': [
 			{
 				'qside': 'life',
