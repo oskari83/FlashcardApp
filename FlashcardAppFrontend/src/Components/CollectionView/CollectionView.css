@@ -94,7 +94,7 @@
 
 .setNameIconButtonSaved:hover{
 	background-color: var(--main-blue);
-  }
+}
 
 .setProgress {
   position: relative;

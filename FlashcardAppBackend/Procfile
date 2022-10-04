@@ -1,1 +1,1 @@
-worker: sh -c 'cp -r build ./prod && npm start'
+web: sh -c 'cp -r ./client/build ./client/src && npm start'

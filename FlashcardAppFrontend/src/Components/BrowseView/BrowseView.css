@@ -72,6 +72,7 @@
     padding-left: 0%;
     padding-right: 0%;
     margin-top: 10px;
+	margin-bottom: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
     z-index: 2;
@@ -81,7 +82,7 @@
     font-family: "Readex";
     font-size: 12px;
     color:rgb(70, 70, 70);
-    min-height: calc(85vh - 0px);
+    min-height: calc(85vh - 100px);
 }
 
 .collectionItem{
@@ -120,7 +121,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
 }
 
 .itemName{
@@ -182,4 +183,62 @@
     padding-left: 10px;
     margin-top: 15px;
     margin-bottom: 10px;
+}
+
+.paginationContainer{
+	width: 90%;
+	margin: auto;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-bottom: 10px;
+}
+
+.paginationInnerContainer{
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 200px;
+	height: 100%;
+}
+
+.paginationBox{
+	width: 33px;
+	height: 33px;
+	margin-left: 2px;
+	border-radius: 10px;
+	color: var(--main-gray80);
+	background-color: white;
+	border: 2px solid var(--white-gray240);
+	font-family: "ReadexBold";
+	font-size: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.paginationBoxSelected{
+	width: 33px;
+	height: 33px;
+	margin-left: 2px;
+	border-radius: 10px;
+	border: 2px solid var(--main-blue75);
+	font-family: "ReadexBold";
+	font-size: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	background-color: var(--main-blue75);
+	cursor: pointer;
+}
+
+.paginationBox:hover{
+	background-color: var(--white-gray250);
+}
+
+.paginationBoxSelected:hover{
+  background-color: var(--main-blue);
 }

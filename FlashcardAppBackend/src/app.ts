@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path');
 require('express-async-errors');
 
 const collectionRouter = require('./routes/collections');
@@ -31,7 +32,13 @@ app.use('/api/collections', userExtractor, collectionRouter);
 app.use('/api/users', userExtractor, usersRouter);
 app.use('/api/login', loginRouter);
 
-app.use(unknownEndpoint);
+app.use(express.static(path.join(__dirname, 'build')));
+
+//app.use(unknownEndpoint);
 app.use(errorHandler);
+
+app.get('*', (_req:any, res:any) => {
+	res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 module.exports = app;

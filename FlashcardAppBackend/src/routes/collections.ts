@@ -8,8 +8,18 @@ const router = express.Router();
 
 router.get('/', async (_req:express.Request, res:express.Response) => {
 	const cols = await CollectionM
-		.find({})
+		.find()
+		.sort({ _id: -1 })
+		.limit(25)
 		.populate('user', { username: 1 });
+	res.json(cols);
+});
+
+router.post('/', async (req:express.Request, res:express.Response) => {
+	const query = req.body.search;
+	const cols = await CollectionM
+		.find({ 'name': { $regex: '^' + query, $options: 'i' } })
+		.exec();
 	res.json(cols);
 });
 

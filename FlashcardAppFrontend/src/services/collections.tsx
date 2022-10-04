@@ -14,6 +14,14 @@ const getAll = () => {
     return request.then(response => response.data);
 }
 
+const search = async (searchString:string) => {
+	const bod = {
+		search: searchString
+	};
+    const response = await axios.post(baseUrl, bod);
+    return response.data;
+}
+
 const getSingle = (id:string) => {
     const request = axios.get(`${baseUrl}/${id}`);
     return request.then(response => response.data);
@@ -64,6 +72,7 @@ const unSaveCollection = async (id:string) => {
 export default { 
   getAll,
   getSingle,
+  search,
   create,
   update,
   deleteCollection,

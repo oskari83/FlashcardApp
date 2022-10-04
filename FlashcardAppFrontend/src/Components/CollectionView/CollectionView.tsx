@@ -25,6 +25,7 @@ export const CollectionView = ({userId, savedCols}: {userId:string,savedCols:Col
 	const [created, setCreated] = useState(false);
 	const [requireRefresh, setRequireRefresh] = useState(false);
 	const [executeRefresh,setExecuteRefresh] = useState(0);
+	const [percentComplete,setPercentComplete] = useState(0);
 	const navigate = useNavigate();
 
 	const ClearNotificationError = (time:number) => {
@@ -72,8 +73,22 @@ export const CollectionView = ({userId, savedCols}: {userId:string,savedCols:Col
 			userService
 				.getData(userId,id)
 				.then((data:PossiblyEmptyData) => {
-					console.log(data)
+					console.log(data);
 					setColData(data);
+					if(data.data!==undefined){
+						let sm2=0;
+						for(let i=0;i<data.data.length;i++){
+							let nm=0;
+							if(Number(data.data[i].correct)>4){
+								nm=4;
+							}else{
+								nm=Number(data.data[i].correct);
+							}
+							sm2+=nm;
+						}
+						const mm = 4*data.data.length;
+						setPercentComplete(Math.round((sm2/mm) * 100));
+					}
 					setLoadingStatus((n:number) => n-1);
 				})
 				.catch((error:any) => {
@@ -146,7 +161,7 @@ export const CollectionView = ({userId, savedCols}: {userId:string,savedCols:Col
 				</div>
 				
             </div>
-            <div className='setProgress'>43%</div>
+            <div className='setProgress'>{percentComplete}%</div>
             <div className="setInfo">{`Creator: ${collection!==undefined ? collection?.creator : 'Loading...'}, Objects: ${collection!==undefined ? collection?.itemCount : 'Loading...'}`}</div>
             </div>
 

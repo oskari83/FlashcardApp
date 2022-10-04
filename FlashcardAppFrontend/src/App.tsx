@@ -6,7 +6,7 @@ import { CreateView } from './Components/CreateView/CreateView';
 import { HomeView } from './Components/HomeView/HomeView';
 import { ProfileView } from './Components/ProfileView/ProfileView';
 import { AuthenticationView } from './Components/AuthenticationView/AuthenticationView';
-import { Routes, Route, HashRouter as Router } from "react-router-dom"
+import { Routes, Route, BrowserRouter as Router } from "react-router-dom"
 import { CollectionView } from './Components/CollectionView/CollectionView';
 import { useState, useEffect } from 'react';
 import collectionService from './services/collections';
@@ -69,12 +69,11 @@ const App = () => {
 			.catch(error => {
 				if(error.code==="ERR_NETWORK"){
 					AddNotification('Network error - please check your internet connection!',5000);
+				}else if(error.response.data!==undefined && error.response.data.error!==undefined && error.response.data.error==='token expired'){
+					DeleteUserData();
+					AddNotification(error.message,300);
 				}else{
 					AddNotification(error.message,5000);
-				}
-				
-				if(error.response.data!==undefined && error.response.data.error!==undefined && error.response.data.error==='token expired'){
-					DeleteUserData();
 				}
 				
 				console.log(error);
