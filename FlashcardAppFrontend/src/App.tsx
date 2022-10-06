@@ -12,6 +12,7 @@ import { useState, useEffect } from 'react';
 import collectionService from './services/collections';
 import userService from './services/user';
 import './App.css';
+import { LandingView } from './Components/LandingView/LandingView';
 
 const App = () => {
 	const [collections, setCollections] = useState([]);
@@ -20,6 +21,7 @@ const App = () => {
 	const [notificationMessage, setNotificationMessage] = useState('');
 	const [user, setUser] = useState<any>(null);
 	const [notificationTimeout, setNotificationTimeout] = useState<null | NodeJS.Timeout>(null);
+	const [wantAuth, setWantAuth] = useState(false);
 
 	const SetUserData = (s:any) => {
 		setUser(s);
@@ -28,6 +30,10 @@ const App = () => {
 	const DeleteUserData = () => {
 		window.localStorage.clear();
 		setUser(null);
+	}
+
+	const GetStarted = () => {
+		setWantAuth(true);
 	}
 
 	const ClearNotificationMessage = (time:number) => {
@@ -82,11 +88,17 @@ const App = () => {
 	}, [user]);
 
 	if(user===null){
-		return(
-			<div>
+		if(wantAuth===false){
+			return(
+				<div>
+					<LandingView getFunc={GetStarted}/>
+				</div>
+			)
+		}else{
+			return(
 				<AuthenticationView setUserFunc={SetUserData}/>
-			</div>
-		)
+			)
+		}
 	}
 
 	return (

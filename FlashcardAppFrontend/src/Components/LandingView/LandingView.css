@@ -1,0 +1,132 @@
+.containerMainLanding{
+	width: clamp(200px,96%,800px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+}
+
+.containerOuter{
+	width: 100%;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+	min-height: 100vh;
+}
+
+.textMain{
+	width: 60%;
+    height: 100px;
+    border: none;
+	margin:auto;
+	margin-top: 100px;
+	display: flex;
+	align-items: center;
+    font-family: "ReadexBold";
+    font-size: 46px;
+    color:rgb(36, 36, 36);
+	text-align: center;
+}
+
+.subText{
+	width: 60%;
+    height: 100px;
+    border: none;
+	margin:auto;
+	display: flex;
+	align-items: center;
+    font-family: "Readex";
+    font-size: 16px;
+    color:rgb(55, 55, 55);
+	text-align: center;
+}
+
+.navbar-outerLanding{
+    display: flex;
+    background-color: #ffffffe1;
+    border-bottom: 1px solid rgb(232, 232, 232);
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+}
+
+.navbar-tutorialLanding{
+    min-height: 70px;
+    display: flex;
+    width: clamp(200px,800px,800px);
+    justify-content: space-between;
+    align-items: stretch;
+    z-index: 8;
+}
+
+.nav-logoLanding{
+    display: flex;
+    align-items: center;
+	justify-content: center;
+	width: 200px;
+}
+
+.nav-brandingLanding{
+    font-size: 1rem;
+    font-family: "ReadexBold";
+	display: flex;
+    align-items: center;
+	justify-content: center;
+	color: var(--main-blue);
+}
+
+.navLogo {
+    width:32px;
+    aspect-ratio: 1/1;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url(../../Assets/logo.png);
+    padding-right: 10px;
+	margin-right: 10px;
+    cursor: pointer;
+}
+
+.navTryOuter{
+	display: flex;
+    align-items: center;
+	justify-content: center;
+	width: 200px;
+	height: 100%;
+}
+
+.navTryButton{
+	width: 110px;
+	height: 40px;
+	margin-left: 2px;
+	border-radius: 12px;
+	border: 0px solid var(--main-blue75);
+	font-family: "ReadexBold";
+	font-size: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	background-color: var(--main-blue75);
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+}
+
+.navTryButton:hover{
+	border-radius: 20px;
+}
+
+.images1 {
+    width:500px;
+	height: 400px;
+	margin: auto;
+    aspect-ratio:initial;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url(../../Assets/sc1.png);
+}
