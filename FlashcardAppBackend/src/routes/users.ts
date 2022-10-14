@@ -214,7 +214,7 @@ usersRouter.put('/:id/updateown', async (req:any, res:express.Response) => {
 				if(items[i].correct!==0){
 					items[i].correct = items[i].correct-1;
 				}
-			}else if(operation===2){
+			}else if(operation===2 && items[i].correct<4){
 				items[i].correct = items[i].correct+1;
 			}
 			items[i].attempts = items[i].attempts+1;
@@ -279,7 +279,7 @@ usersRouter.put('/:id/updatesaved', async (req:any, res:express.Response) => {
 				if(items[i].correct!==0){
 					items[i].correct = items[i].correct-1;
 				}
-			}else if(operation===2){
+			}else if(operation===2 && items[i].correct<4){
 				items[i].correct = items[i].correct+1;
 			}
 			items[i].attempts = items[i].attempts+1;

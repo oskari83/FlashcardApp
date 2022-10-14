@@ -5,12 +5,14 @@ import collectionService from '../../services/collections';
 import userService from '../../services/user';
 import { BsQuestion, BsCheck, BsX } from 'react-icons/bs';
 import { CheckEmail, CheckUsername, CheckPassword } from '../../Utils/validation';
+import { useNavigate } from 'react-router-dom';
 
 const SignInView = ({setUserFunc, setError, errorText}: {setUserFunc:any, setError:any, errorText:string}) => {
 	const [email, setEmail] = useState(''); 
 	const [password, setPassword] = useState(''); 
 	const [emailError, setEmailError] = useState('');
 	const [buttonText, setButtonText] = useState('Sign In'); 
+	const navigate = useNavigate();
 
 	const ResetButton = () => {
 		setButtonText('Sign In');
@@ -46,6 +48,7 @@ const SignInView = ({setUserFunc, setError, errorText}: {setUserFunc:any, setErr
 			setEmail('');
 			setPassword('');
 			ResetButton();
+			navigate('/');
 		} catch (exception) {
 			console.log("failed");
 			ResetButton();

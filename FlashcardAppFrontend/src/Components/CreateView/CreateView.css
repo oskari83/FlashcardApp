@@ -7,7 +7,7 @@
     padding-top: 50px;
     padding-bottom: 10px;
     z-index: 2;
-    background-color: rgb(242, 245, 250);
+    background-color: rgba(242, 245, 250,0.0);
 }
 
 .creationContainer{
@@ -21,7 +21,7 @@
     z-index: 2;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: 2px solid rgb(241, 241, 241);
     font-family: "Readex";
     font-size: 12px;
     color:rgb(70, 70, 70);
@@ -34,12 +34,12 @@
     padding-left: 0%;
     padding-right: 0%;
     margin-top: 10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 7px;
+    padding-bottom: 7px;
     z-index: 2;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: 2px solid rgb(241, 241, 241);
     height: 50px;
     display: flex;
     justify-content: space-between;
@@ -80,22 +80,24 @@
     display: flex;
     height: 100%;
     width: 100px;
-    background-color: #2f6dff9c;
+    background-color: var(--main-blue);
     align-items: center;
     justify-content: center;
     margin-right: 4px;
     color: white;
-    border-radius: 4px;
+    border-radius: 12px;
     cursor: pointer;
     font-size: 10px;
     font-family: "ReadexBold";
     margin-right: 5%;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border: none;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
 
 .submitButtonName:hover{
-    background-color: #2f6effe1;
+    border-radius: 20px;
 }
 
 .createCollectionTable{
@@ -217,7 +219,7 @@
 }
 
 .cbelowTableContainer{
-    height: 30px;
+    height: 35px;
     width: 100%;
     margin: 0 0;
     display: flex;
@@ -233,25 +235,27 @@
     display: flex;
     height: 100%;
     width: 100px;
-    background-color: #2f6dff9c;
+    background-color: var(--main-blue);
     align-items: center;
     justify-content: center;
     margin-right: 4px;
     color: white;
-    border-radius: 4px;
+    border-radius: 12px;
     cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     font-size: 10px;
     font-family: "ReadexBold";
     border: none;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
 
 .submitButton:hover{
-    background-color: #2f6effe1;
+    border-radius: 20px;
 }
 
 .caddAnotherRowContainer{
-    height: 30px;
+    height: 35px;
     width: 100%;
     margin: 0 0;
     display: flex;
@@ -268,16 +272,22 @@
     height: 100%;
     width: 100%;
     margin-left: 4px;
-    background-color: rgba(240, 240, 240, 0.5);
+    background-color: white;
     align-items: center;
     justify-content: center;
-    border-radius: 4px;
+    border-radius: 12px;
+	border: 2px solid var(--white-gray240);
+	color: var(--main-gray80);
     cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    
 }
 
 .addRowButton:hover{
-    background-color: rgb(240, 240, 240);
+	background-color: var(--white-gray250);
+    border-radius: 20px;
 }
 
 .createViewName{

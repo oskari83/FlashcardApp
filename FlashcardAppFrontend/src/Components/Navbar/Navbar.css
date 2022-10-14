@@ -38,8 +38,8 @@ a{
     display: flex;
     justify-content: space-between;
     gap: 40px;
-    font-family: "Readex";
-    font-size: 0.8rem;
+    font-family: "ReadexBold";
+    font-size: 0.75rem;
 }
 
 .nav-menu li:hover{
@@ -51,8 +51,8 @@ a{
     justify-content: space-between;
     gap: 1px;
     align-items: center;
-    font-family: "Readex";
-    font-size: 0.8rem;
+    font-family: "ReadexBold";
+    font-size: 0.75rem;
 }
 
 .nav-mobile{

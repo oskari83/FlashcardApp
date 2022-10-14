@@ -1,5 +1,5 @@
 .containerMainLanding{
-	width: clamp(200px,96%,800px);
+	width: clamp(200px,96%,1000px);
     margin-left: auto;
     margin-right: auto;
     padding-left: 0%;
@@ -7,7 +7,7 @@
     padding-top: 50px;
     padding-bottom: 10px;
     z-index: 2;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255,0.0);
 }
 
 .containerOuter{
@@ -35,9 +35,10 @@
 	width: 60%;
     height: 100px;
     border: none;
-	margin:auto;
+	margin: auto;
 	display: flex;
 	align-items: center;
+	justify-content: center;
     font-family: "Readex";
     font-size: 16px;
     color:rgb(55, 55, 55);
@@ -55,9 +56,9 @@
 }
 
 .navbar-tutorialLanding{
-    min-height: 70px;
+    min-height: 60px;
     display: flex;
-    width: clamp(200px,800px,800px);
+    width: clamp(200px,1000px,1000px);
     justify-content: space-between;
     align-items: stretch;
     z-index: 8;
@@ -99,18 +100,18 @@
 }
 
 .navTryButton{
-	width: 110px;
+	width: 140px;
 	height: 40px;
-	margin-left: 2px;
+	margin-left: 10px;
+	margin-right: 10px;
 	border-radius: 12px;
-	border: 0px solid var(--main-blue75);
 	font-family: "ReadexBold";
-	font-size: 10px;
+	font-size: 12px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	color: white;
-	background-color: var(--main-blue75);
+	background-color: var(--main-blue);
 	cursor: pointer;
 	transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
@@ -122,11 +123,155 @@
 }
 
 .images1 {
-    width:500px;
+	width: 60%;
 	height: 400px;
-	margin: auto;
     aspect-ratio:initial;
     background-repeat: no-repeat;
     background-size: 100%;
     background-image: url(../../Assets/sc1.png);
+}
+
+.images2 {
+	width: 60%;
+	height: 400px;
+    aspect-ratio:initial;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url(../../Assets/sc2.png);
+}
+
+.images3 {
+	width: 60%;
+	height: 400px;
+    aspect-ratio:initial;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url(../../Assets/sc3.png);
+}
+
+.buttonsOuter{
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+	margin-bottom: 40px;
+}
+
+.navLearnButton{
+	width: 140px;
+	height: 40px;
+	margin-left: 10px;
+	margin-right: 10px;
+	border-radius: 12px;
+	font-family: "ReadexBold";
+	border: 2px solid var(--white-gray240);
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--main-gray80);
+	background-color: white;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+}
+
+.navLearnButton:hover{
+	background-color: var(--white-gray250);
+	border-radius: 20px;
+}
+
+.imageContainerOuter{
+	height: 400px;
+	display: flex;
+	margin-top: 100px;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: row;
+}
+
+.contHeader{
+	width: 100%;
+	height: auto;
+	font-family: "ReadexBold";
+	font-size: 22px;
+	margin-top: 24px;
+	padding-left: 60px;
+	text-align: left;
+	color: var(--main-gray60);
+}
+
+.contBody{
+	width: 100%;
+	height: auto;
+	font-family: "ReadexLight";
+	font-size: 15px;
+	margin-top: 12px;
+	padding-left: 60px;
+	text-align: justify;
+	padding-right: 40px;
+	color: var(--main-gray80);
+}
+
+.contHeader2{
+	width: 100%;
+	height: auto;
+	font-family: "ReadexBold";
+	font-size: 22px;
+	margin-top: 24px;
+	text-align: left;
+	padding-left: 40px;
+	color: var(--main-gray60);
+}
+
+.contBody2{
+	width: 100%;
+	height: auto;
+	font-family: "ReadexLight";
+	font-size: 15px;
+	margin-top: 12px;
+	text-align: justify;
+	padding-left: 40px;
+	padding-right: 40px;
+	color: var(--main-gray80);
+}
+
+.containerRight{
+	width: 40%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+}
+
+.textMain4{
+	width: 94%;
+    height: 100px;
+    border: none;
+	margin:auto;
+	margin-top: 40px;
+	display: flex;
+	align-items: center;
+    font-family: "ReadexBold";
+    font-size: 40px;
+    color:rgb(36, 36, 36);
+	text-align: left;
+}
+
+.subText4{
+	width: 94%;
+    height: 20px;
+    border: none;
+	margin:auto;
+	display: flex;
+	align-items: center;
+    font-family: "Readex";
+    font-size: 16px;
+    color:var(--main-blue);
+	text-align: left;
+	cursor: pointer;
+	margin-bottom: 80px;
 }

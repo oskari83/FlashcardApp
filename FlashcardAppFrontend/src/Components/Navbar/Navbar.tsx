@@ -5,6 +5,7 @@ import { IoCloseSharp } from 'react-icons/io5'
 import { AiFillHome, AiOutlineOrderedList } from 'react-icons/ai'
 import { FaUserGraduate } from "react-icons/fa";
 import { MdCreateNewFolder } from 'react-icons/md'
+import { useNavigate } from 'react-router-dom';
 
 interface FuncProps {
     CloseFunction: () => void
@@ -50,25 +51,31 @@ const NavUser = ({username}: {username:string}) => {
 }
 
 const NavMenuMobile = ({CloseFunction}: FuncProps) => {
+	const navigate = useNavigate();
+	const mobileClick = (a:string) => {
+		CloseFunction();
+		navigate(a);
+	}
+
     return(
         <ul className='nav-mobile'>
             <li className="nav-item">
-                <div className="hover-box" onClick={() => CloseFunction()}></div>
+                <div className="hover-box" onClick={() => mobileClick('')}></div>
                 <AiFillHome size='20px' color='white' />
                 <NavLink text='Home' addr='/'/>
             </li>
             <li className="nav-item">
-                <div className="hover-box" onClick={() => CloseFunction()}></div>
+                <div className="hover-box" onClick={() => mobileClick('/browse')}></div>
                 <AiOutlineOrderedList size='20px' color='white' />
                 <NavLink text='Browse' addr='/browse'/>
             </li>
             <li className="nav-item">
-                <div className="hover-box" onClick={() => CloseFunction()}></div>
+                <div className="hover-box" onClick={() => mobileClick('/create')}></div>
                 <MdCreateNewFolder size='20px' color='white' />
                 <NavLink text='Create' addr='/create'/>
             </li>
             <li className="nav-item">
-                <div className="hover-box" onClick={() => CloseFunction()}></div>
+                <div className="hover-box" onClick={() => mobileClick('/user')}></div>
                 <FaUserGraduate size='20px' color='white' />
                 <NavLink text='Profile' addr='/auth'/>
             </li>
@@ -83,7 +90,6 @@ export const Navbar = ({username}:{username:string}) => {
     const closeIcon = <IoCloseSharp size='20px' color='white' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}/>
     const closeMobileMenu = () => {
         setMobileMenuOpen(false);
-        window.location.href="/";
     }
 
     return(

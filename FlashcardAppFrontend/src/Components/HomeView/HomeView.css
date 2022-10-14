@@ -7,7 +7,7 @@
     padding-top: 50px;
     padding-bottom: 10px;
     z-index: 2;
-    background-color: rgb(242, 245, 250);
+    background-color: rgba(242, 245, 250,0.0);
 }
 
 .authPossiblyContainer {
@@ -67,14 +67,14 @@
     z-index: 2;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: 2px solid rgb(241, 241, 241);
     height: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-family: "Readex";
-    font-size: 15px;
-    color:rgb(70, 70, 70);
+    font-size: 14px;
+    color: var(--main-gray60);
 }
 
 .profileUsernameText{
@@ -149,7 +149,7 @@
     z-index: 2;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: 2px solid rgb(241, 241, 241);
     font-family: "Readex";
     font-size: 14px;
     color:rgb(70, 70, 70);
@@ -166,7 +166,7 @@
     z-index: 2;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: 2px solid rgb(241, 241, 241);
     font-family: "Readex";
     font-size: 14px;
     min-height: calc(100vh - 220px);;
@@ -202,71 +202,83 @@
     margin-left: 20px;
     align-items: center;
     justify-content: center;
-    font-family: "Readex";
-    font-size: clamp(9px, 3.5vw, 11px);
+    font-family: "ReadexBold";
+    font-size: clamp(7px, 3.5vw, 9px);
     color: white;
 }
 
 .filterAll{
     width: 32%;
     height: 100%;
-    background-color: #2f6dff61;
-    border-radius: 2px;
-    border: 1px solid #2f6dff66;
+    background-color: white;
+	color: var(--main-gray80);
+	border: 2px solid var(--white-gray240);
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     margin-left: 2px;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
 
 .filterAll:hover{
-    background-color: #2f6dffb6;
-    border: none;
+	background-color: var(--white-gray250);
+    border-radius: 12px;
 }
 
 .filterCreated{
     width: 32%;
     height: 100%;
-    background-color: #2f6dff61;
-    border-radius: 2px;
-    border: 1px solid #2f6dff66;
+    background-color: white;
+	color: var(--main-gray80);
+	border: 2px solid var(--white-gray240);
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     margin-left: 2px;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
 
 .filterCreated:hover{
-    background-color: #2f6dffb6;
-    border: none;
+	background-color: var(--white-gray250);
+    border-radius: 12px;
 }
 
 .filterSaved{
     width: 32%;
     height: 100%;
-    background-color: #2f6dff61;
-    border-radius: 2px;
-    border: 1px solid #2f6dff66;
+    background-color: white;
+	color: var(--main-gray80);
+	border: 2px solid var(--white-gray240);
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     margin-left: 2px;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
 
 .filterSaved:hover{
-    background-color: #2f6dffb6;
-    border: none;
+	background-color: var(--white-gray250);
+    border-radius: 12px;
 }
 
 .filterAllS{
     width: 32%;
     height: 100%;
-    background-color: #2f6dffb6;
+    background-color: var(--main-blue);
     border: none;
-    border-radius: 2px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -277,9 +289,9 @@
 .filterSavedS{
     width: 32%;
     height: 100%;
-    background-color: #2f6dffb6;
+    background-color: var(--main-blue);
     border: none;
-    border-radius: 2px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -290,9 +302,9 @@
 .filterCreatedS{
     width: 32%;
     height: 100%;
-    background-color: #2f6dffb6;
+    background-color: var(--main-blue);
     border: none;
-    border-radius: 2px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -21,7 +21,7 @@
     z-index: 2;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: 2px solid rgb(241, 241, 241);
     height: 50px;
     display: flex;
     justify-content: space-between;
@@ -78,7 +78,7 @@
     z-index: 2;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: 2px solid rgb(241, 241, 241);
     font-family: "Readex";
     font-size: 12px;
     color:rgb(70, 70, 70);
@@ -91,15 +91,18 @@
     width: 90%;
     height: 100px;
     background-color: rgb(255, 255, 255);
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    border-radius: 4px;
+	border: 2px solid rgb(241, 241, 241);
+    border-radius: 8px;
     color:rgb(119, 119, 119);
     cursor: pointer;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
 
 .collectionItem:hover{
     color:rgba(41, 116, 255, 0.801);
-    box-shadow: rgba(50, 50, 105, 0.3) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 1px 1px 0px;
+    border: 3px solid rgb(241, 241, 241);
 }
 
 .aboveResultsContainer{
@@ -207,7 +210,7 @@
 	width: 33px;
 	height: 33px;
 	margin-left: 2px;
-	border-radius: 10px;
+	border-radius: 8px;
 	color: var(--main-gray80);
 	background-color: white;
 	border: 2px solid var(--white-gray240);
@@ -217,28 +220,34 @@
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
 
 .paginationBoxSelected{
 	width: 33px;
 	height: 33px;
 	margin-left: 2px;
-	border-radius: 10px;
-	border: 2px solid var(--main-blue75);
+	border-radius: 8px;
 	font-family: "ReadexBold";
 	font-size: 10px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	color: white;
-	background-color: var(--main-blue75);
+	background-color: var(--main-blue);
 	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
 
 .paginationBox:hover{
 	background-color: var(--white-gray250);
+	border-radius: 12px;
 }
 
-.paginationBoxSelected:hover{
-  background-color: var(--main-blue);
+.paginationBoxSelected:hover{	
+	border-radius: 12px;
 }

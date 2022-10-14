@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Navbar } from './Components/Navbar/Navbar';
-import { Footer } from './Components/Footer/Footer';
+import { Footer, Footer2 } from './Components/Footer/Footer';
 import { BrowseView } from './Components/BrowseView/BrowseView';
 import { CreateView } from './Components/CreateView/CreateView';
 import { HomeView } from './Components/HomeView/HomeView';
 import { ProfileView } from './Components/ProfileView/ProfileView';
 import { AuthenticationView } from './Components/AuthenticationView/AuthenticationView';
-import { Routes, Route, BrowserRouter as Router } from "react-router-dom"
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
 import { CollectionView } from './Components/CollectionView/CollectionView';
 import { useState, useEffect } from 'react';
 import collectionService from './services/collections';
@@ -21,7 +21,10 @@ const App = () => {
 	const [notificationMessage, setNotificationMessage] = useState('');
 	const [user, setUser] = useState<any>(null);
 	const [notificationTimeout, setNotificationTimeout] = useState<null | NodeJS.Timeout>(null);
-	const [wantAuth, setWantAuth] = useState(false);
+	const [footerStatus, setFooterStatus] = useState(true);
+	
+	const navigate = useNavigate();
+	const location = useLocation();
 
 	const SetUserData = (s:any) => {
 		setUser(s);
@@ -33,7 +36,9 @@ const App = () => {
 	}
 
 	const GetStarted = () => {
-		setWantAuth(true);
+		console.log("here");
+		setFooterStatus(false);
+		navigate('/getstarted');
 	}
 
 	const ClearNotificationMessage = (time:number) => {
@@ -62,6 +67,13 @@ const App = () => {
 	}, []);
 
 	useEffect(() => {
+		console.log("path changed");
+		if(location.pathname==='/'){
+			setFooterStatus(true);
+		}
+	}, [location.pathname==='/']);
+
+	useEffect(() => {
 		if(user){
 			userService
 			.getCollections(user.id)
@@ -88,34 +100,31 @@ const App = () => {
 	}, [user]);
 
 	if(user===null){
-		if(wantAuth===false){
-			return(
-				<div>
-					<LandingView getFunc={GetStarted}/>
-				</div>
-			)
-		}else{
-			return(
-				<AuthenticationView setUserFunc={SetUserData}/>
-			)
-		}
+		return(
+			<div className='landingBackground'>		
+				<Routes>
+						<Route path="/" element={<LandingView getFunc={GetStarted}/>} />
+						<Route path="/getstarted" element={<AuthenticationView setUserFunc={SetUserData}/>} />
+				</Routes>
+
+				<Footer2 status={footerStatus}/>
+			</div>
+		)
 	}
 
 	return (
 		<div>
 		<Navbar username={user.username}/>
 
-		<Router>
-			<Routes>
+		<Routes>
 			<Route path="/:id" element={<CollectionView userId={user.id} savedCols={savedCollections} />} />
 			<Route path="/create" element={<CreateView username={user.username}/>} />
 			<Route path="/browse" element={<BrowseView username={user.username} savedCols={savedCollections} />} />
 			<Route path="/auth" element={<AuthenticationView setUserFunc={SetUserData}/>} />
 			<Route path="/user" element={<ProfileView logoutFunc={DeleteUserData} user={user} createdA={collections.length-savedCollections.length} savedA={savedCollections.length}/>} />
 			<Route path="/" element={<HomeView collectionData={collections} username={user.username} notifText={notificationMessage} loadingStatus={loadingStatus}/>} />
-			</Routes>
-		</Router>
-
+		</Routes>
+		
 		<Footer />
 
 		</div>

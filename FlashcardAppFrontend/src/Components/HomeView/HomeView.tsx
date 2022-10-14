@@ -97,9 +97,9 @@ export const HomeView = ({collectionData, username, notifText, loadingStatus}: {
                 <div className='aboveCollectionsContainer'>
                     <div className='collectionsText'>Collections</div>
                     <div className='filterContainer'>
-                        <div className={`filterAll${curFilter===0 ? 'S' : ''}`} onClick={() => filterChange(0)}>All</div>
-                        <div className={`filterCreated${curFilter===1 ? 'S' : ''}`} onClick={() => filterChange(1)}>Created</div>
-                        <div className={`filterSaved${curFilter===2 ? 'S' : ''}`} onClick={() => filterChange(2)}>Saved</div>
+                        <div className={`filterAll${curFilter===0 ? 'S' : ''}`} onClick={() => filterChange(0)}>ALL</div>
+                        <div className={`filterCreated${curFilter===1 ? 'S' : ''}`} onClick={() => filterChange(1)}>CREATED</div>
+                        <div className={`filterSaved${curFilter===2 ? 'S' : ''}`} onClick={() => filterChange(2)}>SAVED</div>
                     </div>
                 </div>
                 <div className='homeCollectionsFlexContainer'>

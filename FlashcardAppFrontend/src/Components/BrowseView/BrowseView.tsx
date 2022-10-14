@@ -199,3 +199,5 @@ export const BrowseView = ({username, savedCols}:{username:string,savedCols:Coll
         </>
     )
 }
+
+//box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;

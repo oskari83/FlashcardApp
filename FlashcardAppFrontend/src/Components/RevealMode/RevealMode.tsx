@@ -101,7 +101,7 @@ export const RevealMode = ({items, itemdata, created, userId, notFunction, id, s
             <tbody>
             <tr className='fboldRow'>
                 <td className='fheaderRow'>
-                    <div className='ftdText'>Object</div>
+                    <div className='ftdText'>Note</div>
                 </td>
                 <td className='fheaderRow'>
                     <div className='ftdText'>Definition {"(click to reveal)"}</div>
