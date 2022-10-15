@@ -108,8 +108,9 @@ const arrayToObject = (arr: any, key: string) => {
 
 export const CollectionEdit = ({items,name, id, notFunction}: {items: any,name:string | undefined, id:string | undefined, notFunction:any}) => {
 	const getHighestID = () => {
+		const nnnn = Object.entries(values);
 		if(items!==undefined){
-			return Math.max(...items.map((o:CollectionItem) => o.key));
+			return Math.max(...nnnn.map((o:any) => o[1]['key']));
 		}
 		return 10000002;
 	}
@@ -224,6 +225,7 @@ export const CollectionEdit = ({items,name, id, notFunction}: {items: any,name:s
 
 	const addRowToTable = () => {
         const id = getHighestID() + 1;
+		console.log(id);
         setValues({...values, [id]: {
             qside: '', 
             aside: '', 
@@ -231,6 +233,7 @@ export const CollectionEdit = ({items,name, id, notFunction}: {items: any,name:s
             correct: 0,
 			attempts: 0,
         }});
+		console.log(values);
         console.log("added row");
     }
 
