@@ -138,16 +138,19 @@
     display: flex;
     height: 100%;
     width: 100px;
-    background-color: var(--main-blue75);
+    background-color: var(--main-blue);
     align-items: center;
     justify-content: center;
     margin-right: 4px;
     color: white;
-    border-radius: 15px;
+    border-radius: 10px;
     cursor: pointer;
 	border:none;
 	font-size: 10px;
     font-family: "ReadexBold";
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
 
 .cancelChanges{
@@ -158,17 +161,21 @@
     background-color: white;
     align-items: center;
     justify-content: center;
-    border-radius: 15px;
+    border-radius: 10px;
     cursor: pointer;
 	border: 2px solid var(--white-gray240);
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
 
 .submitButtonE:hover{
-    background-color: var(--main-blue);
+	border-radius: 16px;
 }
 
 .cancelChanges:hover{
     background-color: var(--white-gray250);
+	border-radius: 16px;
 }
 
 .addAnotherRowContainer{
@@ -192,13 +199,17 @@
     background-color: white;
     align-items: center;
     justify-content: center;
-    border-radius: 15px;
+    border-radius: 10px;
     cursor: pointer;
     border: 2px solid var(--white-gray240);
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
 
 .addRowButtonE:hover{
     background-color: var(--white-gray250);
+	border-radius: 16px;
 }
 
 .nameInputE{

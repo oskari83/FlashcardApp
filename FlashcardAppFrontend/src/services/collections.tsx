@@ -18,7 +18,7 @@ const search = async (searchString:string) => {
 	const bod = {
 		search: searchString
 	};
-    const response = await axios.post(baseUrl, bod);
+    const response = await axios.post(`${baseUrl}/search`, bod);
     return response.data;
 }
 

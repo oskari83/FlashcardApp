@@ -279,7 +279,7 @@
 	-webkit-backface-visibility: hidden;
 	background: white;
 	border-radius: 10px;
-	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	border: 2px solid rgb(241, 241, 241);
 	color: var(--main-gray60);
 	cursor: pointer;
 	display: flex;

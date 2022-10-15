@@ -241,7 +241,7 @@ export const CollectionEdit = ({items,name, id, notFunction}: {items: any,name:s
                 <div className='aboveTableContainer'>
 					<input type="text" className='nameInputE' value={collName} onChange={handleNameChange} placeholder="Name..."></input>
 					<button className='submitButtonE' type="submit">Save</button>
-                    <div className='cancelChanges' onClick={CancelAllChanges}>Cancel changes</div>
+                    <div className='cancelChanges' onClick={CancelAllChanges}>Cancel</div>
                 </div>
 
                 <table className='editTable'>
@@ -276,7 +276,7 @@ export const CollectionEdit = ({items,name, id, notFunction}: {items: any,name:s
 
                 <div className='belowTableContainer'>
 					<button className='submitButtonE' type="submit">Save</button>
-                    <div className='cancelChanges' onClick={CancelAllChanges}>Cancel changes</div>
+                    <div className='cancelChanges' onClick={CancelAllChanges}>Cancel</div>
                 </div>
             </form>
         </div>

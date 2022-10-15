@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.05ca41b4.css",
-    "main.js": "/static/js/main.0847f113.js",
+    "main.css": "/static/css/main.cdd01c1c.css",
+    "main.js": "/static/js/main.ff489041.js",
     "static/media/sc2.png": "/static/media/sc2.0121716e099fae6c748d.png",
     "static/media/sc3.png": "/static/media/sc3.7749c5d35b54827f776b.png",
     "static/media/sc1.png": "/static/media/sc1.f520357bf25fbd51d49c.png",
@@ -10,11 +10,11 @@
     "static/media/ReadexPro-Regular.woff": "/static/media/ReadexPro-Regular.2bc8e3dcd512a34a23d1.woff",
     "static/media/logo.png": "/static/media/logo.744f9b7690e808d05458.png",
     "index.html": "/index.html",
-    "main.05ca41b4.css.map": "/static/css/main.05ca41b4.css.map",
-    "main.0847f113.js.map": "/static/js/main.0847f113.js.map"
+    "main.cdd01c1c.css.map": "/static/css/main.cdd01c1c.css.map",
+    "main.ff489041.js.map": "/static/js/main.ff489041.js.map"
   },
   "entrypoints": [
-    "static/css/main.05ca41b4.css",
-    "static/js/main.0847f113.js"
+    "static/css/main.cdd01c1c.css",
+    "static/js/main.ff489041.js"
   ]
 }

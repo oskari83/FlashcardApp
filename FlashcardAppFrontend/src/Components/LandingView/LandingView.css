@@ -26,7 +26,7 @@
 	display: flex;
 	align-items: center;
     font-family: "ReadexBold";
-    font-size: 46px;
+    font-size: clamp(28px, 4.5vw, 46px);
     color:rgb(36, 36, 36);
 	text-align: center;
 }
@@ -256,7 +256,7 @@
 	display: flex;
 	align-items: center;
     font-family: "ReadexBold";
-    font-size: 40px;
+    font-size: clamp(24px, 4.5vw, 40px);
     color:rgb(36, 36, 36);
 	text-align: left;
 }
@@ -274,4 +274,54 @@
 	text-align: left;
 	cursor: pointer;
 	margin-bottom: 80px;
+}
+
+@media (max-width: 800px) {
+    .imageContainerOuter{
+		height: 540px;
+		margin-top: 60px;
+		flex-direction: column;
+	}
+
+	.images1 {
+		height: 600px;
+		width: 80%;
+	}
+
+	.images2 {
+		height: 80%;
+		width: 80%;
+		background-repeat: no-repeat;
+		background-size: 100%;
+	}
+
+	.images3 {
+		height: 600px;
+		width: 80%;
+	}
+
+	.containerRight{
+		width: 66%;
+		height: 50%;
+	}
+
+	.contHeader{
+		padding-left: 40px;
+	}
+	
+	.contBody{
+		padding-left: 40px;
+	}
+
+	.textMain4{
+		width: 70%;
+	}
+	
+	.subText4{
+		width: 70%;
+	}
+
+	.contBody2{
+		padding-bottom: 40px;
+	}
 }

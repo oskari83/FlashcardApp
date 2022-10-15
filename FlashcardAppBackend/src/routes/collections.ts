@@ -15,7 +15,7 @@ router.get('/', async (_req:express.Request, res:express.Response) => {
 	res.json(cols);
 });
 
-router.post('/', async (req:express.Request, res:express.Response) => {
+router.post('/search', async (req:express.Request, res:express.Response) => {
 	const query = req.body.search;
 	const cols = await CollectionM
 		.find({ 'name': { $regex: '^' + query, $options: 'i' } })

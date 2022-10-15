@@ -18,3 +18,5 @@ const Card = ({cardFrontText, cardBackText, cardClass, rotateFunc}: {cardFrontTe
 };
 
 export default Card;
+
+//box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
