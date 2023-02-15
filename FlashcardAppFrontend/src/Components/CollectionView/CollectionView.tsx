@@ -162,7 +162,7 @@ export const CollectionView = ({userId, savedCols}: {userId:string,savedCols:Col
 				
             </div>
             <div className='setProgress'>{percentComplete}%</div>
-            <div className="setInfo">{`Creator: ${collection!==undefined ? collection?.creator : 'Loading...'}, Objects: ${collection!==undefined ? collection?.itemCount : 'Loading...'}`}</div>
+            <div className="setInfo">{`Creator: ${collection!==undefined ? collection?.creator : 'Loading...'}, Notes: ${collection!==undefined ? collection?.itemCount : 'Loading...'}`}</div>
             </div>
 
             <div className='setAreaOuter'>

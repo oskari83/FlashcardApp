@@ -70,7 +70,7 @@ a{
     width: 100%;
     z-index: 99 !important;
     border-top: 1px solid rgba(255, 255, 255, 0.511);
-    background: #2f6effe1;
+    background: var(--main-blue);
 }
 
 .nav-item{

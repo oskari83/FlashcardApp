@@ -36,7 +36,6 @@ const App = () => {
 	}
 
 	const GetStarted = () => {
-		console.log("here");
 		setFooterStatus(false);
 		navigate('/getstarted');
 	}
