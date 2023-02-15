@@ -82,7 +82,7 @@ a{
 
 .nav-itemUser{
     height: 100%;
-    width: 110px;
+    width: 180px;
     display: flex;
     list-style: none;
 }
@@ -105,9 +105,19 @@ a{
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content:end;
     gap: 14px;
     align-items: center;
+}
+
+.user-hover{
+	text-decoration: underline rgba(0, 0, 0, 0);
+	transition: text-decoration-color 300ms;
+	text-underline-offset: 7px;
+}
+
+.user-hover:hover{
+	text-decoration: underline var(--white-gray240);
 }
 
 .nav-itemHoverable{
@@ -140,6 +150,7 @@ a{
 
 .nav-logo{
     display: flex;
+	width: 180px;
     align-items: center;
 }
 

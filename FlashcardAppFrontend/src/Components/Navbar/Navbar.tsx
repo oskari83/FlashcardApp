@@ -39,7 +39,7 @@ const NavUser = ({username}: {username:string}) => {
     return(
         <ul className="nav-user">
             <li className="nav-itemUser">
-                <a href={'/user'} className="nav-linkUser nav-itemHoverable">
+                <a href={'/user'} className="nav-linkUser user-hover">
                     {username}
                     <div className="nav-icon">
                         <FaUserGraduate size='16px' color='white'/>

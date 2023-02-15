@@ -199,7 +199,7 @@ usersRouter.put('/:id/updateown', (req, res) => __awaiter(void 0, void 0, void 0
                     items[i].correct = items[i].correct - 1;
                 }
             }
-            else if (operation === 2) {
+            else if (operation === 2 && items[i].correct < 4) {
                 items[i].correct = items[i].correct + 1;
             }
             items[i].attempts = items[i].attempts + 1;
@@ -251,7 +251,7 @@ usersRouter.put('/:id/updatesaved', (req, res) => __awaiter(void 0, void 0, void
                     items[i].correct = items[i].correct - 1;
                 }
             }
-            else if (operation === 2) {
+            else if (operation === 2 && items[i].correct < 4) {
                 items[i].correct = items[i].correct + 1;
             }
             items[i].attempts = items[i].attempts + 1;

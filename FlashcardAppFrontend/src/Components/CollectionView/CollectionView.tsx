@@ -169,20 +169,20 @@ export const CollectionView = ({userId, savedCols}: {userId:string,savedCols:Col
             <div className="setAreaContainer">
                 <div className="selectorBar">
                 <div className={currentSelection===0 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(0)}>
-                    <div className='selectorBarItemIcon'><IoMdStats size='16px' color={currentSelection===0 ? `rgb(47, 110, 255)` : `rgb(92, 92, 92)`} /></div>
+                    <div className='selectorBarItemIcon'><IoMdStats size='16px' color={currentSelection===0 ? `rgb(47, 110, 255)` : `rgb(31,48,76)`} /></div>
                     <div className='selectorBarItemText'>OVERVIEW</div>
                 </div>
                 <div className={currentSelection===1 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(1)}>
-                    <div className='selectorBarItemIcon'><IoMdPlay size='16px' color={currentSelection===1 ? `rgb(47, 110, 255)` : `rgb(92, 92, 92)`} /></div>
+                    <div className='selectorBarItemIcon'><IoMdPlay size='16px' color={currentSelection===1 ? `rgb(47, 110, 255)` : `rgb(31,48,76)`} /></div>
                     <div className='selectorBarItemText'>FLIP</div>
                 </div>
                 <div className={currentSelection===2 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(2)}>
-                    <div className='selectorBarItemIcon'><IoMdPlay size='16px' color={currentSelection===2 ? `rgb(47, 110, 255)` : `rgb(92, 92, 92)`} /></div>
+                    <div className='selectorBarItemIcon'><IoMdPlay size='16px' color={currentSelection===2 ? `rgb(47, 110, 255)` : `rgb(31,48,76)`} /></div>
                     <div className='selectorBarItemText'>REVEAL</div>
                 </div>
 				{ created &&
                 (<div className={currentSelection===3 ? `selectorBarItemSelected` : `selectorBarItem`} onClick={() => selectionChange(3)}>
-                    <div className='selectorBarItemIcon'><AiFillEdit size='16px' color={currentSelection===3 ? `rgb(47, 110, 255)` : `rgb(92, 92, 92)`} /></div>
+                    <div className='selectorBarItemIcon'><AiFillEdit size='16px' color={currentSelection===3 ? `rgb(47, 110, 255)` : `rgb(31,48,76)`} /></div>
                     <div className='selectorBarItemText'>EDIT</div>
                 </div>)
 				}					

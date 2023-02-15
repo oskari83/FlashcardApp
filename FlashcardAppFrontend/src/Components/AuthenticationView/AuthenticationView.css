@@ -63,7 +63,7 @@
 .authViewName{
     font-family: "ReadexBold";
     font-size: 24px;
-    color:rgb(80, 80, 80);
+    color:var(--dark-blue-black);
     padding-left: 10px;
     margin-top: 8vh;
     margin-bottom: 10px;
@@ -134,8 +134,8 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    color:rgb(100, 100, 100);
-    border-bottom: 4px solid rgb(100, 100, 100);
+    color:var(--dark-blue-black);
+    border-bottom: 4px solid var(--dark-blue-black);
 }
 
 .registerChoice{
@@ -155,18 +155,18 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    color:rgb(100, 100, 100);
-    border-bottom: 4px solid rgb(100, 100, 100);
+    color:var(--dark-blue-black);
+    border-bottom: 4px solid var(--dark-blue-black);
 }
 
 .signInChoice:hover{
-    color:rgb(100, 100, 100);
-    border-bottom: 4px solid rgb(100, 100, 100);
+    color:var(--dark-blue-black);
+    border-bottom: 4px solid var(--dark-blue-black);
 }
 
 .registerChoice:hover{
-    color:rgb(100, 100, 100);
-    border-bottom: 4px solid rgb(100, 100, 100);
+    color:var(--dark-blue-black);
+    border-bottom: 4px solid var(--dark-blue-black);
 }
 
 .emailInput{

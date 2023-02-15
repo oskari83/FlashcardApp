@@ -13,7 +13,7 @@
 .profViewName{
     font-family: "ReadexBold";
     font-size: 24px;
-    color:rgb(80, 80, 80);
+    color:var(--dark-blue-black);
     padding-left: 10px;
     margin-top: 20px;
     margin-bottom: 10px;

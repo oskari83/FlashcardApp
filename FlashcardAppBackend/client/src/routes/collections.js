@@ -25,7 +25,7 @@ router.get('/', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
         .populate('user', { username: 1 });
     res.json(cols);
 }));
-router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/search', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const query = req.body.search;
     const cols = yield CollectionM
         .find({ 'name': { $regex: '^' + query, $options: 'i' } })

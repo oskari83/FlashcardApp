@@ -48,7 +48,7 @@
   padding-right: 5%;
   font-family: "ReadexBold";
   font-size: clamp(20px, 5.5vw, 25px);
-  color: var(--main-gray80);
+  color: var(--dark-blue-black);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -120,7 +120,7 @@
   padding-right: 5%;
   font-family: "Readex";
   font-size: 12px;
-  color: var(--main-gray110);
+  color: var(--light-blue-black);
   clear: left;
 }
 
@@ -153,7 +153,7 @@
   width: clamp(20%,20%,25%);
   font-family: "ReadexBold";
   font-size: clamp(9px, 1.5vw, 11px);
-  color: var(--main-gray60);
+  color: var(--dark-blue-black);
   cursor: pointer;
   text-align: center;
   float: left;
