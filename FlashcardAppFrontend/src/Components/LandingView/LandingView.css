@@ -40,14 +40,14 @@
 	align-items: center;
 	justify-content: center;
     font-family: "ReadexLight";
-    font-size: 16px;
+    font-size: clamp(12px, 2.5vw, 16px);
     color:var(--light-blue-black);
 	text-align: center;
 }
 
 .navbar-outerLanding{
     display: flex;
-    background-color: #ffffffe1;
+    background-color: white;
     border-bottom: 1px solid rgb(232, 232, 232);
     justify-content: center;
     position: fixed;
@@ -81,11 +81,11 @@
 }
 
 .navLogo {
-    width:32px;
+    width:22px;
     aspect-ratio: 1/1;
     background-repeat: no-repeat;
     background-size: 100%;
-    background-image: url(../../Assets/logo.png);
+    background-image: url(../../Assets/memBlue.png);
     padding-right: 10px;
 	margin-right: 10px;
     cursor: pointer;
@@ -189,70 +189,6 @@
 	border-radius: 20px;
 }
 
-.imageContainerOuter{
-	height: 400px;
-	display: flex;
-	margin-top: 100px;
-	align-items: center;
-	justify-content: flex-start;
-	flex-direction: row;
-}
-
-.contHeader{
-	width: 100%;
-	height: auto;
-	font-family: "ReadexBold";
-	font-size: 22px;
-	margin-top: 24px;
-	padding-left: 60px;
-	text-align: left;
-	color: var(--main-gray60);
-}
-
-.contBody{
-	width: 100%;
-	height: auto;
-	font-family: "ReadexLight";
-	font-size: 15px;
-	margin-top: 12px;
-	padding-left: 60px;
-	text-align: justify;
-	padding-right: 40px;
-	color: var(--main-gray80);
-}
-
-.contHeader2{
-	width: 100%;
-	height: auto;
-	font-family: "ReadexBold";
-	font-size: 22px;
-	margin-top: 24px;
-	text-align: left;
-	padding-left: 40px;
-	color: var(--main-gray60);
-}
-
-.contBody2{
-	width: 100%;
-	height: auto;
-	font-family: "ReadexLight";
-	font-size: 15px;
-	margin-top: 12px;
-	text-align: justify;
-	padding-left: 40px;
-	padding-right: 40px;
-	color: var(--main-gray80);
-}
-
-.containerRight{
-	width: 40%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	flex-direction: column;
-}
-
 .textMain4{
 	width: 94%;
     height: 100px;
@@ -283,7 +219,7 @@
 }
 
 .blockOuter{
-	height: 350px;
+	height: 370px;
 	display: flex;
 	flex-direction: column;
     justify-content: flex-start;
@@ -300,7 +236,7 @@
 	align-items: center;
     justify-content: start;
     width: 50%;
-    height: 140px;
+    height: 160px;
 }
 
 .innerBlockTitle{
@@ -332,7 +268,7 @@
 	margin-top: 10px;
 	width: 100%;
 	font-family: "ReadexLight";
-    font-size: 14px;
+    font-size: clamp(11px, 1.5vw, 14px);
 	line-height: 1.6;
     color:var(--light-blue-black);
 }
@@ -343,11 +279,21 @@
 	display: flex;
 	flex-direction: column;
     justify-content: flex-start;
+	align-items: center;
     flex-wrap: wrap;
 	width: 400%;
 	background-color: rgb(244,244,246);
 	left: -150%;
 	position: relative;
+}
+
+.usersDiv{
+	width: clamp(200px,26%,1000px);
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+    justify-content: flex-start;
+	flex-wrap: wrap;
 }
 
 .usersInner{
@@ -360,7 +306,7 @@
 	padding-right: 40px;
 	height: 60px;
 	font-family: "ReadexLight";
-    font-size: 18px;
+    font-size: clamp(9px, 1.5vw, 18px);
 	color: var(--dark-blue-black);
 }
 
@@ -380,24 +326,10 @@
 	margin-top: 12px;
 }
 
-@media (max-width: 800px) {
-    .imageContainerOuter{
-		height: 540px;
-		margin-top: 60px;
-		flex-direction: column;
-	}
+@media (max-width: 728px) {
 
-	.containerRight{
-		width: 66%;
-		height: 50%;
-	}
-
-	.contHeader{
-		padding-left: 40px;
-	}
-	
-	.contBody{
-		padding-left: 40px;
+	.blockOuter{
+		display: none;
 	}
 
 	.textMain4{
@@ -408,7 +340,15 @@
 		width: 70%;
 	}
 
-	.contBody2{
-		padding-bottom: 40px;
+	.images1 {
+		width: 140px;
+	}
+	
+	.images2 {
+		width: 140px;
+	}
+	
+	.images3 {
+		width: 120px;
 	}
 }

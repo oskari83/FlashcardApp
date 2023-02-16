@@ -44,7 +44,7 @@ export const LandingView = ({getFunc}:{getFunc:any}) => {
 							</div>
 						</div>
 						<div className='innerBlockText'>
-							Lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
+							Whether you have just a few dozen or thousands of flashcards, {`we've`} got you covered. Easily organize your flashcards by with collections.
 						</div>
 					</div>
 					<div className='innerBlock'>
@@ -55,7 +55,7 @@ export const LandingView = ({getFunc}:{getFunc:any}) => {
 							</div>
 						</div>
 						<div className='innerBlockText'>
-							Lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
+							Like to have a visual grasp of the content? The reveal mode allows you to to check the other side of multiple flashcards all at once.
 						</div>
 					</div>
 					<div className='innerBlock'>
@@ -66,7 +66,7 @@ export const LandingView = ({getFunc}:{getFunc:any}) => {
 							</div>
 						</div>
 						<div className='innerBlockText'>
-							Lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
+							After each card, give input on whether you answered correctly, incorrectly, or neither. This is then collected to give you individual card-based statistics to improve your learning.
 						</div>
 					</div>
 					<div className='innerBlock'>
@@ -77,19 +77,21 @@ export const LandingView = ({getFunc}:{getFunc:any}) => {
 							</div>
 						</div>
 						<div className='innerBlockText'>
-							Lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet
+							Having problems or struggling with functionality? We will help you as soon as possible.  
 						</div>
 					</div>
 				</div>
 
 				<div className='usersOuter'>
-					<div className='usersInner'>
-						Over &nbsp; <div className='boldedInner'>1000 students</div> &nbsp; from all around the world trust MemNotes.io to help their studying.
-					</div>
-					<div className='logosOuter'>
-						<div className='images1'></div>
-						<div className='images2'></div>
-						<div className='images3'></div>
+					<div className='usersDiv'>
+						<div className='usersInner'>
+							Over &nbsp; <div className='boldedInner'>1000 students</div> &nbsp; from all around the world use MemNotes to achieve better grades.
+						</div>
+						<div className='logosOuter'>
+							<div className='images1'></div>
+							<div className='images2'></div>
+							<div className='images3'></div>
+						</div>
 					</div>
 				</div>
 
