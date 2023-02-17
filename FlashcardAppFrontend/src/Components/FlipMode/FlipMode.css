@@ -101,6 +101,7 @@
   
 .feedButtonNeut:hover{
 	border-radius: 16px;
+	background-color: var(--white-gray250);
 }
   
 .feedButtonPos:hover{

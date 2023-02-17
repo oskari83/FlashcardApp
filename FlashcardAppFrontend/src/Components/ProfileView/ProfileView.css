@@ -240,10 +240,10 @@
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	font-size: 10px;
-	height: 35px;
+	font-size: 12px;
+	height: 40px;
 	width: 80%;
-	border-radius: 10px;
+	border-radius: 12px;
 	margin: auto;
 	color: var(--main-gray80);
 	background-color: white;
@@ -255,5 +255,6 @@
 }
 
 .logoutButton:hover{
-	border-radius: 16px;
+	border-radius: 20px;
+	background-color: var(--white-gray250);
 }

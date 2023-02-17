@@ -10,6 +10,18 @@
     background-color: rgba(255, 255, 255,0.0);
 }
 
+.containerMainLanding2{
+	width: clamp(200px,96%,1000px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0%;
+    padding-right: 0%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    z-index: 2;
+    background-color: rgba(255, 255, 255,0.0);
+}
+
 .containerOuter{
 	width: 100%;
     z-index: 2;
@@ -26,7 +38,7 @@
 	display: flex;
 	align-items: center;
     font-family: "ReadexBold";
-    font-size: clamp(28px, 4.5vw, 42px);
+    font-size: clamp(26px, 4.5vw, 42px);
     color:var(--dark-blue-black);
 	text-align: center;
 }
@@ -40,7 +52,7 @@
 	align-items: center;
 	justify-content: center;
     font-family: "ReadexLight";
-    font-size: clamp(12px, 2.5vw, 16px);
+    font-size: clamp(13px, 2.5vw, 16px);
     color:var(--light-blue-black);
 	text-align: center;
 }
@@ -127,6 +139,7 @@
 	height: 100%;
 	margin-left: 20px;
 	margin-right: 20px;
+	margin-top: 5px;
     aspect-ratio:initial;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -243,7 +256,7 @@
 	height: 50px;
 	display: flex;
 	align-items: center;
-	padding-left: 60px;
+	padding-left: 50px;
 	margin-top: 20px;
 	width: 100%;
 }
@@ -263,8 +276,8 @@
 .innerBlockText{
 	display: flex;
 	align-items: center;
-	padding-left: 60px;
-	padding-right: 40px;
+	padding-left: 50px;
+	padding-right: 50px;
 	margin-top: 10px;
 	width: 100%;
 	font-family: "ReadexLight";
@@ -273,22 +286,18 @@
     color:var(--light-blue-black);
 }
 
-
 .usersOuter{
 	height: 200px;
-	display: flex;
-	flex-direction: column;
-    justify-content: flex-start;
 	align-items: center;
     flex-wrap: wrap;
-	width: 400%;
+	width: 100%;
 	background-color: rgb(244,244,246);
-	left: -150%;
-	position: relative;
 }
 
 .usersDiv{
-	width: clamp(200px,26%,1000px);
+	width: clamp(200px,96%,1000px);
+	margin-left: auto;
+    margin-right: auto;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -306,7 +315,22 @@
 	padding-right: 40px;
 	height: 60px;
 	font-family: "ReadexLight";
-    font-size: clamp(9px, 1.5vw, 18px);
+    font-size: clamp(14px, 1.5vw, 18px);
+	color: var(--dark-blue-black);
+}
+
+.usersInnerMobile{
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding-left: 40px;
+	margin-top: 20px;
+	padding-right: 40px;
+	height: 60px;
+	font-family: "Readex";
+	text-align: center;
+    font-size: 12px;
 	color: var(--dark-blue-black);
 }
 
@@ -329,7 +353,21 @@
 @media (max-width: 728px) {
 
 	.blockOuter{
+		height: 670px;
+		width: 90%;
+		margin: auto;
+	}
+
+	.usersInner{
 		display: none;
+	}
+
+	.usersInnerMobile{
+		display:flex;
+	}
+
+	.innerBlock{
+		width: 100%;
 	}
 
 	.textMain4{
@@ -350,5 +388,30 @@
 	
 	.images3 {
 		width: 120px;
+	}
+}
+
+@media (max-width: 500px){
+	.logosOuter{
+		flex-direction: column;
+		align-items: center;
+		height: 220px;
+	}
+
+	.usersOuter{
+		height: 340px;
+	}
+
+
+	.images1 {
+		width: 180px;
+	}
+	
+	.images2 {
+		width: 180px;
+	}
+	
+	.images3 {
+		width: 140px;
 	}
 }

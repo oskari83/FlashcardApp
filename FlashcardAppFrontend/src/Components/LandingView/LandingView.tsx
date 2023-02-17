@@ -51,7 +51,7 @@ export const LandingView = ({getFunc}:{getFunc:any}) => {
 						<div className='innerBlockTitle'>
 							<BsBoundingBox size='28px' color='rgb(31,48,76)'/>
 							<div className='innerBlockHeader'>
-								Innovative new reveal mode
+								Different modes of study
 							</div>
 						</div>
 						<div className='innerBlockText'>
@@ -81,20 +81,25 @@ export const LandingView = ({getFunc}:{getFunc:any}) => {
 						</div>
 					</div>
 				</div>
+			</div>
 
-				<div className='usersOuter'>
-					<div className='usersDiv'>
-						<div className='usersInner'>
-							Over &nbsp; <div className='boldedInner'>1000 students</div> &nbsp; from all around the world use MemNotes to achieve better grades.
-						</div>
-						<div className='logosOuter'>
-							<div className='images1'></div>
-							<div className='images2'></div>
-							<div className='images3'></div>
-						</div>
+			<div className='usersOuter'>
+				<div className='usersDiv'>
+					<div className='usersInner'>
+						Over &nbsp; <div className='boldedInner'>1000 students</div> &nbsp; from all around the world use MemNotes to achieve better grades.
+					</div>
+					<div className='usersInnerMobile'>
+						Over 1000 students from all around the world use MemNotes to achieve better grades.
+					</div>
+					<div className='logosOuter'>
+						<div className='images1'></div>
+						<div className='images2'></div>
+						<div className='images3'></div>
 					</div>
 				</div>
+			</div>
 
+			<div className="containerMainLanding2">
 				<div className='textMain4'>What are you waiting for?</div>
 				<div className='subText4' onClick={() => getFunc()}>Sign up and start studying today!</div>
 			</div>
