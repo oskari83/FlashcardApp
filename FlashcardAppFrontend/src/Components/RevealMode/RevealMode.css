@@ -68,8 +68,8 @@
 }
 
 .normalAnswerTd0:hover{
-    background-color: var(--white-gray240-a75);
-    color: var(--white-gray240-a75);
+    background-color: var(--white-gray240);
+    color: var(--white-gray240);
 }
 
 .tdFbOuter{
@@ -161,16 +161,15 @@
 .fboldRow {
     font-family: "ReadexBold";
     position: relative;
-    color: var(--main-gray110);
-    border-radius: 2px;
-    border-bottom: 1px solid var(--main-gray110);
-    border-left: 1px solid var(--main-gray110);
-    border-top: 1px solid var(--main-gray110);
+    color: var(--dark-blue-black);
+    border-bottom: 1px solid var(--dark-blue-black);
+	border-left: 1px solid var(--dark-blue-black);
+    border-top: 1px solid var(--dark-blue-black);
 }
 
 .fheaderRow{
     vertical-align: middle;
-    border-right: 1px solid var(--main-gray110);
+	border-right: 1px solid var(--dark-blue-black);
     padding-left: 6px;
     padding-right: 6px;
 }

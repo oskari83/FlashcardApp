@@ -239,7 +239,7 @@ export const CreateView = ({username}: {username:string}) => {
                             <td className='cheaderRow'>
                                 <div className='ctdText'>
                                     <div className='cDelIcon'>
-                                        <RiDeleteBinLine size='20px' color={`rgb(70, 70, 70)`} />
+                                        <RiDeleteBinLine size='20px' color={`rgb(31,48,76)`} />
                                     </div>
                                 </div>
                             </td>

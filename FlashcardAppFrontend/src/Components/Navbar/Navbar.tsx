@@ -39,10 +39,10 @@ const NavUser = ({username}: {username:string}) => {
     return(
         <ul className="nav-user">
             <li className="nav-itemUser">
-                <a href={'/user'} className="nav-linkUser user-hover">
-                    {username}
+                <a href={'/user'} className="nav-linkUser">
+                    Account
                     <div className="nav-icon">
-                        <FaUserGraduate size='16px' color='white'/>
+                        <FaUserGraduate size='16px' color='rgb(31,48,76)'/>
                     </div>
                 </a>
             </li>
@@ -96,6 +96,7 @@ export const Navbar = ({username}:{username:string}) => {
       <div className="navbar-outer">
         <nav className="navbar-tutorial">
             <div className="nav-logo">
+				<div className='navbarLogo'></div>
                 <a href='/' className="nav-branding">MemNotes.io</a>
             </div>
 

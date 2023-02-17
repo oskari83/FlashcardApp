@@ -264,7 +264,7 @@ export const CollectionEdit = ({items,name, id, notFunction}: {items: any,name:s
 							<td className='eheaderRow'>
 								<div className='etdText'>
 									<div className='editDelIcon'>
-										<RiDeleteBinLine size='20px' color={`rgb(70, 70, 70)`} />
+										<RiDeleteBinLine size='20px' color={`rgb(31,48,76)`} />
 									</div>
 								</div>
 							</td>

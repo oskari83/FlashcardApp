@@ -12,7 +12,7 @@
 .aboveCard{
     font-family: "ReadexLight";
     font-size: 12px;
-    color: var(--main-gray155);
+    color: var(--light-blue-black);
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -57,9 +57,12 @@
     justify-content: center;
     width: 32%;
     height: 100%;
-    background-color: var(--main-gray180-a75);
+    background-color: var(--main-gray180);
     cursor: pointer;
     border-radius: 8px;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
   
 .feedButtonNeut{
@@ -68,10 +71,14 @@
     justify-content: center;
     width: 32%;
     height: 100%;
-    background-color: var(--white-gray240-a75);
+    background-color: white;
     cursor: pointer;
     color: var(--main-gray60);
+	border: 2px solid var(--white-gray240);
     border-radius: 8px;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
   
 .feedButtonPos{
@@ -80,23 +87,24 @@
     justify-content: center;
     width: 32%;
     height: 100%;
-    background-color: var(--main-blue75);
+    background-color: var(--main-blue);
     cursor: pointer;
     border-radius: 8px;
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
   
 .feedButtonNeg:hover{
-    background-color: var(--main-gray180);
+    border-radius: 16px;
 }
   
 .feedButtonNeut:hover{
-    background-color: white;
-	border: 2px solid var(--white-gray240);
-    color: var(--main-gray60);
+	border-radius: 16px;
 }
   
 .feedButtonPos:hover{
-    background-color: var(--main-blue);
+    border-radius: 16px;
 }
   
 .randomOuterOuter{
@@ -131,7 +139,7 @@
 .randomOrder .checkmark{
     width: 100%;
     height: 100%;
-    border: 1px solid var(--main-gray155);
+    border: 1px solid var(--light-blue-black);
     display: inline-block;
     border-radius: 7px;
 }

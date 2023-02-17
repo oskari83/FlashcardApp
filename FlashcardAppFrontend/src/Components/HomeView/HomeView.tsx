@@ -87,7 +87,7 @@ export const HomeView = ({collectionData, username, notifText, loadingStatus}: {
             <div className='profileCont'>
                 <div className='leftSideCont'>
                     <div className='profileIcon'>
-                        <FaUserGraduate size='20px' color={`rgba(47, 110, 255, 0.8)`} />
+                        <FaUserGraduate size='20px' color={`rgb(47, 110, 255)`} />
                     </div>
                     <div className='profileUsernameText'>{username}</div>
                 </div>

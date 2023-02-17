@@ -147,16 +147,16 @@
 .cboldRow {
     font-family: "ReadexBold";
     position: relative;
-    color: rgb(105, 105, 105);
+    color: var(--dark-blue-black);
     border-radius: 2px;
-    border-bottom: 1px solid rgb(105, 105, 105);
-    border-left: 1px solid rgb(105, 105, 105);
-    border-top: 1px solid rgb(105, 105, 105);
+    border-bottom: 1px solid var(--dark-blue-black);
+    border-left: 1px solid var(--dark-blue-black);
+    border-top: 1px solid var(--dark-blue-black);
 }
 
 .cheaderRow{
     vertical-align: middle;
-    border-right: 1px solid rgb(105, 105, 105);
+    border-right: 1px solid var(--dark-blue-black);
     padding-left: 6px;
     padding-right: 6px;
 }

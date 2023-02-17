@@ -68,10 +68,13 @@
 	font-size: 10px;
 	height: 25px;
 	width: 75px;
-	border-radius: 12px;
+	border-radius: 8px;
 	color: var(--main-gray80);
 	background-color: white;
 	border: 2px solid var(--white-gray240);
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
 }
 
 .setNameIconButtonSaved{
@@ -91,6 +94,7 @@
 
 .setNameIconButton:hover{
   	background-color: var(--white-gray250);
+	  border-radius: 14px;
 }
 
 .setNameIconButtonSaved:hover{
