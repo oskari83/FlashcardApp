@@ -1,4 +1,5 @@
-import express from 'express';
+const express = require('express');
+
 import { CollectionEntry, ItemEntry } from '../types';
 const helper = require('../utils/helper');
 const CollectionM = require('../models/collection');
@@ -6,7 +7,7 @@ const User = require('../models/user');
 
 const router = express.Router();
 
-router.get('/', async (_req:express.Request, res:express.Response) => {
+router.get('/', async (_req:any, res:any) => {
 	const cols = await CollectionM
 		.find()
 		.sort({ _id: -1 })
@@ -15,7 +16,7 @@ router.get('/', async (_req:express.Request, res:express.Response) => {
 	res.json(cols);
 });
 
-router.post('/search', async (req:express.Request, res:express.Response) => {
+router.post('/search', async (req:any, res:any) => {
 	const query = req.body.search;
 	const cols = await CollectionM
 		.find({ 'name': { $regex: '^' + query, $options: 'i' } })
@@ -23,7 +24,7 @@ router.post('/search', async (req:express.Request, res:express.Response) => {
 	res.json(cols);
 });
 
-router.get('/:id', async (req:express.Request, res:express.Response) => {
+router.get('/:id', async (req:any, res:any) => {
 	const fcol = await CollectionM.findById(req.params.id);
 	if (fcol) {
 		res.json(fcol);
@@ -32,7 +33,7 @@ router.get('/:id', async (req:express.Request, res:express.Response) => {
 	}
 });
 
-router.post('/', async (req:any, res:express.Response) => {
+router.post('/', async (req:any, res:any) => {
 	try {
 		if(!req.user){
 			return res.status(401).json({ error: 'token missing or invalid' });
@@ -88,7 +89,7 @@ router.post('/', async (req:any, res:express.Response) => {
 	}
 });
 
-router.delete('/:id', async (req:any, res:express.Response) => {
+router.delete('/:id', async (req:any, res:any) => {
 	const collectionToDelete = await CollectionM.findById(req.params.id);
 	if(!collectionToDelete) {
 		return res.status(204).end();
@@ -117,7 +118,7 @@ router.delete('/:id', async (req:any, res:express.Response) => {
 	res.status(204).end();
 });
 
-router.put('/:id', async (req:any, res:express.Response) => {
+router.put('/:id', async (req:any, res:any) => {
 	const collectionToUpdate = await CollectionM.findById(req.params.id);
 	if(!collectionToUpdate) {
 		return res.status(404).json({
@@ -222,7 +223,7 @@ router.put('/:id', async (req:any, res:express.Response) => {
 	res.json(updatedCol);
 });
 
-router.put('/:id/save', async (req:any, res:express.Response) => {
+router.put('/:id/save', async (req:any, res:any) => {
 	if(!req.user){
 		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in to save collections)' });
 	}
@@ -264,7 +265,7 @@ router.put('/:id/save', async (req:any, res:express.Response) => {
 	res.json(collectionToSave);
 });
 
-router.put('/:id/unsave', async (req:any, res:express.Response) => {
+router.put('/:id/unsave', async (req:any, res:any) => {
 	if(!req.user){
 		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in to unsave collections)' });
 	}

@@ -1,12 +1,12 @@
 const bcrypt = require('bcryptjs');
-import express from 'express';
+const express = require('express');
 const usersRouter = express.Router();
 const User = require('../models/user');
 const CollectionM = require('../models/collection');
 import { UserRaw, ItemEntry, DataEntry } from '../types';
 //const helper = require('../utils/helper');
 
-usersRouter.post('/signup', async (req:express.Request, res:express.Response) => {
+usersRouter.post('/signup', async (req:any, res:any) => {
 	const { username, email, password } = req.body;
 
 	const existingUser = await User.findOne({ username });
@@ -37,7 +37,7 @@ usersRouter.post('/signup', async (req:express.Request, res:express.Response) =>
 	res.status(201).json(savedUser);
 });
 
-usersRouter.get('/', async (_req:express.Request,res:express.Response) => {
+usersRouter.get('/', async (_req:any,res:any) => {
 	const users = await User
 		.find({})
 		.populate('createdCollections', { name:1,creator:1,itemCount:1,items:1,id:1 });
@@ -52,7 +52,7 @@ usersRouter.get('/', async (_req:express.Request,res:express.Response) => {
 	res.json(hideStuffUsers);
 });
 
-usersRouter.get('/:id/collections', async (req:any,res:express.Response) => {
+usersRouter.get('/:id/collections', async (req:any,res:any) => {
 	if(!req.user){
 		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in)' });
 	}
@@ -79,7 +79,7 @@ usersRouter.get('/:id/collections', async (req:any,res:express.Response) => {
 	res.json(onlyReturnDataObject);
 });
 
-usersRouter.put('/:id/data', async (req:any,res:express.Response) => {
+usersRouter.put('/:id/data', async (req:any,res:any) => {
 	if(!req.user){
 		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in)' });
 	}
@@ -176,7 +176,7 @@ usersRouter.put('/:id/data', async (req:any,res:express.Response) => {
 	res.json(onlyReturnDataObject);
 });
 
-usersRouter.put('/:id/updateown', async (req:any, res:express.Response) => {
+usersRouter.put('/:id/updateown', async (req:any, res:any) => {
 	if(!req.user){
 		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in to save collections)' });
 	}
@@ -241,7 +241,7 @@ usersRouter.put('/:id/updateown', async (req:any, res:express.Response) => {
 	res.json(savedUser);
 });
 
-usersRouter.put('/:id/updatesaved', async (req:any, res:express.Response) => {
+usersRouter.put('/:id/updatesaved', async (req:any, res:any) => {
 	if(!req.user){
 		return res.status(401).json({ error: 'token missing or invalid (you need to be signed in to save collections)' });
 	}
@@ -306,7 +306,7 @@ usersRouter.put('/:id/updatesaved', async (req:any, res:express.Response) => {
 	res.json(savedUser);
 });
 
-usersRouter.post('/checkusername', async (req:express.Request, res:express.Response) => {
+usersRouter.post('/checkusername', async (req:any, res:any) => {
 	const { username } = req.body;
 
 	const existingUser = await User.findOne({ username });
@@ -321,7 +321,7 @@ usersRouter.post('/checkusername', async (req:express.Request, res:express.Respo
 	}
 });
 
-usersRouter.post('/checkemail', async (req:express.Request, res:express.Response) => {
+usersRouter.post('/checkemail', async (req:any, res:any) => {
 	const { email } = req.body;
 
 	const existingUser = await User.findOne({ email });

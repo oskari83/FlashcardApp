@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const logger2 = require('./logger');
-import express from 'express';
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const requestLogger = (request:express.Request, _response:express.Response, next:express.NextFunction) => {
+const requestLogger = (request:any, _response:any, next:any) => {
 	logger2.info('Method:', request.method);
 	logger2.info('Path:  ', request.path);
 	logger2.info('Body:  ', request.body);
@@ -12,11 +11,11 @@ const requestLogger = (request:express.Request, _response:express.Response, next
 	next();
 };
 
-const unknownEndpoint = (_req: express.Request, response: express.Response) => {
+const unknownEndpoint = (_req: any, response: any) => {
 	response.status(404).send({ error: 'unknown endpoint' });
 };
 
-const errorHandler = (error: { name: string, message: string}, _request:express.Request, response: express.Response, next:express.NextFunction) => {
+const errorHandler = (error: { name: string, message: string}, _request:any, response: any, next:any) => {
 	logger2.error(error.message);
 
 	if (error.name === 'CastError') {
@@ -36,7 +35,7 @@ const errorHandler = (error: { name: string, message: string}, _request:express.
 	next(error);
 };
 
-const userExtractor = async (request:any, _response:express.Response, next:express.NextFunction) => {
+const userExtractor = async (request:any, _response:any, next:any) => {
 	const authorization = await request.get('authorization');
 	if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
 		const decodedToken = jwt.verify(authorization.substring(7), process.env.SECRET);
@@ -54,3 +53,5 @@ module.exports = {
 	errorHandler,
 	userExtractor
 };
+
+export {};

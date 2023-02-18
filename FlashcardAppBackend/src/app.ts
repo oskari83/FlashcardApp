@@ -9,7 +9,7 @@ require('express-async-errors');
 
 const collectionRouter = require('./routes/collections');
 const usersRouter = require('./routes/users');
-const loginRouter = require('./routes/login');
+const loginRouter2 = require('./routes/login');
 
 const { unknownEndpoint, errorHandler, userExtractor } = require('./utils/middleware');
 const logger = require('./utils/logger');
@@ -30,7 +30,7 @@ app.use(express.json());
 
 app.use('/api/collections', userExtractor, collectionRouter);
 app.use('/api/users', userExtractor, usersRouter);
-app.use('/api/login', loginRouter);
+app.use('/api/login', loginRouter2);
 
 app.use(express.static(path.join(__dirname, 'build')));
 
