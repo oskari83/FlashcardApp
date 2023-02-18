@@ -19,7 +19,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     width: 100%;
-    height: 330px;
+    height: 350px;
     z-index: 2;
     background-color: rgb(255, 255, 255);
     border-radius: 8px;
@@ -315,7 +315,7 @@
     display: flex;
     height: 40px;
     width: 80%;
-    margin-top: 14px;
+    margin-top: 10px;
     background-color: var(--main-blue);
     align-items: center;
     justify-content: center;
@@ -412,8 +412,92 @@
 .userNameErrorText{
     width: 80%;
 	min-height: 14px;
+    margin-top: 6px;
+	font-size: 11px;
+	font-family: "ReadexLight";
+	color: rgb(255, 89, 89);
+}
+
+.userNameErrorText2{
+    width: 80%;
+	min-height: 14px;
     margin-top: 2px;
 	font-size: 11px;
 	font-family: "ReadexLight";
 	color: rgb(255, 89, 89);
+}
+
+.loginOptionsContainer{
+	width: 80%;
+	display: flex;
+	align-items:center;
+	justify-content:space-between;
+	height: 14px;
+	font-size: 12px;
+	margin-top: 8px;
+	font-family: "Readex";
+	color: var(--main-blue);
+}
+
+.forgotPasswordLink{
+	width: 50%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.rememberMeBox{
+	width: 50%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	color: var(--light-blue-black);
+	font-family: "Readex";
+}
+
+.rememberMeButton{
+	box-sizing: border-box;
+    width: 20px;
+    height: 100%;
+	margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rememberMeButtonButton{
+	box-sizing: border-box;
+    width: 14px;
+    height: 14px;
+}
+
+.rememberLabel{
+	cursor: pointer;
+}
+
+.rememberLabel .checkMarkInRemember{
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgb(230, 230, 230);
+    display: inline-block;
+    border-radius: 2px;
+}
+
+.rememberLabel input {
+    display: none;
+}
+  
+.rememberLabel input:checked + .checkMarkInRemember{
+    background-color: var(--main-blue75);
+	border-radius: 2px;
+    border: 0px solid rgb(235, 235, 235);
+}
+
+.innerRememberCircle{
+	margin-left: 3px;
+    margin-top: 3px;
+    width: 0px;
+    height: 0px;
+    border-radius: 1px;
+    background-color: var(--main-blue);
 }

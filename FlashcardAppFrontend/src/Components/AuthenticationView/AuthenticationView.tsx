@@ -20,7 +20,6 @@ const SignInView = ({setUserFunc, setError, errorText}: {setUserFunc:any, setErr
 
 	const handleLogin = async (event: SyntheticEvent) => {
 		event.preventDefault();
-		console.log('logging in with', email, password);
 		setButtonText('Loading...');
 
 		const emailCheck = CheckEmail(email);
@@ -82,7 +81,7 @@ const SignInView = ({setUserFunc, setError, errorText}: {setUserFunc:any, setErr
 			></input>
         </div>
 
-		<div className='userNameErrorText'>{emailError}</div>
+		<div className='userNameErrorText2'>{emailError}</div>
 
         <div className='passwordTextContainer'>Password</div>
         <div className='passwordContainer'>
@@ -94,7 +93,23 @@ const SignInView = ({setUserFunc, setError, errorText}: {setUserFunc:any, setErr
 				onChange={handlePasswordChange}
 			></input>
         </div>
-
+		
+		<div className='loginOptionsContainer'>
+			<div className='forgotPasswordLink'>Forgot password?</div>
+			<div className='rememberMeBox'>
+				<div className='rememberMeButton'>
+					<div className='rememberMeButtonButton'>
+						<label className='rememberLabel'>
+							<input type="checkbox" className='rememberCheckBox'></input>
+							<span className='checkMarkInRemember'>
+								<div className='innerRememberCircle'></div>
+							</span>
+						</label>
+					</div>
+				</div>
+				<div>Remember me</div>
+			</div>
+		</div>
 		<div className='userNameErrorText'>{errorText}</div>
 
         <button className='signinButton' type='submit'>{buttonText}</button>
@@ -360,7 +375,7 @@ const RegisterView = ({selectionFunc, setError, errorText}: {selectionFunc:any, 
 			</div>
         </div>
 
-		<div className='userNameErrorText'>{usernameError}</div>
+		<div className='userNameErrorText2'>{usernameError}</div>
 
         <div className='emailTextContainer'>Email</div>
         <div className='emailContainer'>
@@ -378,7 +393,7 @@ const RegisterView = ({selectionFunc, setError, errorText}: {selectionFunc:any, 
 			</div>
         </div>
 
-		<div className='userNameErrorText'>{emailError}</div>
+		<div className='userNameErrorText2'>{emailError}</div>
 
         <div className='passwordTextContainer'>Password</div>
         <div className='passwordContainer'>
@@ -396,7 +411,7 @@ const RegisterView = ({selectionFunc, setError, errorText}: {selectionFunc:any, 
 			</div>
         </div>
 
-		<div className='userNameErrorText'>{passwordError}</div>
+		<div className='userNameErrorText2'>{passwordError}</div>
 
         <div className='passwordTextContainer'>Password again</div>
         <div className='passwordContainer'>
@@ -414,7 +429,7 @@ const RegisterView = ({selectionFunc, setError, errorText}: {selectionFunc:any, 
 			</div>
         </div>
 
-		<div className='userNameErrorText'>{lowestError}</div>
+		<div className='userNameErrorText2'>{lowestError}</div>
 
 		<button className='registerButton' type='submit'>{buttonText}</button>
 	</form>

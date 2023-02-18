@@ -61,22 +61,22 @@ const NavMenuMobile = ({CloseFunction}: FuncProps) => {
         <ul className='nav-mobile'>
             <li className="nav-item">
                 <div className="hover-box" onClick={() => mobileClick('')}></div>
-                <AiFillHome size='20px' color='white' />
+                <AiFillHome size='20px' color='black' />
                 <NavLink text='Home' addr='/'/>
             </li>
             <li className="nav-item">
                 <div className="hover-box" onClick={() => mobileClick('/browse')}></div>
-                <AiOutlineOrderedList size='20px' color='white' />
+                <AiOutlineOrderedList size='20px' color='black' />
                 <NavLink text='Browse' addr='/browse'/>
             </li>
             <li className="nav-item">
                 <div className="hover-box" onClick={() => mobileClick('/create')}></div>
-                <MdCreateNewFolder size='20px' color='white' />
+                <MdCreateNewFolder size='20px' color='black' />
                 <NavLink text='Create' addr='/create'/>
             </li>
             <li className="nav-item">
                 <div className="hover-box" onClick={() => mobileClick('/user')}></div>
-                <FaUserGraduate size='20px' color='white' />
+                <FaUserGraduate size='20px' color='black' />
                 <NavLink text='Profile' addr='/auth'/>
             </li>
         </ul>
@@ -86,8 +86,8 @@ const NavMenuMobile = ({CloseFunction}: FuncProps) => {
 export const Navbar = ({username}:{username:string}) => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    const hamburgerIcon = <FiMenu size='20px' color='white' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}/>
-    const closeIcon = <IoCloseSharp size='20px' color='white' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}/>
+    const hamburgerIcon = <FiMenu size='20px' color='rgb(47, 110, 255)' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}/>
+    const closeIcon = <IoCloseSharp size='20px' color='rgb(47, 110, 255)' onClick={() => setMobileMenuOpen(!mobileMenuOpen)}/>
     const closeMobileMenu = () => {
         setMobileMenuOpen(false);
     }

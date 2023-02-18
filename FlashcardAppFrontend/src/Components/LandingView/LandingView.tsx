@@ -44,7 +44,7 @@ export const LandingView = ({getFunc}:{getFunc:any}) => {
 							</div>
 						</div>
 						<div className='innerBlockText'>
-							Whether you have just a few dozen or thousands of flashcards, {`we've`} got you covered. Easily organize your flashcards by with collections.
+							Whether you have just a few dozen or thousands of flashcards, {`we've`} got you covered. Easily organize your flashcards with collections.
 						</div>
 					</div>
 					<div className='innerBlock'>

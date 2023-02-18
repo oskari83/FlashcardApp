@@ -209,7 +209,10 @@ export const CollectionEdit = ({items,name, id, notFunction}: {items: any,name:s
                 if(error.code==="ERR_NETWORK"){
 					notFunction('Network error - please check your internet connection!',5000);
                     //setNotificationMessage('Network error - please check your internet connection!');
-                }else{
+                }else if(error.response.data.error === 'token expired'){
+					//if our token expires while we are editing collection, not tested, hopefully works
+					navigate('/getstarted')
+				}else{
 					notFunction(error.message,5000);
                 }
                 console.log(error);
