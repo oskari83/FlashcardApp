@@ -67,6 +67,10 @@ export const CollectionView = ({userId, savedCols}: {userId:string,savedCols:Col
 					}else{
 						SetNotificaiton(error.message,5000);
 					}
+					if(error.response.data.error==='token expired'){
+						window.localStorage.removeItem('loggedFlashcardAppUser');
+						window.location.reload();
+					}
 					console.log(error);
 				});
 
@@ -97,6 +101,10 @@ export const CollectionView = ({userId, savedCols}: {userId:string,savedCols:Col
 					}else{
 						SetNotificaiton(error.message,5000);
 					}
+					if(error.response.data.error==='token expired'){
+						window.localStorage.removeItem('loggedFlashcardAppUser');
+						window.location.reload();
+					}
 					console.log(error);
 				});
 		}
@@ -118,6 +126,10 @@ export const CollectionView = ({userId, savedCols}: {userId:string,savedCols:Col
 						console.log(error);
 						SetNotificaiton(error.message,5000);
 						setBookmarked(false);
+						if(error.response.data.error==='token expired'){
+							window.localStorage.removeItem('loggedFlashcardAppUser');
+							window.location.reload();
+						}
 					});
 			}
 		}else{
@@ -135,6 +147,10 @@ export const CollectionView = ({userId, savedCols}: {userId:string,savedCols:Col
 						console.log(error);
 						SetNotificaiton(error.message,5000);
 						setBookmarked(false);
+						if(error.response.data.error==='token expired'){
+							window.localStorage.removeItem('loggedFlashcardAppUser');
+							window.location.reload();
+						}
 					});
 			}
 		}

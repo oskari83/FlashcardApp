@@ -110,6 +110,10 @@ export const BrowseView = ({username, savedCols}:{username:string,savedCols:Coll
             }else{
 				AddNotification(error.message,5000);
             }
+			if(error.response.data.error==='token expired'){
+				window.localStorage.removeItem('loggedFlashcardAppUser');
+				window.location.reload();
+			}
             console.log(error);
         });
     }, [getRecentNow]);
@@ -156,6 +160,10 @@ export const BrowseView = ({username, savedCols}:{username:string,savedCols:Coll
 					AddNotification('Network error - please check your internet connection!',5000);
 				}else{
 					AddNotification(error.message,5000);
+				}
+				if(error.response.data.error==='token expired'){
+					window.localStorage.removeItem('loggedFlashcardAppUser');
+					window.location.reload();
 				}
 				console.log(error);
 			});

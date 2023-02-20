@@ -31,7 +31,7 @@ const App = () => {
 	}
 
 	const DeleteUserData = () => {
-		window.localStorage.clear();
+		window.localStorage.removeItem('loggedFlashcardAppUser');
 		setUser(null);
 	}
 
@@ -62,11 +62,14 @@ const App = () => {
 			setUser(user);
 			collectionService.setToken(user.token);
 			userService.setToken(user.token);
+		}else{
+			if(location.pathname!=='/' && location.pathname!=='/getstarted'){
+				GetStarted();
+			}
 		}
 	}, []);
 
 	useEffect(() => {
-		console.log("path changed");
 		if(location.pathname==='/'){
 			setFooterStatus(true);
 		}

@@ -30,7 +30,7 @@ const NormalTableRow = ({item,created,collectionId, userId, notFunction, setRefr
 						notFunction(error.message,5000);
 					}
 					if(error.response.data.error==='token expired'){
-						window.localStorage.clear();
+						window.localStorage.removeItem('loggedFlashcardAppUser');
 						window.location.reload();
 					}
 					console.log(error);
@@ -54,7 +54,7 @@ const NormalTableRow = ({item,created,collectionId, userId, notFunction, setRefr
 						notFunction(error.message,5000);
 					}
 					if(error.response.data.error==='token expired'){
-						window.localStorage.clear();
+						window.localStorage.removeItem('loggedFlashcardAppUser');
 						window.location.reload();
 					}
 					console.log(error);

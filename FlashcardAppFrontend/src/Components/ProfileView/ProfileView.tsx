@@ -1,42 +1,14 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import './ProfileView.css';
 
 export const ProfileView = ({logoutFunc, user, createdA, savedA}:{logoutFunc:any, user:any, savedA:number, createdA:number}) => {
-    const [emailChange, setEmailChange] = useState(0);
-    const [pwChange, setPwChange] = useState(0);
 	const navigate = useNavigate();
 
 	const LogoutOfAccount = () => {
 		logoutFunc();
+		window.localStorage.removeItem('rememberPassword');
 		navigate('/');
 	}
-
-    const emailChangeStatus = (id: number) => {
-        setEmailChange(id);
-    }
-
-    const pwChangeStatus = (id: number) => {
-        setPwChange(id);
-    }
-
-    const emailChangeSubmit = () => {
-        emailChangeStatus(0);
-        console.log('email changed');
-    }
-
-    const emailChangeCancel = () => {
-        emailChangeStatus(0);
-    }
-
-    const pwChangeSubmit = () => {
-        setPwChange(0);
-        console.log('password changed');
-    }
-
-    const pwChangeCancel = () => {
-        setPwChange(0);
-    }
 
     return(
         <>

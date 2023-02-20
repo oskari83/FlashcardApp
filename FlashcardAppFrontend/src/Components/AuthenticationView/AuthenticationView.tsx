@@ -1,5 +1,5 @@
 import './AuthenticationView.css';
-import { useState, SyntheticEvent } from 'react';
+import { useState, SyntheticEvent, useEffect } from 'react';
 import authService from '../../services/auth';
 import collectionService from '../../services/collections';
 import userService from '../../services/user';
@@ -12,10 +12,25 @@ const SignInView = ({setUserFunc, setError, errorText}: {setUserFunc:any, setErr
 	const [password, setPassword] = useState(''); 
 	const [emailError, setEmailError] = useState('');
 	const [buttonText, setButtonText] = useState('Sign In'); 
+	const [remember, setRemember] = useState(false);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		const rememberDetails = window.localStorage.getItem('rememberPassword');
+		if (rememberDetails) {
+			const userDetails = JSON.parse(rememberDetails);
+			setEmail(userDetails.email);
+			setPassword(userDetails.password);
+			handleLogin2(userDetails.email,userDetails.password);
+		}
+	}, []);
 
 	const ResetButton = () => {
 		setButtonText('Sign In');
+	}
+
+	const rememberMe = () => {
+		setRemember((rem) => !rem);
 	}
 
 	const handleLogin = async (event: SyntheticEvent) => {
@@ -39,7 +54,56 @@ const SignInView = ({setUserFunc, setError, errorText}: {setUserFunc:any, setErr
 			});
 			window.localStorage.setItem(
 				'loggedFlashcardAppUser', JSON.stringify(user)
-			); 
+			);
+
+			if(remember){
+				const rememberDetails = {
+					email: email,
+					password: password
+				};
+				window.localStorage.setItem(
+					'rememberPassword', JSON.stringify(rememberDetails)
+				);
+			} 
+			console.log(user);
+			collectionService.setToken(user.token);
+			userService.setToken(user.token);
+			setUserFunc(user);
+			setEmail('');
+			setPassword('');
+			ResetButton();
+			navigate('/');
+		} catch (exception) {
+			console.log("failed");
+			ResetButton();
+			setError('Incorrect email or password');
+			setTimeout(() => {
+				setError('');
+			}, 5000);
+		}
+	};
+
+	const handleLogin2 = async (emailRemember:string,passwordRemember:string) => {
+		setButtonText('Loading...');
+		console.log(emailRemember,passwordRemember);
+		try {
+			const user = await authService.login({
+				email: emailRemember, 
+				password: passwordRemember,
+			});
+			window.localStorage.setItem(
+				'loggedFlashcardAppUser', JSON.stringify(user)
+			);
+
+			if(remember){
+				const rememberDetails = {
+					email: email,
+					password: password
+				};
+				window.localStorage.setItem(
+					'rememberPassword', JSON.stringify(rememberDetails)
+				);
+			} 
 			console.log(user);
 			collectionService.setToken(user.token);
 			userService.setToken(user.token);
@@ -100,7 +164,7 @@ const SignInView = ({setUserFunc, setError, errorText}: {setUserFunc:any, setErr
 				<div className='rememberMeButton'>
 					<div className='rememberMeButtonButton'>
 						<label className='rememberLabel'>
-							<input type="checkbox" className='rememberCheckBox'></input>
+							<input type="checkbox" className='rememberCheckBox' onClick={() => rememberMe()}></input>
 							<span className='checkMarkInRemember'>
 								<div className='innerRememberCircle'></div>
 							</span>

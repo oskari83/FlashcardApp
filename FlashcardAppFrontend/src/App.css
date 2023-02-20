@@ -27,6 +27,8 @@ src: local('ReadexPro-Light'), url(./Fonts/ReadexPro-Light.woff) format('woff');
 	--dark-blue-black: rgb(31,48,76);
 	--light-blue-black: rgb(106,115,137);
 
+	--main-blue85: rgba(47, 110, 255,0.85);
+
 	--main-blue75: rgba(47, 110, 255,0.75);
 	--light-blue75: rgba(113, 158, 255,0.75);
 	--gray-blue75: rgba(171, 200, 224,0.75);

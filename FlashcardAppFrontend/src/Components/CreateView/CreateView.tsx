@@ -187,6 +187,10 @@ export const CreateView = ({username}: {username:string}) => {
                 }else{
                     setNotificationMessage(error.message);
                 }
+				if(error.response.data.error==='token expired'){
+					window.localStorage.removeItem('loggedFlashcardAppUser');
+					window.location.reload();
+				}
                 console.log(error);
                 ClearNotificationError(5000);
             });

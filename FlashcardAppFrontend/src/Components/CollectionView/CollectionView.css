@@ -115,7 +115,7 @@
   border-radius: 5px;
   margin-right: 3%;
   margin-top: 0px;
-  background-color: var(--main-blue75);
+  background-color: var(--main-blue85);
 }
 
 .setInfo {
@@ -186,15 +186,15 @@
 }
 
 .selectorBarItem:hover {
-  box-shadow: inset 0 -3px 0 0 rgba(41, 116, 255, 0.801);
+  box-shadow: inset 0 -4px 0 0 var(--main-blue);
 }
 
 .selectorBarItemSelected {
   width: clamp(20%,20%,25%);
   font-family: "ReadexBold";
   font-size: clamp(9px, 1.5vw, 11px);
-  color: rgba(41, 116, 255, 1.0);
-  box-shadow: inset 0 -3px 0 0 rgba(41, 116, 255, 0.801);
+  color: var(--main-blue);
+  box-shadow: inset 0px -4px 0 0 var(--main-blue);
   cursor: pointer;
   text-align: center;
   float: left;

@@ -83,7 +83,7 @@ a{
 
 .nav-itemUser{
     height: 100%;
-    width: 180px;
+    width: 100px;
     display: flex;
 	align-items: flex-start;
     list-style: none;

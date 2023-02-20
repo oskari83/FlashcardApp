@@ -68,7 +68,7 @@ export const FlipMode = ({items, itemdata, created, userId, notFunction, id, set
 						notFunction(error.message,5000);
 					}
 					if(error.response.data.error==='token expired'){
-						window.localStorage.clear();
+						window.localStorage.removeItem('loggedFlashcardAppUser');
 						window.location.reload();
 					}
 					console.log(error);
@@ -92,7 +92,7 @@ export const FlipMode = ({items, itemdata, created, userId, notFunction, id, set
 						notFunction(error.message,5000);
 					}
 					if(error.response.data.error==='token expired'){
-						window.localStorage.clear();
+						window.localStorage.removeItem('loggedFlashcardAppUser');
 						window.location.reload();
 					}
 					console.log(error);
@@ -100,6 +100,22 @@ export const FlipMode = ({items, itemdata, created, userId, notFunction, id, set
 		}
         IncrementIndex();
     }
+
+	const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+		console.log("hi");
+		if(event.code === "ArrowLeft"){
+			DecrementIndex();
+		}
+		if (event.code === "ArrowRight") {
+			IncrementIndex();
+		}
+		if (event.code === "ArrowUp") {
+			RotateCard();
+		}
+		if (event.code === "ArrowDown") {
+			RotateCard();
+		}
+	}
 
 	const IncrementIndex = () => {
 		if(itemsToShow!==undefined && itemIndex!==(itemsToShow.length)-1){

@@ -209,12 +209,13 @@ export const CollectionEdit = ({items,name, id, notFunction}: {items: any,name:s
                 if(error.code==="ERR_NETWORK"){
 					notFunction('Network error - please check your internet connection!',5000);
                     //setNotificationMessage('Network error - please check your internet connection!');
-                }else if(error.response.data.error === 'token expired'){
-					//if our token expires while we are editing collection, not tested, hopefully works
-					navigate('/getstarted')
-				}else{
+                }else{
 					notFunction(error.message,5000);
                 }
+				if(error.response.data.error==='token expired'){
+					window.localStorage.removeItem('loggedFlashcardAppUser');
+					window.location.reload();
+				}
                 console.log(error);
             });
 		}
