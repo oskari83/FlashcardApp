@@ -1,6 +1,0 @@
-/FlashcardAppBackend/.env
-/FlashcardAppBackend/node_modules
-/FlashcardAppBackend/prod
-FlashcardAppBackend/client-cert.pem
-FlashcardAppBackend/client-key.pem
-FlashcardAppBackend/client.csr
