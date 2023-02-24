@@ -2,7 +2,7 @@
 This is my Fullstack MOOC 2022 Project
 
 Try it here:
-www.memnotes.io
+https://www.memnotes.io
 
 Building:
 - npm run build in backend
