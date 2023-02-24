@@ -10,3 +10,4 @@ FlashcardAppBackend/package-lock.json
 FlashcardAppFrontend/package-lock.json
 .DS_Store
 FlashcardAppFrontend/.gitignore
+FlashcardAppBackend/client
