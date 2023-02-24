@@ -1,0 +1,12 @@
+FlashcardAppBackend/.env
+FlashcardAppBackend/node_modules
+FlashcardAppBackend/prod
+FlashcardAppBackend/client-cert.pem
+FlashcardAppBackend/client-key.pem
+FlashcardAppBackend/client.csr
+FlashcardAppBackend/Procfile
+FlashcardAppBackend/.gitignore
+FlashcardAppBackend/package-lock.json
+FlashcardAppFrontend/package-lock.json
+.DS_Store
+FlashcardAppFrontend/.gitignore
