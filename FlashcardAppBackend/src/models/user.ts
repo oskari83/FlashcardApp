@@ -4,6 +4,9 @@ const userSchema = new mongoose.Schema({
 	username: String,
 	email: String,
 	passwordHash: String,
+	recoverData: {
+		type: Object
+	},
 	createdCollections: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
@@ -27,6 +30,7 @@ userSchema.set('toJSON', {
 		delete returnedObject.__v;
 		delete returnedObject.passwordHash;
 		delete returnedObject.email;
+		delete returnedObject.recoverData;
 	}
 });
 

@@ -8,6 +8,9 @@ const userSchema = new mongoose_1.default.Schema({
     username: String,
     email: String,
     passwordHash: String,
+    recoverData: {
+        type: Object
+    },
     createdCollections: [
         {
             type: mongoose_1.default.Schema.Types.ObjectId,
@@ -30,6 +33,7 @@ userSchema.set('toJSON', {
         delete returnedObject.__v;
         delete returnedObject.passwordHash;
         delete returnedObject.email;
+        delete returnedObject.recoverData;
     }
 });
 const User = mongoose_1.default.model('User', userSchema);

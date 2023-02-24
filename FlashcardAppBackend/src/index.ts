@@ -2,6 +2,9 @@ const application = require('./app');
 const http = require('http');
 const config2 = require('./utils/config');
 const logger3 = require('./utils/logger');
+const enforce = require('express-sslify');
+
+application.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 const server = http.createServer(application);
 

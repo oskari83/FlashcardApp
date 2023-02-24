@@ -2,3 +2,4 @@
 /prod
 /data
 .env
+sendgrid.env

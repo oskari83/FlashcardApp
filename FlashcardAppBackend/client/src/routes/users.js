@@ -8,16 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const bcrypt = require('bcryptjs');
-const express_1 = __importDefault(require("express"));
-const usersRouter = express_1.default.Router();
+const express = require('express');
+const usersRouter = express.Router();
 const User = require('../models/user');
 const CollectionM = require('../models/collection');
-//const helper = require('../utils/helper');
+const helper = require('../utils/helper');
+const sgMail = require('@sendgrid/mail');
 usersRouter.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, email, password } = req.body;
     const existingUser = yield User.findOne({ username });
@@ -297,5 +295,89 @@ usersRouter.post('/checkemail', (req, res) => __awaiter(void 0, void 0, void 0, 
             answer: 'ok'
         });
     }
+}));
+usersRouter.post('/recover', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email } = req.body;
+    //get user
+    const existingUser = yield User.findOne({ email });
+    //if user with that email is not found, do nothing
+    if (!existingUser) {
+        return res.status(200).json({
+            answer: 'ok'
+        });
+    }
+    const userID = existingUser.id;
+    //get timestamp to associate with recovery key
+    const date = Date();
+    const new_date = new Date(date);
+    console.log(new_date);
+    //get recovery key that is used to check authentication
+    const key = helper.generateKey();
+    const newUser = existingUser;
+    const recoverData = {
+        key: key,
+        date: new_date
+    };
+    newUser.recoverData = recoverData;
+    const htmlString = helper.generateHTML(key, email);
+    const msg = {
+        to: email,
+        from: 'memnotes.contact@gmail.com',
+        subject: 'MemNotes Password Recovery',
+        text: 'Use the link below to change your password.',
+        html: htmlString,
+    };
+    sgMail
+        .send(msg)
+        .then(() => {
+        console.log('Email sent');
+    })
+        .catch((error) => {
+        console.error(error);
+    });
+    //save key and date in user data
+    yield User.findByIdAndUpdate(userID, newUser, { new: true })
+        .catch((error) => {
+        console.log(error);
+        throw new Error('Could not save collection to mongodb');
+    });
+    return res.status(200).json({
+        answer: 'ok'
+    });
+}));
+usersRouter.post('/reset', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, password, key } = req.body;
+    //get user
+    const existingUser = yield User.findOne({ email });
+    console.log('resetting');
+    //if user with that email is not found, do nothing
+    if (!existingUser) {
+        return res.status(404).json({
+            error: 'could not find user'
+        });
+    }
+    if (!('recoverData' in existingUser)) {
+        return res.status(404).json({
+            error: 'could not find user'
+        });
+    }
+    if (existingUser.recoverData.key !== key) {
+        return res.status(404).json({
+            error: 'incorrect key'
+        });
+    }
+    //checks that key is not older than 1 hour
+    const key_date = new Date(existingUser.recoverData.date);
+    if (!helper.lessThanOneHourAgo(key_date)) {
+        return res.status(404).json({
+            error: 'invalid key (1 hour limit)'
+        });
+    }
+    const saltRounds = 10;
+    const passwordHash = yield bcrypt.hash(password, saltRounds);
+    const newUser = existingUser;
+    newUser.passwordHash = passwordHash;
+    const savedUser = yield newUser.save();
+    res.status(201).json(savedUser);
 }));
 module.exports = usersRouter;

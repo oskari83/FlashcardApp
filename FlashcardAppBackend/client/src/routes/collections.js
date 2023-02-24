@@ -8,15 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
+const express = require('express');
 const helper = require('../utils/helper');
 const CollectionM = require('../models/collection');
 const User = require('../models/user');
-const router = express_1.default.Router();
+const router = express.Router();
 router.get('/', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const cols = yield CollectionM
         .find()

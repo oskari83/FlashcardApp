@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
+const sgMail = require('@sendgrid/mail');
 const path = require('path');
 require('express-async-errors');
 
@@ -23,6 +24,8 @@ mongoose.connect(config.MONGODB_URI)
 	.catch((error: Error) => {
 		logger.info('error connecting to MongoDB:', error.message);
 	});
+
+sgMail.setApiKey(config.SENDGRID_API_KEY);
 
 app.use(cors());
 app.use(express.static('build'));

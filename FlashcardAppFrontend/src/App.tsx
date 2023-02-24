@@ -6,6 +6,7 @@ import { CreateView } from './Components/CreateView/CreateView';
 import { HomeView } from './Components/HomeView/HomeView';
 import { ProfileView } from './Components/ProfileView/ProfileView';
 import { AuthenticationView } from './Components/AuthenticationView/AuthenticationView';
+import { ResetView } from './Components/ResetView/ResetView';
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
 import { CollectionView } from './Components/CollectionView/CollectionView';
 import { useState, useEffect } from 'react';
@@ -63,9 +64,17 @@ const App = () => {
 			collectionService.setToken(user.token);
 			userService.setToken(user.token);
 		}else{
-			if(location.pathname!=='/' && location.pathname!=='/getstarted'){
+			if(location.pathname!=='/' && location.pathname!=='/getstarted' && !location.pathname.startsWith('/reset/')){
 				GetStarted();
 			}
+		}
+
+		if(location.pathname==='/getstarted'){
+			setFooterStatus(false);
+		}
+
+		if(location.pathname.startsWith('/reset')){
+			setFooterStatus(false);
 		}
 	}, []);
 
@@ -105,8 +114,9 @@ const App = () => {
 		return(
 			<div className='landingBackground'>		
 				<Routes>
-						<Route path="/" element={<LandingView getFunc={GetStarted}/>} />
-						<Route path="/getstarted" element={<AuthenticationView setUserFunc={SetUserData}/>} />
+					<Route path="/" element={<LandingView getFunc={GetStarted}/>} />
+					<Route path="/getstarted" element={<AuthenticationView setUserFunc={SetUserData}/>} />
+					<Route path="/reset" element={<ResetView />} />
 				</Routes>
 
 				<Footer2 status={footerStatus}/>

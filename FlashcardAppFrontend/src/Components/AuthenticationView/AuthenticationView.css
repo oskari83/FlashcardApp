@@ -60,6 +60,18 @@
     background-color: rgba(255, 255, 255, 0);
 }
 
+.emptyContE{
+    height: calc(100vh - 545px);
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.emptyContF{
+    height: calc(100vh - 460px);
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0);
+}
+
 .authViewName{
     font-family: "ReadexBold";
     font-size: 24px;
@@ -500,4 +512,108 @@
     height: 0px;
     border-radius: 1px;
     background-color: var(--main-blue);
+}
+
+
+.recoverForm{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+}
+
+.sendButton{
+    display: flex;
+    height: 40px;
+    width: 80%;
+    margin-top: 10px;
+    background-color: var(--main-blue);
+    align-items: center;
+    justify-content: center;
+    margin-right: 0px;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+	border: none;
+	font-size: 12px;
+    font-family: "ReadexBold";
+	transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+}
+
+.sendButton:hover{
+    border-radius: 20px;
+}
+
+.authContainerE{
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0%;
+    padding-right: 0%;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    height: 320px;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    border: 2px solid rgb(241, 241, 241);
+    font-family: "Readex";
+    font-size: 12px;
+    color:rgb(70, 70, 70);
+}
+
+.authContainerF{
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0%;
+    padding-right: 0%;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    height: 230px;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+    border: 2px solid rgb(241, 241, 241);
+    font-family: "Readex";
+    font-size: 12px;
+    color:rgb(70, 70, 70);
+}
+
+.recoverTitle{
+    width: 150px;
+    height: 100%;
+    margin-right: 22px;
+    display: flex;
+    align-items: center;
+    color:var(--dark-blue-black);
+    border-bottom: 4px solid var(--dark-blue-black);
+}
+
+.recoveryText{
+	width: 80%;
+	height: 40px;
+	margin-top: 4px;
+	margin-bottom: 20px;
+	font-family: "ReadexLight";
+	color: var(--light-blue-black);
+	font-size: 12px;
+	text-align: justify;
+}
+
+.recoveryTextSuccess{
+	margin:auto;
+	width: 80%;
+	margin-top: 4px;
+	margin-bottom: 20px;
+	font-family: "ReadexLight";
+	color: var(--light-blue-black);
+	font-size: 12px;
+	text-align: justify;
 }
