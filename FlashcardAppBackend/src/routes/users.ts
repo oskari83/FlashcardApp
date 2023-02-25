@@ -420,7 +420,7 @@ usersRouter.post('/reset', async (req:any, res:any) => {
 	}
 
 	if(existingUser.recoverData.key!==key){
-		return res.status(404).json({
+		return res.status(403).json({
 			error: 'incorrect key'
 		});
 	}
@@ -428,7 +428,7 @@ usersRouter.post('/reset', async (req:any, res:any) => {
 	//checks that key is not older than 1 hour
 	const key_date = new Date(existingUser.recoverData.date);
 	if(!helper.lessThanOneHourAgo(key_date)){
-		return res.status(404).json({
+		return res.status(408).json({
 			error: 'invalid key (1 hour limit)'
 		});
 	}

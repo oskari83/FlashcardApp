@@ -7,67 +7,6 @@ import { BsQuestion, BsCheck, BsX } from 'react-icons/bs';
 import { CheckEmail, CheckUsername, CheckPassword } from '../../Utils/validation';
 import { useNavigate } from 'react-router-dom';
 
-const RecoverSuccessView = ({selectionChangeFunc}: {selectionChangeFunc:any}) => {
-    return(
-        <button className='sendButton' onClick={() => selectionChangeFunc(0)}>Return to Sign In</button>
-    )
-}
-
-const RecoverPasswordView = ({setError, errorText, selectionChangeFunc}: {setError:any, errorText:string, selectionChangeFunc:any}) => {
-	const [email, setEmail] = useState(''); 
-	const [buttonText, setButtonText] = useState('Recover Password'); 
-
-	const ResetButton = () => {
-		setButtonText('Recover Password');
-	}
-
-	const handleLogin = async (event: SyntheticEvent) => {
-		event.preventDefault();
-		setButtonText('Loading...');
-
-		try {
-			const user = await authService.recover({
-				email
-			});
- 
-			console.log(user);
-			setEmail('');
-			selectionChangeFunc(3);
-		} catch (exception) {
-			console.log("failed");
-			ResetButton();
-			setError('Encountered a problem, please try again');
-			setTimeout(() => {
-				setError('');
-			}, 5000);
-		}
-	};
-
-	const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const val = event.target.value;
-        setEmail(val);
-    };
-
-    return(
-    <form onSubmit={handleLogin} className='recoverForm'>
-        <div className='emailTextContainer'>Email</div>
-        <div className='emailContainer'>
-            <input 
-				type="text" 
-				value={email} 
-				className='emailInputS'  
-				placeholder="example@gmail.com"
-				onChange={handleEmailChange}
-			></input>
-        </div>
-
-		<div className='userNameErrorText'>{errorText}</div>
-
-        <button className='sendButton' type='submit'>{buttonText}</button>
-	</form>
-    )
-}
-
 const SignInView = ({setUserFunc, setError, errorText, selectionChangeFunc}: {setUserFunc:any, setError:any, errorText:string, selectionChangeFunc:any}) => {
 	const [email, setEmail] = useState(''); 
 	const [password, setPassword] = useState(''); 
@@ -220,14 +159,21 @@ const SignInView = ({setUserFunc, setError, errorText, selectionChangeFunc}: {se
         </div>
 		
 		<div className='loginOptionsContainer'>
-			<div className='forgotPasswordLink' onClick={() => selectionChangeFunc(2)}>Forgot password?</div>
+			<div className='forgotPasswordLink' onClick={() => navigate('/recover')}>Forgot password?</div>
 			<div className='rememberMeBox'>
 				<div className='rememberMeButton'>
 					<div className='rememberMeButtonButton'>
 						<label className='rememberLabel'>
 							<input type="checkbox" className='rememberCheckBox' onClick={() => rememberMe()}></input>
 							<span className='checkMarkInRemember'>
+								{remember && 
+								<>
+								<div className='checkIconClass'>
+									<BsCheck size='18px' color={`rgb(255, 255, 255)`} />
+								</div>
 								<div className='innerRememberCircle'></div>
+								</>
+								}
 							</span>
 						</label>
 					</div>
@@ -586,8 +532,6 @@ export const AuthenticationView = ({setUserFunc}: {setUserFunc:any}) => {
         <div className="containerMainAuth">
             <div className="authViewName">Authentication</div>
 
-			{(currentSelection===0 || currentSelection===1) &&
-			<>
             <div className={`authContainer${currentSelection===0 ? 'S' : 'R'}`}>
                 <div className='authFlexCont'>
                     <div className='choiceContainer'>
@@ -602,40 +546,6 @@ export const AuthenticationView = ({setUserFunc}: {setUserFunc:any}) => {
             </div>
 
             <div className={`emptyCont${currentSelection===0 ? 'S' : 'R'}`}></div>
-			</>
-			}
-
-			{(currentSelection===2 || currentSelection===3) && 
-			<>
-				<div className={`authContainer${currentSelection===2 ? 'E' : 'F'}`}>
-					<div className='authFlexCont'>
-						<div className='choiceContainer'>
-							<div className={`recoverTitle`}>Recover Password</div>
-						</div>
-						{currentSelection===2 && 
-						<>
-						<div className='recoveryText'>
-							Please input the email address associated with your account. We will then send you a password recovery email.
-						</div>
-						</>
-						}
-						{currentSelection===3 && 
-						<>
-						<div className='recoveryTextSuccess'>
-							Recovery email sent. Please check your inbox and follow the instructions given in the email.
-						</div>
-						</>
-						}
-
-						{currentSelection===2 && <RecoverPasswordView setError={SetErrorS} errorText={errorMessageS} selectionChangeFunc={selectionChange}/>}
-						{currentSelection===3 && <RecoverSuccessView selectionChangeFunc={selectionChange}/>}
-					
-					</div>
-				</div>
-
-			<div className={`emptyCont${currentSelection===2 ? 'E' : 'F'}`}></div>
-			</>
-			}
 
         </div>
         </>

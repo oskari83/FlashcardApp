@@ -617,3 +617,9 @@
 	font-size: 12px;
 	text-align: justify;
 }
+
+.checkIconClass{
+	position: relative;
+	top: -2px;
+	left: -2px;
+}

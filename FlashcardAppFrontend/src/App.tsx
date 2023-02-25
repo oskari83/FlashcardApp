@@ -6,6 +6,7 @@ import { CreateView } from './Components/CreateView/CreateView';
 import { HomeView } from './Components/HomeView/HomeView';
 import { ProfileView } from './Components/ProfileView/ProfileView';
 import { AuthenticationView } from './Components/AuthenticationView/AuthenticationView';
+import { RecoverView } from './Components/RecoverView/RecoverView';
 import { ResetView } from './Components/ResetView/ResetView';
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
 import { CollectionView } from './Components/CollectionView/CollectionView';
@@ -73,6 +74,10 @@ const App = () => {
 			setFooterStatus(false);
 		}
 
+		if(location.pathname==='/recover'){
+			setFooterStatus(false);
+		}
+
 		if(location.pathname.startsWith('/reset')){
 			setFooterStatus(false);
 		}
@@ -116,6 +121,7 @@ const App = () => {
 				<Routes>
 					<Route path="/" element={<LandingView getFunc={GetStarted}/>} />
 					<Route path="/getstarted" element={<AuthenticationView setUserFunc={SetUserData}/>} />
+					<Route path="/recover" element={<RecoverView />} />
 					<Route path="/reset" element={<ResetView />} />
 				</Routes>
 
