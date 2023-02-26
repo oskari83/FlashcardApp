@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Readex';
-    src: local('ReadexPro-Regular'), url(../../Fonts/ReadexPro-Regular.woff) format('woff');
+    src: local('ReadexPro-Regular'), url(../../../../Fonts/ReadexPro-Regular.woff) format('woff');
 }
 
 @font-face {
   font-family: 'ReadexLight';
-  src: local('ReadexPro-Light'), url(../../Fonts/ReadexPro-Light.woff) format('woff');
+  src: local('ReadexPro-Light'), url(../../../../Fonts/ReadexPro-Light.woff) format('woff');
 }
 
 .thecard{

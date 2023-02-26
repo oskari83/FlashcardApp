@@ -1,13 +1,8 @@
 import axios from 'axios';
 import { NewCollectionData, UpdateCollectionData } from '../types';
+import { getAuthenticationConfig } from '../Utils/token';
 
 const baseUrl = 'api/collections';
-
-let token: string | number | boolean = false;
-
-const setToken = (newToken: string) => {
-	token = `bearer ${newToken}`;
-}
 
 const getAll = () => {
     const request = axios.get(baseUrl);
@@ -28,42 +23,32 @@ const getSingle = (id:string) => {
 }
 
 const create = async (newObject: NewCollectionData) => {
-	const config = {
-		headers: { Authorization: token }
-	}
+	const config = getAuthenticationConfig();
     const response = await axios.post(baseUrl, newObject, config);
     return response.data;
 }
 
 const update = async (id:string, newObject: UpdateCollectionData) => {
-	const config = {
-		headers: { Authorization: token }
-	}
+	const config = getAuthenticationConfig();
     const response = await axios.put(`${baseUrl}/${id}`, newObject, config);
     return response.data;
 }
 
 const deleteCollection = (id:string) => {
-	const config = {
-		headers: { Authorization: token }
-	}
+	const config = getAuthenticationConfig();
     const request = axios.delete(`${baseUrl}/${id}`,config);
     return request.then(response => response.data);
 }
 
 const saveCollection = async (id:string) => {
-	const config = {
-		headers: { Authorization: token }
-	}
+	const config = getAuthenticationConfig();
 	const emp = {};
 	const response = await axios.put(`${baseUrl}/${id}/save`, emp, config);
 	return response.data;
 }
 
 const unSaveCollection = async (id:string) => {
-	const config = {
-		headers: { Authorization: token }
-	}
+	const config = getAuthenticationConfig();
 	const emp = {};
 	const response = await axios.put(`${baseUrl}/${id}/unsave`, emp, config);
 	return response.data;
@@ -78,5 +63,4 @@ export default {
   deleteCollection,
   saveCollection,
   unSaveCollection,
-  setToken
 }

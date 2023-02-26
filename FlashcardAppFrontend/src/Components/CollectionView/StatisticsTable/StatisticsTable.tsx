@@ -1,5 +1,5 @@
 import { MdKeyboardArrowDown } from 'react-icons/md'
-import { CollectionItem } from '../../types';
+import { CollectionItem } from '../../../types';
 import { BsCheck } from 'react-icons/bs'; 
 import { useEffect, useState } from 'react';
 import './StatisticsTable.css';

@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Navbar } from './Components/Navbar/Navbar';
-import { Footer, Footer2 } from './Components/Footer/Footer';
-import { BrowseView } from './Components/BrowseView/BrowseView';
-import { CreateView } from './Components/CreateView/CreateView';
-import { HomeView } from './Components/HomeView/HomeView';
-import { ProfileView } from './Components/ProfileView/ProfileView';
-import { AuthenticationView } from './Components/AuthenticationView/AuthenticationView';
-import { RecoverView } from './Components/RecoverView/RecoverView';
-import { ResetView } from './Components/ResetView/ResetView';
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
-import { CollectionView } from './Components/CollectionView/CollectionView';
-import { useState, useEffect } from 'react';
-import collectionService from './services/collections';
-import userService from './services/user';
 import './App.css';
-import { LandingView } from './Components/LandingView/LandingView';
+import { Navbar } from './Components/Navbar';
+import { Footer, Footer2 } from './Components/Footer';
+import { CollectionView } from './Components/CollectionView';
+import { BrowseView } from './Components/BrowseView';
+import { CreateView } from './Components/CreateView';
+import { HomeView } from './Components/HomeView';
+import { ProfileView } from './Components/ProfileView';
+import { AuthenticationView } from './Components/AuthenticationView';
+import { RecoverView } from './Components/RecoverView';
+import { ResetView } from './Components/ResetView';
+import { LandingView } from './Components/LandingView';
+import { setToken } from './Utils/token';
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
+import { useState, useEffect } from 'react';
+import userService from './services/user';
 
 const App = () => {
 	const [collections, setCollections] = useState([]);
@@ -62,8 +62,7 @@ const App = () => {
 		if (loggedUserJSON) {
 			const user = JSON.parse(loggedUserJSON);
 			setUser(user);
-			collectionService.setToken(user.token);
-			userService.setToken(user.token);
+			setToken(user.token);
 		}else{
 			if(location.pathname!=='/' && location.pathname!=='/getstarted' && !location.pathname.startsWith('/reset/')){
 				GetStarted();
@@ -123,6 +122,9 @@ const App = () => {
 					<Route path="/getstarted" element={<AuthenticationView setUserFunc={SetUserData}/>} />
 					<Route path="/recover" element={<RecoverView />} />
 					<Route path="/reset" element={<ResetView />} />
+
+					<Route path="/user" element={<AuthenticationView setUserFunc={SetUserData}/>} />
+					<Route path="/:id" element={<AuthenticationView setUserFunc={SetUserData}/>} />
 				</Routes>
 
 				<Footer2 status={footerStatus}/>
@@ -141,6 +143,10 @@ const App = () => {
 			<Route path="/auth" element={<AuthenticationView setUserFunc={SetUserData}/>} />
 			<Route path="/user" element={<ProfileView logoutFunc={DeleteUserData} user={user} createdA={collections.length-savedCollections.length} savedA={savedCollections.length}/>} />
 			<Route path="/" element={<HomeView collectionData={collections} username={user.username} notifText={notificationMessage} loadingStatus={loadingStatus}/>} />
+
+			<Route path="/getstarted" element={<AuthenticationView setUserFunc={SetUserData}/>} />
+			<Route path="/recover" element={<RecoverView />} />
+			<Route path="/reset" element={<ResetView />} />
 		</Routes>
 		
 		<Footer />

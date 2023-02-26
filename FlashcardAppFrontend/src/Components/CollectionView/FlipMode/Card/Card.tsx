@@ -1,7 +1,7 @@
 import './Card.css';
-import { useFitText } from '../../Utils/useFitText';
+import { useFitText } from '../../../../Utils/useFitText';
 
-const Card = ({cardFrontText, cardBackText, cardClass, rotateFunc}: {cardFrontText: string, cardBackText: string, cardClass:string, rotateFunc: any}) => {
+export const Card = ({cardFrontText, cardBackText, cardClass, rotateFunc}: {cardFrontText: string, cardBackText: string, cardClass:string, rotateFunc: any}) => {
 	const fontSizeF = useFitText(cardFrontText);
 	const fontSizeB = useFitText(cardBackText);
 
@@ -16,7 +16,3 @@ const Card = ({cardFrontText, cardBackText, cardClass, rotateFunc}: {cardFrontTe
       </div>
     );
 };
-
-export default Card;
-
-//box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;

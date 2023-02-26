@@ -2,9 +2,9 @@ import { RiDeleteBinLine } from 'react-icons/ri'
 import { IoMdClose } from 'react-icons/io'
 import { useState, SyntheticEvent, useRef, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { SingleItem, CollectionItem } from '../../types';
-import collectionService from '../../services/collections';
-import objectMap from '../../Utils/objectMap';
+import { SingleItem, CollectionItem } from '../../../types';
+import collectionService from '../../../services/collections';
+import objectMap from '../../../Utils/objectMap';
 import './CollectionEdit.css'
 
 const ContentEditableWithRef = (props:any) => {

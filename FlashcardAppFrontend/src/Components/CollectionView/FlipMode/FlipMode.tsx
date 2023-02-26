@@ -1,9 +1,9 @@
-import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
-import { CollectionItem } from '../../types';
-import { useState, useEffect } from 'react';
-import userService from '../../services/user';
-import Card from '../Card/Card';
 import './FlipMode.css';
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
+import { CollectionItem } from '../../../types';
+import { useState, useEffect } from 'react';
+import { Card } from './Card';
+import userService from '../../../services/user';
 
 const FinishedComponent = ({restartFunc}:{restartFunc:any}) => {
     return(

@@ -1,7 +1,7 @@
-import { FlipMode } from '../FlipMode/FlipMode';
-import { RevealMode } from '../RevealMode/RevealMode';
-import { StatisticsTable } from '../StatisticsTable/StatisticsTable';
-import { CollectionEdit } from '../CollectionEdit/CollectionEdit';
+import { FlipMode } from './FlipMode';
+import { RevealMode } from './RevealMode';
+import { StatisticsTable } from './StatisticsTable';
+import { CollectionEdit } from './CollectionEdit';
 import { IoMdStats, IoMdPlay } from 'react-icons/io';
 import { AiFillEdit } from 'react-icons/ai';
 import { useState, useEffect } from 'react';

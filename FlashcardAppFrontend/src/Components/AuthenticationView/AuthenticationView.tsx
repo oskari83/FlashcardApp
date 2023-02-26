@@ -1,10 +1,9 @@
 import './AuthenticationView.css';
 import { useState, SyntheticEvent, useEffect } from 'react';
 import authService from '../../services/auth';
-import collectionService from '../../services/collections';
-import userService from '../../services/user';
 import { BsQuestion, BsCheck, BsX } from 'react-icons/bs';
 import { CheckEmail, CheckUsername, CheckPassword } from '../../Utils/validation';
+import { setToken } from '../../Utils/token';
 import { useNavigate } from 'react-router-dom';
 
 const SignInView = ({setUserFunc, setError, errorText, selectionChangeFunc}: {setUserFunc:any, setError:any, errorText:string, selectionChangeFunc:any}) => {
@@ -66,8 +65,7 @@ const SignInView = ({setUserFunc, setError, errorText, selectionChangeFunc}: {se
 				);
 			} 
 			console.log(user);
-			collectionService.setToken(user.token);
-			userService.setToken(user.token);
+			setToken(user.token);
 			setUserFunc(user);
 			setEmail('');
 			setPassword('');
@@ -105,8 +103,7 @@ const SignInView = ({setUserFunc, setError, errorText, selectionChangeFunc}: {se
 				);
 			} 
 			console.log(user);
-			collectionService.setToken(user.token);
-			userService.setToken(user.token);
+			setToken(user.token);
 			setUserFunc(user);
 			setEmail('');
 			setPassword('');

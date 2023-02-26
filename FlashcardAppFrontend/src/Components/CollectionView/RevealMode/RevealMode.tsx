@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { CollectionItem } from '../../types';
-import userService from '../../services/user';
+import { CollectionItem } from '../../../types';
+import userService from '../../../services/user';
 import './RevealMode.css'
 
 const NormalTableRow = ({item,created,collectionId, userId, notFunction, setRefresh}: {item: CollectionItem, created: boolean, collectionId:string, userId:string, notFunction:any, setRefresh:any}) => {
