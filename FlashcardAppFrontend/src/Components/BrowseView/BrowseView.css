@@ -7,7 +7,7 @@
     padding-top: 50px;
     padding-bottom: 10px;
     z-index: 2;
-    background-color: rgb(242, 245, 250);
+    background-color: rgba(255, 255, 255,0);
 }
 
 .searchBarContainer {
@@ -137,9 +137,26 @@ border: 2px solid rgb(241, 241, 241);
     font-family: "ReadexBold";
     font-size: clamp(15px, 3.5vw, 20px);
     float: left;
+	max-width: 60%;
 }
 
 .itemNameText{
+    float:left;
+	white-space: nowrap;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+	max-width: 100%;
+}
+
+.itemNameBrowse{
+    margin-left: 25px;
+    margin-top: 20px;
+    font-family: "ReadexBold";
+    font-size: clamp(15px, 3.5vw, 20px);
+    float: left;
+}
+
+.itemNameTextBrowse{
     float:left;
 }
 
@@ -161,6 +178,15 @@ border: 2px solid rgb(241, 241, 241);
     float: right;
     width: 20px;
     height: 20px;
+    margin-top: 0px;
+    margin-right: 25px;
+	clear: both;
+}
+
+.linkIconBrowse{
+    float: right;
+    width: 20px;
+    height: 20px;
     margin-top: 20px;
     margin-right: 25px;
 }
@@ -171,7 +197,8 @@ border: 2px solid rgb(241, 241, 241);
     font-family: "Readex";
     font-size: clamp(10px, 3.5vw, 12px);
     color:var(--light-blue-black);
-    clear: both;
+	float: left;
+	clear: both;
 }
 
 .itemObjects{
@@ -254,4 +281,28 @@ border: 2px solid rgb(241, 241, 241);
 
 .paginationBoxSelected:hover{	
 	border-radius: 12px;
+}
+
+@media (max-width: 500px) {
+	.progressBarOuter{
+		float: right;
+		width: 80px;
+		height: 16px;
+		margin-top: 20px;
+		margin-right: 25px;
+		background-color: var(--white-gray240);
+		border-radius: 4px;
+		display: flex;
+	}
+}
+
+@media (max-width: 450px) {
+	.itemName{
+		margin-left: 25px;
+		margin-top: 20px;
+		font-family: "ReadexBold";
+		font-size: clamp(15px, 3.5vw, 20px);
+		float: left;
+		max-width: 50%;
+	}
 }

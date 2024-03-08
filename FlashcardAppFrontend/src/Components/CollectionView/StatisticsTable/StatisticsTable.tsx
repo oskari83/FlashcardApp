@@ -37,8 +37,8 @@ const NormalTableRow = ({item}: {item:CollectionItem}) => {
     return(
         <tr className='normalRow'>
 			<td>{item.qside}</td>
-			<td className='attemptsTextTable'>{item.attempts}</td>
-			<MasteryBoxElement level={item.correct}/>
+			<td className='attemptsTextTable'>{item.qside.substring(0,4)!=='----' && item.attempts}</td>
+			{item.qside.substring(0,4)!=='----' && <MasteryBoxElement level={item.correct}/>}
         </tr>
     )
 }

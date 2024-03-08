@@ -45,8 +45,9 @@ export const FlipMode = ({items, itemdata, created, userId, notFunction, id, set
 
 	const cardData = itemsToShow.length>0 ? {
 		front: itemsToShow[itemIndex].qside,
-		back: itemsToShow[itemIndex].aside
-	} : {front: '', back: ''}
+		back: itemsToShow[itemIndex].aside,
+		correct: itemsToShow[itemIndex].correct,
+	} : {front: '', back: '', correct: 0}
 
 	const giveFeedBack = (op:number) => {
 		if(created){
@@ -206,7 +207,7 @@ export const FlipMode = ({items, itemdata, created, userId, notFunction, id, set
                 <div className="cardcontainer">
 					{finishedPanel && <FinishedComponent restartFunc={RestartFlipping}/>}
 					{!finishedPanel &&
-						<Card cardFrontText={cardData.front} cardBackText={cardData.back} cardClass={cardClass} rotateFunc={RotateCard}/>
+						<Card cardFrontText={cardData.front} cardBackText={cardData.back} cardClass={cardClass} rotateFunc={RotateCard} cardMastery={cardData.correct}/>
 					}
                 </div>
                 <div className='rightButton noselect' onClick={() => IncrementIndex()}>

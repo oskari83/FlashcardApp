@@ -140,27 +140,45 @@
     width: clamp(2px,15%,16px);
     margin: 0px 1px 0px 1px;
     aspect-ratio: 1/1;
-    background-color: var(--main-gray180-a75);
-	border: 1px solid var(--main-gray180);
-	border-radius: 2px;
+    background-color: rgba(255, 73, 73, 0.75);
+	border: 1px solid rgb(255, 73, 73);
+	border-radius: 8px;
 }
 
 .masterybox2{
+    width: clamp(2px,15%,16px);
+    margin: 0px 1px 0px 1px;
+    aspect-ratio: 1/1;
+    background-color: var(--main-gray180-a75);
+	border: 1px solid var(--main-gray180);
+	border-radius: 8px;
+}
+
+.masterybox3{
+    width: clamp(2px,15%,16px);
+    margin: 0px 1px 0px 1px;
+    aspect-ratio: 1/1;
+    background-color: var(--main-gray180-a75);
+	border: 1px solid var(--main-gray180);
+	border-radius: 8px;
+}
+
+.masterybox22{
     width: clamp(2px,15%,16px);
     aspect-ratio: 1/1;
     margin: 0px 1px 0px 1px;
     background: var(--gray-blue75);
 	border: 1px solid var(--gray-blue);
-	border-radius: 2px;
+	border-radius: 8px;
 }
 
-.masterybox3{
+.masterybox33{
     width: clamp(2px,15%,16px);
     aspect-ratio: 1/1;
     margin: 0px 1px 0px 1px;
     background: var(--light-blue75);
 	border: 1px solid var(--light-blue);
-	border-radius: 2px;
+	border-radius: 8px;
 }
 
 .masterybox4{
@@ -169,7 +187,16 @@
     margin: 0px 1px 0px 1px;
     background: var(--main-blue75);
 	border: 1px solid var(--main-blue);
-	border-radius: 2px;
+	border-radius: 8px;
+}
+
+.masterybox5{
+    width: clamp(2px,15%,16px);
+    aspect-ratio: 1/1;
+    margin: 0px 1px 0px 1px;
+    background: var(--main-blue75);
+	border: 1px solid var(--main-blue);
+	border-radius: 8px;
 }
 
 @media (max-width: 700px) {

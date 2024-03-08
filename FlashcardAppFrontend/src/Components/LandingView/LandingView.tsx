@@ -18,7 +18,7 @@ export const LandingView = ({getFunc}:{getFunc:any}) => {
 					<div className="nav-logoLanding">
 						<a href='/' className="nav-brandingLanding">
 							<div className='navLogo'></div>
-							MemNotes.io
+							Flashcards
 						</a>
 					</div>
 					<div className='navTryOuter'>
@@ -86,10 +86,10 @@ export const LandingView = ({getFunc}:{getFunc:any}) => {
 			<div className='usersOuter'>
 				<div className='usersDiv'>
 					<div className='usersInner'>
-						Over &nbsp; <div className='boldedInner'>1000 students</div> &nbsp; from all around the world use MemNotes to achieve better grades.
+						Over &nbsp; <div className='boldedInner'>1000 students</div> &nbsp; from all around the world use Flashcards to achieve better grades.
 					</div>
 					<div className='usersInnerMobile'>
-						Over 1000 students from all around the world use MemNotes to achieve better grades.
+						Over 1000 students from all around the world use Flashcards to achieve better grades.
 					</div>
 					<div className='logosOuter'>
 						<div className='images1'></div>

@@ -37,14 +37,24 @@ const CollectionItemComponent = ( { col }: { col: CollectionData}) => {
             <div className='itemName'>
                 <div className='itemNameText'>{col.name}</div>
             </div>
-            <div className='linkIcon'>
-                <HiOutlineExternalLink size='20px' color={`rgb(78, 78, 78)`} />
-            </div>
+			<div className="progressBarOuter">
+				<div className="progressBarText" style={{background: `linear-gradient(to right, var(--main-blue) ${(4*col.itemCount)/4}%, var(--gray-blue) ${(4*col.itemCount)/4}%)`}}>
+					{(4*col.itemCount)/4}%
+				</div>
+			</div>
+    
             <div className='itemCreator'>Creator: {col.creator}</div>
+			
             <div className='itemObjects'>Notes: {col.itemCount}</div>
         </div>
     )
 }
+
+/*
+<div className='linkIcon'>
+    <HiOutlineExternalLink size='20px' color={`rgb(78, 78, 78)`} />
+</div>
+*/
 
 const EmptyCollectionsComponent = () => {
     return (

@@ -23,10 +23,10 @@ const CollectionItem = ( { name, creator, count, id }: { name: string, creator: 
     
     return (
         <div className='collectionItem' onClick={ClickedCollection}>
-            <div className='itemName'>
-                <div className='itemNameText'>{name}</div>
+            <div className='itemNameBrowse'>
+                <div className='itemNameTextBrowse'>{name}</div>
             </div>
-            <div className='linkIcon'>
+            <div className='linkIconBrowse'>
                 <HiOutlineExternalLink size='20px' color={`rgb(78, 78, 78)`} />
             </div>
             <div className='itemCreator'>Creator: {creator}</div>
