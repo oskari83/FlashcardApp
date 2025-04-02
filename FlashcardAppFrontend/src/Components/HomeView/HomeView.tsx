@@ -8,23 +8,6 @@ import { Loading } from '../Loading/Loading';
 import { useNavigate } from "react-router-dom";
 import './HomeView.css';
 
-const LearningStreak = () => {
-    return(
-    <>
-        <div className='learningStreakText'>1 day in a row</div>
-        <div className='learningStreakCont'>
-            <div className='learningStreakBoxGreen'></div>
-            <div className='learningStreakBoxGreen'></div>
-            <div className='learningStreakBoxGray'></div>
-            <div className='learningStreakBoxGray'></div>
-            <div className='learningStreakBoxGreen'></div>
-            <div className='learningStreakBoxGray'></div>
-            <div className='learningStreakBoxGreen'></div>
-        </div>
-    </>
-    )
-}
-
 const CollectionItemComponent = ( { col }: { col: CollectionData}) => { 
 	const navigate = useNavigate();
 
