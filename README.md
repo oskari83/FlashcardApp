@@ -8,4 +8,4 @@ Building:
 - npm run build in backend
 - npm run build in frontend
 - copy into client and client/src
-- git add/commit/push heroku master
+- git add/commit/push heroku master (IN BACKEND)

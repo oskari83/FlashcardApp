@@ -66,8 +66,8 @@
     padding-bottom: 10px;
     z-index: 2;
     background-color: rgb(255, 255, 255);
-    border-radius: 8px;
-    border: 2px solid rgb(241, 241, 241);
+    border-radius: 0px;
+    border: 0px solid rgb(241, 241, 241);
     height: 50px;
     display: flex;
     justify-content: space-between;
@@ -75,6 +75,8 @@
     font-family: "Readex";
     font-size: 14px;
     color: var(--dark-blue-black);
+
+	box-shadow: rgba(149, 157, 165, 0.05) 0px 8px 24px;
 }
 
 .profileUsernameText{
@@ -148,11 +150,12 @@
     padding-bottom: 10px;
     z-index: 2;
     background-color: rgb(255, 255, 255);
-    border-radius: 8px;
-    border: 2px solid rgb(241, 241, 241);
+    border-radius: 0px;
+    border: 0px solid rgb(241, 241, 241);
     font-family: "Readex";
     font-size: 14px;
     color:rgb(70, 70, 70);
+	box-shadow: rgba(149, 157, 165, 0.05) 0px 8px 24px;
 }
 
 .mainHomeContainerE{
@@ -165,19 +168,20 @@
     padding-bottom: 10px;
     z-index: 2;
     background-color: rgb(255, 255, 255);
-    border-radius: 8px;
-    border: 2px solid rgb(241, 241, 241);
+    border-radius: 0px;
+    border: 0px solid rgb(241, 241, 241);
     font-family: "Readex";
     font-size: 14px;
     min-height: calc(100vh - 220px);;
     color:rgb(70, 70, 70);
+	box-shadow: rgba(149, 157, 165, 0.05) 0px 8px 24px;
 }
 
 .homeViewUpperText{
     font-family: "ReadexBold";
     font-size: 24px;
     color:var(--dark-blue-black);
-    padding-left: 10px;
+    padding-left: 30px;
     margin-top: 15px;
     margin-bottom: 10px;
 }

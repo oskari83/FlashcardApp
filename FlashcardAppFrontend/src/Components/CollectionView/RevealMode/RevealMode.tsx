@@ -1,10 +1,25 @@
 import { useState, useEffect } from 'react';
 import { CollectionItem } from '../../../types';
 import userService from '../../../services/user';
+import { BsCheck } from 'react-icons/bs';
 import './RevealMode.css'
 
-const NormalTableRow = ({item,created,collectionId, userId, notFunction, setRefresh}: {item: CollectionItem, created: boolean, collectionId:string, userId:string, notFunction:any, setRefresh:any}) => {
+const NormalTableRow = ({item,created,collectionId, userId, notFunction, setRefresh, cardMastery}: {item: CollectionItem, created: boolean, collectionId:string, userId:string, notFunction:any, setRefresh:any, cardMastery:number}) => {
     const [show, setShow] = useState(0);
+	const [mastered, setMastered] = useState(false);
+	const [newLevel, setNewLevel] = useState<number>(1);
+
+	useEffect(() => {
+		if(cardMastery!==undefined){
+			if(cardMastery>=4){
+				setNewLevel(4);
+				setMastered(true);
+			}else{
+				setNewLevel(cardMastery+1);
+				setMastered(false);
+			}
+		}	
+	}, [cardMastery]);
 
     const showAnswer = () => {
         show<2 && setShow(show + 1);
@@ -68,6 +83,22 @@ const NormalTableRow = ({item,created,collectionId, userId, notFunction, setRefr
             <td className='normalRowTd'>{item.qside}</td>
             <td className={`normalAnswerTd${show}`} onClick={() => showAnswer()}>
                 {item.aside}
+
+				{show===0 && 
+				<div className="cardMasteryDivReveal">
+					{
+					<div className='masteryBoxesCardReveal'>
+						{[...Array(newLevel)].map(
+						(value: undefined, index: number) => (
+							<div className={`masterybox${newLevel}`} key={index}></div>
+						)
+						)}
+						{mastered && <BsCheck size='20px' color={`rgb(65, 228, 112)`} />}
+					</div>
+					}
+				</div>
+				}
+
                 {show===2 && 
                 <div className='tdFbOuter'>
                     <div className='fbneg' onClick={() => giveFeedBack(0)}>-1</div>
@@ -108,7 +139,7 @@ export const RevealMode = ({items, itemdata, created, userId, notFunction, id, s
                 </td>
             </tr>
 			{combinedItems.map((item:CollectionItem) => {
-				return (<NormalTableRow key={item.key} item={item} created={created} collectionId={id} userId={userId} notFunction={notFunction} setRefresh={setRefresh}/>);
+				return (<NormalTableRow key={item.key} item={item} created={created} collectionId={id} userId={userId} notFunction={notFunction} setRefresh={setRefresh} cardMastery={item.correct}/>);
 			})}
             </tbody>
             </table>

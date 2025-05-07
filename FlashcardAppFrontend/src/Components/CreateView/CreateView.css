@@ -20,12 +20,13 @@
     padding-bottom: 10px;
     z-index: 2;
     background-color: rgb(255, 255, 255);
-    border-radius: 8px;
-    border: 2px solid rgb(241, 241, 241);
+    border-radius: 0px;
+    border: 0px solid rgb(241, 241, 241);
     font-family: "Readex";
     font-size: 12px;
     color:rgb(70, 70, 70);
     min-height: calc(95vh - 20px);
+	box-shadow: rgba(149, 157, 165, 0.05) 0px 8px 24px;
 }
 
 .collectionNameContainer {
@@ -38,8 +39,8 @@
     padding-bottom: 7px;
     z-index: 2;
     background-color: rgb(255, 255, 255);
-    border-radius: 8px;
-    border: 2px solid rgb(241, 241, 241);
+    border-radius: 0px;
+    border: 0px solid rgb(241, 241, 241);
     height: 50px;
     display: flex;
     justify-content: space-between;
@@ -47,6 +48,7 @@
     font-family: "Readex";
     font-size: 20px;
     color:rgb(70, 70, 70);
+	box-shadow: rgba(149, 157, 165, 0.05) 0px 8px 24px;
 }
 
 .nameInput{

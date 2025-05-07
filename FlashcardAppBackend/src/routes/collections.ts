@@ -113,7 +113,7 @@ router.delete('/:id', async (req:any, res:any) => {
 
 	user.createdData = newCreatedData;
 	await user.save();
-	await CollectionM.findByIdAndRemove(req.params.id);
+	await CollectionM.findByIdAndDelete(req.params.id);
 
 	res.status(204).end();
 });

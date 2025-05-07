@@ -63,6 +63,17 @@ html {
   scroll-behavior: smooth;
 }
 
+/*
+body {
+	background-size: contain;
+	padding-left: 0%;
+	margin: 0;
+	min-width:200px;
+	height: 100%;
+	background-color: #fbfbfb;
+}
+*/
+
 body {
   background-color: rgb(255, 255, 255);
   background-size: contain;

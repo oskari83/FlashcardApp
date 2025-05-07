@@ -30,8 +30,8 @@
     width: 100%;
     z-index: 2;
     background-color: rgb(255, 255, 255);
-    border-radius: 8px;
-    border: 2px solid rgb(241, 241, 241);
+    border-radius: 0px;
+    border: 0px solid rgb(241, 241, 241);
     font-family: "Readex";
     font-size: 14px;
     color:var(--dark-blue-black);
@@ -39,6 +39,7 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
+	box-shadow: rgba(149, 157, 165, 0.05) 0px 8px 24px;
 }
 
 .accountDetailsText{

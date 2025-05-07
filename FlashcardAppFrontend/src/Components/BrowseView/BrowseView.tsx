@@ -22,7 +22,7 @@ const CollectionItem = ( { name, creator, count, id }: { name: string, creator: 
 	}
     
     return (
-        <div className='collectionItem' onClick={ClickedCollection}>
+        <div className='collectionItemBrowse' onClick={ClickedCollection}>
             <div className='itemNameBrowse'>
                 <div className='itemNameTextBrowse'>{name}</div>
             </div>
