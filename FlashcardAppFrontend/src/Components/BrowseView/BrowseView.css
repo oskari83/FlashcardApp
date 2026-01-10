@@ -129,32 +129,53 @@ border: 2px solid rgb(241, 241, 241);
 }
 
 .collectionItemInnerContainer{
-	width: 100%;
+	width: calc(100% - 50px);
 }
 
 .collectionItemStyleContainerB{
 	display: flex;
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 	background-color: var(--main-blue85);
 	margin-left: 25px;
 	margin-top: 23px;
+	background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url(../../Assets/camLogo.png);
 }
 
 .collectionItemStyleContainerR{
 	display: flex;
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 	background-color: rgb(255, 111, 111);
 	margin-left: 25px;
 	margin-top: 23px;
+	background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url(../../Assets/camLogo.png);
 }
 
 .collectionItemStyleContainerG{
 	display: flex;
+	width: 25px;
+	height: 25px;
+	background-color: rgb(97, 210, 186);
+	margin-left: 25px;
+	margin-top: 23px;
+	background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-image: url(../../Assets/camLogo.png);
+}
+
+.collectionItemStyleContainerLSE{
+	display: flex;
 	width: 20px;
 	height: 20px;
-	background-color: rgb(97, 210, 186);
+	background-color: rgb(195, 27, 27);
 	margin-left: 25px;
 	margin-top: 23px;
 }

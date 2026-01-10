@@ -26,6 +26,12 @@ const BoxComponentG = () => {
 	)
 }
 
+const BoxComponentLSE = () => { 
+	return(
+		<div className='imageLSE'></div>
+	)
+}
+
 const CollectionItemComponent = ( { col }: { col: CollectionData}) => { 
 	const navigate = useNavigate();
 
@@ -38,6 +44,7 @@ const CollectionItemComponent = ( { col }: { col: CollectionData}) => {
 			{col.name.substring(0,4)==='PIIB' && <BoxComponentB/>}
 			{col.name.substring(0,4)==='PIIA' && <BoxComponentR/>}
 			{col.name.substring(0,4)==='PI -' && <BoxComponentG/>}
+			{col.name.substring(0,4)==='LSE ' && <BoxComponentLSE/>}
 			<div className='collectionItemInnerContainer'>
 				<div className='itemName'>
 					<div className='itemNameText'>{col.name}</div>
